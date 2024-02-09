@@ -5,6 +5,7 @@ git push => doorsturen naar repository is online, bv. github
 git pull => veranderingen ontvangen
 mv huidige bestandsnaam nieuwe bestandsnaam => bestandsnaam veranderen
 ctrl c => command cancel
+<<<<<<< HEAD
 qsdfqs
 qsdfqsf
 
@@ -12,3 +13,10 @@ qsdfqsf
 
 
 
+=======
+Mohammed
+
+
+mohammeds text test
+hier ook een random lijntje
+>>>>>>> 855a6384e2cf887001a989cc17cf5f1d0b58a0f8
