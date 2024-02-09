@@ -6,7 +6,7 @@ git pull => veranderingen ontvangen
 mv huidige bestandsnaam nieuwe bestandsnaam => bestandsnaam veranderen
 ctrl c => command cancel
 Mohammed
-
+Precious
 
 mohammeds text test
 hier ook een random lijntje
