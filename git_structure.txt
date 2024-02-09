@@ -1,0 +1,15 @@
+1. git add .
+
+2. git commit -m
+
+3. git pull - check of er conflicten zijn
+
+(indien geen conflict)
+
+4.1 git push
+
+(indien wel conflict)
+
+4.2 los op in editor (keuzes: accepteer incoming of curent of both)
+
+5. git push
