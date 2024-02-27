@@ -12,4 +12,6 @@
 
 4.2 los op in editor (keuzes: accepteer incoming of curent of both)
 
+4.3 Ga terug naar stap 1.
+
 5. git push
