@@ -1,0 +1,30 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  p {
+    margin: 0;
+  }
+  
+  /* Optioneel: Stijlen voor de knop en afbeelding */
+  button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  img {
+    width: 40px; /* Pas aan naar de gewenste grootte */
+    height: auto;
+  }
+  
