@@ -1,6 +1,12 @@
 /* Import van fonts */
 @import url("https://fonts.googleapis.com/css2?family=Anta&display=swap");
 
+body{
+  background-color: rgba(128, 128, 128, 0.418);
+  width: 100%;
+  height: 100vh;
+}
+
 nav p{
   text-align: center;
   font-family: "Anta", sans-serif;
@@ -10,44 +16,42 @@ nav p{
   border-radius: 30px;
 }
 
-.nav-ingelogd {
-  padding-top: 4px;
-  background-color: #ffcc00;
-}
-.nav-ingelogd img {
-  margin-left: 10px;
-  width: 45px;
+.landing-main {
+  text-align: center;
+  font-size: 2rem;
+  font-family: 'Anta', sans-serif;
 }
 
-.nav-ingelogd ul li:nth-child(2) {
-  margin-right: 0px;
+.projects{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.projects ul{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-.nav-ingelogd ul .active {
-  padding-bottom: 10px;
-  border-bottom: #000 2px solid;
+.projects ul li{
+  margin: 1rem;
+  padding: 1rem;
+  background-color: pink;
+  border-radius: 30px;
+  width: 400px;
+  height: 200px;
 }
 
-.right-container {
-  margin-right: 20px;
-}
-
-.right-container ul li:nth-child(1) {
-  margin-top: 5px;
-}
-
-.right-container ul li:nth-child(2) button {
-  border-radius: 7%;
-}
-
-.right-container ul li:nth-child(3) button {
-  border-radius: 50%;
-}
-
-body {
-  background-color: rgba(128, 128, 128, 0.596);
-}
-
-.main-ingelogd {
-  background-color: #fff;
+.projects ul li img{
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  border-radius: 30px;
+  border: 2px solid black;
+  box-shadow: 0 0 10px black;
+  transition: 1s;
+  cursor: pointer;
 }
