@@ -1,30 +1,47 @@
+/* Import van fonts */
+@import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
+
 nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  p {
-    margin: 0;
-  }
-  
-  /* Optioneel: Stijlen voor de knop en afbeelding */
-  button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  img {
-    width: 40px; /* Pas aan naar de gewenste grootte */
-    height: auto;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Anta', sans-serif;
+  background-color: #fa8072;
+  padding-bottom: 5px;
+  border-radius: 25px;
+}
+
+nav ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin-top: 4px;
+}
+
+nav p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+}
+
+/* Optioneel: Stijlen voor de knop en afbeelding */
+button {
+  padding: 5px 10px;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+nav ul li:nth-child(2) {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+nav ul li:nth-child(2) button{
+  border-radius: 50%;
+  cursor: pointer;
+}
