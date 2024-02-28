@@ -26,3 +26,12 @@ Een branch aan maken en erop werken
 indien wel 
 
 3. Blijf werken en dan git add, git commit en git push --set-upstream origin "branch naam"
+
+naar github gaan, 
+check recent gemaakte branch
+open contribute, 
+open pull reqquest
+compare and pull request, daar vergelijk je beide versies
+merge pull request
+confirm merge
+delete branch indien klaar ermee
