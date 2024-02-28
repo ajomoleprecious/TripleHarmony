@@ -18,7 +18,7 @@ nav p{
 
 .landing-main {
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-family: 'Anta', sans-serif;
 }
 
@@ -39,10 +39,30 @@ nav p{
 .projects ul li{
   margin: 1rem;
   padding: 1rem;
-  background-color: pink;
   border-radius: 30px;
   width: 400px;
   height: 200px;
+  transition: .5s;
+}
+
+.projects ul li a{
+  color: black;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.projects ul li:hover{
+  transform: scale(1.1);
+  transition: 1s;
+}
+
+.projects ul li button{
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: .5s;
 }
 
 .projects ul li img{

@@ -18,27 +18,27 @@
     <p>Kies een project</p>
     <div class="projects">
       <ul>
-        <li><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="assets/projects-logos/Pokémon_logo.png" alt=""></button></li>
-        <li><img src="assets/projects-logos/FIFA_logo.png" alt=""></li>
-        <li><img src="assets/projects-logos/fortnite.png" alt=""></li>
-        <li><img src="assets/projects-logos/the-lord-of-the-rings.png" alt=""></li>
-        <li><img src="assets/projects-logos/lego-masters.png" alt=""></li>
-        <li><img src="assets/projects-logos/magic-the-gatherings.webp" alt=""></li>
+        <li><a href="Pokemon/pokemon-auth.html"><img src="assets/projects-logos/Pokémon_logo.png" alt=""></a></li>
+        <li><button type="button" data-bs-toggle="modal" data-bs-target="#deniedProject"><img src="assets/projects-logos/FIFA_logo.png" alt=""></button></li>
+        <li><button type="button" data-bs-toggle="modal" data-bs-target="#deniedProject"><img src="assets/projects-logos/fortnite.png" alt=""></button></li>
+        <li><button type="button" data-bs-toggle="modal" data-bs-target="#deniedProject"><img src="assets/projects-logos/the-lord-of-the-rings.png" alt=""></button></li>
+        <li><button type="button" data-bs-toggle="modal" data-bs-target="#deniedProject"><img src="assets/projects-logos/lego-masters.png" alt=""></button></li>
+        <li><button type="button" data-bs-toggle="modal" data-bs-target="#deniedProject"><img src="assets/projects-logos/magic-the-gatherings.webp" alt=""></button></li>
       </ul>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal to show when denied access to project -->
+    <div class="modal fade" id="deniedProject" tabindex="-1" aria-labelledby="deniedProjectLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <h1 class="modal-title fs-5" id="deniedProjectLabel">Geen toegang</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            ...
+            Je hebt hier helaas geen toegang toe.
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
