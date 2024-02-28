@@ -1,47 +1,53 @@
 /* Import van fonts */
-@import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Anta&display=swap");
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: 'Anta', sans-serif;
-  background-color: #fa8072;
-  padding-bottom: 5px;
-  border-radius: 25px;
-}
-
-nav ul {
-  display: flex;
-  gap: 1rem;
-  list-style: none;
-  margin-top: 4px;
-}
-
-nav p {
-  margin: 0;
-  font-weight: bold;
-  font-size: 2rem;
+nav p{
   text-align: center;
+  font-family: "Anta", sans-serif;
+  font-size: 2rem;
+  padding: .7rem;
+  background-color: pink;
+  border-radius: 30px;
 }
 
-/* Optioneel: Stijlen voor de knop en afbeelding */
-button {
-  padding: 5px 10px;
-  background-color: #000;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.nav-ingelogd {
+  padding-top: 4px;
+  background-color: #ffcc00;
+}
+.nav-ingelogd img {
+  margin-left: 10px;
+  width: 45px;
 }
 
-nav ul li:nth-child(2) {
-  display: flex;
-  align-items: center;
+.nav-ingelogd ul li:nth-child(2) {
+  margin-right: 0px;
+}
+
+.nav-ingelogd ul .active {
+  padding-bottom: 10px;
+  border-bottom: #000 2px solid;
+}
+
+.right-container {
   margin-right: 20px;
 }
 
-nav ul li:nth-child(2) button{
+.right-container ul li:nth-child(1) {
+  margin-top: 5px;
+}
+
+.right-container ul li:nth-child(2) button {
+  border-radius: 7%;
+}
+
+.right-container ul li:nth-child(3) button {
   border-radius: 50%;
-  cursor: pointer;
+}
+
+body {
+  background-color: rgba(128, 128, 128, 0.596);
+}
+
+.main-ingelogd {
+  background-color: #fff;
 }
