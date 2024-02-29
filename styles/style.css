@@ -172,3 +172,13 @@ nav p {
 .modal-content {
   background-color: #fcba03;
 }
+
+
+/* Media Queries */
+
+@media (max-width: 550px) {
+  .projects ul li {
+    width: 350px;
+    height: 150px;
+  }
+}
