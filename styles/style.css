@@ -1,17 +1,17 @@
 /* Import van fonts */
 @import url("https://fonts.googleapis.com/css2?family=Anta&display=swap");
 
-body{
+body {
   background-color: rgba(128, 128, 128, 0.418);
   width: 100%;
   height: 100vh;
 }
 
-nav p{
+nav p {
   text-align: center;
   font-family: "Anta", sans-serif;
   font-size: 2rem;
-  padding: .7rem;
+  padding: 0.7rem;
   background-color: pink;
   border-radius: 30px;
 }
@@ -19,53 +19,53 @@ nav p{
 .landing-main {
   text-align: center;
   font-size: 1.7rem;
-  font-family: 'Anta', sans-serif;
+  font-family: "Anta", sans-serif;
 }
 
-.projects{
+.projects {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.projects ul{
+.projects ul {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
 }
 
-.projects ul li{
+.projects ul li {
   margin: 1rem;
   padding: 1rem;
   border-radius: 30px;
   width: 400px;
   height: 200px;
-  transition: .5s;
+  transition: 0.5s;
 }
 
-.projects ul li a{
+.projects ul li a {
   color: black;
   border-radius: 30px;
   cursor: pointer;
-  transition: .5s;
+  transition: 0.5s;
 }
 
-.projects ul li:hover{
+.projects ul li:hover {
   transform: scale(1.1);
   transition: 1s;
 }
 
-.projects ul li button{
+.projects ul li button {
   width: 100%;
   height: 100%;
   border-radius: 30px;
   cursor: pointer;
-  transition: .5s;
+  transition: 0.5s;
 }
 
-.projects ul li img{
+.projects ul li img {
   width: 100%;
   height: 100%;
   padding: 1rem;
@@ -76,7 +76,7 @@ nav p{
   cursor: pointer;
 }
 
-.ingelogd{
+.ingelogd {
   background-image: url("../assets/auth_bg.png");
   background-size: cover;
   background-position: center;
@@ -87,36 +87,36 @@ nav p{
   justify-content: space-between;
   align-items: center;
   background-color: #fcba03;
-  padding: .2rem .7rem;
+  padding: 0.2rem 0.7rem;
   border-radius: 30px;
 }
 
-.left-container{
+.left-container {
   display: flex;
   justify-content: center;
   align-items: start;
   height: 52px;
 }
 
-.left-container img{
+.left-container img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
-  transition: .5s;
+  transition: 0.5s;
 }
-.left-container img:hover{
+.left-container img:hover {
   transform: scale(1.1);
-  transition: .5s;
+  transition: 0.5s;
 }
-.left-container p{
+.left-container p {
   font-size: 1.5rem;
-  font-family: 'Anta', sans-serif;
-  padding: .5rem;
+  font-family: "Anta", sans-serif;
+  padding: 0.5rem;
   background-color: transparent;
 }
 
-.nav-container ul{
+.nav-container ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -124,26 +124,26 @@ nav p{
   gap: 4rem;
 }
 
-.nav-container ul li.active{
+.nav-container ul li.active {
   border-bottom: 2px solid black;
 }
 
-.nav-container ul li{
-  transition: .6s;
+.nav-container ul li {
+  transition: 0.6s;
 }
-.nav-container ul li:hover{
+.nav-container ul li:hover {
   transform: scale(1.5);
-  transition: .3s;
+  transition: 0.3s;
 }
 
-.nav-container ul li img{
+.nav-container ul li img {
   width: 30px;
   height: 30px;
   cursor: pointer;
-  transition: .5s;
+  transition: 0.5s;
 }
 
-.right-container ul{
+.right-container ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -151,16 +151,16 @@ nav p{
   gap: 10px;
 }
 
-.right-container ul li:nth-child(1) button{
-  padding: .5rem;
+.right-container ul li:nth-child(1) button {
+  padding: 0.5rem;
   border-radius: 10px;
   color: white;
   background-color: #000;
   cursor: pointer;
 }
 
-.right-container ul li:nth-child(2) button{
-  padding: .5rem;
+.right-container ul li:nth-child(2) button {
+  padding: 0.5rem;
   width: 40px;
   border-radius: 100%;
   color: white;
