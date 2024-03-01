@@ -123,7 +123,9 @@ nav p {
   align-items: center;
   margin: 0;
   gap: 4rem;
+  right: 0;
 }
+
 
 .nav-container ul li.active {
   border-bottom: 2px solid black;
@@ -174,6 +176,46 @@ nav p {
   background-color: #fcba03;
 }
 
+.hamMenu {
+  visibility: hidden;
+  position: fixed;
+  right: 3%;
+  bottom: 3%;
+  z-index: 3;
+  cursor: pointer;
+  transition: 0.5s;
+  border-radius: 100%;
+  background-color: #fcba03;
+  padding: .7rem;
+  box-shadow: 0 0 10px black;
+  font-size: 1.5rem;
+}
+
+.hamMenu:hover {
+  transform: scale(1.1);
+  transition: 0.5s;
+}
+
+nav{
+  z-index: 2;
+}
+.nav-container ul.active{
+  visibility: visible;
+  position: fixed;
+  padding: 0.45rem;
+  right: 0%;
+  top: 6%;
+  bottom: 0%;
+  z-index: 1;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #fcba03;
+  gap: 2rem;
+}
 
 /* Media Queries */
 
@@ -182,6 +224,19 @@ nav p {
     width: 350px;
     height: 150px;
   }
+  .ingelogd{
+    background-position: right;
+  }
+  .nav-container ul {
+    gap: .1rem;
+  }
+  .hamMenu {
+    visibility: visible;
+  }
+  .ingelogd header nav {
+    border-radius: 40px 0 0 40px;
+    z-index: 2;
+  }
 }
 
 @media (max-width: 400px) {
@@ -189,4 +244,5 @@ nav p {
     width: 300px;
     height: 150px;
   }
+  
 }

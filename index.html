@@ -21,7 +21,7 @@
     </header>
     <main class="landing-main">
       <p>Kies een project</p>
-      <div class="projects">
+      <container class="projects">
         <ul>
           <li>
             <a href="Pokemon/pokemon-auth.html"
@@ -80,18 +80,18 @@
             </button>
           </li>
         </ul>
-      </div>
+      </container>
       <!-- Modal to show when denied access to project -->
-      <div
+      <modal
         class="modal fade"
         id="deniedProject"
         tabindex="-1"
         aria-labelledby="deniedProjectLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
+        <modal-dialog class="modal-dialog modal-dialog-centered">
+          <modal-content class="modal-content">
+            <modal-header class="modal-header">
               <h1 class="modal-title fs-5" id="deniedProjectLabel">
                 Geen toegang
               </h1>
@@ -101,9 +101,9 @@
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
-            </div>
-            <div class="modal-body">Je hebt hier helaas geen toegang toe.</div>
-            <div class="modal-footer">
+            </modal-header>
+            <modal-body class="modal-body">Je hebt hier helaas geen toegang toe.</modal-body>
+            <modal-footer class="modal-footer">
               <button
                 type="button"
                 class="btn btn-primary"
@@ -111,10 +111,10 @@
               >
                 Close
               </button>
-            </div>
-          </div>
-        </div>
-      </div>
+            </modal-footer>
+          </modal-content>
+        </modal-dialog>
+      </modal>
     </main>
     <!-- Scripts -->
     <script
