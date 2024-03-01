@@ -122,7 +122,7 @@ nav p {
   justify-content: space-between;
   align-items: center;
   margin: 0;
-  gap: 4rem;
+  gap: 1.5rem;
   right: 0;
 }
 
@@ -176,12 +176,11 @@ nav p {
   background-color: #fcba03;
 }
 
-.hamMenu {
+.hamMenu i {
   visibility: hidden;
   position: fixed;
   right: 3%;
   bottom: 3%;
-  z-index: 3;
   cursor: pointer;
   transition: 0.5s;
   border-radius: 100%;
@@ -189,32 +188,17 @@ nav p {
   padding: .7rem;
   box-shadow: 0 0 10px black;
   font-size: 1.5rem;
+  z-index: 3;
 }
 
-.hamMenu:hover {
+.hamMenu i:hover {
   transform: scale(1.1);
   transition: 0.5s;
 }
 
-nav{
+
+nav *{
   z-index: 2;
-}
-.nav-container ul.active{
-  visibility: visible;
-  position: fixed;
-  padding: 0.45rem;
-  right: 0%;
-  top: 6%;
-  bottom: 0%;
-  z-index: 1;
-  cursor: pointer;
-  transition: 0.5s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  background-color: #fcba03;
-  gap: 2rem;
 }
 
 /* Media Queries */
@@ -227,15 +211,39 @@ nav{
   .ingelogd{
     background-position: right;
   }
-  .nav-container ul {
-    gap: .1rem;
-  }
-  .hamMenu {
+  .hamMenu i {
     visibility: visible;
   }
   .ingelogd header nav {
     border-radius: 40px 0 0 40px;
-    z-index: 2;
+  }
+
+  .nav-container ul.active{
+    visibility: visible;
+    position: fixed;
+    padding: 4rem 0.45rem 5rem 0.45rem;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #fcba03;
+    gap: 2rem;
+    z-index: 1;
+  }
+  
+  .nav-container ul{
+    transition: 3s ease-in-out;
+    position: fixed;
+    right: -140%;
+    top: 0%;
+    bottom: 0%;
+    display: flex;
+    flex-direction: column;
   }
 }
 

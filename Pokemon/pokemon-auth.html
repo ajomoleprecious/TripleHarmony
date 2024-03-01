@@ -18,6 +18,16 @@
                 <img src="../assets/pokemon_logo.png" alt="logo">
                 <!--<p>Page Title</p>-->
             </div>
+            <div id="nav-menus" class="nav-container">
+                <ul class="">
+                    <li class="active"><a href="./pokemons-bekijken.html"><img src="../assets/nav-icons/bekijken.png" alt=""></a></a></li>
+                    <li><a href="./pokemon-vergelijken.html"><img src="../assets/nav-icons/vergelijken.png" alt=""></a></li>
+                    <li><a href="./pokemons-vangen.html"><img src="../assets/nav-icons/vangen.png" alt=""></a></li>
+                    <li><a href="./huidige-pokemon.html"><img src="../assets/nav-icons/huidige.png" alt=""></a></li>
+                    <li><a href="./pokemon-battler.html"><img src="../assets/nav-icons/battler.png" alt=""></a></li>
+                    <li><a href="./who's-that-pokemon.html"><img src="../assets/nav-icons/who.png" alt=""></a></li>
+                </ul>
+            </div>
             <div class="right-container">
                 <ul>
                     <li><button data-bs-toggle="modal" data-bs-target="#register">Registeren</button></li>
@@ -25,16 +35,6 @@
                 </ul>
             </div>
         </nav>
-        <div class="nav-container">
-            <ul class="active">
-                <li class="active"><a href="./pokemons-bekijken.html"></a><img src="../assets/nav-icons/bekijken.png" alt=""></a></li>
-                <li><a href="./pokemon-vergelijken.html"><img src="../assets/nav-icons/vergelijken.png" alt=""></a></li>
-                <li><a href="./pokemons-vangen.html"><img src="../assets/nav-icons/vangen.png" alt=""></a></li>
-                <li><a href="./huidige-pokemon.html"><img src="../assets/nav-icons/huidige.png" alt=""></a></li>
-                <li><a href="./pokemon-battler.html"><img src="../assets/nav-icons/battler.png" alt=""></a></li>
-                <li><a href="./who's-that-pokemon.html"><img src="../assets/nav-icons/who.png" alt=""></a></li>
-            </ul>
-        </div>
     </header>
     <main>
         <!-- Modal voor registreren-->
@@ -164,7 +164,9 @@
                 </div>
             </div>
         </div>
-        <i class="fa-solid fa-angles-left hamMenu"></i>
+        <div class="hamMenu">
+            <i class="fa-solid fa-angles-left hamMenu"></i>
+        </div>
     </main>
     <script>
         window.onload = function () {
@@ -173,6 +175,11 @@
             });
             modal.show();
         }
+        let hamMenu = document.querySelector('.hamMenu i');
+        hamMenu.addEventListener('click', () => {
+            document.querySelector('.nav-container ul').classList.toggle('active');
+            hamMenu.innerHTML = document.querySelector('.nav-container ul').classList.contains('active')? '<i class="fa-solid fa-angles-right"></i>' : '<i class="fa-solid fa-angles-left"></i>';
+            });
     </script>
     <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
