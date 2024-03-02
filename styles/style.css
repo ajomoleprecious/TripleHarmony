@@ -1,30 +1,256 @@
-nav {
+/* Import van fonts */
+@import url("https://fonts.googleapis.com/css2?family=Anta&display=swap");
+
+body {
+  background-color: rgba(128, 128, 128, 0.418);
+  width: 100%;
+  height: 100vh;
+}
+
+nav p {
+  text-align: center;
+  font-family: "Anta", sans-serif;
+  font-size: 2rem;
+  padding: 0.7rem;
+  background-color: pink;
+  border-radius: 30px;
+}
+
+.landing-main {
+  text-align: center;
+  font-size: 1.7rem;
+  font-family: "Anta", sans-serif;
+}
+
+.projects {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.projects ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.projects ul li {
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 30px;
+  width: 400px;
+  height: 200px;
+  transition: 0.5s;
+}
+
+.projects ul li a {
+  color: black;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.projects ul li:hover {
+  transform: scale(1.1);
+  transition: 1s;
+}
+
+.projects ul li button {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.projects ul li img {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  border-radius: 30px;
+  border: 2px solid black;
+  box-shadow: 0 0 10px black;
+  transition: 1s;
+  cursor: pointer;
+}
+
+#poke-bg{
+  background-image: url("../assets/auth_bg.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.ingelogd header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fcba03;
+  padding: 0.2rem 0.7rem;
+  border-radius: 30px;
+}
+
+.left-container {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  height: 52px;
+}
+
+.left-container img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.left-container img:hover {
+  transform: scale(1.1);
+  transition: 0.5s;
+}
+.left-container p {
+  font-size: 1.5rem;
+  font-family: "Anta", sans-serif;
+  padding: 0.5rem;
+  background-color: transparent;
+}
+
+.nav-container ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  gap: 1.5rem;
+  right: 0;
+}
+
+
+.nav-container ul li.active {
+  border-bottom: 2px solid black;
+}
+
+.nav-container ul li {
+  transition: 0.6s;
+}
+.nav-container ul li:hover {
+  transform: scale(1.5);
+  transition: 0.3s;
+}
+
+.nav-container ul li img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.right-container ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  gap: 10px;
+}
+
+.right-container ul li:nth-child(1) button {
+  padding: 0.5rem;
+  border-radius: 10px;
+  color: white;
+  background-color: #000;
+  cursor: pointer;
+}
+
+.right-container ul li:nth-child(2) button {
+  padding: 0.5rem;
+  width: 40px;
+  border-radius: 100%;
+  color: white;
+  background-color: #000;
+  cursor: pointer;
+  text-align: center;
+}
+
+.modal-content {
+  background-color: #fcba03;
+}
+
+.hamMenu i {
+  visibility: hidden;
+  position: fixed;
+  right: 3%;
+  bottom: 3%;
+  cursor: pointer;
+  transition: 0.5s;
+  border-radius: 100%;
+  background-color: #fcba03;
+  padding: .7rem;
+  box-shadow: 0 0 10px black;
+  font-size: 1.5rem;
+  z-index: 3;
+}
+
+.hamMenu i:hover {
+  transform: scale(1.1);
+  transition: 0.5s;
+}
+
+
+nav *{
+  z-index: 2;
+}
+
+/* Media Queries */
+
+@media (max-width: 550px) {
+  .projects ul li {
+    width: 350px;
+    height: 150px;
+  }
+  .ingelogd{
+    background-position: right;
+  }
+  .hamMenu i {
+    visibility: visible;
+  }
+  .ingelogd header nav {
+    border-radius: 40px 0 0 40px;
+  }
+
+  .nav-container ul.active{
+    visibility: visible;
+    position: fixed;
+    padding: 4rem 0.45rem 5rem 0.45rem;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    cursor: pointer;
+    transition: .2s ease-in-out;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
+    background-color: #fcba03;
+    gap: 2rem;
+    z-index: 1;
   }
   
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .nav-container ul{
+    transition: 3s ease-in-out;
+    position: fixed;
+    right: -140%;
+    top: 0%;
+    bottom: 0%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 400px) {
+  .projects ul li {
+    width: 300px;
+    height: 150px;
   }
   
-  p {
-    margin: 0;
-  }
-  
-  /* Optioneel: Stijlen voor de knop en afbeelding */
-  button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  img {
-    width: 40px; /* Pas aan naar de gewenste grootte */
-    height: auto;
-  }
-  
+}
