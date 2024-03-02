@@ -77,7 +77,7 @@ nav p {
   cursor: pointer;
 }
 
-.ingelogd {
+#poke-bg{
   background-image: url("../assets/auth_bg.png");
   background-size: cover;
   background-position: center;
