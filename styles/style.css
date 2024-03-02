@@ -6,7 +6,9 @@ body {
   width: 100%;
   height: 100vh;
 }
-
+main {
+  font-family: "Anta", sans-serif;
+}
 nav p {
   text-align: center;
   font-family: "Anta", sans-serif;
@@ -199,6 +201,67 @@ nav p {
 
 nav *{
   z-index: 2;
+}
+
+.pv_project {
+  margin-top: 2rem;
+  display: flex;
+  gap: 3rem;
+  justify-content: space-around;
+}
+
+.left_pokemon, .right_pokemon {
+  display: flex;
+  flex-direction: column;
+}
+
+.left_pokemon img, .right_pokemon img {
+  width: 300px;
+}
+
+.left_pokemon input, .right_pokemon input {
+  width: 10rem;
+  padding: 0.5rem;
+  border: black 1px solid;
+  border-radius: 0.7rem;
+  text-align: center;
+  font-family: "Anta", sans-serif;
+}
+
+.pv_stats {
+  display: flex;
+}
+
+.pv_stats li{
+  padding: 0.5rem;
+  width: 8rem;
+  border-bottom: 1px solid black;
+}
+
+.pv_stats li:nth-child(2)
+{
+  width: 2.5rem;
+}
+
+.visual_percentage {
+  padding: 0.5rem;
+  border-radius: 6rem;
+  border: 1px solid black;
+}
+
+.visual_percentage.first {
+  background-color: #1cfc03;
+  width: 75%;
+}
+
+.visual_percentage.second {
+  width: 50%;
+  background-color: #f8fc03;
+}
+
+.visual_percentage.third {
+  width: 25%;
+  background-color: #fc6203;
 }
 
 /* Media Queries */
