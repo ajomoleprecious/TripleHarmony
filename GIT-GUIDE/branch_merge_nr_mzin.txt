@@ -1,0 +1,15 @@
+Om een merge te doen: 
+
+1. naar github gaan, 
+2. check recent gemaakte branch
+3. open contribute (contribute)
+4. open pull reqquest
+5. compare and pull request, daar vergelijk je beide versies
+
+Indien conflict?
+> los op in online editor (lijnen aanpassen of verwijderen)
+
+Indien geen conflict?
+6.  merge pull request
+7. confirm merge
+8. delete branch indien klaar ermee

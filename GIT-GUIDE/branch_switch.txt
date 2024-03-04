@@ -1,0 +1,15 @@
+Om naar een iemand anders zijn branch te switchen of naar je eigen:
+
+1. git fetch origin
+2. git switch "branch naam"
+3. git pull
+
+Indien geen conflicten?
+> Werk verder
+
+Indien wel?
+> Los het op in tekst editor
+
+Klaar ?
+
+git add . ; git commit -m "xxx" ; git push
