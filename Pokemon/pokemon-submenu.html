@@ -16,19 +16,20 @@
                 <a href="pokemon-submenu.html"><img src="../assets/pokemon_logo.png" alt="logo"></a>
             </div>
             <div id="nav-menus" class="nav-container">
-                <ul class="">
+                <!--<ul class="">
                     <li><a href="./pokemons-bekijken.html"><img src="../assets/nav-icons/bekijken.png"></a></a></li>
                     <li><a href="./pokemon-vergelijken.html"><img src="../assets/nav-icons/vergelijken.png" alt=""></a></li>
                     <li><a href="./pokemons-vangen.html"><img src="../assets/nav-icons/vangen.png" alt=""></a></li>
                     <li><a href="./huidige-pokemon.html"><img src="../assets/nav-icons/huidige.png" alt=""></a></li>
                     <li><a href="./pokemon-battler.html"><img src="../assets/nav-icons/battler.png" alt=""></a></li>
                     <li><a href="./who's-that-pokemon.html"><img src="../assets/nav-icons/who.png" alt=""></a></li>
-                </ul>
+                </ul>-->
             </div>
             <div class="right-container">
                 <ul>
-                    <li><a href="../index.html"><button>Uitloggen</button></a></li>
+                    <li></li>
                     <li><button>?</button></li>
+                    <li><a href="../Pokemon/pokemon-auth.html" class="fa-solid fa-right-from-bracket btn btn-dark"></a></li>
                 </ul>
             </div>
         </nav>
@@ -54,15 +55,11 @@
                 <a href="who's-that-pokemon.html"><button class="submenu-button"><img src="../assets/submenu-buttons/who's-that.png" alt=""></button></a>
             </article>
         </section>
-        <div class="hamMenu">
-            <i class="fa-solid fa-angles-left hamMenu"></i>
-        </div>
     </main>
     <script>
-        let hamMenu = document.querySelector('.hamMenu i');
+        let hamMenu = document.querySelector('.hamMenu');
         hamMenu.addEventListener('click', () => {
             document.querySelector('.nav-container ul').classList.toggle('active');
-            hamMenu.innerHTML = document.querySelector('.nav-container ul').classList.contains('active')? '<i class="fa-solid fa-angles-right"></i>' : '<i class="fa-solid fa-angles-left"></i>';
             });
     </script>
     <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>

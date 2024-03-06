@@ -27,22 +27,19 @@
             </div>
             <div class="right-container">
                 <ul>
-                    <li><a href="../index.html"><button>Uitloggen</button></a></li>
+                    <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
                     <li><button>?</button></li>
+                    <li><a href="../Pokemon/pokemon-auth.html" class="fa-solid fa-right-from-bracket btn btn-dark"></a></li>
                 </ul>
             </div>
         </nav>
     </header>
     <main>
-        <div class="hamMenu">
-            <i class="fa-solid fa-angles-left hamMenu"></i>
-        </div>
     </main>
     <script>
-        let hamMenu = document.querySelector('.hamMenu i');
+        let hamMenu = document.querySelector('.hamMenu');
         hamMenu.addEventListener('click', () => {
             document.querySelector('.nav-container ul').classList.toggle('active');
-            hamMenu.innerHTML = document.querySelector('.nav-container ul').classList.contains('active')? '<i class="fa-solid fa-angles-right"></i>' : '<i class="fa-solid fa-angles-left"></i>';
             });
     </script>
     <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>

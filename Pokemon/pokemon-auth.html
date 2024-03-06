@@ -29,7 +29,7 @@
             </div>
             <div class="right-container">
                 <ul>
-                    <li><button data-bs-toggle="modal" data-bs-target="#register">Registeren</button></li>
+                    <li><button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#register">Registreren</button></li>
                     <li><button>?</button></li>
                 </ul>
             </div>
@@ -41,46 +41,46 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="registerLabel">Registeren</h1>
+                        <h1 class="modal-title fs-5" id="registerLabel">Registreren</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="mb-1">
+                        <div class="mb-2">
                             <label for="emailInput" class="form-label">Email address</label>
                             <div class="input-group">
                                 <input type="email" class="form-control" id="emailInput"
                                     placeholder="naam@voorbeeld.com" autocomplete="email">
-                                <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-envelope"></i></span>
                             </div>
                         </div>
-                        <div class="mb-1">
+                        <div class="mb-2">
                             <label for="usernameInput" class="form-label">Gebruikersnaam</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="usernameInput" placeholder="user_123"
+                                <input type="text" class="form-control" id="usernameInput" placeholder="gebruiker_123"
                                     autocomplete="additional-name">
-                                <span class="input-group-text"><i class="fa-solid fa-at"></i></span>
+                                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-at"></i></span>
                             </div>
                         </div>
-                        <div class="mb-1">
+                        <div class="mb-2">
                             <label for="passwordInput" class="form-label">Wachtwoord</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" id="passwordInput" placeholder="********"
+                                <input type="password" class="form-control" id="passwordInput" placeholder="**********"
                                     autocomplete="new-password">
-                                <span class="input-group-text"><i class="fa-solid fa-eye-slash"></i></span>
+                                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-eye-slash"></i></span>
                             </div>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-4">
                             <label for="confirmPasswordInput" class="form-label">Bevestig wachtwoord</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="confirmPasswordInput"
                                     placeholder="**********">
-                                <span class="input-group-text"><i class="fa-solid fa-eye-slash"></i></span>
+                                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-eye-slash"></i></span>
                             </div>
                         </div>
                         <div class="d-grid gap-2 mb-2">
-                            <button class="btn btn-dark" type="button">Registren</button>
+                            <button class="btn btn-dark" type="button">Registreren</button>
                         </div>
-                        Heeft u een account? <a href="" data-bs-toggle="modal" data-bs-target="#login">Inloggen</a>
+                        Heeft u al een account? <a href="" data-bs-toggle="modal" data-bs-target="#login">Aanmelden</a>
                     </div>
                 </div>
             </div>
@@ -94,28 +94,28 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="mb-1">
+                        <div class="mb-2">
                             <label for="usernameInput" class="form-label">Gebruikersnaam</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="usernameInput" placeholder="user_123"
+                                <input type="text" class="form-control" id="usernameInput" placeholder="gebruiker_123"
                                     autocomplete="additional-name">
-                                <span class="input-group-text"><i class="fa-solid fa-at"></i></span>
+                                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-at"></i></span>
                             </div>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-4">
                             <label for="passwordInput" class="form-label">Wachtwoord</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" id="passwordInput" placeholder="********"
-                                    autocomplete="new-password">
-                                <span class="input-group-text"><i class="fa-solid fa-eye-slash"></i></span>
+                                <input type="password" class="form-control" id="passwordInput" placeholder="**********"
+                                    autocomplete="current-password">
+                                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-eye-slash"></i></span>
                             </div>
                             Wachtwoord vergeten? <a href="" data-bs-toggle="modal"
                                 data-bs-target="#resetPassword">Terugstellen</a>
                         </div>
                         <div class="d-grid gap-2 mb-2">
-                            <a href="pokemon-submenu.html" class="btn btn-dark">Inloggen</a>
+                            <a href="pokemon-submenu.html" class="btn btn-dark">Aanmelden</a>
                         </div>
-                        Heeft u geen account? <a href="" data-bs-toggle="modal"
+                        Heeft u nog geen account? <a href="" data-bs-toggle="modal"
                             data-bs-target="#register">Registreren</a>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="resetPasswordLabel">Registeren</h1>
+                        <h1 class="modal-title fs-5" id="resetPasswordLabel">Registreren</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -136,14 +136,14 @@
                             <div class="input-group">
                                 <input type="email" class="form-control" id="emailInput"
                                     placeholder="naam@voorbeeld.com" autocomplete="email">
-                                <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-envelope"></i></span>
                             </div>
                         </div>
                         <div class="d-grid gap-2 mb-2">
                             <button class="btn btn-dark" type="button" data-bs-toggle="modal"
                                 data-bs-target="#confirmatie">Herstel uw wachtwoord</button>
                         </div>
-                        Terug naar inloggen? <a href="" data-bs-toggle="modal" data-bs-target="#login">Inloggen</a>
+                        Terug naar aanmelden? <a href="" data-bs-toggle="modal" data-bs-target="#login">Aanmelden</a>
                     </div>
                 </div>
             </div>
@@ -158,14 +158,11 @@
                     </div>
                     <div class="modal-body">
                         Uw nieuwe wachtwoord is naar uw email gestuurd. <br>
-                        Terug naar inloggen? <a href="" data-bs-toggle="modal" data-bs-target="#login">Inloggen</a>
+                        Terug naar aanmelden? <a href="" data-bs-toggle="modal" data-bs-target="#login">Aanmelden</a>
                     </div>
                 </div>
             </div>
         </div>
-        <!--<div class="hamMenu">
-            <i class="fa-solid fa-angles-left hamMenu"></i>
-        </div>-->
     </main>
     <script>
         window.onload = function () {

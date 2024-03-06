@@ -27,21 +27,36 @@
             </div>
             <div class="right-container">
                 <ul>
-                    <li><a href="../index.html"><button>Uitloggen</button></a></li>
+                    <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
                     <li><button>?</button></li>
+                    <li><a href="../Pokemon/pokemon-auth.html" class="fa-solid fa-right-from-bracket btn btn-dark"></a></li>
                 </ul>
             </div>
         </nav>
     </header>
     <main>
         <section class="current-pokemon">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="my-pokemon">
+            <img class="pokemon-pic" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="my-pokemon">
             <img src="../assets/gold-podium.webp" alt="pokemon-podium">
+            <div class="pokemon-stats">
+                <div class="pokemon-hp">
+                    <img id="life" src="../assets/red-heart.png" alt="leven">
+                    <p>78</p>
+                </div>
+                |
+                <div class="pokemon-shield">
+                    <img src="../assets/shield.png" alt="verdediging">
+                    <p>78</p>
+                </div>
+            </div>
         </section>
         <section class="pv_project">
             <article class="left_pokemon">
-                <input type="text" placeholder="zoek pokemon">
                 <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="">
+                <div class="input-group">
+                    <span class="input-group-text btn btn-warning"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input class="form-control" type="text" placeholder="zoek pokemon">
+                </div>
                 <ul class="pv_stats">
                     <li>HP</li>
                     <li id="hp_left">78</li>
@@ -66,8 +81,11 @@
                 </ul>
             </article>
             <article class="right_pokemon">
-                <input type="text" placeholder="zoek pokemon">
                 <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/1.gif" alt="">
+                <div class="input-group">
+                    <span class="input-group-text btn btn-warning"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input class="form-control" type="text" placeholder="zoek pokemon">
+                </div>
                 <ul class="pv_stats">
                     <li>HP</li>
                     <li>45</li>
@@ -85,15 +103,11 @@
                 </ul>
             </article>
         </section>
-        <div class="hamMenu">
-            <i class="fa-solid fa-angles-left hamMenu"></i>
-        </div>
     </main>
     <script>
-        let hamMenu = document.querySelector('.hamMenu i');
+        let hamMenu = document.querySelector('.hamMenu');
         hamMenu.addEventListener('click', () => {
             document.querySelector('.nav-container ul').classList.toggle('active');
-            hamMenu.innerHTML = document.querySelector('.nav-container ul').classList.contains('active')? '<i class="fa-solid fa-angles-right"></i>' : '<i class="fa-solid fa-angles-left"></i>';
             });
     </script>
     <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>
