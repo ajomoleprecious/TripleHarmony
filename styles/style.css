@@ -232,17 +232,19 @@ nav *{
 .pv_project {
   margin-top: 2rem;
   display: flex;
-  gap: 3rem;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .left_pokemon, .right_pokemon {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .left_pokemon img, .right_pokemon img {
+  margin: 2rem 0 2rem 0;
   width: 300px;
+  height: 250px;
 }
 
 .left_pokemon input, .right_pokemon input {
@@ -262,6 +264,7 @@ nav *{
   padding: 0.5rem;
   width: 8rem;
   border-bottom: 1px solid black;
+  margin-top: 2rem;
 }
 
 .pv_stats li:nth-child(2)
@@ -275,19 +278,46 @@ nav *{
   border: 1px solid black;
 }
 
-.visual_percentage.first {
+.left_pokemon .visual_percentage.first {
   background-color: #1cfc03;
-  width: 75%;
+  width: 78%;
 }
 
-.visual_percentage.second {
-  width: 50%;
-  background-color: #f8fc03;
+.left_pokemon .visual_percentage.second {
+  width: 84%;
+  background-color: #1cfc03;
 }
 
-.visual_percentage.third {
-  width: 25%;
-  background-color: #fc6203;
+.left_pokemon .visual_percentage.third {
+  width: 78%;
+  background-color: #1cfc03;
+}
+
+.right_pokemon .visual_percentage.first {
+  background-color: #fc9d03;
+  width: 45%;
+}
+
+.right_pokemon .visual_percentage.second {
+  background-color: #fc9d03;
+  width: 49%;
+}
+
+.right_pokemon .visual_percentage.third {
+  background-color: #fc9d03;
+  width: 49%;
+}
+
+.middle_stats {
+  display: flex;
+  align-items: end;
+}
+
+.comparison li {
+  margin: 2.4rem 0 1.7rem 0;
+  color: #18ce04;
+  text-shadow: #000000 2px 2px 2px;
+  font-size: 1.5rem;
 }
 
 .submenu {
