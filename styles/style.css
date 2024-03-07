@@ -406,6 +406,38 @@ margin: 5rem
   transform: scale(1.1); /* Scale the button slightly on hover */
 }
 
+.submenu > li{
+  list-style: none;
+  margin: 0;
+}
+
+.submenu > li > a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 30px;
+  background-color: #fcba03;
+  transition: 0.5s;
+  cursor: pointer;
+  text-decoration: none;
+  padding: .8rem;
+}
+
+.submenu > li > a:visited{
+  color: black;
+
+}
+
+.submenu > li > a > p{
+  margin: auto 0;
+  color: #000;
+  font-size: 1.5rem;
+}
+
+.submenu > li > a > img{
+  width: 60px;
+}
+
 /* Animation */
 
 @keyframes move {
