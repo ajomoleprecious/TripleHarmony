@@ -36,7 +36,9 @@
     </header>
     <main>
         <section class="current-pokemon">
-            <img class="pokemon-pic" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="my-pokemon">
+            <a href="huidige-pokemon.html">
+                <img class="pokemon-pic" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="my-pokemon">
+            </a>
             <img src="../assets/gold-podium.webp" alt="pokemon-podium">
             <div class="pokemon-stats">
                 <div class="pokemon-hp">
@@ -50,8 +52,23 @@
                 </div>
             </div>
         </section>
-        <div class="help"><i class="fa-solid fa-question"></i></div>
-    </main>
+        <!-- Modal voor help-->
+        <div class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="hulpLabel">Hulp</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Je krijgt hier een overzicht van al je gevangen pokémons. 
+                        Je zou ook hier een filter kunnen gebruiken om je gevangen pokémons te sorteren. <br>
+                        Eens je de juiste pokémon hebt gevonden kan je deze selecteren om als huidige pokémon te gebruiken.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="help"><button data-bs-toggle="modal" data-bs-target="#hulp"><i class="fa-solid fa-question"></i></button></div>    </main>
     <script>
         let hamMenu = document.querySelector('.hamMenu');
         hamMenu.addEventListener('click', () => {
@@ -59,5 +76,8 @@
             });
     </script>
     <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 </html>

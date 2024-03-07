@@ -36,7 +36,9 @@
     </header>
     <main>
         <section class="current-pokemon">
-            <img class="pokemon-pic" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="my-pokemon">
+            <a href="huidige-pokemon.html">
+                <img class="pokemon-pic" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="my-pokemon">
+            </a>
             <img src="../assets/gold-podium.webp" alt="pokemon-podium">
             <div class="pokemon-stats">
                 <div class="pokemon-hp">
@@ -50,7 +52,23 @@
                 </div>
             </div>
         </section>
-    </main>
+        <!-- Modal voor help-->
+        <div class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="hulpLabel">Hulp</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Hier heb je een klein raad speletje om jou kennis van pokémons te testen.<br>
+                        Als je een juiste antwoord hebt gegeven wordt je pokémon versterkt met een aantal aanval sterkte of krijgt die meer defensie.<br>
+                        De pokémons zullen in zwarte conturen naar voorschijn komen.<br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="help"><button data-bs-toggle="modal" data-bs-target="#hulp"><i class="fa-solid fa-question"></i></button></div>    </main>
     <script>
         let hamMenu = document.querySelector('.hamMenu');
         hamMenu.addEventListener('click', () => {
@@ -58,5 +76,8 @@
             });
     </script>
     <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 </html>
