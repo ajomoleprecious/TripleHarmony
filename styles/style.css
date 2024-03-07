@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Anta&display=swap");
 
 body {
-  background-color: rgba(128, 128, 128, 0.418);
+  background-color: #a1cbf1;
   width: 100%;
   height: 100vh;
   font-family: 'Anta', sans-serif;
@@ -329,6 +329,14 @@ nav *{
   padding: 0.5rem;
   border-radius: 6rem;
   border: 1px solid black;
+}
+
+.left_pokemon span{
+  border: #000 1px solid;
+}
+
+.right_pokemon span{
+  border: #000 1px solid;
 }
 
 .left_pokemon .visual_percentage.first {
