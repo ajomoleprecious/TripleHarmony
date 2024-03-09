@@ -476,7 +476,7 @@ nav *{
   height: 100%;
 }
 .pokemon-list{
-  height: 680px;
+  height: 660px;
   overflow: scroll;
 }
 .pokemon-list > ul{
