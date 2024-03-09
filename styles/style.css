@@ -7,7 +7,22 @@ body {
   height: 100vh;
   font-family: 'Anta', sans-serif;
 }
+header{
+  grid-area: header;
+}
+aside{
+  grid-area: aside;
+}
+main{
+  grid-area: main;
+}
 
+.pokemon-bekijken{
+  display: grid;
+  grid-template-areas: "header header" "main main";
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr 4fr;
+}
 .current-pokemon{
   padding: .5rem;
   border-radius: 100%;
@@ -430,6 +445,83 @@ nav *{
 
 .submenu > li > a > img{
   width: 60px;
+}
+
+.pokemon-bekijken > aside{
+  background-color: wheat;
+  border-radius: 30px;
+  padding: 1rem;
+  transition: 0.5s;
+  display: flex;
+  flex-direction: column;
+  display: none;
+}
+
+.pokemon-bekijken > aside > button:nth-child(1){
+  margin: 0 0 0 auto;
+}
+
+.pokemon-bekijken > aside > h2{
+  font-size: 1rem;
+  text-align: center;
+  margin: 2rem auto;
+}
+
+.pokemon-bekijken > main > h1 {
+  font-size: 1.5rem;
+  margin: 4rem auto 3.5rem 2rem;
+}
+.pokemon-bekijken > main{
+  width: 100%;
+  height: 100%;
+}
+.pokemon-list{
+  height: 680px;
+  overflow: scroll;
+}
+.pokemon-list > ul{
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  
+}
+.pokemon-list > ul > li{
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  width: 100px;
+  height: 110px;
+}
+.pokemon-list > ul > li p{
+  margin: 0;
+}
+.page-nav{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+  z-index: 4;
+}
+
+.page-nav button{
+  border-radius: 15px;
+  background-color: #fcba03;
+  cursor: pointer;
+  padding: 0.5rem;
+  width: 110px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 /* Animation */
