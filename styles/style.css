@@ -138,9 +138,13 @@ nav p {
   cursor: pointer;
 }
 
-.projects ul li:hover {
+.projects ul li:nth-child(1):hover {
   transform: scale(1.1);
   transition: 1s;
+}
+
+.denied:hover {
+  animation: denied 1s infinite;
 }
 
 .projects ul li button {
@@ -439,6 +443,25 @@ nav *{
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+@keyframes denied {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(5px);
+    
+  }
+  50% {
+    transform: translateX(-5px);background-color: red;
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
 
