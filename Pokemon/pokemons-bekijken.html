@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="nl-be">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pokemons bekijken</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="../styles/reset.css">
-<link rel="stylesheet" href="../styles/style.css">
-<!--SCRIPTS-->
-<script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <!--SCRIPTS-->
+    <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </head>
+
 <body class="ingelogd pokemon-bekijken">
     <header>
         <nav>
@@ -22,8 +24,10 @@
             </div>
             <div id="nav-menus" class="nav-container">
                 <ul class="">
-                    <li class="active"><a href="./pokemons-bekijken.html"><img src="../assets/nav-icons/bekijken.png" alt=""></a></a></li>
-                    <li><a href="./pokemon-vergelijken.html"><img src="../assets/nav-icons/vergelijken.png" alt=""></a></li>
+                    <li class="active"><a href="./pokemons-bekijken.html"><img src="../assets/nav-icons/bekijken.png"
+                                alt=""></a></a></li>
+                    <li><a href="./pokemon-vergelijken.html"><img src="../assets/nav-icons/vergelijken.png" alt=""></a>
+                    </li>
                     <li><a href="./pokemons-vangen.html"><img src="../assets/nav-icons/vangen.png" alt=""></a></li>
                     <li><a href="./huidige-pokemon.html"><img src="../assets/nav-icons/huidige.png" alt=""></a></li>
                     <li><a href="./pokemon-battler.html"><img src="../assets/nav-icons/battler.png" alt=""></a></li>
@@ -34,13 +38,14 @@
                 <ul>
                     <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
                     <li><button>?</button></li>
-                    <li><a href="../Pokemon/pokemon-auth.html" class="fa-solid fa-right-from-bracket btn btn-dark"></a></li>
+                    <li><a href="../Pokemon/pokemon-auth.html" class="fa-solid fa-right-from-bracket btn btn-dark"></a>
+                    </li>
                 </ul>
             </div>
         </nav>
     </header>
     <aside>
-        <button type="button" class="btn-close" aria-label="Close"></button>
+        <button type="button" class="btn-close filter-close" aria-label="Close"></button>
         <h2>Filter de pokémons</h2>
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Zoek op naam">
@@ -57,68 +62,279 @@
             <option value="bug">Insect</option>
             <option value="ground">Bodem</option>
         </select>
+        <div class="form-floating mb-3">
+            <select class="form-select form-select-sm" id="floatingSelect" aria-label="Floating label select example">
+                <option value="naam" selected>Naam (alfabetisch)</option>
+                <option value="pokemon_nr">Pokémon nummer</option>
+                <option value="weight">Gewicht</option>
+                <option value="height">Lengte</option>
+            </select>
+            <label>Sorteer op:</label>
+        </div>
+        <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" role="switch">
+            <label class="form-check-label">Toon mijn pokémons</label>
+        </div>
+        <div class="d-grid gap-2 mb-2">
+            <button class="btn btn-dark" type="button">Filter</button>
+        </div>
     </aside>
     <main>
+        <div><i class="fa-solid fa-filter"></i></div>
         <h1>Alle Pokémons</h1>
-        <div class="pokemon-list">
+        <section class="pokemon-list">
             <ul>
-                <li><a data-bs-toggle="modal" data-bs-target="#hulp" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/26.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/27.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/28.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/29.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/30.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/31.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/32.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/33.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/34.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/35.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/36.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/37.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/38.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/39.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/40.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/41.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/42.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/43.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/44.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/45.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/46.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/47.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/48.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/49.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/51.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/52.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/53.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/54.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/55.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/56.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/57.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/58.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/59.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/60.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/61.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/62.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/63.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/64.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/65.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/66.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/67.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/68.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/69.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/70.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/71.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/72.gif" alt=""></a><p>Pokémon</p></li>
-                <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/73.gif" alt=""></a><p>Pokémon</p></li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/26.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/27.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/28.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/29.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/30.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/31.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/32.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/33.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/34.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/35.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/36.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/37.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/38.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/39.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/40.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/41.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/42.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/43.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/44.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/45.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/46.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/47.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/48.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/49.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/51.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/52.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/53.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/54.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/55.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/56.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/57.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/58.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/59.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/60.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/61.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/62.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/63.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/64.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/65.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/66.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/67.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/68.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/69.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/70.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/71.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/72.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
+                <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/73.gif"
+                            alt=""></a>
+                    <p>Pokémon</p>
+                </li>
             </ul>
-        </div>
+        </section>
         <div class="page-nav">
             <button><i class="fa-solid fa-angles-left"></i>Vorige</button>
             <button>Volgende<i class="fa-solid fa-angles-right"></i></button>
         </div>
         <section class="current-pokemon">
             <a href="huidige-pokemon.html">
-                <img class="pokemon-pic" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="my-pokemon">
+                <img class="pokemon-pic"
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif"
+                    alt="my-pokemon">
             </a>
             <img src="../assets/gold-podium.webp" alt="pokemon-podium">
             <div class="pokemon-stats">
@@ -148,13 +364,121 @@
                 </div>
             </div>
         </div>
-        <div class="help"><button data-bs-toggle="modal" data-bs-target="#hulp"><i class="fa-solid fa-question"></i></button></div>
+        <!-- Modal voor detail -->
+        <div class="modal fade" id="detail" tabindex="-1" aria-labelledby="detailLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="detailLabel">Detail over Pokémon</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif"
+                            alt="">
+                        <div>
+                            <table class="table table-dark table-striped">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Gewicht</th>
+                                        <td>Mark</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Lengte</th>
+                                        <td>Mark</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Type</th>
+                                        <td>Mark</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <section>
+                                <h3>Niveaus</h3>
+                                <section class="pokemon-levels">
+                                    <ul>
+                                        <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif"
+                                                    alt=""></a>
+                                            <p>Pokémon</p>
+                                        </li>
+                                        <li><a href="#"><img
+                                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/26.gif"
+                                                    alt=""></a>
+                                            <p>Pokémon</p>
+                                        </li>
+                                        <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif"
+                                                    alt=""></a>
+                                            <p>Pokémon</p>
+                                        </li>
+                                        <li><a href="#"><img
+                                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/26.gif"
+                                                    alt=""></a>
+                                            <p>Pokémon</p>
+                                        </li>
+                                        <li><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img
+                                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif"
+                                                    alt=""></a>
+                                            <p>Pokémon</p>
+                                        </li>
+                                        <li><a href="#"><img
+                                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/26.gif"
+                                                    alt=""></a>
+                                            <p>Pokémon</p>
+                                        </li>
+                                        <li><a href="#"><img
+                                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/26.gif"
+                                                    alt=""></a>
+                                            <p>Pokémon</p>
+                                        </li>
+                                        <li><a href="#"><img
+                                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/26.gif"
+                                                    alt=""></a>
+                                            <p>Pokémon</p>
+                                        </li>
+                                        <li><a href="#"><img
+                                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/26.gif"
+                                                    alt=""></a>
+                                            <p>Pokémon</p>
+                                        </li>
+                                    </ul>
+                                </section>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="help"><button data-bs-toggle="modal" data-bs-target="#hulp"><i
+                    class="fa-solid fa-question"></i></button></div>
     </main>
     <script>
+        function openFilterMenu() {
+            if (document.querySelector('aside').classList.contains('active')) {
+                document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "aside main"';
+            }
+            else {
+                document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "main main"';
+            }
+        }
         let hamMenu = document.querySelector('.hamMenu');
         hamMenu.addEventListener('click', () => {
             document.querySelector('.nav-container ul').classList.toggle('active');
-            });
+        });
+        let filterMenu = document.querySelector('.fa-filter');
+        filterMenu.addEventListener('click', () => {
+            filterMenu.style.display = 'none';
+            document.querySelector('aside').classList.toggle('active');
+            openFilterMenu();
+        });
+        let closeFilter = document.querySelector('.filter-close');
+        closeFilter.addEventListener('click', () => {
+            filterMenu.style.display = 'block';
+            document.querySelector('aside').classList.toggle('active');
+            openFilterMenu();
+        });
+        openFilterMenu();
     </script>
 </body>
+
 </html>
