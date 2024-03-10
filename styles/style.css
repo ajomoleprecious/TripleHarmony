@@ -521,6 +521,8 @@ nav *{
   align-items: center;
   width: 100px;
   height: 110px;
+  box-shadow: 0 0 10px black;
+  border-radius: 10px;
 }
 .pokemon-list > ul > li p{
   margin: 0;
