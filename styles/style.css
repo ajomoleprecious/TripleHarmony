@@ -13,16 +13,19 @@ header{
 aside{
   grid-area: aside;
 }
-main > h1{
+main{
+  grid-area: main;
+}
+.pokemon-bekijken-main > h1{
   grid-area: title;
 }
-main > .pokemon-list{
+.pokemon-bekijken-main > .pokemon-list{
   grid-area: pokemon-list;
 }
-main > .list-nav{
+.pokemon-bekijken-main > .list-nav{
   grid-area: list-nav;
 }
-main{
+.pokemon-bekijken-main{
   grid-area: main;
   display: grid;
   grid-template-areas: "title" "pokemon-list" "list-nav";
@@ -252,6 +255,10 @@ nav p {
 #nav-menus {
   width: 80%;
   margin: 0 2rem;
+}
+
+#nav-menus ul li.active{
+  border-bottom: 7px solid #af2215;
 }
 
 .nav-container ul {
@@ -487,7 +494,7 @@ nav *{
 
 .pokemon-bekijken > aside.active{
   display: flex;
-  animation: slide-in 2s ease-in-out;
+  animation: slide-in .6s ease-in-out;
 }
 
 .form-select{
