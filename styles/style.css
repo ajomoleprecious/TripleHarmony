@@ -512,6 +512,7 @@ nav *{
   gap: 1.5rem;
   justify-content: flex-start;
   align-items: center;
+  align-content: flex-start;
 }
 .pokemon-list > ul > li{
   margin: 0;
@@ -727,12 +728,22 @@ nav *{
     position: fixed;
     top: 200px;
   }
+  .pokemon-levels ul{
+    width: 200px;
+  }
 }
 
 @media (max-width: 400px) {
   .projects ul li {
     width: 300px;
     height: 150px;
+  }
+  
+}
+
+@media (max-width: 320px) {
+  .pokemon-levels ul{
+    width: 150px;
   }
   
 }
