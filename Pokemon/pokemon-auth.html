@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <div class="d-grid gap-2 mb-2">
-                            <button class="btn btn-dark" type="button">Registreren</button>
+                            <button data-bs-target="#success-registratie" data-bs-toggle="modal" class="btn btn-dark" type="button">Registreren</button>
                         </div>
                         Heeft u al een account? <a href="" data-bs-toggle="modal" data-bs-target="#login">Aanmelden</a>
                     </div>
@@ -159,6 +159,21 @@
                     </div>
                     <div class="modal-body">
                         Uw nieuwe wachtwoord is naar uw email gestuurd. <br>
+                        Terug naar aanmelden? <a href="" data-bs-toggle="modal" data-bs-target="#login">Aanmelden</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal voor successvol registratie-->
+        <div class="modal fade" id="success-registratie" tabindex="-1" aria-labelledby="success-registratieLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="success-registratieLabel">Successvol</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Uw nieuwe account is gemaakt en een berichtje is naar uw email gestuurd. <br>
                         Terug naar aanmelden? <a href="" data-bs-toggle="modal" data-bs-target="#login">Aanmelden</a>
                     </div>
                 </div>

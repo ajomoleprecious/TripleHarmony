@@ -13,9 +13,22 @@ header{
 aside{
   grid-area: aside;
 }
+main > h1{
+  grid-area: title;
+}
+main > .pokemon-list{
+  grid-area: pokemon-list;
+}
+main > .list-nav{
+  grid-area: list-nav;
+}
 main{
   grid-area: main;
+  display: grid;
+  grid-template-areas: "title" "pokemon-list" "list-nav";
+  grid-template-rows: .5fr 658px 60px;
 }
+
 
 .pokemon-bekijken{
   display: grid;
@@ -500,7 +513,6 @@ nav *{
   height: 100%;
 }
 .pokemon-list{
-  height: 650px;
   display: flex;
   overflow: scroll;
 }
@@ -645,12 +657,33 @@ nav *{
 
 /* Media Queries */
 
+@media (max-width: 1024px) {
+  main{
+    grid-template-rows: .5fr 650px 60px;
+  }
+  .pokemon-bekijken{
+    grid-template-columns: auto 3fr;
+  }
+}
+
+@media (max-width: 900px) {
+  main{
+    grid-template-rows: .5fr 650px 60px;
+  }
+  .pokemon-bekijken{
+    grid-template-columns: auto 3fr;
+  }
+}
+
 @media (max-width: 768px){
   .pokemon-list > ul{
     justify-content: center;
   }
   .pokemon-bekijken{
     grid-template-columns: auto 3fr;
+  }
+  main{
+    grid-template-rows: .5fr 650px 60px;
   }
 }
 
@@ -733,10 +766,22 @@ nav *{
   }
 }
 
+@media (max-width: 425px) {
+  main{
+    grid-template-rows: .5fr 570px 60px;
+  }
+  main{
+    grid-template-rows: .5fr 650px 60px;
+  }
+}
+
 @media (max-width: 400px) {
   .projects ul li {
     width: 300px;
     height: 150px;
+  }
+  main{
+    grid-template-rows: .5fr 650px 60px;
   }
   
 }
@@ -744,6 +789,9 @@ nav *{
 @media (max-width: 320px) {
   .pokemon-levels ul{
     width: 150px;
+  }
+  main{
+    grid-template-rows: .5fr 650px 60px;
   }
   
 }
