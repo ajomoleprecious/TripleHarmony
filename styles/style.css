@@ -29,7 +29,7 @@ main{
   grid-area: main;
   display: grid;
   grid-template-areas: "title" "pokemon-list" "list-nav";
-  grid-template-rows: 18vh 69vh 5vh;
+  grid-template-rows: 18dvh 69dvh 5dvh;
 }
 
 
@@ -620,7 +620,7 @@ nav *{
 .modal-huidige button, .modal-huidige img{
   margin: 0 auto;
 }
-.modal-body button:hover{
+.modal-huidige button:hover{
   background-color: green;
 }
 /* Animation */
