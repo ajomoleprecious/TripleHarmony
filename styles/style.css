@@ -29,7 +29,7 @@ main{
   grid-area: main;
   display: grid;
   grid-template-areas: "title" "pokemon-list" "list-nav";
-  grid-template-rows: 18vh 60vh 5vh;
+  grid-template-rows: 18vh 56vh 5vh;
 }
 
 
@@ -490,6 +490,7 @@ nav *{
   transition: 0.5s;
   flex-direction: column;
   display: none;
+  z-index: 5;
 }
 
 .pokemon-bekijken > aside.active{
@@ -767,6 +768,10 @@ nav *{
   .projects ul li {
     width: 300px;
     height: 150px;
+  }
+  aside.active{
+    position: fixed;
+    top: 180px;
   }
   
 }
