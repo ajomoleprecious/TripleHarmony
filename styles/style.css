@@ -13,20 +13,23 @@ header{
 aside{
   grid-area: aside;
 }
-main > h1{
+main{
+  grid-area: main;
+}
+.pokemon-bekijken-main > h1{
   grid-area: title;
 }
-main > .pokemon-list{
+.pokemon-bekijken-main > .pokemon-list{
   grid-area: pokemon-list;
 }
-main > .list-nav{
+.pokemon-bekijken-main > .list-nav{
   grid-area: list-nav;
 }
-main{
+.pokemon-bekijken-main{
   grid-area: main;
   display: grid;
   grid-template-areas: "title" "pokemon-list" "list-nav";
-  grid-template-rows: .5fr 658px 60px;
+  grid-template-rows: 18vh 69vh 5vh;
 }
 
 
@@ -252,6 +255,10 @@ nav p {
 #nav-menus {
   width: 80%;
   margin: 0 2rem;
+}
+
+#nav-menus ul li.active{
+  border-bottom: 7px solid #af2215;
 }
 
 .nav-container ul {
@@ -616,6 +623,12 @@ nav *{
   filter: brightness(0);
 }
 
+.modal-huidige button, .modal-huidige img{
+  margin: 0 auto;
+}
+.modal-huidige button:hover{
+  background-color: green;
+}
 /* Animation */
 
 @keyframes move {
@@ -662,33 +675,9 @@ nav *{
 
 /* Media Queries */
 
-@media (max-width: 1024px) {
-  main{
-    grid-template-rows: .5fr 650px 60px;
-  }
-  .pokemon-bekijken{
-    grid-template-columns: auto 3fr;
-  }
-}
-
-@media (max-width: 900px) {
-  main{
-    grid-template-rows: .5fr 650px 60px;
-  }
-  .pokemon-bekijken{
-    grid-template-columns: auto 3fr;
-  }
-}
-
 @media (max-width: 768px){
   .pokemon-list > ul{
     justify-content: center;
-  }
-  .pokemon-bekijken{
-    grid-template-columns: auto 3fr;
-  }
-  main{
-    grid-template-rows: .5fr 650px 60px;
   }
 }
 
@@ -760,7 +749,6 @@ nav *{
 
 }
 
-
 @media (max-width: 475px){
   aside.active{
     position: fixed;
@@ -769,14 +757,8 @@ nav *{
   .pokemon-levels ul{
     width: 200px;
   }
-}
-
-@media (max-width: 425px) {
-  main{
-    grid-template-rows: .5fr 570px 60px;
-  }
-  main{
-    grid-template-rows: .5fr 650px 60px;
+  .pokemon-bekijken{
+    grid-template-areas: "header header" "main main";
   }
 }
 
@@ -785,18 +767,12 @@ nav *{
     width: 300px;
     height: 150px;
   }
-  main{
-    grid-template-rows: .5fr 650px 60px;
-  }
   
 }
 
 @media (max-width: 320px) {
   .pokemon-levels ul{
     width: 150px;
-  }
-  main{
-    grid-template-rows: .5fr 650px 60px;
   }
   
 }

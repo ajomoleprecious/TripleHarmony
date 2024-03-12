@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl-be">
+<html lang="nl-BE">
 
 <head>
     <meta charset="UTF-8">
@@ -24,15 +24,20 @@
             </div>
             <div id="nav-menus" class="nav-container">
                 <ul class="">
-                    <li><a href="./pokemons-bekijken.html"><img src="../assets/nav-icons-black/bekijken.png" alt=""></a></a>
+                    <li><a href="./pokemons-bekijken.html"><img src="../assets/nav-icons-black/bekijken.png"
+                                alt=""></a></a>
                     </li>
-                    <li><a href="./pokemon-vergelijken.html"><img src="../assets/nav-icons-black/vergelijken.png" alt=""></a>
+                    <li><a href="./pokemon-vergelijken.html"><img src="../assets/nav-icons-black/vergelijken.png"
+                                alt=""></a>
                     </li>
-                    <li><a href="./pokemons-vangen.html"><img src="../assets/nav-icons-black/vangen.png" alt=""></a></li>
+                    <li><a href="./pokemons-vangen.html"><img src="../assets/nav-icons-black/vangen.png" alt=""></a>
+                    </li>
                     <li class="active"><a href="./huidige-pokemon.html"><img src="../assets/nav-icons-red/huidige.png"
                                 alt=""></a></li>
-                    <li><a href="./pokemon-battler.html"><img src="../assets/nav-icons-black/battler.png" alt=""></a></li>
-                    <li><a href="./who's-that-pokemon.html"><img src="../assets/nav-icons-black/who.png" alt=""></a></li>
+                    <li><a href="./pokemon-battler.html"><img src="../assets/nav-icons-black/battler.png" alt=""></a>
+                    </li>
+                    <li><a href="./who's-that-pokemon.html"><img src="../assets/nav-icons-black/who.png" alt=""></a>
+                    </li>
                 </ul>
             </div>
             <div class="right-container">
@@ -73,7 +78,7 @@
             <label>Sorteer op:</label>
         </div>
     </aside>
-    <main>
+    <main class="pokemon-bekijken-main">
         <div><i class="fa-solid fa-filter"></i></div>
         <h1>Jouw Pokémons</h1>
         <section class="pokemon-list">
@@ -213,8 +218,9 @@
                         <h1 class="modal-title fs-5" id="detailLabel">Detail over Pokémon</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <img class="mb-5" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif"
+                    <div class="modal-body modal-huidige">
+                        <img class="mb-5"
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif"
                             alt="">
                         <button class="btn btn-dark" type="button">Maak je huidige Pokémon</button>
                     </div>
@@ -226,11 +232,22 @@
     </main>
     <script>
         function openFilterMenu() {
-            if (document.querySelector('aside').classList.contains('active')) {
-                document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "aside main"';
+            // check if window size is 425px or less
+            if (window.innerWidth <= 425) {
+                if (document.querySelector('aside').classList.contains('active')) {
+                    document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "main main"';
+                }
+                else {
+                    document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "main main"';
+                }
             }
             else {
-                document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "main main"';
+                if (document.querySelector('aside').classList.contains('active')) {
+                    document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "aside main"';
+                }
+                else {
+                    document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "main main"';
+                }
             }
         }
         let hamMenu = document.querySelector('.hamMenu');
