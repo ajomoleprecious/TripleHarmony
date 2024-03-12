@@ -29,7 +29,7 @@ main{
   grid-area: main;
   display: grid;
   grid-template-areas: "title" "pokemon-list" "list-nav";
-  grid-template-rows: 18vh 69vh 5vh;
+  grid-template-rows: 18vh 60vh 5vh;
 }
 
 
@@ -521,7 +521,7 @@ nav *{
 }
 .pokemon-list{
   display: flex;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .pokemon-list > ul{
   margin: 0;
@@ -532,6 +532,7 @@ nav *{
   justify-content: flex-start;
   align-items: center;
   align-content: flex-start;
+  height: 100%;
 }
 .pokemon-list > ul > li{
   margin: 0;
@@ -612,7 +613,7 @@ nav *{
   justify-content: start;
   align-items: end;
   gap: 1rem;
-  overflow: scroll;
+  overflow-x: scroll;
 }
 .pokemon-levels ul li p{
   margin: 0;
