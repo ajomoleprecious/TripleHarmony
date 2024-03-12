@@ -617,7 +617,12 @@ nav *{
 .pokemon-levels ul li p{
   margin: 0;
 }
-
+.modal-huidige button, .modal-huidige img{
+  margin: 0 auto;
+}
+.modal-body button:hover{
+  background-color: green;
+}
 /* Animation */
 
 @keyframes move {
