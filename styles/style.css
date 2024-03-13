@@ -677,6 +677,36 @@ nav *{
   animation-duration: 2s;
 }
 
+.poke-catch {
+  display: flex;
+  flex-direction: column;  
+  align-items: center;
+  gap: 3rem;
+}
+
+.poke-catch article {
+  font-size: 3rem;
+}
+
+.poke-catch article:first-child {
+  margin-top: 2rem;
+}
+
+.poke-catch article:nth-child(2) {
+  margin-bottom: 3rem;
+}
+
+.poke-catch-img {
+  width: 17rem;
+}
+
+.poke-catch-ball {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 10rem;
+  border: 3px red solid;
+}
+
 .pokemonWho {
   filter: grayscale(1);
   filter: brightness(0);
