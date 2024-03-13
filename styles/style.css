@@ -7,6 +7,14 @@ body {
   height: 100vh;
   font-family: 'Anta', sans-serif;
 }
+
+.battler {
+  background-image: url("../assets/MicrosoftTeams-image\ \(1\).png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 header{
   grid-area: header;
 }
@@ -597,6 +605,55 @@ nav *{
 }
 .pokemon-levels ul li p{
   margin: 0;
+}
+
+.battlefield {
+  display: flex;
+  flex-wrap: wrap;
+  height: 90vh;
+}
+
+.battlefield img {
+  width: 9rem;
+  height: 14rem;
+}
+
+.battlefield img:first-child
+{
+  margin-top: 5rem;
+}
+
+.battlefield article {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.aanvallen {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  align-content: end;
+  padding: 0;
+  margin: 0 0 5rem 0;
+  gap: 1rem;
+}
+
+
+.aanvallen li {
+  border: #000 1px solid;
+  border-radius: 2rem;
+  text-align: center;
+  padding: .5rem 1rem;
+  width: 40%;
+  background-color: #fcba03;
+  box-shadow: #000 2px 2px 4px;
+}
+
+.aanvallen li:hover {
+  animation: infinite 2s ease-in-out;
+  animation-name: move;
+  animation-duration: 2s;
 }
 
 /* Animation */

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl-be">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,8 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </head>
-<body class="ingelogd">
+
+<body class="ingelogd battler">
     <header>
         <nav>
             <div class="left-container">
@@ -22,11 +24,14 @@
             </div>
             <div id="nav-menus" class="nav-container">
                 <ul class="">
-                    <li><a href="./pokemons-bekijken.html"><img src="../assets/nav-icons/bekijken.png" alt=""></a></a></li>
-                    <li><a href="./pokemon-vergelijken.html"><img src="../assets/nav-icons/vergelijken.png" alt=""></a></li>
+                    <li><a href="./pokemons-bekijken.html"><img src="../assets/nav-icons/bekijken.png" alt=""></a></a>
+                    </li>
+                    <li><a href="./pokemon-vergelijken.html"><img src="../assets/nav-icons/vergelijken.png" alt=""></a>
+                    </li>
                     <li><a href="./pokemons-vangen.html"><img src="../assets/nav-icons/vangen.png" alt=""></a></li>
                     <li><a href="./huidige-pokemon.html"><img src="../assets/nav-icons/huidige.png" alt=""></a></li>
-                    <li  class="active"><a href="./pokemon-battler.html"><img src="../assets/nav-icons/battler.png" alt=""></a></li>
+                    <li class="active"><a href="./pokemon-battler.html"><img src="../assets/nav-icons/battler.png"
+                                alt=""></a></li>
                     <li><a href="./who's-that-pokemon.html"><img src="../assets/nav-icons/who.png" alt=""></a></li>
                 </ul>
             </div>
@@ -34,12 +39,34 @@
                 <ul>
                     <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
                     <li><button>?</button></li>
-                    <li><a href="../Pokemon/pokemon-auth.html" class="fa-solid fa-right-from-bracket btn btn-dark"></a></li>
+                    <li><a href="../Pokemon/pokemon-auth.html" class="fa-solid fa-right-from-bracket btn btn-dark"></a>
+                    </li>
                 </ul>
             </div>
         </nav>
     </header>
     <main>
+        <section class="battlefield">
+            <article>
+
+            </article>
+            <article>
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif"
+                    alt="">
+            </article>
+            <article>
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/back/shiny/94.gif"
+                    alt="">
+            </article>
+            <article>
+                <ul class="aanvallen">
+                        <li>aanval 1</li>
+                        <li>aanval 2</li>
+                        <li>aanval 3</li>
+                        <li>aanval 4</li>
+                </ul>
+            </article>
+        </section>
         <!-- Modal voor help-->
         <div class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -49,17 +76,22 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Hier kan je je pokemons tegen anderen laten vechten. <br> Indien nog niet gedaan kies een pokemon op de pagina <a href="huidige-pokemon.html">huidige-pokemon</a>. Gebruik een aanval tegen de anderen pokémon en kijk wie er wint.
+                        Hier kan je je pokemons tegen anderen laten vechten. <br> Indien nog niet gedaan kies een
+                        pokemon op de pagina <a href="huidige-pokemon.html">huidige-pokemon</a>. Gebruik een aanval
+                        tegen de anderen pokémon en kijk wie er wint.
                     </div>
                 </div>
             </div>
         </div>
-        <div class="help"><button data-bs-toggle="modal" data-bs-target="#hulp"><i class="fa-solid fa-question"></i></button></div>    </main>
+        <div class="help"><button data-bs-toggle="modal" data-bs-target="#hulp"><i
+                    class="fa-solid fa-question"></i></button></div>
+    </main>
     <script>
         let hamMenu = document.querySelector('.hamMenu');
         hamMenu.addEventListener('click', () => {
             document.querySelector('.nav-container ul').classList.toggle('active');
-            });
+        });
     </script>
 </body>
+
 </html>
