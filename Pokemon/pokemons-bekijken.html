@@ -432,11 +432,21 @@
     </main>
     <script>
         function openFilterMenu() {
-            if (document.querySelector('aside').classList.contains('active')) {
-                document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "aside main"';
+            if (window.innerWidth <= 425) {
+                if (document.querySelector('aside').classList.contains('active')) {
+                    document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "main main"';
+                }
+                else {
+                    document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "main main"';
+                }
             }
             else {
-                document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "main main"';
+                if (document.querySelector('aside').classList.contains('active')) {
+                    document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "aside main"';
+                }
+                else {
+                    document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "main main"';
+                }
             }
         }
         let hamMenu = document.querySelector('.hamMenu');

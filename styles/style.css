@@ -693,6 +693,46 @@ nav *{
   margin-top: 7rem;
   overflow: hidden;
 }
+.poke-catch {
+  display: flex;
+  flex-direction: column;  
+  align-items: center;
+  gap: 3rem;
+}
+
+.poke-catch article:nth-child(1) p {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.poke-catch article:first-child {
+  margin-top: 2rem;
+}
+
+.poke-catch article:nth-child(2) {
+  margin-bottom: 3rem;
+}
+
+.poke-catch-img {
+  width: 17rem;
+}
+
+.poke-catch-ball {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 10rem;
+  border: 5px lawngreen solid;
+  cursor: pointer;
+}
+
+.pokemonWho {
+  filter: grayscale(1);
+  filter: brightness(0);
+  width:60%;
+  animation: infinite 1s ease-in-out;
+  animation-name: move;
+  animation-duration: 2s;
+}
 
 .silhouette {
   filter: brightness(0);
@@ -936,6 +976,9 @@ nav *{
   }
   .fa-filter{
     top: 100px;
+  }
+  .poke-catch article:nth-child(1) p {
+    font-size: 2rem;
   }
 }
 
