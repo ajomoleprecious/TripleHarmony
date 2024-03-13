@@ -4,7 +4,7 @@
 body {
   background-color: #a1cbf1;
   width: 100%;
-  height: 100vh;
+  height: 100svh;
   font-family: 'Anta', sans-serif;
 }
 header{
@@ -29,7 +29,7 @@ main{
   grid-area: main;
   display: grid;
   grid-template-areas: "title" "pokemon-list" "list-nav";
-  grid-template-rows: 18vh 56vh 5vh;
+  grid-template-rows: 18vh 65vh 5vh;
 }
 
 
