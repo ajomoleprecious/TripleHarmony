@@ -4,9 +4,10 @@
 body {
   background-color: #a1cbf1;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   font-family: 'Anta', sans-serif;
 }
+
 header{
   grid-area: header;
 }
@@ -29,7 +30,7 @@ main{
   grid-area: main;
   display: grid;
   grid-template-areas: "title" "pokemon-list" "list-nav";
-  grid-template-rows: 18vh 69vh 5vh;
+  grid-template-rows: 20dvh 58dvh 10dvh;
 }
 
 
@@ -127,9 +128,9 @@ main{
   background-color: #fcba03;
   border-radius: 100%;
   transition: 0.5s;
-  transition: 0.5s ease-in-out;
   height: 50px;
   width: 50px;
+  transition: 0.5s ease-in-out;
   font-size: 2rem;
 }
 
@@ -336,7 +337,6 @@ nav *{
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: #000 1px solid;
 }
 
 .left_pokemon img, .right_pokemon img {
@@ -346,7 +346,7 @@ nav *{
 }
 
 .left_pokemon input, .right_pokemon input {
-  width: 1rem;
+  width: 10rem;
   padding: 0.5rem;
   border: black 1px solid;
   border-radius: 0.7rem;
@@ -361,8 +361,8 @@ nav *{
 .pv_stats li{
   padding: 0.5rem;
   width: 8rem;
+  border-bottom: 1px solid black;
   margin-top: 2rem;
-  margin-bottom: 2rem;
 }
 
 .pv_stats li:nth-child(2)
@@ -425,6 +425,7 @@ nav *{
   text-shadow: #000000 2px 2px 2px;
   font-size: 1.5rem;
 }
+
 
 .submenu {
   margin: 1rem;
@@ -491,6 +492,7 @@ nav *{
   transition: 0.5s;
   flex-direction: column;
   display: none;
+  z-index: 5;
 }
 
 .pokemon-bekijken > aside.active{
@@ -514,7 +516,7 @@ nav *{
 
 .pokemon-bekijken > main > h1 {
   font-size: 1.5rem;
-  margin: 4rem auto 3.5rem 2rem;
+  margin: .5rem auto 0 1.5rem;
 }
 .pokemon-bekijken > main{
   width: 100%;
@@ -522,7 +524,7 @@ nav *{
 }
 .pokemon-list{
   display: flex;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .pokemon-list > ul{
   margin: 0;
@@ -530,9 +532,10 @@ nav *{
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  justify-content: flex-start;
+  justify-content: center; /* of flex-start */
   align-items: center;
   align-content: flex-start;
+  height: 100%;
 }
 .pokemon-list > ul > li{
   margin: 0;
@@ -613,10 +616,66 @@ nav *{
   justify-content: start;
   align-items: end;
   gap: 1rem;
-  overflow: scroll;
+  overflow-x: scroll;
 }
 .pokemon-levels ul li p{
   margin: 0;
+}
+
+.battler {
+  background-image: url("../assets/MicrosoftTeams-image\ \(1\).png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.battlefield {
+  display: flex;
+  flex-wrap: wrap;
+  height: 90vh;
+}
+
+.battlefield img {
+  width: 9rem;
+  height: 14rem;
+}
+
+.battlefield img:first-child
+{
+  margin-top: 5rem;
+}
+
+.battlefield article {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.aanvallen {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  align-content: end;
+  padding: 0;
+  margin: 0 0 5rem 0;
+  gap: 1rem;
+}
+
+
+.aanvallen li {
+  border: #000 1px solid;
+  border-radius: 2rem;
+  text-align: center;
+  padding: .5rem 1rem;
+  width: 40%;
+  background-color: #fcba03;
+  box-shadow: #000 2px 2px 4px;
+}
+
+.aanvallen li:hover {
+  animation: infinite 2s ease-in-out;
+  animation-name: move;
+  animation-duration: 2s;
 }
 
 .pokemonToGuess {
@@ -693,6 +752,7 @@ nav *{
   transform: scale(1.1);
   transition: 0.5s ease-in-out;
 }
+
 
 .modal-huidige button, .modal-huidige img{
   margin: 0 auto;
@@ -817,7 +877,22 @@ nav *{
   .pokemon-hp p, .pokemon-shield p{
     font-size: 0.8rem;
   }
-
+  .battler {
+    background-image: url("../assets/mobiel_battler.png");
+  }
+  .battlefield article:nth-child(2) img {
+    margin-top: 0;
+  }
+  .battlefield article:nth-child(2) {
+    justify-content: end;
+  }
+  .battlefield article:nth-child(3) {
+    justify-content: start;
+  }
+  .aanvallen {
+    justify-content: end;
+    margin-right: 1rem;
+  }
 }
 
 @media (max-width: 475px){
@@ -831,6 +906,9 @@ nav *{
   .pokemon-bekijken{
     grid-template-areas: "header header" "main main";
   }
+  .aanvallen li {
+    font-size: 0.7rem;
+  }
 }
 
 @media (max-width: 400px) {
@@ -838,88 +916,24 @@ nav *{
     width: 300px;
     height: 150px;
   }
-  
+  aside.active{
+    position: fixed;
+    top: 100px;
+  }
+  .fa-filter{
+    top: 100px;
+  }
 }
 
 @media (max-width: 320px) {
   .pokemon-levels ul{
     width: 150px;
   }
+  
 }
-
-@media (max-width: 750px){
-  .pokemonToGuess {
-    height: 60vh;
-    width: 40vh;
-    margin-top: 8rem;
-  }
-  
-  .silhouette {
-    width:50%;
-  }
-  
-  #inputWho {
-    padding: 10px;
-    font-size: 11px;
-    width: 200px;
-    padding-top: 8px;
-    padding: 8px;
-  }
-  .pokemonToGuess .fa-angles-right {
-    font-size: 1rem;
-    padding: 0.5rem;
-  }
-
-  #cardTitle {
-    font-size: 15px;
-  }
-  
-  #dontKnow{
-    padding: 5px 10px;
-    font-size: 1rem;
-    width: 150px;
-  }
-}
-
-@media (max-width: 1100px){
-  .pokemonToGuess {
-    height: 55vh;
-    width: 40vh;
-    margin-top: 8rem;
-  }
-  
-  .silhouette {
-    width:50%;
-  }
-  
-  #inputWho {
-    padding: 10px;
-    font-size: 11px;
-    width: 200px;
-    padding-top: 8px;
-    padding: 8px;
-  }
-  .pokemonToGuess .fa-angles-right {
-    font-size: 1rem;
-    padding: 0.5rem;
-  }
-
-  #cardTitle {
-    font-size: 20px;
-  }
-  
-  #dontKnow{
-    padding: 5px 10px;
-    font-size: 1rem;
-    width: 150px;
-  }
-}
-
 
 @media (min-width: 375px) and (max-width: 800px){
-
-body {
-  width: max-content;
-}
-
+  body {
+    width: max-content;
+  }
 }
