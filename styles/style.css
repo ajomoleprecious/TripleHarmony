@@ -349,6 +349,7 @@ nav *{
   width: 10rem;
   padding: 0.5rem;
   border: black 1px solid;
+  border-left: #000 1px solid;
   border-radius: 0.7rem;
   text-align: center;
   font-family: "Anta", sans-serif;
@@ -361,7 +362,6 @@ nav *{
 .pv_stats li{
   padding: 0.5rem;
   width: 8rem;
-  border-bottom: 1px solid black;
   margin-top: 2rem;
 }
 
@@ -992,5 +992,39 @@ nav *{
 @media (min-width: 375px) and (max-width: 800px){
   body .ingelogd {
     width: max-content;
+  }
+}
+
+@media (max-width: 1100px){
+  .pokemonToGuess {
+    height: 55vh;
+    width: 40vh;
+    margin-top: 8rem;
+  }
+  
+  .silhouette {
+    width:50%;
+  }
+  
+  #inputWho {
+    padding: 10px;
+    font-size: 11px;
+    width: 200px;
+    padding-top: 8px;
+    padding: 8px;
+  }
+  .pokemonToGuess .fa-angles-right {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  #cardTitle {
+    font-size: 20px;
+  }
+  
+  #dontKnow{
+    padding: 5px 10px;
+    font-size: 1rem;
+    width: 150px;
   }
 }
