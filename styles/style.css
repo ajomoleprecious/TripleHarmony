@@ -684,8 +684,9 @@ nav *{
   gap: 3rem;
 }
 
-.poke-catch article {
+.poke-catch article:nth-child(1) p {
   font-size: 3rem;
+  margin: 0;
 }
 
 .poke-catch article:first-child {
@@ -704,7 +705,8 @@ nav *{
   width: 5rem;
   height: 5rem;
   border-radius: 10rem;
-  border: 3px red solid;
+  border: 5px lawngreen solid;
+  cursor: pointer;
 }
 
 .pokemonWho {
@@ -880,6 +882,12 @@ nav *{
   }
   .fa-filter{
     top: 100px;
+  }
+  .poke-catch article:nth-child(1) p {
+    font-size: 2rem;
+  }
+  .poke-catch {
+    gap: 2rem;
   }
 }
 
