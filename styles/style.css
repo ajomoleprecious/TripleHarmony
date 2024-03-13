@@ -702,6 +702,20 @@ nav *{
   animation-duration: 2s;
 }
 
+.silhouette-result {
+  filter: brightness(1);
+  width:70%;
+  animation: infinite 1s ease-in-out;
+  animation-name: move;
+  animation-duration: 2s;
+}
+
+#pokemonName {
+  font-size: 2.5rem;
+  color: #286078;
+}
+
+
 #inputWho {
   padding: 10px;
   font-size: 16px;
@@ -933,7 +947,7 @@ nav *{
 }
 
 @media (min-width: 375px) and (max-width: 800px){
-  body {
+  body .ingelogd {
     width: max-content;
   }
 }
