@@ -4,7 +4,7 @@
 body {
   background-color: #a1cbf1;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   font-family: 'Anta', sans-serif;
 }
 
@@ -24,6 +24,22 @@ aside{
 main{
   grid-area: main;
 }
+.pokemon-bekijken-main > h1{
+  grid-area: title;
+}
+.pokemon-bekijken-main > .pokemon-list{
+  grid-area: pokemon-list;
+}
+.pokemon-bekijken-main > .list-nav{
+  grid-area: list-nav;
+}
+.pokemon-bekijken-main{
+  grid-area: main;
+  display: grid;
+  grid-template-areas: "title" "pokemon-list" "list-nav";
+  grid-template-rows: 20dvh 58dvh 10dvh;
+}
+
 
 .pokemon-bekijken{
   display: grid;
@@ -247,6 +263,10 @@ nav p {
 #nav-menus {
   width: 80%;
   margin: 0 2rem;
+}
+
+#nav-menus ul li.active{
+  border-bottom: 7px solid #af2215;
 }
 
 .nav-container ul {
@@ -478,11 +498,12 @@ nav *{
   transition: 0.5s;
   flex-direction: column;
   display: none;
+  z-index: 5;
 }
 
 .pokemon-bekijken > aside.active{
   display: flex;
-  animation: slide-in 2s ease-in-out;
+  animation: slide-in 0.6s ease-in-out;
 }
 
 .form-select{
@@ -501,16 +522,15 @@ nav *{
 
 .pokemon-bekijken > main > h1 {
   font-size: 1.5rem;
-  margin: 4rem auto 3.5rem 2rem;
+  margin: .5rem auto 0 1.5rem;
 }
 .pokemon-bekijken > main{
   width: 100%;
   height: 100%;
 }
 .pokemon-list{
-  height: 650px;
   display: flex;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .pokemon-list > ul{
   margin: 0;
@@ -518,9 +538,10 @@ nav *{
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  justify-content: flex-start;
+  justify-content: center; /* of flex-start */
   align-items: center;
   align-content: flex-start;
+  height: 100%;
 }
 .pokemon-list > ul > li{
   margin: 0;
@@ -601,7 +622,7 @@ nav *{
   justify-content: start;
   align-items: end;
   gap: 1rem;
-  overflow: scroll;
+  overflow-x: scroll;
 }
 .pokemon-levels ul li p{
   margin: 0;
@@ -656,6 +677,17 @@ nav *{
   animation-duration: 2s;
 }
 
+.pokemonWho {
+  filter: grayscale(1);
+  filter: brightness(0);
+}
+
+.modal-huidige button, .modal-huidige img{
+  margin: 0 auto;
+}
+.modal-huidige button:hover{
+  background-color: green;
+}
 /* Animation */
 
 @keyframes move {
@@ -705,9 +737,6 @@ nav *{
 @media (max-width: 768px){
   .pokemon-list > ul{
     justify-content: center;
-  }
-  .pokemon-bekijken{
-    grid-template-columns: auto 3fr;
   }
 }
 
@@ -779,7 +808,6 @@ nav *{
 
 }
 
-
 @media (max-width: 475px){
   aside.active{
     position: fixed;
@@ -788,6 +816,9 @@ nav *{
   .pokemon-levels ul{
     width: 200px;
   }
+  .pokemon-bekijken{
+    grid-template-areas: "header header" "main main";
+  }
 }
 
 @media (max-width: 400px) {
@@ -795,7 +826,13 @@ nav *{
     width: 300px;
     height: 150px;
   }
-  
+  aside.active{
+    position: fixed;
+    top: 100px;
+  }
+  .fa-filter{
+    top: 100px;
+  }
 }
 
 @media (max-width: 320px) {
