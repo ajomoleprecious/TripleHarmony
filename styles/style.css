@@ -127,9 +127,9 @@ main{
   background-color: #fcba03;
   border-radius: 100%;
   transition: 0.5s;
+  transition: 0.5s ease-in-out;
   height: 50px;
   width: 50px;
-  transition: 0.5s ease-in-out;
   font-size: 2rem;
 }
 
@@ -618,9 +618,79 @@ nav *{
   margin: 0;
 }
 
-.pokemonWho {
-  filter: grayscale(1);
+.pokemonToGuess {
+  margin:auto;
+  background-color: #f3f2b3;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0 0 15px black;
+  border-radius: 20px;
+  height: 70vh;
+  width: 50vh;
+  padding-bottom: 50px;
+  margin-top: 7rem;
+  overflow: hidden;
+}
+
+.silhouette {
   filter: brightness(0);
+  width:60%;
+  animation: infinite 1s ease-in-out;
+  animation-name: move;
+  animation-duration: 2s;
+}
+
+#inputWho {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #286078;
+  border-radius: 15px;
+  width: 300px;
+  padding-top: 13px;
+  padding: 13px;
+  
+}
+#inputWho::placeholder {
+  color: #000000;
+  opacity: 0.5;
+  text-align: center;
+}
+
+.pokemonToGuess .fa-angles-right {
+  cursor: pointer;
+  font-size: 2rem;
+  padding: 1rem;
+  background-color: #286078;
+  border-radius: 100%;
+  color: #f3f2b3;
+}
+
+.pokemonToGuess .fa-angles-right:hover{
+  transform: scale(1.1);
+  transition: 0.5s ease-in-out; 
+}
+
+#cardTitle {
+  color: #286078;
+  font-size: 30px;
+}
+
+#dontKnow{
+  cursor: pointer;
+  color: #f3f2b3;
+  text-align: center;
+  background-color: #286078;
+  border-radius: 15px;
+  padding: 7px 10px;
+  font-size: 1.3rem;
+  width: 300px;
+}
+
+#dontKnow:hover{
+  transform: scale(1.1);
+  transition: 0.5s ease-in-out;
 }
 
 .modal-huidige button, .modal-huidige img{
@@ -774,5 +844,72 @@ nav *{
   .pokemon-levels ul{
     width: 150px;
   }
+}
+
+@media (max-width: 750px){
+  .pokemonToGuess {
+    height: 60vh;
+    width: 40vh;
+    margin-top: 8rem;
+  }
   
+  .silhouette {
+    width:50%;
+  }
+  
+  #inputWho {
+    padding: 10px;
+    font-size: 11px;
+    width: 200px;
+    padding-top: 8px;
+    padding: 8px;
+  }
+  .pokemonToGuess .fa-angles-right {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  #cardTitle {
+    font-size: 15px;
+  }
+  
+  #dontKnow{
+    padding: 5px 10px;
+    font-size: 1rem;
+    width: 150px;
+  }
+}
+
+@media (max-width: 1100px){
+  .pokemonToGuess {
+    height: 55vh;
+    width: 40vh;
+    margin-top: 8rem;
+  }
+  
+  .silhouette {
+    width:50%;
+  }
+  
+  #inputWho {
+    padding: 10px;
+    font-size: 11px;
+    width: 200px;
+    padding-top: 8px;
+    padding: 8px;
+  }
+  .pokemonToGuess .fa-angles-right {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  #cardTitle {
+    font-size: 20px;
+  }
+  
+  #dontKnow{
+    padding: 5px 10px;
+    font-size: 1rem;
+    width: 150px;
+  }
 }
