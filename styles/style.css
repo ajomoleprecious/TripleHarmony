@@ -29,7 +29,7 @@ main{
   grid-area: main;
   display: grid;
   grid-template-areas: "title" "pokemon-list" "list-nav";
-  grid-template-rows: 20dvh 56dvh 10dvh;
+  grid-template-rows: 20dvh 58dvh 10dvh;
 }
 
 
