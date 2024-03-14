@@ -1011,8 +1011,8 @@ nav *{
     font-size: 0.7rem;
   }
   .progress, .progress-bar{
-    height: 15px;
-    width: 20%;
+    height: 20px;
+    width: 100%;
     font-size: 1rem;
   }
   .aanvallen {
