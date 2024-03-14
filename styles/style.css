@@ -637,7 +637,7 @@ nav *{
 .battlefield {
   display: flex;
   flex-wrap: wrap;
-  height: 90vh;
+  height: 100vh;
 }
 
 .battlefield img {
@@ -650,7 +650,7 @@ nav *{
 }
 
 .battlefield article {
-  width: 50%;
+  width: 50vw;
   display: flex;
   justify-content: center;
 }
@@ -981,15 +981,6 @@ nav *{
   .battler {
     background-image: url("../assets/mobiel_battler.png");
   }
-  .battlefield article:nth-child(2) img {
-    margin-top: 0;
-  }
-  .battlefield article:nth-child(2) {
-    justify-content: end;
-  }
-  .battlefield article:nth-child(3) {
-    justify-content: start;
-  }
   .aanvallen {
     justify-content: end;
     margin-right: 1rem;
@@ -1026,6 +1017,16 @@ nav *{
   }
   .poke-catch article:nth-child(1) p {
     font-size: 2rem;
+  }
+  .progress, .progress-bar{
+    height: 15px;
+    width: 20%;
+    font-size: 1rem;
+  }
+  .aanvallen {
+    justify-content: center;
+    align-self: center;
+    margin-top: 0;
   }
 }
 
