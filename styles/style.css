@@ -638,7 +638,7 @@ nav *{
 .battlefield {
   display: flex;
   flex-wrap: wrap;
-  height: 91vh;
+  height: 91svh;
 }
 
 .battlefield img {
