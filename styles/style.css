@@ -367,7 +367,7 @@ nav *{
 
 .pv_stats li:nth-child(2)
 {
-  width: 2.5rem;
+  width: 5rem;
 }
 
 .visual_percentage {
@@ -416,14 +416,19 @@ nav *{
 
 .middle_stats {
   display: flex;
-  align-items: end;
+  margin-top: 21rem;
 }
 
 .comparison li {
-  margin: 2.4rem 0 1.7rem 0;
-  color: #18ce04;
+  margin-top: 4rem;
+  margin-bottom: 1.8rem;
+  color: #22ee0b;
   text-shadow: #000000 2px 2px 2px;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.progress{
+  width: 11rem;
 }
 
 
@@ -990,9 +995,117 @@ nav *{
 }
 
 @media (min-width: 375px) and (max-width: 800px){
-  body .ingelogd {
-    width: max-content;
+  .pv_project {
+    margin-top: 2rem;
+    border: #000 1px solid;
+    display: flex;
+    justify-content: space-evenly;
   }
+  
+  .pv_project input{
+    width: fit-content;
+  }
+  
+  .left_pokemon, .right_pokemon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: #000 1px solid;
+  }
+  
+  .left_pokemon img, .right_pokemon img {
+    margin: 2rem 0 2rem 0;
+    width: 150px;
+    height: 130px;
+  }
+  
+  .left_pokemon input, .right_pokemon input {
+    width: 10rem;
+    padding: 0rem;
+    border: black 1px solid;
+    border-left: #000 1px solid;
+    border-radius: 0.7rem;
+    text-align: center;
+    font-family: "Anta", sans-serif;
+  }
+  
+  .pv_stats {
+    display: flex;
+  }
+  
+  .pv_stats li{
+    padding: 0.5rem;
+    width: 8rem;
+    margin-top: 2rem;
+  }
+  
+  .pv_stats li:nth-child(2)
+  {
+    width: 5rem;
+  }
+  
+  .visual_percentage {
+    padding: 0.5rem;
+    border-radius: 6rem;
+    border: 1px solid black;
+  }
+  
+  .left_pokemon span{
+    border: #000 1px solid;
+  }
+  
+  .right_pokemon span{
+    border: #000 1px solid;
+  }
+  
+  .left_pokemon .visual_percentage.first {
+    background-color: #1cfc03;
+    width: 78%;
+  }
+  
+  .left_pokemon .visual_percentage.second {
+    width: 84%;
+    background-color: #1cfc03;
+  }
+  
+  .left_pokemon .visual_percentage.third {
+    width: 78%;
+    background-color: #1cfc03;
+  }
+  
+  .right_pokemon .visual_percentage.first {
+    background-color: #fc9d03;
+    width: 45%;
+  }
+  
+  .right_pokemon .visual_percentage.second {
+    background-color: #fc9d03;
+    width: 49%;
+  }
+  
+  .right_pokemon .visual_percentage.third {
+    background-color: #fc9d03;
+    width: 49%;
+  }
+  
+  .middle_stats {
+    display: flex;
+    margin-top: 15rem;
+  }f
+  
+  .comparison li {
+    margin-top: 4rem;
+    margin-bottom: 1.8rem;
+    color: #22ee0b;
+    text-shadow: #000000 2px 2px 2px;
+
+  }
+
+  
+.progress{
+  width: 8rem;
+}
+  
 }
 
 @media (max-width: 1100px){
