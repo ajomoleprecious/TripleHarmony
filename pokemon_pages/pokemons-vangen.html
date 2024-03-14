@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl-BE">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </head>
+
 <body class="ingelogd">
     <header>
         <nav>
@@ -22,19 +24,26 @@
             </div>
             <div id="nav-menus" class="nav-container">
                 <ul class="">
-                    <li><a href="./pokemons-bekijken.html"><img src="../assets/nav-icons-black/bekijken.png" alt=""></a></a></li>
-                    <li><a href="./pokemon-vergelijken.html"><img src="../assets/nav-icons-black/vergelijken.png" alt=""></a></li>
-                    <li class="active"><a href="./pokemons-vangen.html"><img src="../assets/nav-icons-red/vangen.png" alt=""></a></li>
-                    <li><a href="./huidige-pokemon.html"><img src="../assets/nav-icons-black/huidige.png" alt=""></a></li>
-                    <li><a href="./pokemon-battler.html"><img src="../assets/nav-icons-black/battler.png" alt=""></a></li>
-                    <li><a href="./who's-that-pokemon.html"><img src="../assets/nav-icons-black/who.png" alt=""></a></li>
+                    <li><a href="./pokemons-bekijken.html"><img src="../assets/nav-icons-black/bekijken.png"
+                                alt=""></a></a></li>
+                    <li><a href="./pokemon-vergelijken.html"><img src="../assets/nav-icons-black/vergelijken.png"
+                                alt=""></a></li>
+                    <li class="active"><a href="./pokemons-vangen.html"><img src="../assets/nav-icons-red/vangen.png"
+                                alt=""></a></li>
+                    <li><a href="./huidige-pokemon.html"><img src="../assets/nav-icons-black/huidige.png" alt=""></a>
+                    </li>
+                    <li><a href="./pokemon-battler.html"><img src="../assets/nav-icons-black/battler.png" alt=""></a>
+                    </li>
+                    <li><a href="./who's-that-pokemon.html"><img src="../assets/nav-icons-black/who.png" alt=""></a>
+                    </li>
                 </ul>
             </div>
             <div class="right-container">
                 <ul>
                     <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>?</button></a></li>
-                    <li><a href="../Pokemon/pokemon-auth.html" class="fa-solid fa-right-from-bracket btn btn-dark"></a></li>
+                    <li><a href="../Pokemon/pokemon-auth.html" class="fa-solid fa-right-from-bracket btn btn-dark"></a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -42,7 +51,9 @@
     <main>
         <section class="current-pokemon">
             <a href="huidige-pokemon.html">
-                <img class="pokemon-pic" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="my-pokemon">
+                <img class="pokemon-pic"
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif"
+                    alt="my-pokemon">
             </a>
             <img src="../assets/podium.png" alt="pokemon-podium">
             <div class="pokemon-stats">
@@ -58,11 +69,16 @@
             </div>
         </section>
         <section class="poke-catch">
-            <article><p>Snorlax</p></article>
-            <article><img class="poke-catch-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/shiny/143.gif" alt=""></article>
-            <article><a data-bs-target="#loslaten" data-bs-toggle="modal" href="#"><img class="poke-catch-ball" src="../assets/pokemon_logo.png"></a></article>
+            <article>
+                <p>Snorlax</p>
+            </article>
+            <article><img class="poke-catch-img"
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/shiny/143.gif"
+                    alt=""></article>
+            <article><a data-bs-target="#loslaten" data-bs-toggle="modal" href="#"><img class="poke-catch-ball"
+                        src="../assets/pokemon_logo.png"></a></article>
         </section>
-        
+
         <!-- Modal voor help-->
         <div class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -74,7 +90,8 @@
                     <div class="modal-body">
                         Hier krijg je een random pokémon te zien door op de pokébal te drukken. <br>
                         Als de rand van de pokébal groen is, dan kan je deze pokémon vangen. <br>
-                        Als de rand van de pokébal rood is, dan kan je deze pokémon niet vangen omdat je dan een keuze moet maken om die vrij te laten of niet. <br>
+                        Als de rand van de pokébal rood is, dan kan je deze pokémon niet vangen omdat je dan een keuze
+                        moet maken om die vrij te laten of niet. <br>
                         Je zal overgedragen worden naar de pokemon-battler pagina om de pokémon te vangen. <br>
                     </div>
                 </div>
@@ -119,12 +136,15 @@
                 </div>
             </div>
         </div>
-        <div class="help"><button data-bs-toggle="modal" data-bs-target="#hulp"><i class="fa-solid fa-question"></i></button></div>    </main>
+        <div class="help"><button data-bs-toggle="modal" data-bs-target="#hulp"><i
+                    class="fa-solid fa-question"></i></button></div>
+    </main>
     <script>
         let hamMenu = document.querySelector('.hamMenu');
         hamMenu.addEventListener('click', () => {
             document.querySelector('.nav-container ul').classList.toggle('active');
-            });
+        });
     </script>
 </body>
+
 </html>

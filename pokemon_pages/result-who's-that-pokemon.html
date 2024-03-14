@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl-BE">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </head>
+
 <body class="ingelogd">
     <header>
         <nav>
@@ -22,34 +24,45 @@
             </div>
             <div id="nav-menus" class="nav-container">
                 <ul class="">
-                    <li><a href="./pokemons-bekijken.html"><img src="../assets/nav-icons-black/bekijken.png" alt=""></a></a></li>
-                    <li><a href="./pokemon-vergelijken.html"><img src="../assets/nav-icons-black/vergelijken.png" alt=""></a></li>
-                    <li><a href="./pokemons-vangen.html"><img src="../assets/nav-icons-black/vangen.png" alt=""></a></li>
-                    <li><a href="./huidige-pokemon.html"><img src="../assets/nav-icons-black/huidige.png" alt=""></a></li>
-                    <li><a href="./pokemon-battler.html"><img src="../assets/nav-icons-black/battler.png" alt=""></a></li>
-                    <li class="active"><a href="./who's-that-pokemon.html"><img src="../assets/nav-icons-red/who.png" alt=""></a></li>
+                    <li><a href="./pokemons-bekijken.html"><img src="../assets/nav-icons-black/bekijken.png"
+                                alt=""></a></a></li>
+                    <li><a href="./pokemon-vergelijken.html"><img src="../assets/nav-icons-black/vergelijken.png"
+                                alt=""></a></li>
+                    <li><a href="./pokemons-vangen.html"><img src="../assets/nav-icons-black/vangen.png" alt=""></a>
+                    </li>
+                    <li><a href="./huidige-pokemon.html"><img src="../assets/nav-icons-black/huidige.png" alt=""></a>
+                    </li>
+                    <li><a href="./pokemon-battler.html"><img src="../assets/nav-icons-black/battler.png" alt=""></a>
+                    </li>
+                    <li class="active"><a href="./who's-that-pokemon.html"><img src="../assets/nav-icons-red/who.png"
+                                alt=""></a></li>
                 </ul>
             </div>
             <div class="right-container">
                 <ul>
                     <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>?</button></a></li>
-                    <li><a href="../Pokemon/pokemon-auth.html" class="fa-solid fa-right-from-bracket btn btn-dark"></a></li>
+                    <li><a href="../Pokemon/pokemon-auth.html" class="fa-solid fa-right-from-bracket btn btn-dark"></a>
+                    </li>
                 </ul>
             </div>
         </nav>
     </header>
     <main>
         <section class="pokemonToGuess">
-        <img class="silhouette-result" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/384.png" alt="Rayquaza">
+            <img class="silhouette-result"
+                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/384.png"
+                alt="Rayquaza">
 
-        <p id="pokemonName">RAYQUAZA</p>
-        <a href="/Pokemon/who's-that-pokemon.html"><i class="fa-solid fa-angles-right"></i></a> 
+            <p id="pokemonName">RAYQUAZA</p>
+            <a href="/Pokemon/who's-that-pokemon.html"><i class="fa-solid fa-angles-right"></i></a>
         </section>
-        
+
         <section class="current-pokemon">
             <a href="huidige-pokemon.html">
-                <img class="pokemon-pic" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="my-pokemon">
+                <img class="pokemon-pic"
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif"
+                    alt="my-pokemon">
             </a>
             <img src="../assets/podium.png" alt="pokemon-podium">
             <div class="pokemon-stats">
@@ -75,7 +88,8 @@
                     </div>
                     <div class="modal-body">
                         Hier heb je een klein raad speletje om jou kennis van pokémons te testen.<br>
-                        Als je een juiste antwoord hebt gegeven wordt je pokémon versterkt met een aantal aanval sterkte of krijgt die meer defensie.<br>
+                        Als je een juiste antwoord hebt gegeven wordt je pokémon versterkt met een aantal aanval sterkte
+                        of krijgt die meer defensie.<br>
                         De pokémons zullen in zwarte conturen naar voorschijn komen.<br>
                     </div>
                 </div>
@@ -103,12 +117,15 @@
                 </div>
             </div>
         </div>
-        <div class="help"><button data-bs-toggle="modal" data-bs-target="#hulp"><i class="fa-solid fa-question"></i></button></div>    </main>
+        <div class="help"><button data-bs-toggle="modal" data-bs-target="#hulp"><i
+                    class="fa-solid fa-question"></i></button></div>
+    </main>
     <script>
         let hamMenu = document.querySelector('.hamMenu');
         hamMenu.addEventListener('click', () => {
             document.querySelector('.nav-container ul').classList.toggle('active');
-            });
+        });
     </script>
 </body>
+
 </html>
