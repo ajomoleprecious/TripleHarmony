@@ -642,12 +642,11 @@ nav *{
 
 .battlefield img {
   width: 9rem;
-  height: 14rem;
-}
+  height: 10rem;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  image-rendering: optimizeSpeed;
 
-.battlefield img:first-child
-{
-  margin-top: 5rem;
 }
 
 .battlefield article {
@@ -656,6 +655,22 @@ nav *{
   justify-content: center;
 }
 
+.battlefield article:nth-child(2) {
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 1rem;
+}
+.battlefield article:nth-child(3) {
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 1rem;
+}
+.progress, .progress-bar{
+  height:30px;
+  width: 25%;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
 .aanvallen {
   display: flex;
   flex-flow: row wrap;
@@ -675,6 +690,7 @@ nav *{
   width: 40%;
   background-color: #fcba03;
   box-shadow: #000 2px 2px 4px;
+  cursor: pointer;
 }
 
 .aanvallen li:hover {
@@ -1117,7 +1133,7 @@ nav *{
   .middle_stats {
     display: flex;
     margin-top: 15rem;
-  }f
+  }
   
   .comparison li {
     margin-top: 4rem;
