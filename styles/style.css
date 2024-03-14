@@ -1012,7 +1012,7 @@ nav *{
   }
   .progress, .progress-bar{
     height: 20px;
-    width: 100%;
+    width: 50%;
     font-size: 1rem;
   }
   .aanvallen {
