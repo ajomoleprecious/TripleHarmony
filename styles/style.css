@@ -1010,7 +1010,7 @@ nav *{
   .aanvallen li {
     font-size: 0.7rem;
   }
-  .progress, .progress-bar{
+  .battlefield .progress, .progress-bar{
     height: 20px;
     width: 75%;
     font-size: 1rem;
