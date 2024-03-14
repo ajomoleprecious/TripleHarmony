@@ -665,7 +665,7 @@ nav *{
   align-items: center;
   gap: 1rem;
 }
-.progress, .progress-bar{
+.battlefield .progress, .progress-bar{
   height:30px;
   width: 25%;
   font-size: 1.5rem;
