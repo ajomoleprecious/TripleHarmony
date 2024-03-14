@@ -1135,8 +1135,8 @@ nav * {
   .left_pokemon img,
   .right_pokemon img {
     margin: 2rem 0 2rem 0;
-    width: 150px;
-    height: 130px;
+    width: 120px;/**//**//**//**//**//**//**/
+    height: 110px; /**//**//**//**//**//**//**/
   }
 
   .left_pokemon input,
@@ -1148,10 +1148,12 @@ nav * {
     border-radius: 0.7rem;
     text-align: center;
     font-family: "Anta", sans-serif;
+    display: none; /**//**//**//**//**//**//**//**/
   }
 
   .pv_stats {
     display: flex;
+    font-size: 0.8rem;
   }
 
   .pv_stats li {
@@ -1210,22 +1212,19 @@ nav * {
 
   .middle_stats {
     display: flex;
-    margin-top: 15rem;
+    margin-top: 14rem;
   }
 
-  f .comparison li {
+  .comparison li {
     margin-top: 4rem;
     margin-bottom: 1.8rem;
     color: #22ee0b;
     text-shadow: #000000 2px 2px 2px;
-
   }
-
 
   .progress {
-    width: 8rem;
+    width: 6rem;
   }
-
 }
 
 @media (max-width: 1100px) {
