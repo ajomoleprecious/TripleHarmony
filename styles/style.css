@@ -985,7 +985,7 @@ nav *{
     margin-top: 0;
   }
   .battlefield article:nth-child(2) {
-    justify-content: end;
+    justify-content: start;
   }
   .battlefield article:nth-child(3) {
     justify-content: start;
