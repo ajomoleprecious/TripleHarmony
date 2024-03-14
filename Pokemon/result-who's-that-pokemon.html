@@ -33,7 +33,7 @@
             <div class="right-container">
                 <ul>
                     <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
-                    <li><button>?</button></li>
+                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>?</button></a></li>
                     <li><a href="../Pokemon/pokemon-auth.html" class="fa-solid fa-right-from-bracket btn btn-dark"></a></li>
                 </ul>
             </div>
@@ -77,6 +77,28 @@
                         Hier heb je een klein raad speletje om jou kennis van pokémons te testen.<br>
                         Als je een juiste antwoord hebt gegeven wordt je pokémon versterkt met een aantal aanval sterkte of krijgt die meer defensie.<br>
                         De pokémons zullen in zwarte conturen naar voorschijn komen.<br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal voor avatar-->
+        <div class="modal fade" id="chooseAvatar" tabindex="-1" aria-labelledby="chooseAvatar" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="chooseAvatarLabel">Kies je nieuwe avatar</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="avatars">
+                            <li><img src="../assets/avatars/ash_ketchum.png" alt=""></li>
+                            <li><img src="../assets/avatars/chloe.png" alt=""></li>
+                            <li><img src="../assets/avatars/dawn.png" alt=""></li>
+                            <li><img src="../assets/avatars/james.png" alt=""></li>
+                            <li><img src="../assets/avatars/jessie.png" alt=""></li>
+                            <li><img src="../assets/avatars/may.png" alt=""></li>
+                            <li><img src="../assets/avatars/serena.png" alt=""></li>
+                        </ul>
                     </div>
                 </div>
             </div>

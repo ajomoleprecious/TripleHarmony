@@ -21,19 +21,11 @@
                 <a href="pokemon-submenu.html"><img src="../assets/pokemon_logo.png" alt="logo"></a>
             </div>
             <div id="nav-menus" class="nav-container">
-                <!--<ul class="">
-                    <li><a href="./pokemons-bekijken.html"><img src="../assets/nav-icons/bekijken.png"></a></a></li>
-                    <li><a href="./pokemon-vergelijken.html"><img src="../assets/nav-icons/vergelijken.png" alt=""></a></li>
-                    <li><a href="./pokemons-vangen.html"><img src="../assets/nav-icons/vangen.png" alt=""></a></li>
-                    <li><a href="./huidige-pokemon.html"><img src="../assets/nav-icons/huidige.png" alt=""></a></li>
-                    <li><a href="./pokemon-battler.html"><img src="../assets/nav-icons/battler.png" alt=""></a></li>
-                    <li><a href="./who's-that-pokemon.html"><img src="../assets/nav-icons/who.png" alt=""></a></li>
-                </ul>-->
             </div>
             <div class="right-container">
                 <ul>
                     <li></li>
-                    <li><button>?</button></li>
+                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>?</button></a></li>
                     <li><a href="../Pokemon/pokemon-auth.html" class="fa-solid fa-right-from-bracket btn btn-dark"></a></li>
                 </ul>
             </div>
@@ -70,6 +62,28 @@
                     </div>
                     <div class="modal-body">
                         Hier heb je een overzicht van alle navigaties van de website.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal voor avatar-->
+        <div class="modal fade" id="chooseAvatar" tabindex="-1" aria-labelledby="chooseAvatar" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="chooseAvatarLabel">Kies je nieuwe avatar</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="avatars">
+                            <li><img src="../assets/avatars/ash_ketchum.png" alt=""></li>
+                            <li><img src="../assets/avatars/chloe.png" alt=""></li>
+                            <li><img src="../assets/avatars/dawn.png" alt=""></li>
+                            <li><img src="../assets/avatars/james.png" alt=""></li>
+                            <li><img src="../assets/avatars/jessie.png" alt=""></li>
+                            <li><img src="../assets/avatars/may.png" alt=""></li>
+                            <li><img src="../assets/avatars/serena.png" alt=""></li>
+                        </ul>
                     </div>
                 </div>
             </div>

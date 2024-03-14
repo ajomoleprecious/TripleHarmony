@@ -819,6 +819,32 @@ nav *{
 .modal-huidige button:hover{
   background-color: green;
 }
+
+.avatars{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+
+}
+
+.avatars li img {
+  width: 150px;
+  height: 150px;
+  padding: 1rem;
+  border: 2px solid #286078;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #f3f2b3;
+  transition: 0.5s;
+}
+
+.avatars li img:hover{
+  transform: scale(1.1);
+  transition: 0.5s;
+}
 /* Animation */
 
 @keyframes move {
