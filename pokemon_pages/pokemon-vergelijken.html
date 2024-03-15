@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon vergelijken</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <!--SCRIPTS-->
+    <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</head>
+
+<body class="ingelogd">
+    <header>
+        <nav>
+            <div class="left-container">
+                <a href="pokemon-submenu.html"><img src="../assets/pokemon_logo.png" alt="logo"></a>
+            </div>
+            <div id="nav-menus" class="nav-container">
+                <ul class="">
+                    <li><a href="./pokemons-bekijken.html"><img src="../assets/nav-icons-black/bekijken.png"
+                                alt=""></a></a></li>
+                    <li class="active"><a href="./pokemon-vergelijken.html"><img
+                                src="../assets/nav-icons-red/vergelijken.png" alt=""></a></li>
+                    <li><a href="./pokemons-vangen.html"><img src="../assets/nav-icons-black/vangen.png" alt=""></a>
+                    </li>
+                    <li><a href="./huidige-pokemon.html"><img src="../assets/nav-icons-black/huidige.png" alt=""></a>
+                    </li>
+                    <li><a href="./pokemon-battler.html"><img src="../assets/nav-icons-black/battler.png" alt=""></a>
+                    </li>
+                    <li><a href="./who's-that-pokemon.html"><img src="../assets/nav-icons-black/who.png" alt=""></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="right-container">
+                <ul>
+                    <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
+                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>?</button></a></li>
+                    <li><a href="../pokemon_pages/pokemon-auth.html" class="fa-solid fa-right-from-bracket btn btn-dark"></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="current-pokemon">
+            <a href="huidige-pokemon.html">
+                <img class="pokemon-pic"
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif"
+                    alt="my-pokemon">
+            </a>
+            <img src="../assets/podium.png" alt="pokemon-podium">
+            <div class="pokemon-stats">
+                <div class="pokemon-hp">
+                    <img id="life" src="../assets/red-heart.png" alt="leven">
+                    <p>78</p>
+                </div>
+                |
+                <div class="pokemon-shield">
+                    <img src="../assets/shield.png" alt="verdediging">
+                    <p>78</p>
+                </div>
+            </div>
+        </section>
+        <section class="pv_project">
+            <article class="left_pokemon">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif"
+                    alt="">
+                <div class="input-group">
+                    <span class="input-group-text btn btn-warning"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input class="form-control" type="text" placeholder="zoek pokemon" style="width: 20px;">
+                </div>
+                <ul class="pv_stats">
+                    <li>HP &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 24</li>
+                </ul>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
+                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 24%"></div>
+                </div>
+                <ul class="pv_stats">
+                    <li>AANVAL&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;76</li>
+
+                </ul>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
+                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 76%"></div>
+                </div>
+                <ul class="pv_stats">
+                    <li>DEF&nbsp;&nbsp;|&nbsp;&nbsp;42</li>
+                </ul>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar"
+                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 42%"></div>
+                </div>
+            </article>
+            <article class="middle_stats">
+                <ul class="comparison">
+                    <li>+21</li>
+                    <li style="color: red;">-46</li>
+                    <li>+38</li>
+                </ul>
+            </article>
+            <article class="right_pokemon">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/384.gif"
+                    alt="">
+                <div class="input-group">
+                    <span class="input-group-text btn btn-warning"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input class="form-control" type="text" placeholder="zoek pokemon">
+                </div>
+                <ul class="pv_stats">
+                    <li>HP &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 45</li>
+                </ul>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar"
+                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 55%"></div>
+                </div>
+                <ul class="pv_stats">
+                    <li>AANVAL&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;30</li>
+                </ul>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
+                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 30%"></div>
+                </div>
+                <ul class="pv_stats">
+                    <li>DEF&nbsp;&nbsp;|&nbsp;&nbsp;80</li>
+                </ul>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
+                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 76%"></div>
+                </div>
+
+            </article>
+        </section>
+        <!-- Modal voor help-->
+        <div class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="hulpLabel">Hulp</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Hier kan je 2 pokemons vergelijken met elkaar.<br>
+                        Gebruik de zoekbalken om te zoeken naar een pokemon.<br>
+                        De statistieken worden automatisch berekend en worden van de linker pokemon afgeleid.<br>
+                        BV. stel je ziet +20 aan aanval, dan heeft de linker pokémon meer aanval dan de rechter.<br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal voor avatar-->
+        <div class="modal fade" id="chooseAvatar" tabindex="-1" aria-labelledby="chooseAvatar" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="chooseAvatarLabel">Kies je nieuwe avatar</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="avatars">
+                            <li><img src="../assets/avatars/ash_ketchum.png" alt=""></li>
+                            <li><img src="../assets/avatars/chloe.png" alt=""></li>
+                            <li><img src="../assets/avatars/dawn.png" alt=""></li>
+                            <li><img src="../assets/avatars/james.png" alt=""></li>
+                            <li><img src="../assets/avatars/jessie.png" alt=""></li>
+                            <li><img src="../assets/avatars/may.png" alt=""></li>
+                            <li><img src="../assets/avatars/serena.png" alt=""></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="help"><button data-bs-toggle="modal" data-bs-target="#hulp"><i
+                    class="fa-solid fa-question"></i></button></div>
+    </main>
+    <script>
+        let hamMenu = document.querySelector('.hamMenu');
+        hamMenu.addEventListener('click', () => {
+            document.querySelector('.nav-container ul').classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>
