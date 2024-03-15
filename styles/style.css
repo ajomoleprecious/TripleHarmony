@@ -204,26 +204,36 @@ nav p {
   transition: 1s;
 }
 
-/*.denied {
-  position: relative; 
+.denied button{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  place-items: center;
+  place-content: center;
 }
 
-.denied:hover::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("../assets/denied.png");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+.denied button > img:nth-child(1) {
+  cursor: pointer;
+  grid-area: 1/1;
+  justify-content: center;
+  align-items: center;
+  width: 370px;
+  height: 180px;
 }
-*/
 
-.denied:hover{
-  animation: denied 2s infinite;
+.denied button > img:nth-child(2){
+  display: none;
+  width: 150px;
+  height: 110px;
+  grid-area: 1/1;
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+}
+
+.denied button:hover > img:nth-child(2) {
+  display: block;
 }
 
 .projects ul li button {
@@ -698,8 +708,6 @@ nav * {
   height: 10rem;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
-  image-rendering: optimizeSpeed;
-
 }
 
 .battlefield article {
@@ -972,13 +980,13 @@ nav * {
 
 @keyframes denied {
   0% {
-    background-color: none;
+    background-color: transparent;
   }
   50% {
     background-color: red;
   }
   100% {
-    background-color: none;
+    background-color: transparent;
   }
 }
 
@@ -989,6 +997,16 @@ nav * {
   .boxing-gloves {
     width: 15%;
     right: 1rem;
+  }
+  .denied button{
+    display: block;
+  }
+  .denied button > img:nth-child(2){
+    display: none;
+    visibility: hidden;
+  }
+  .denied:hover{
+    animation: denied 2s infinite;
   }
 }
 
