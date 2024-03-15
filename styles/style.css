@@ -449,7 +449,7 @@ nav * {
 
 .middle_stats {
   display: flex;
-  margin-top: 21rem;
+  margin-top: 23.7rem;
 }
 
 .comparison li {
@@ -1119,7 +1119,6 @@ nav * {
 @media (min-width: 375px) and (max-width: 800px) {
   .pv_project {
     margin-top: 2rem;
-    border: #000 1px solid;
     display: flex;
     justify-content: space-evenly;
   }
@@ -1130,34 +1129,31 @@ nav * {
 
   .left_pokemon,
   .right_pokemon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: #000 1px solid;
+    font-weight:bold;
   }
 
   .left_pokemon img,
   .right_pokemon img {
-    margin: 2rem 0 2rem 0;
-    width: 120px;/**//**//**//**//**//**//**/
-    height: 110px; /**//**//**//**//**//**//**/
+    margin: 5.5rem 0 0rem 0;
+    width: 110px;
+    height: 100px; 
   }
 
   .left_pokemon input,
   .right_pokemon input {
-    width: 10rem;
+    width: 2rem;
     padding: 0rem;
     border: black 1px solid;
     border-left: #000 1px solid;
     border-radius: 0.7rem;
     text-align: center;
     font-family: "Anta", sans-serif;
-    display: none; /**//**//**//**//**//**//**//**/
   }
 
   .pv_stats {
     display: flex;
     font-size: 0.8rem;
+    padding: 0;
   }
 
   .pv_stats li {
@@ -1217,6 +1213,7 @@ nav * {
   .middle_stats {
     display: flex;
     margin-top: 14rem;
+    border: #000 1px;
   }
 
   .comparison li {
@@ -1224,6 +1221,10 @@ nav * {
     margin-bottom: 1.8rem;
     color: #22ee0b;
     text-shadow: #000000 2px 2px 2px;
+  }
+
+  .comparison{
+    padding: 0;
   }
 
   .progress {
