@@ -801,6 +801,22 @@ nav * {
   cursor: pointer;
 }
 
+.poke-catch-ball:hover {
+  transform: scale(1.1);
+  transition: 0.5s ease-in-out;
+}
+
+.boxing-gloves {
+  position: fixed;
+  right: 7rem;
+  top: 20rem;
+}
+
+.boxing-gloves:hover {
+  transform: scale(1.1);
+  transition: 0.5s ease-in-out;
+}
+
 .pokemonWho {
   filter: grayscale(1);
   filter: brightness(0);
@@ -955,9 +971,20 @@ nav * {
 
 /* Media Queries */
 
+@media (max-width: 950px) {
+  .boxing-gloves {
+    width: 15%;
+    right: 1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .pokemon-list>ul {
     justify-content: center;
+  }
+
+  .poke-catch-img {
+    width: 10rem;
   }
 }
 
