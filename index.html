@@ -80,7 +80,6 @@
       let projects = document.querySelectorAll(".projects ul li");
       let projectsContainer = document.querySelector(".projects");
 
-      if (window.innerWidth > 1399) {
         projects.forEach((project, index) => {
           project.addEventListener("mouseover", () => {
             body.style.backgroundImage = `url('assets/landing-page-bgs/bg_${getImageName(index)}.jpg')`;
@@ -95,7 +94,6 @@
             body.style.backgroundImage = "none";
           });
         });
-      }
 
       function getImageName(index) {
         let projectNames = ["pokemon", "fifa", "fortnite", "lotr", "lego", "magic"];
@@ -103,7 +101,7 @@
       }
     }
     function checkScreenSize() {
-      if (window.innerWidth > 1399) {
+      if (window.innerWidth >= 1400) {
         showBg();
       }
     }

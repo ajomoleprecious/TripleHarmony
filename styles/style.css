@@ -204,11 +204,11 @@ nav p {
   transition: 1s;
 }
 
-.denied {
-  position: relative; /* Ensure relative positioning for the parent */
+/*.denied {
+  position: relative; 
 }
 
-.denied:hover::after {
+.denied:hover::before {
   content: '';
   position: absolute;
   top: 0;
@@ -220,8 +220,7 @@ nav p {
   background-position: center;
   background-repeat: no-repeat;
 }
-
-
+*/
 
 .projects ul li button {
   width: 100%;
