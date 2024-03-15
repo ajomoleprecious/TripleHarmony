@@ -71,6 +71,31 @@
       </div>
     </div>
   </main>
+  <script>
+    const body = document.querySelector("body");
+    const projects = document.querySelectorAll(".projects ul li");
+    const projectsContainer = document.querySelector(".projects");
+
+    projects.forEach((project, index) => {
+      project.addEventListener("mouseover", () => {
+        body.style.backgroundImage = `url('assets/landing-page-bgs/bg_${getImageName(index)}.jpg')`;
+        body.style.backgroundSize = "cover";
+        body.style.backgroundPosition = "center";
+        body.style.backgroundRepeat = "no-repeat";
+        projectsContainer.style.opacity = "0.5";     
+      });
+      
+      project.addEventListener("mouseout", () => {
+        body.style.backgroundImage = "none";
+        projectsContainer.style.opacity = "1";
+      });
+    });
+
+    function getImageName(index) {
+      const projectNames = ["pokemon", "fifa", "fortnite", "lotr", "lego", "magic"];
+      return projectNames[index];
+    }
+  </script>
 </body>
 
 </html>

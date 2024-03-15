@@ -203,13 +203,24 @@ nav p {
   transition: 1s;
 }
 
-.projects ul li:nth-child(1):hover ~ body {
-  background-color: #fcba03;
+.denied {
+  position: relative; /* Ensure relative positioning for the parent */
 }
 
-.denied:hover {
-  animation: denied 1s infinite;
+.denied:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/denied.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
+
+
 
 .projects ul li button {
   width: 100%;
@@ -376,6 +387,11 @@ nav * {
   font-family: "Anta", sans-serif;
 }
 
+.left_pokemon .input-group-text, .right_pokemon .input-group-text {
+  display: flex;
+  justify-content: center;
+}
+
 .pv_stats {
   display: flex;
 }
@@ -396,11 +412,7 @@ nav * {
   border: 1px solid black;
 }
 
-.left_pokemon span {
-  border: #000 1px solid;
-}
-
-.right_pokemon span {
+.left_pokemon span, .right_pokemon span {
   border: #000 1px solid;
 }
 
@@ -513,7 +525,7 @@ nav * {
 }
 
 .pokemon-bekijken>aside {
-  background-color: wheat;
+  background-color: #0075BE;
   border-radius: 30px;
   padding: 1rem;
   transition: 0.5s;
@@ -925,15 +937,6 @@ nav * {
 
   100% {
     transform: translateY(0);
-  }
-}
-
-@keyframes denied {
-  50%{
-    background-color: red;
-  }
-  100%{
-    background-color: transparent;
   }
 }
 
