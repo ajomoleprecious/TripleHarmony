@@ -222,6 +222,10 @@ nav p {
 }
 */
 
+.denied:hover{
+  animation: denied 2s infinite;
+}
+
 .projects ul li button {
   width: 100%;
   height: 100%;
@@ -966,6 +970,17 @@ nav * {
   }
 }
 
+@keyframes denied {
+  0% {
+    background-color: none;
+  }
+  50% {
+    background-color: red;
+  }
+  100% {
+    background-color: none;
+  }
+}
 
 
 /* Media Queries */
