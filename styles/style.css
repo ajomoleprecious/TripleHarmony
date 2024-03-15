@@ -1267,7 +1267,7 @@ nav * {
   }
 
   .silhouette {
-    width: 50%;
+    width: 45%;
   }
 
   #inputWho {
@@ -1285,6 +1285,7 @@ nav * {
 
   #cardTitle {
     font-size: 20px;
+    margin-bottom: 0;
   }
 
   #dontKnow {
