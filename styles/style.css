@@ -728,6 +728,11 @@ nav * {
   animation: damage 1s;
 }
 
+.battlefield article:nth-child(3) img {
+  animation: damage 1s;
+  animation-delay: 3s;
+}
+
 .battlefield article:nth-child(3) {
   flex-direction: column-reverse;
   align-items: center;
