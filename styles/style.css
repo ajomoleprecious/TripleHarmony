@@ -204,7 +204,7 @@ nav p {
   transition: 1s;
 }
 
-.denied button{
+.denied button {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
@@ -212,7 +212,7 @@ nav p {
   place-content: center;
 }
 
-.denied button > img:nth-child(1) {
+.denied button>img:nth-child(1) {
   cursor: pointer;
   grid-area: 1/1;
   justify-content: center;
@@ -221,7 +221,7 @@ nav p {
   height: 180px;
 }
 
-.denied button > img:nth-child(2){
+.denied button>img:nth-child(2) {
   display: none;
   width: 150px;
   height: 110px;
@@ -232,7 +232,7 @@ nav p {
   box-shadow: none;
 }
 
-.denied button:hover > img:nth-child(2) {
+.denied button:hover>img:nth-child(2) {
   display: block;
 }
 
@@ -401,7 +401,8 @@ nav * {
   font-family: "Anta", sans-serif;
 }
 
-.left_pokemon .input-group-text, .right_pokemon .input-group-text {
+.left_pokemon .input-group-text,
+.right_pokemon .input-group-text {
   display: flex;
   justify-content: center;
 }
@@ -426,7 +427,8 @@ nav * {
   border: 1px solid black;
 }
 
-.left_pokemon span, .right_pokemon span {
+.left_pokemon span,
+.right_pokemon span {
   border: #000 1px solid;
 }
 
@@ -722,6 +724,10 @@ nav * {
   gap: 1rem;
 }
 
+.battlefield article:nth-child(2) img {
+  animation: damage 1s;
+}
+
 .battlefield article:nth-child(3) {
   flex-direction: column-reverse;
   align-items: center;
@@ -982,11 +988,36 @@ nav * {
   0% {
     background-color: transparent;
   }
+
   50% {
     background-color: red;
   }
+
   100% {
     background-color: transparent;
+  }
+}
+
+@keyframes damage {
+  0% {
+    filter: grayscale(0) brightness(100%);
+    transform: scale(1);
+  }
+  25% {
+    filter: grayscale(50%) brightness(90%);
+    transform: scale(0.95);
+  }
+  50% {
+    filter: grayscale(70%) brightness(20%) sepia(100%);
+    transform: scale(0.90);
+  }
+  75% {
+    filter: grayscale(80%) brightness(70%);
+    transform: scale(0.95);
+  } 
+  100% {
+    filter: grayscale(100%) brightness(50%);
+    transform: scale(1);
   }
 }
 
@@ -998,14 +1029,17 @@ nav * {
     width: 15%;
     right: 1rem;
   }
-  .denied button{
+
+  .denied button {
     display: block;
   }
-  .denied button > img:nth-child(2){
+
+  .denied button>img:nth-child(2) {
     display: none;
     visibility: hidden;
   }
-  .denied:hover{
+
+  .denied:hover {
     animation: denied 2s infinite;
   }
 }
@@ -1188,14 +1222,14 @@ nav * {
 
   .left_pokemon,
   .right_pokemon {
-    font-weight:bold;
+    font-weight: bold;
   }
 
   .left_pokemon img,
   .right_pokemon img {
     margin: 5.5rem 0 0rem 0;
     width: 110px;
-    height: 100px; 
+    height: 100px;
   }
 
   .left_pokemon input,
@@ -1282,7 +1316,7 @@ nav * {
     text-shadow: #000000 2px 2px 2px;
   }
 
-  .comparison{
+  .comparison {
     padding: 0;
   }
 
