@@ -465,6 +465,7 @@ nav * {
 .middle_stats {
   display: flex;
   margin-top: 23.7rem;
+
 }
 
 .comparison li {
@@ -1257,7 +1258,7 @@ nav * {
   .pv_stats li {
     padding: 0.5rem;
     width: 8rem;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
   }
 
   .pv_stats li:nth-child(2) {
@@ -1311,14 +1312,14 @@ nav * {
   .middle_stats {
     display: flex;
     margin-top: 14rem;
-    border: #000 1px;
   }
 
   .comparison li {
-    margin-top: 4rem;
-    margin-bottom: 1.8rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
     color: #22ee0b;
     text-shadow: #000000 2px 2px 2px;
+    font-size: 1.1rem;
   }
 
   .comparison {
