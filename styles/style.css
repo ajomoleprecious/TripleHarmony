@@ -19,7 +19,7 @@ header {
 
 aside {
   grid-area: aside;
-  color: #fff;
+  color: var(--white);
 }
 
 main {
@@ -92,7 +92,7 @@ main {
   cursor: pointer;
   padding: .7rem;
   font-size: 1.5rem;
-  background-color: #fcba03;
+  background-color: var(--orange);
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -116,7 +116,7 @@ main {
   align-items: center;
   padding: 1rem;
   cursor: pointer;
-  background-color: #fcba03;
+  background-color: var(--orange);
   border-radius: 100%;
   transition: 0.5s;
   height: 50px;
@@ -134,7 +134,7 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fcba03;
+  background-color: var(--orange);
   padding: 0.2rem 0.7rem;
   border-radius: 30px;
 }
@@ -145,7 +145,7 @@ main {
 }
 
 #nav-menus ul li.active {
-  border-bottom: 7px solid #af2215;
+  border-bottom: 7px solid var(--nav-link-border);
 }
 
 .nav-container ul {
@@ -181,8 +181,8 @@ main {
 
 .right-container ul li:nth-child(1) button {
   border-radius: 10px;
-  color: white;
-  background-color: #000;
+  color: var(--white);
+  background-color: var(--black);
   cursor: pointer;
 }
 
@@ -190,14 +190,14 @@ main {
   padding: 0.5rem;
   width: 40px;
   border-radius: 100%;
-  color: white;
-  background-color: #000;
+  color: var(--white);
+  background-color: var(--black);
   cursor: pointer;
   text-align: center;
 }
 
 .modal-content {
-  background-color: #fcba03;
+  background-color: var(--orange);
 }
 
 .hamMenu {
@@ -222,7 +222,7 @@ nav * {
   width: 150px;
   height: 150px;
   padding: 1rem;
-  border: 2px solid #286078;
+  border: 2px solid var(--avatar-border-color);
   border-radius: 50%;
   cursor: pointer;
   background-color: #f3f2b3;
@@ -283,7 +283,7 @@ nav p {
 }
 
 .projects ul li a {
-  color: black;
+  color: var(--black);
   border-radius: 30px;
   cursor: pointer;
 }
@@ -373,7 +373,7 @@ nav p {
 }
 
 .pokemon-bekijken>aside {
-  background-color: #0075BE;
+  background-color: var(--blue);
   border-radius: 30px;
   padding: 1rem;
   transition: 0.5s;
@@ -437,7 +437,7 @@ nav p {
   align-items: center;
   width: 100px;
   height: 130px;
-  box-shadow: 0 0 15px black;
+  box-shadow: 0 0 15px var(--black);
   border-radius: 10px;
   transition: 0.5s;
 }
@@ -463,7 +463,7 @@ nav p {
 
 .list-nav button {
   border-radius: 15px;
-  background-color: #fcba03;
+  background-color: var(--orange);
   cursor: pointer;
   padding: 0.5rem;
   width: 115px;
@@ -589,8 +589,7 @@ nav p {
 .right_pokemon input {
   width: 10rem;
   padding: 0.5rem;
-  border: black 1px solid;
-  border-left: #000 1px solid;
+  border: var(--black) 1px solid;
   border-radius: 0.7rem;
   text-align: center;
   font-family: "Anta", sans-serif;
@@ -632,7 +631,7 @@ nav p {
 
 .left_pokemon span,
 .right_pokemon span {
-  border: #000 1px solid;
+  border: var(--black) 1px solid;
 }
 
 .middle_stats {
@@ -642,13 +641,13 @@ nav p {
 .comparison li {
   margin-top: 4rem;
   margin-bottom: 1.8rem;
-  color: #22ee0b;
-  text-shadow: #000000 2px 2px 2px;
+  color: var(--lime-green);
+  text-shadow: var(--black) 2px 2px 2px;
   font-size: 1.4rem;
 }
 
 .comparison li:nth-child(2) {
-  color: red;
+  color: var(--red);
 }
 
 .progress {
@@ -762,13 +761,13 @@ nav p {
 }
 
 .aanvallen li {
-  border: #000 1px solid;
+  border: var(--black) 1px solid;
   border-radius: 2rem;
   text-align: center;
   padding: .5rem 1rem;
   width: 40%;
-  background-color: #fcba03;
-  box-shadow: #000 2px 2px 4px;
+  background-color: var(--orange);
+  box-shadow: var(--black) 2px 2px 4px;
   cursor: pointer;
 }
 
@@ -782,12 +781,12 @@ nav p {
 
 .pokemonToGuess {
   margin: auto;
-  background-color: #f3f2b3;
+  background-color: var(--pokemonToGuess-bg);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  box-shadow: 0 0 15px black;
+  box-shadow: 0 0 15px var(--black);
   border-radius: 20px;
   height: 70vh;
   width: 90vw;
@@ -798,9 +797,9 @@ nav p {
 
 .pokemonToGuess .result{
   cursor: pointer;
-  color: #f3f2b3;
+  color: var(--pokemonToGuess-bg);
   text-align: center;
-  background-color: #286078;
+  background-color: var(--avatar-border-color);
   border-radius: 15px;
   padding: 7px 10px;
   font-size: 1.3rem;
@@ -846,13 +845,13 @@ nav p {
 
 #pokemonName {
   font-size: 2.5rem;
-  color: #286078;
+  color: var(--avatar-border-color);
 }
 
 #inputWho {
   padding: 10px;
   font-size: 16px;
-  border: 2px solid #286078;
+  border: 2px solid var(--avatar-border-color);
   border-radius: 15px;
   width: 300px;
   padding-top: 13px;
@@ -861,7 +860,7 @@ nav p {
 }
 
 #inputWho::placeholder {
-  color: #000000;
+  color: var(--black);
   opacity: 0.5;
   text-align: center;
 }
@@ -870,9 +869,9 @@ nav p {
   cursor: pointer;
   font-size: 2rem;
   padding: 1rem;
-  background-color: #286078;
+  background-color: var(--avatar-border-color);
   border-radius: 100%;
-  color: #f3f2b3;
+  color: var(--pokemonToGuess-bg);
 }
 
 .pokemonToGuess .fa-angles-right:hover {
@@ -881,15 +880,15 @@ nav p {
 }
 
 #cardTitle {
-  color: #286078;
+  color: var(--avatar-border-color);
   font-size: 30px;
 }
 
 #dontKnow {
   cursor: pointer;
-  color: #f3f2b3;
+  color: var(--pokemonToGuess-bg);
   text-align: center;
-  background-color: #286078;
+  background-color: var(--avatar-border-color);
   border-radius: 15px;
   padding: 7px 10px;
   font-size: 1.3rem;
@@ -931,7 +930,7 @@ nav p {
   width: 5rem;
   height: 5rem;
   border-radius: 10rem;
-  border: 5px lawngreen solid;
+  border: 5px var(--pokeBall-color) solid;
   cursor: pointer;
 }
 
@@ -959,5 +958,5 @@ nav p {
 }
 
 .modal-huidige button:hover {
-  background-color: green;
+  background-color: var(--green);
 }
