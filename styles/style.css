@@ -740,6 +740,7 @@ nav * {
 .pokemon-damage img:nth-child(2) {
   display: none;
   grid-area: 1/1;
+  z-index: 6;
 }
 
 .battlefield article:nth-child(3) {
