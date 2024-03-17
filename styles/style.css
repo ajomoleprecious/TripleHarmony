@@ -725,11 +725,6 @@ nav * {
   gap: 1rem;
 }
 
-.battlefield article:nth-child(2) img {
-  animation: damage .5s reverse;
-  animation-delay: .5s;
-}
-
 .pokemon-damage{
   display: grid;
   grid-template-columns: 1fr;
@@ -739,6 +734,11 @@ nav * {
 }
 
 .pokemon-damage img:nth-child(1) {
+  grid-area: 1/1;
+}
+
+.pokemon-damage img:nth-child(2) {
+  display: none;
   grid-area: 1/1;
 }
 
