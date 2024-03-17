@@ -1039,6 +1039,42 @@ nav * {
 
 /* Media Queries */
 
+@media (max-width: 1100px) {
+  .pokemonToGuess {
+    height: 55vh;
+    width: 40vh;
+    margin-top: 8rem;
+  }
+
+  .silhouette {
+    width: 45%;
+  }
+
+  #inputWho {
+    padding: 10px;
+    font-size: 11px;
+    width: 200px;
+    padding-top: 8px;
+    padding: 8px;
+  }
+
+  .pokemonToGuess .fa-angles-right {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  #cardTitle {
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+
+  #dontKnow {
+    padding: 5px 10px;
+    font-size: 1rem;
+    width: 150px;
+  }
+}
+
 @media (max-width: 950px) {
   .boxing-gloves {
     width: 15%;
@@ -1224,7 +1260,7 @@ nav * {
 
 }
 
-@media (min-width: 375px) and (max-width: 800px) {
+@media (min-width: 300px) and (max-width: 800px) {
   .pv_project {
     margin-top: 2rem;
     display: flex;
@@ -1340,38 +1376,3 @@ nav * {
   }
 }
 
-@media (max-width: 1100px) {
-  .pokemonToGuess {
-    height: 55vh;
-    width: 40vh;
-    margin-top: 8rem;
-  }
-
-  .silhouette {
-    width: 45%;
-  }
-
-  #inputWho {
-    padding: 10px;
-    font-size: 11px;
-    width: 200px;
-    padding-top: 8px;
-    padding: 8px;
-  }
-
-  .pokemonToGuess .fa-angles-right {
-    font-size: 1rem;
-    padding: 0.5rem;
-  }
-
-  #cardTitle {
-    font-size: 20px;
-    margin-bottom: 0;
-  }
-
-  #dontKnow {
-    padding: 5px 10px;
-    font-size: 1rem;
-    width: 150px;
-  }
-}
