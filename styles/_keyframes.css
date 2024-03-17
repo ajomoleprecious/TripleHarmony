@@ -1,0 +1,66 @@
+/* Animation */
+
+@keyframes move {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes denied {
+    0% {
+        background-color: transparent;
+    }
+
+    50% {
+        background-color: red;
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+@keyframes damage {
+    0% {
+        filter: grayscale(0) brightness(100%);
+        transform: scale(1);
+    }
+
+    25% {
+        filter: grayscale(50%) brightness(90%);
+        transform: scale(0.95);
+    }
+
+    50% {
+        filter: grayscale(70%) brightness(20%) sepia(100%);
+        transform: scale(0.90);
+    }
+
+    75% {
+        filter: grayscale(80%) brightness(70%);
+        transform: scale(0.95);
+    }
+
+    100% {
+        filter: grayscale(100%) brightness(50%);
+        transform: scale(1);
+    }
+}

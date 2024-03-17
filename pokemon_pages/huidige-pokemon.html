@@ -54,11 +54,11 @@
         <button type="button" class="btn-close filter-close" aria-label="Close"></button>
         <h2>Filter de pokémons</h2>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Zoek op naam">
+            <input type="text" class="form-control" name="pokemon_name" placeholder="Zoek op naam">
             <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
         </div>
-        <select class="form-select form-select-lg mb-3" aria-label="Large select example">
-            <option selected>Pokémon type</option>
+        <select class="form-select form-select-lg mb-3" name="pokemon_type" aria-label="Large select example">
+            <option value="none" selected>Pokémon type</option>
             <hr class="dropdown-divider">
             <option value="all">Alle types</option>
             <option value="electric">Elektrische</option>
@@ -69,13 +69,13 @@
             <option value="ground">Bodem</option>
         </select>
         <div class="form-floating mb-3">
-            <select class="form-select form-select-sm" id="floatingSelect" aria-label="Floating label select example">
+            <select class="form-select form-select-sm" name="sort_by" id="floatingSelect" aria-label="Floating label select example">
                 <option value="naam" selected>Naam (alfabetisch)</option>
                 <option value="pokemon_nr">Pokémon nummer</option>
                 <option value="weight">Gewicht</option>
                 <option value="height">Lengte</option>
             </select>
-            <label>Sorteer op:</label>
+            <label for="floatingSelect">Sorteer op:</label>
         </div>
     </aside>
     <main class="pokemon-bekijken-main">
@@ -254,8 +254,7 @@
     </main>
     <script>
         function openFilterMenu() {
-            // check if window size is 425px or less
-            if (window.innerWidth <= 425) {
+            if (window.innerWidth <= 475) {
                 if (document.querySelector('aside').classList.contains('active')) {
                     document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "main main"';
                 }
