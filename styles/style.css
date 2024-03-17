@@ -726,12 +726,20 @@ nav * {
 }
 
 .battlefield article:nth-child(2) img {
-  animation: damage 1s;
+  animation: damage .5s reverse;
+  animation-delay: .5s;
 }
 
-.battlefield article:nth-child(3) img {
-  animation: damage 1s;
-  animation-delay: 3s;
+.pokemon-damage{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  place-items: center;
+  place-content: center;
+}
+
+.pokemon-damage img:nth-child(1) {
+  grid-area: 1/1;
 }
 
 .battlefield article:nth-child(3) {
