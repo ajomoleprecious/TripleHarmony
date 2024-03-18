@@ -19,10 +19,10 @@
 <body class="ingelogd">
     <header>
         <nav>
-            <div class="left-container">
+            <section class="left-container">
                 <a href="pokemon-submenu.html"><img src="../assets/pokemon_logo.png" alt="logo"></a>
-            </div>
-            <div id="nav-menus" class="nav-container">
+            </section>
+            <section id="nav-menus" class="nav-container">
                 <ul class="">
                     <li><a href="./pokemons-bekijken.html"><img src="../assets/nav-icons-black/bekijken.png"
                                 alt=""></a></a></li>
@@ -37,15 +37,15 @@
                     <li><a href="./who's-that-pokemon.html"><img src="../assets/nav-icons-black/who.png" alt=""></a>
                     </li>
                 </ul>
-            </div>
-            <div class="right-container">
+            </section>
+            <section class="right-container">
                 <ul>
                     <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>?</button></a></li>
                     <li><a href="../pokemon_pages/pokemon-auth.html" class="fa-solid fa-right-from-bracket btn btn-dark"></a>
                     </li>
                 </ul>
-            </div>
+            </section>
         </nav>
     </header>
     <main>
@@ -57,17 +57,17 @@
                     alt="my-pokemon">
             </a>
             <img src="../assets/podium.png" alt="pokemon-podium">
-            <div class="pokemon-stats">
-                <div class="pokemon-hp">
+            <section class="pokemon-stats">
+                <section class="pokemon-hp">
                     <img id="life" src="../assets/red-heart.png" alt="leven">
                     <p>78</p>
-                </div>
+                </section>
                 |
-                <div class="pokemon-shield">
+                <section class="pokemon-shield">
                     <img src="../assets/shield.png" alt="verdediging">
                     <p>78</p>
-                </div>
-            </div>
+                </section>
+            </section>
         </section>
         <section class="poke-catch">
             <article>
@@ -81,47 +81,47 @@
         </section>
         
         <!-- Modal voor help-->
-        <div class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
+        <section class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
+            <section class="modal-dialog modal-dialog-centered">
+                <section class="modal-content">
+                    <section class="modal-header">
                         <h1 class="modal-title fs-5" id="hulpLabel">Hulp</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
+                    </section>
+                    <section class="modal-body">
                         Op deze pagina krijgt u een willekeurige Pokémon te zien door op de Pokébal te drukken. <br>
                         Als de rand van de pokébal <span style="color: green; font-weight:bolder;">groen</span> is, kunt u deze pokemon vangen. <br>
                         Als de rand van de Pokébal <span style="color: red; font-weight:bolder;">rood</span> is, betekent dit dat u de Pokémon niet kunt vangen en een keuze moet maken om deze vrij te laten of niet. <br>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal voor help-->
-        <div class="modal fade" id="loslaten" tabindex="-1" aria-labelledby="loslatenLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
+                    </section>
+                </section>
+            </section>
+        </section>
+        <!-- Modal voor keuze-->
+        <section class="modal fade" id="loslaten" tabindex="-1" aria-labelledby="loslatenLabel" aria-hidden="true">
+            <section class="modal-dialog modal-dialog-centered">
+                <section class="modal-content">
+                    <section class="modal-header">
                         <h1 class="modal-title fs-5" id="loslatenLabel">Wil je die loslaten?</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-dark">
-                        <div class="d-grid gap-2 mb-2">
+                    </section>
+                    <section class="modal-body bg-dark">
+                        <section class="d-grid gap-2 mb-2">
                             <button data-bs-dismiss="modal" class="btn btn-success" type="button">Ja</button>
                             <button data-bs-dismiss="modal" class="btn btn-danger" type="button">Nee</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </section>
         <!-- Modal voor avatar-->
-        <div class="modal fade" id="chooseAvatar" tabindex="-1" aria-labelledby="chooseAvatar" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
+        <section class="modal fade" id="chooseAvatar" tabindex="-1" aria-labelledby="chooseAvatar" aria-hidden="true">
+            <section class="modal-dialog modal-dialog-centered">
+                <section class="modal-content">
+                    <section class="modal-header">
                         <h1 class="modal-title fs-5" id="chooseAvatarLabel">Kies je nieuwe avatar</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
+                    </section>
+                    <section class="modal-body">
                         <ul class="avatars">
                             <li><img src="../assets/avatars/ash_ketchum.png" alt=""></li>
                             <li><img src="../assets/avatars/chloe.png" alt=""></li>
@@ -131,12 +131,12 @@
                             <li><img src="../assets/avatars/may.png" alt=""></li>
                             <li><img src="../assets/avatars/serena.png" alt=""></li>
                         </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="help"><button data-bs-toggle="modal" data-bs-target="#hulp"><i
-                    class="fa-solid fa-question"></i></button></div>
+                    </section>
+                </section>
+            </section>
+        </section>
+        <section class="help"><button data-bs-toggle="modal" data-bs-target="#hulp"><i
+                    class="fa-solid fa-question"></i></button></section>
     </main>
     <script>
         let hamMenu = document.querySelector('.hamMenu');

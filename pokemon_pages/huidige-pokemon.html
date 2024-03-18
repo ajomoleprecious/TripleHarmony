@@ -19,10 +19,10 @@
 <body class="ingelogd pokemon-bekijken">
     <header>
         <nav>
-            <div class="left-container">
+            <section class="left-container">
                 <a href="pokemon-submenu.html"><img src="../assets/pokemon_logo.png" alt="logo"></a>
-            </div>
-            <div id="nav-menus" class="nav-container">
+            </section>
+            <section id="nav-menus" class="nav-container">
                 <ul class="">
                     <li><a href="./pokemons-bekijken.html"><img src="../assets/nav-icons-black/bekijken.png"
                                 alt=""></a></a>
@@ -39,27 +39,27 @@
                     <li><a href="./who's-that-pokemon.html"><img src="../assets/nav-icons-black/who.png" alt=""></a>
                     </li>
                 </ul>
-            </div>
-            <div class="right-container">
+            </section>
+            <section class="right-container">
                 <ul>
                     <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>?</button></a></li>
                     <li><a href="../pokemon_pages/pokemon-auth.html" class="fa-solid fa-right-from-bracket btn btn-dark"></a>
                     </li>
                 </ul>
-            </div>
+            </section>
         </nav>
     </header>
     <aside>
         <button type="button" class="btn-close filter-close" aria-label="Close"></button>
         <h2>Filter de pokémons</h2>
-        <div class="input-group mb-3">
+        <section class="input-group mb-3">
             <input type="text" class="form-control" name="pokemon_name" placeholder="Zoek op naam">
             <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
-        </div>
+        </section>
         <select class="form-select form-select-lg mb-3" name="pokemon_type" aria-label="Large select example">
             <option value="none" selected>Pokémon type</option>
-            <hr class="dropdown-divider">
+            <hr class="dropdown-sectionider">
             <option value="all">Alle types</option>
             <option value="electric">Elektrische</option>
             <option value="fire">Vuur</option>
@@ -68,7 +68,7 @@
             <option value="bug">Insect</option>
             <option value="ground">Bodem</option>
         </select>
-        <div class="form-floating mb-3">
+        <section class="form-floating mb-3">
             <select class="form-select form-select-sm" name="sort_by" id="floatingSelect" aria-label="Floating label select example">
                 <option value="naam" selected>Naam (alfabetisch)</option>
                 <option value="pokemon_nr">Pokémon nummer</option>
@@ -76,10 +76,10 @@
                 <option value="height">Lengte</option>
             </select>
             <label for="floatingSelect">Sorteer op:</label>
-        </div>
+        </section>
     </aside>
     <main class="pokemon-bekijken-main">
-        <div><i class="fa-solid fa-filter"></i></div>
+        <section><i class="fa-solid fa-filter"></i></section>
         <h1>Jouw Pokémons</h1>
         <section class="pokemon-list">
             <ul>
@@ -175,10 +175,10 @@
         </li>
             </ul>
         </section>
-        <div class="list-nav">
+        <section class="list-nav">
             <button><i class="fa-solid fa-angles-left"></i>Vorige</button>
             <button>Volgende<i class="fa-solid fa-angles-right"></i></button>
-        </div>
+        </section>
         <section class="current-pokemon">
             <a href="huidige-pokemon.html">
                 <img class="pokemon-pic"
@@ -186,58 +186,58 @@
                     alt="my-pokemon">
             </a>
             <img src="../assets/podium.png" alt="pokemon-podium">
-            <div class="pokemon-stats">
-                <div class="pokemon-hp">
+            <section class="pokemon-stats">
+                <section class="pokemon-hp">
                     <img id="life" src="../assets/red-heart.png" alt="leven">
                     <p>78</p>
-                </div>
+                </section>
                 |
-                <div class="pokemon-shield">
+                <section class="pokemon-shield">
                     <img src="../assets/shield.png" alt="verdediging">
                     <p>78</p>
-                </div>
-            </div>
+                </section>
+            </section>
         </section>
         <!-- Modal voor help-->
-        <div class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
+        <section class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
+            <section class="modal-dialog modal-dialog-centered">
+                <section class="modal-content">
+                    <section class="modal-header">
                         <h1 class="modal-title fs-5" id="hulpLabel">Hulp</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
+                    </section>
+                    <section class="modal-body">
                         Hier wordt een volledig overzicht getoond van al uw gevangen Pokémons. Bovendien bestaat de mogelijkheid om een filter toe te passen om uw verzamelde Pokémons te sorteren. Zodra u de gewenste Pokémon heeft geïdentificeerd, kunt u deze selecteren om als actuele Pokémon in te zetten.
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </section>
+                </section>
+            </section>
+        </section>
         <!-- Modal voor detail -->
-        <div class="modal fade" id="detail" tabindex="-1" aria-labelledby="detailLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
+        <section class="modal fade" id="detail" tabindex="-1" aria-labelledby="detailLabel" aria-hidden="true">
+            <section class="modal-dialog modal-dialog-centered">
+                <section class="modal-content">
+                    <section class="modal-header">
                         <h1 class="modal-title fs-5" id="detailLabel">Pikachu</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body modal-huidige">
+                    </section>
+                    <section class="modal-body modal-huidige">
                         <img class="mb-5"
                             src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif"
                             alt="">
                         <button class="btn btn-dark" type="button">Maak je huidige Pokémon</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </section>
+                </section>
+            </section>
+        </section>
         <!-- Modal voor avatar-->
-        <div class="modal fade" id="chooseAvatar" tabindex="-1" aria-labelledby="chooseAvatar" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
+        <section class="modal fade" id="chooseAvatar" tabindex="-1" aria-labelledby="chooseAvatar" aria-hidden="true">
+            <section class="modal-dialog modal-dialog-centered">
+                <section class="modal-content">
+                    <section class="modal-header">
                         <h1 class="modal-title fs-5" id="chooseAvatarLabel">Kies je nieuwe avatar</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
+                    </section>
+                    <section class="modal-body">
                         <ul class="avatars">
                             <li><img src="../assets/avatars/ash_ketchum.png" alt=""></li>
                             <li><img src="../assets/avatars/chloe.png" alt=""></li>
@@ -247,12 +247,12 @@
                             <li><img src="../assets/avatars/may.png" alt=""></li>
                             <li><img src="../assets/avatars/serena.png" alt=""></li>
                         </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="help"><button data-bs-toggle="modal" data-bs-target="#hulp"><i
-                    class="fa-solid fa-question"></i></button></div>
+                    </section>
+                </section>
+            </section>
+        </section>
+        <section class="help"><button data-bs-toggle="modal" data-bs-target="#hulp"><i
+                    class="fa-solid fa-question"></i></button></section>
     </main>
     <script>
         function openFilterMenu() {
