@@ -361,7 +361,7 @@ nav p {
   grid-area: main;
   display: grid;
   grid-template-areas: "title" "pokemon-list" "list-nav";
-  grid-template-rows: 25dvh 58dvh 5dvh;
+  grid-template-rows: 25dvh 57dvh 5dvh;
 }
 
 
