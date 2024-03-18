@@ -240,7 +240,7 @@
     .ingelogd .right_pokemon {
         font-weight: bold;
         justify-content: start;
-        margin-top: 1.3rem;
+        margin-top: .5rem;
     }
 
     .ingelogd .left_pokemon img,
@@ -288,7 +288,7 @@
     }
 
     .ingelogd .comparison li {
-        margin-top: 1rem;
+        margin-top: .3rem;
         margin-bottom: 2.9rem;
         color: #22ee0b;
         text-shadow: #000000 2px 2px 2px;
