@@ -227,7 +227,6 @@
     }
 
     .ingelogd .pv_project {
-        margin-top: 3rem;
         display: flex;
         justify-content: space-evenly;
     }
@@ -240,12 +239,11 @@
     .ingelogd .right_pokemon {
         font-weight: bold;
         justify-content: start;
-        margin-top: .5rem;
     }
 
     .ingelogd .left_pokemon img,
     .ingelogd .right_pokemon img {
-        margin: 5.5rem 0 0rem 0;
+        margin: 2rem 0 0rem 0;
         width: 110px;
         height: 100px;
     }
@@ -286,18 +284,22 @@
         display: flex;
         margin-top: 16.5rem;
     }
+    .pv_project article:nth-child(2) {
+        margin-top: 10rem;
+    }
+    .ingelogd .comparison {
+        padding: 0;
+    }
 
     .ingelogd .comparison li {
-        margin-top: .3rem;
-        margin-bottom: 2.9rem;
+        margin-top: 2.9rem;
+        margin-bottom: 1rem;
         color: #22ee0b;
         text-shadow: #000000 2px 2px 2px;
         font-size: 1.1rem;
     }
 
-    .ingelogd .comparison {
-        padding: 0;
-    }
+
 
     .ingelogd .progress {
         width: 7rem;
@@ -333,6 +335,7 @@
     .landing-main .projects {
         width: 90vw;
     }
+
     .landing-main .projects ul li,
     .landing-main .projects .denied {
         width: 300px;
@@ -342,11 +345,11 @@
     .landing-main .denied button>img:nth-child(1) {
         width: 100%;
         height: 118px;
-    } 
+    }
 
     .right-container ul {
         padding: 0;
-    } 
+    }
 
     .ingelogd .avatars li img {
         width: 100px;

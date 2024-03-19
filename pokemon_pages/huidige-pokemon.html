@@ -14,6 +14,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script defer src="../scripts/general.js"></script>
+    <script defer src="../scripts/currentpokemon.js"></script>
+    <script defer src="../scripts/filter.js"></script>
 </head>
 
 <body class="ingelogd pokemon-bekijken">
@@ -181,13 +184,17 @@
             <button><i class="fa-solid fa-angles-left"></i>Vorige</button>
             <button>Volgende<i class="fa-solid fa-angles-right"></i></button>
         </section>
+        <section class="pokemon_hide">
+            <img src="../assets/pokemon_logo.png" alt="">
+            <img src="../assets/pokeball_opening.gif" alt="">
+        </section>
         <section class="current-pokemon">
             <a href="huidige-pokemon.html">
                 <img class="pokemon-pic"
                     src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif"
                     alt="my-pokemon">
             </a>
-            <img src="../assets/podium.png" alt="pokemon-podium">
+            <img class="pokemon_podioum" src="../assets/podium.png" alt="pokemon-podium">
             <section class="pokemon-stats">
                 <section class="pokemon-hp">
                     <img id="life" src="../assets/red-heart.png" alt="leven">
@@ -195,7 +202,7 @@
                 </section>
                 |
                 <section class="pokemon-shield">
-                    <img src="../assets/shield.png" alt="verdediging">
+                    <img id="shield" src="../assets/shield.png" alt="verdediging">
                     <p>78</p>
                 </section>
             </section>
@@ -259,50 +266,6 @@
         <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i
                     class="fa-solid fa-question"></i></button></section>
     </main>
-    <script>
-        function openFilterMenu() {
-            if (window.innerWidth <= 475) {
-                if (document.querySelector('aside').classList.contains('active')) {
-                    document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "main main"';
-                }
-                else {
-                    document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "main main"';
-                }
-            }
-            else {
-                if (document.querySelector('aside').classList.contains('active')) {
-                    document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "aside main"';
-                }
-                else {
-                    document.querySelector('.pokemon-bekijken').style.gridTemplateAreas = '"header header" "main main"';
-                }
-            }
-        }
-        let hamMenu = document.querySelector('.hamMenu');
-        hamMenu.addEventListener('click', () => {
-            document.querySelector('.nav-container ul').classList.toggle('active');
-        });
-        let filterMenu = document.querySelector('.fa-filter');
-        filterMenu.addEventListener('click', () => {
-            filterMenu.style.display = 'none';
-            document.querySelector('aside').classList.toggle('active');
-            openFilterMenu();
-        });
-        let closeFilter = document.querySelector('.filter-close');
-        closeFilter.addEventListener('click', () => {
-            filterMenu.style.display = 'block';
-            document.querySelector('aside').classList.toggle('active');
-            openFilterMenu();
-        });
-        openFilterMenu();
-
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('#nav-menus ul').classList.add('active');
-            setTimeout(() => {
-                document.querySelector('#nav-menus ul').classList.remove('active');
-            }, 1000);
-        });
-    </script>
 </body>
 
 </html>
