@@ -18,5 +18,5 @@ pokeballTohide.addEventListener('click', () => {
         setTimeout(() => {
             currentPokemon.style.display = "none";
         }, 6000);
-    }, 2000);
+    }, 1000);
 });
