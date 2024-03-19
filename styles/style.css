@@ -33,7 +33,7 @@ main {
   max-height: fit-content;
   position: fixed;
   right: 10px;
-  top: 35px; /* 35px */
+  top: 35px;
   display: none;
   flex-direction: column;
   align-items: center;
@@ -206,9 +206,6 @@ main {
 }
 
 .nav-container ul li img {
-  /*width: 40px;
-  height: 40px;
-  ik heb de groottes afgezet omdat de images al de juiste dimensie hebben*/
   cursor: pointer;
   transition: 0.5s;
 }
@@ -467,7 +464,6 @@ nav p {
   flex-wrap: wrap;
   gap: 1.5rem;
   justify-content: center;
-  /* of flex-start */
   align-items: center;
   align-content: flex-start;
   height: 100%;
