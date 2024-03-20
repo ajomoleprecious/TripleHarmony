@@ -805,6 +805,21 @@ nav p {
   font-weight: bold;
 }
 
+.battlefield .progress{
+  display: grid;
+}
+.battlefield .progress-bar{
+  grid-area: 1/1;
+}
+.battlefield .progress p{
+  grid-area: 1/1;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
 .aanvallen {
   display: flex;
   flex-flow: row wrap;
@@ -918,10 +933,10 @@ nav p {
   font-size: 16px;
   border: 2px solid var(--avatar-border-color);
   border-radius: 15px;
-  width: 350px;
+  width: 300px;
   padding-top: 13px;
   padding: 13px;
-  padding-left: 2rem;
+  padding-left: 3rem;
   text-align: center;
 }
 
