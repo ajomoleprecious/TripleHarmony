@@ -356,6 +356,6 @@
 
     .pokemon-bekijken .modal-body > img:nth-child(1) {
         width: fit-content;
-        height: fit-content;
+        height: 100%;
     }
 }
