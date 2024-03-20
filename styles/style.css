@@ -692,13 +692,13 @@ nav p {
 .comparison li {
   margin-top: 4rem;
   margin-bottom: 1.8rem;
-  color: var(--lime-green);
+  color: var(--red);
   text-shadow: var(--black) 2px 2px 2px;
   font-size: 1.4rem;
 }
 
 .comparison li:nth-child(2) {
-  color: var(--red);
+  color: var(--blue);
 }
 
 .progress {
