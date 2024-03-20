@@ -20,6 +20,7 @@ header {
 aside {
   grid-area: aside;
   color: var(--white);
+  background-color: #ff3c00;
 }
 
 main {
@@ -415,7 +416,6 @@ nav p {
 }
 
 .pokemon-bekijken>aside {
-  background-color: var(--blue);
   border-radius: 30px;
   padding: 1rem;
   transition: 0.5s;
