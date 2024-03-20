@@ -396,6 +396,7 @@ nav p {
   grid-area: list-nav;
   width: 100%;
   height: fit-content;
+  margin-top: 0.3rem;
 }
 
 .pokemon-bekijken-main {
@@ -480,6 +481,7 @@ nav p {
   box-shadow: 0 0 15px var(--black);
   border-radius: 10px;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .pokemon-list>ul>li:hover {
