@@ -13,6 +13,10 @@ body {
   font-family: 'Anta', sans-serif;
 }
 
+body * ::-webkit-scrollbar {
+  display: none;
+}
+
 header {
   grid-area: header;
 }
@@ -478,7 +482,7 @@ nav p {
   align-items: center;
   width: 100px;
   height: 130px;
-  box-shadow: 0 0 15px var(--black);
+  box-shadow: 0 0 8px var(--black);
   border-radius: 10px;
   transition: 0.5s;
   cursor: pointer;
@@ -839,11 +843,10 @@ nav p {
   flex-direction: column;
   box-shadow: 0 0 15px var(--black);
   border-radius: 20px;
-  height: 70vh;
-  width: 90vw;
+  height: 85dvh;
+  width: 90dvw;
   padding-bottom: 50px;
   margin-top: 3rem;
-  overflow: hidden;
 }
 
 .pokemonToGuess .result{
