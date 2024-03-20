@@ -355,7 +355,7 @@
     }
 
     .pokemon-bekijken .modal-body > img:nth-child(1) {
-        width: 100px;
-        height: 100px;
+        width: fit-content;
+        height: fit-content;
     }
 }
