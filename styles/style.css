@@ -899,15 +899,31 @@ nav p {
   color: var(--avatar-border-color);
 }
 
+.input-group-who {
+
+}
+
+.who {
+  margin-right: -3.1rem;
+  margin-top: -0.1rem;
+  padding: 0.8rem;
+  border-top-left-radius: 13px;
+  border-bottom-left-radius: 14px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 2px solid var(--avatar-border-color);
+}
+
 #inputWho {
   padding: 10px;
   font-size: 16px;
   border: 2px solid var(--avatar-border-color);
   border-radius: 15px;
-  width: 300px;
+  width: 350px;
   padding-top: 13px;
   padding: 13px;
-
+  padding-left: 2rem;
+  text-align: center;
 }
 
 #inputWho::placeholder {
