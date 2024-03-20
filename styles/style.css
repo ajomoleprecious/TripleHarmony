@@ -993,12 +993,17 @@ nav p {
   width: 17rem;
 }
 
+.poke-catch-img:hover {
+  cursor: none;
+  animation: boxing 1s infinite;
+}
+
 .poke-catch-ball {
   width: 5rem;
   height: 5rem;
   border-radius: 10rem;
   border: 5px var(--pokeBall-color) solid;
-  cursor: pointer;
+  cursor: none;
 }
 
 .poke-catch-ball:hover {
@@ -1010,6 +1015,7 @@ nav p {
   position: fixed;
   right: 7rem;
   top: 20rem;
+  z-index: 500;
 }
 
 .boxing-gloves:hover {
