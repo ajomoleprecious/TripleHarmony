@@ -282,9 +282,11 @@
         display: flex;
         margin-top: 16.5rem;
     }
+
     .pv_project article:nth-child(2) {
         margin-top: 10rem;
     }
+
     .ingelogd .comparison {
         padding: 0;
     }
@@ -354,8 +356,14 @@
         height: 100px;
     }
 
-    .pokemon-bekijken .modal-body > img:nth-child(1) {
+    .pokemon-bekijken .modal-body>img:nth-child(1) {
         width: fit-content;
         height: 100%;
+    }
+
+    .ingelogd #nav-menus ul li.active {
+        border: none;
+        border-left: 7px solid var(--nav-link-border);
+
     }
 }
