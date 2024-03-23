@@ -1,7 +1,6 @@
 function showBg() {
     let body = document.querySelector("body");
     let projects = document.querySelectorAll(".projects ul li");
-    let projectsContainer = document.querySelector(".projects");
 
     projects.forEach((project, index) => {
         project.addEventListener("mouseover", () => {

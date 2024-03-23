@@ -1162,17 +1162,18 @@ nav p {
 
 .pokemon-finder #joyDiv {
   visibility: hidden; /* Hide the joy div by default */
-  width:80px;
-  height:80px;
+  width: 100px;
+  height: 100px;
   position: fixed;
   margin: 0;
   padding: 0;
   /* Position the joy div */
-  bottom: 40px;
-  left: 40px;
+  bottom: 70px;
+  left: 70px;
   /* Add some styling */
   background-color: var(--white);
   border: 8px solid var(--red);
-  border-radius: 50%;
+  border-radius: 49%;
   z-index: 20;
+  
 }

@@ -144,7 +144,7 @@ var JoyStick = (function(container, parameters, callback)
         context.beginPath();
         context.arc(centerX, centerY, externalRadius, 0, circumference, false);
         context.lineWidth = externalLineWidth;
-        context.strokeStyle = externalStrokeColor;
+        context.strokeStyle = 'red';
         context.stroke();
     }
 
@@ -168,7 +168,7 @@ var JoyStick = (function(container, parameters, callback)
         context.fillStyle = 'black';
         context.fill();
         context.lineWidth = internalLineWidth;
-        context.strokeStyle = internalStrokeColor;
+        context.strokeStyle = 'black';
         context.stroke();
     }
 

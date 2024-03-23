@@ -65,7 +65,6 @@ function handleJoystickMovement() {
             player.style.backgroundImage = 'url("../assets/finder-files/player_front.png")';
             player.classList.add('active');
             break;
-        case "C":
         default:
             // Stop player movement if joystick is not actively moving
             player_vel.x = 0;
@@ -179,7 +178,6 @@ function checkCollisions() {
             ball.ball.remove();
             balls.splice(index, 1);
             generateBall();
-            
             modal.show();
         }
     });
