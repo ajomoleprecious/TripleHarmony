@@ -12,14 +12,75 @@ const player_vel = {
     y: 0
 }
 const balls = []
-//const sound = new Audio('assets/coin.mp3')
+const sound = new Audio('https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/6.ogg')
 const mainTag = document.querySelector('main');
+
+var joy = new JoyStick('joyDiv');
+
+function handleJoystickMovement() {
+    var direction = joy.GetDir();
+
+    switch (direction) {
+        case "N":
+            player_vel.y = 0.35;
+            player.style.backgroundImage = 'url("../assets/finder-files/player_front.png")';
+            player.classList.add('active');
+            break;
+        case "NE":
+            player_vel.y = 0.25;
+            player_vel.x = 0.25;
+            player.style.backgroundImage = 'url("../assets/finder-files/player_front.png")';
+            player.classList.add('active');
+            break;
+        case "E":
+            player_vel.x = 0.35;
+            player.style.backgroundImage = 'url("../assets/finder-files/player_right.png")';
+            player.classList.add('active');
+            break;
+        case "SE":
+            player_vel.y = -0.25;
+            player_vel.x = 0.25;
+            player.style.backgroundImage = 'url("../assets/finder-files/player_back.png")';
+            player.classList.add('active');
+            break;
+        case "S":
+            player_vel.y = -0.35;
+            player.style.backgroundImage = 'url("../assets/finder-files/player_back.png")';
+            player.classList.add('active');
+            break;
+        case "SW":
+            player_vel.y = -0.25;
+            player_vel.x = -0.25;
+            player.style.backgroundImage = 'url("../assets/finder-files/player_back.png")';
+            player.classList.add('active');
+            break;
+        case "W":
+            player_vel.x = -0.35;
+            player.style.backgroundImage = 'url("../assets/finder-files/player_left.png")';
+            player.classList.add('active');
+            break;
+        case "NW":
+            player_vel.y = 0.25;
+            player_vel.x = -0.25;
+            player.style.backgroundImage = 'url("../assets/finder-files/player_front.png")';
+            player.classList.add('active');
+            break;
+        case "C":
+        default:
+            // Stop player movement if joystick is not actively moving
+            player_vel.x = 0;
+            player_vel.y = 0;
+            player.classList.remove('active');
+            break;
+    }
+}
 
 function createBushes() {
     const mainTag = document.querySelector('main');
 
     if (window.innerWidth <= 800) { // Check for window width of 800 pixels or lower
         document.body.style.backgroundSize = "cover";
+        document.querySelector('#joyDiv').style.visibility = 'visible';
         for (let i = 0; i < NUM_BUSHES_MOBILE; i++) {
             const div = document.createElement('div');
             div.classList.add('bush');
@@ -47,7 +108,7 @@ function generateBall() {
         const div = document.createElement('div');
         div.classList.add('pokeball');
         div.style.position = 'absolute';
-        
+
         // Calculate the maximum X and Y positions
         const maxX = window.innerWidth - 50; // Maximum X position
         const maxY = window.innerHeight - 110; // Maximum Y position
@@ -107,17 +168,18 @@ function collision(ball, player) {
     return true;
 }
 
-let modal;
+let modal = new bootstrap.Modal(document.getElementById('pokemonFinder'), {
+    keyboard: false,
+    backdrop: 'static'
+});
 function checkCollisions() {
     balls.forEach((ball, index) => {
         if (collision(ball.ball, player)) {
-            //sound.play();
+            sound.play();
             ball.ball.remove();
             balls.splice(index, 1);
             generateBall();
-            modal = new bootstrap.Modal(document.getElementById('pokemonFinder'), {
-                keyboard: false
-            });
+            
             modal.show();
         }
     });
@@ -153,15 +215,20 @@ function init() {
     createBushes()
     createBalls()
     run()
+
 }
 
 init()
+if (window.innerWidth <= 800) {
+    setInterval(handleJoystickMovement, 50);
+}
+
 
 const keysPressed = new Set();
 
 window.addEventListener('keydown', function (e) {
     keysPressed.add(e.key);
-    
+
     // Check if modal is shown
     if (modal && modal._element.classList.contains('show')) {
         // If modal is shown, do not update player velocity
@@ -204,4 +271,9 @@ window.addEventListener('keyup', function (e) {
     if (keysPressed.size === 0) {
         player.classList.remove('active');
     }
+});
+
+window.addEventListener('resize', function () {
+    // reload page
+    location.reload();
 });
