@@ -72,6 +72,7 @@
         right: 1rem;
         top: 15rem;
     }
+    
 }
 
 @media (max-width: 710px) {
@@ -92,9 +93,6 @@
         border-radius: 40px 0 0 40px;
     }
 
-    #poke-bg {
-        background-position: right;
-    }
 
     .nav-container ul.active {
         visibility: visible;
@@ -217,6 +215,10 @@
 
 @media (min-width: 300px) and (max-width: 800px) {
 
+    .ingelogd {
+        background-position: right;
+    }
+
     .ingelogd .battlefield .progress,
     .ingelogd .progress-bar {
         height: 20px;
@@ -309,10 +311,10 @@
         justify-content: center;
     }
 
-    .pokemonToGuess {
-        height: 55vh;
-        width: 40vw;
-        margin-top: 8rem;
+    .ingelogd .pokemonToGuess {
+        height: 80vh;
+        width: 90vw;
+        margin-top: 1rem;
     }
 
     .pokemonToGuess #cardTitle {

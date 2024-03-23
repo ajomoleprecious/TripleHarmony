@@ -27,8 +27,8 @@ function handleJoystickMovement() {
             player.classList.add('active');
             break;
         case "NE":
-            player_vel.y = 0.25;
-            player_vel.x = 0.25;
+            player_vel.y = 0.35;
+            player_vel.x = 0.35;
             player.style.backgroundImage = 'url("../assets/finder-files/player_front.png")';
             player.classList.add('active');
             break;
@@ -38,8 +38,8 @@ function handleJoystickMovement() {
             player.classList.add('active');
             break;
         case "SE":
-            player_vel.y = -0.25;
-            player_vel.x = 0.25;
+            player_vel.y = -0.35;
+            player_vel.x = 0.35;
             player.style.backgroundImage = 'url("../assets/finder-files/player_back.png")';
             player.classList.add('active');
             break;
@@ -49,8 +49,8 @@ function handleJoystickMovement() {
             player.classList.add('active');
             break;
         case "SW":
-            player_vel.y = -0.25;
-            player_vel.x = -0.25;
+            player_vel.y = -0.35;
+            player_vel.x = -0.35;
             player.style.backgroundImage = 'url("../assets/finder-files/player_back.png")';
             player.classList.add('active');
             break;
@@ -60,8 +60,8 @@ function handleJoystickMovement() {
             player.classList.add('active');
             break;
         case "NW":
-            player_vel.y = 0.25;
-            player_vel.x = -0.25;
+            player_vel.y = 0.35;
+            player_vel.x = -0.35;
             player.style.backgroundImage = 'url("../assets/finder-files/player_front.png")';
             player.classList.add('active');
             break;
@@ -174,13 +174,27 @@ let modal = new bootstrap.Modal(document.getElementById('pokemonFinder'), {
 function checkCollisions() {
     balls.forEach((ball, index) => {
         if (collision(ball.ball, player)) {
-            sound.play();
             ball.ball.remove();
             balls.splice(index, 1);
             generateBall();
             modal.show();
+            playSound();
         }
     });
+}
+
+// Function to play the sound
+function playSound() {
+    // Check if the audio element is paused or ended
+    if (sound.paused || sound.ended) {
+        // Play the sound
+        sound.play().catch(error => {
+            console.error('Failed to play sound:', error.message);
+        });
+    } else {
+        // If the sound is already playing, restart it
+        sound.currentTime = 0;
+    }
 }
 
 
