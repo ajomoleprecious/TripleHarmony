@@ -155,6 +155,7 @@ main {
   position: fixed;
   right: 15px;
   bottom: 15px;
+  z-index: 10;
 }
 
 .help i {
@@ -193,6 +194,14 @@ main {
 
 #nav-menus ul li.active {
   border-bottom: 7px solid var(--nav-link-border);
+}
+
+#nav-menus ul li i{
+  margin: 0;
+  padding: 0;
+  font-size: 2.4rem;
+  color: #000;
+  transform: rotate(360deg);
 }
 
 .nav-container ul {
@@ -1126,8 +1135,7 @@ nav p {
   width: 100%;
 }
 
-#finder i{
-  /* flip */
+#finder .modal-footer i{
   transform: scaleX(-1);
 }
 

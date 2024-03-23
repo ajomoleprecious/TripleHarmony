@@ -36,13 +36,13 @@
                     </li>
                     <li><a href="./pokemons-vangen.html"><img src="../assets/nav-icons-black/vangen.png" alt=""></a>
                     </li>
-                    <li><a href="./huidige-pokemon.html"><img src="../assets/nav-icons-red/huidige.png" alt=""></a></li>
+                    <li><a href="./huidige-pokemon.html"><img src="../assets/nav-icons-black/huidige.png" alt=""></a>
+                    </li>
                     <li><a href="./pokemon-battler.html"><img src="../assets/nav-icons-black/battler.png" alt=""></a>
                     </li>
                     <li><a href="./who's-that-pokemon.html"><img src="../assets/nav-icons-black/who.png" alt=""></a>
                     </li>
-                    <li class="active"><a href="./pokemon-finder.html"><img src="../assets/nav-icons-black/who.png"
-                                alt=""></a>
+                    <li class="active"><a href="./pokemon-finder.html"><i class="fa-solid fa-magnifying-glass"></i></a>
                     </li>
                 </ul>
             </section>
@@ -61,6 +61,7 @@
         <section class="player"></section>
         <section id="joyDiv"></section>
     </main>
+    <!-- Modal voor gevonden pokemon -->
     <section class="modal fade" id="pokemonFinder" tabindex="-1">
         <section class="modal-dialog modal-dialog-centered">
             <section class="modal-content">
@@ -80,6 +81,34 @@
             </section>
         </section>
     </section>
+    <!-- Modal voor help-->
+    <section class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
+        <section class="modal-dialog modal-dialog-centered">
+            <section class="modal-content">
+                <section class="modal-header">
+                    <h1 class="modal-title fs-5" id="hulpLabel">Hulp</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </section>
+                <section class="modal-body">
+                    <span>Zoek naar een Pokémon door jouw speler met de pijltjestoetsen <i
+                            class="fa-regular fa-square-caret-up"></i>
+                        <i class="fa-regular fa-square-caret-right"></i> <i class="fa-regular fa-square-caret-down"></i>
+                        <i class="fa-regular fa-square-caret-left"></i>
+                        te bewegen. <br>
+                        Of als je een mobiel apparaat gebruikt, gebruik dan de joystick <span><svg
+                                xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 24 24">
+                                <path fill="black"
+                                    d="M11 8.275V7.85q-1.1-.325-1.8-1.237T8.5 4.5q0-1.45 1.025-2.475T12 1q1.45 0 2.475 1.025T15.5 4.5q0 1.2-.7 2.113T13 7.85v.425l8 4.6v4.25l-8 4.6Q12.525 22 12 22t-1-.275l-8-4.6v-4.25zM6.8 13l5.2 3l5.2-3l-4.2-2.425V14h-2v-3.425z" />
+                            </svg></span> die voor u klaar gemaakt is.
+                        <br> Wanneer je een Pokémon vindt, kan je ervoor kiezen om te vechten of te vluchten. Veel
+                        succes!
+                    </span>
+                </section>
+            </section>
+        </section>
+    </section>
+    <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i
+                class="fa-solid fa-question"></i></button></section>
 </body>
 
 </html>
