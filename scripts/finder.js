@@ -178,7 +178,7 @@ function checkCollisions() {
             balls.splice(index, 1);
             generateBall();
             modal.show();
-            playSound();
+            //playSound();
         }
     });
 }
