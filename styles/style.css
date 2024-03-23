@@ -46,12 +46,12 @@ main {
   z-index: 100;
 }
 
-.current-pokemon.show{
+.current-pokemon.show {
   animation: scaleIn 1s ease-in-out;
   display: flex;
 }
 
-.current-pokemon.hide{
+.current-pokemon.hide {
   animation: scaleOut 1s ease-in-out;
   display: none;
 }
@@ -66,11 +66,11 @@ main {
   cursor: pointer;
 }
 
-.pokemon_hide.hide{
+.pokemon_hide.hide {
   display: none;
 }
 
-.pokemon_hide img:nth-child(1){
+.pokemon_hide img:nth-child(1) {
   width: 40px;
   height: 40px;
   z-index: 100;
@@ -78,7 +78,7 @@ main {
   margin: auto;
 }
 
-.pokemon_hide img:nth-child(2){
+.pokemon_hide img:nth-child(2) {
   width: 50px;
   height: 50px;
   grid-area: 1/1;
@@ -555,9 +555,10 @@ nav p {
   text-align: center;
 }
 
-#detail .modal-body h3{
+#detail .modal-body h3 {
   text-align: center;
 }
+
 .pokemon-levels ul {
   display: flex;
   height: 150px;
@@ -573,7 +574,7 @@ nav p {
   margin: 0;
 }
 
-.pokemon-bekijken .modal-body > img:nth-child(1){
+.pokemon-bekijken .modal-body>img:nth-child(1) {
   padding: .7rem;
   border-radius: 10px;
   border: 4px solid var(--black);
@@ -669,15 +670,16 @@ nav p {
   margin-top: 2rem;
 }
 
-.left_pokemon .pv_stats{
+.left_pokemon .pv_stats {
   justify-content: start;
   align-items: start;
 }
-.left_pokemon .pv_stats li{
+
+.left_pokemon .pv_stats li {
   text-align: start;
 }
 
-.right_pokemon .pv_stats li{
+.right_pokemon .pv_stats li {
   text-align: end;
 }
 
@@ -806,13 +808,15 @@ nav p {
   font-weight: bold;
 }
 
-.battlefield .progress{
+.battlefield .progress {
   display: grid;
 }
-.battlefield .progress-bar{
+
+.battlefield .progress-bar {
   grid-area: 1/1;
 }
-.battlefield .progress p{
+
+.battlefield .progress p {
   grid-area: 1/1;
   width: 100%;
   height: 100%;
@@ -865,7 +869,7 @@ nav p {
   margin-top: 3rem;
 }
 
-.pokemonToGuess .result{
+.pokemonToGuess .result {
   cursor: pointer;
   color: var(--pokemonToGuess-bg);
   text-align: center;
@@ -877,7 +881,7 @@ nav p {
   text-decoration: none;
 }
 
-.pokemonToGuess .result:hover{
+.pokemonToGuess .result:hover {
   transform: scale(1.1);
   transition: 0.5s ease-in-out;
 }
@@ -1048,4 +1052,102 @@ nav p {
 .modal-huidige button:hover {
   background-color: var(--green);
   color: var(--black);
+}
+
+/* POKEMON FINDER */
+
+#finder {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-areas: "header" "main";
+  grid-template-rows: 60px auto;
+  background-image: url("../assets/finder-files/land.png");
+  margin: 0;
+  padding: 0;
+}
+
+#finder header{
+  grid-area: header;
+}
+
+#finder .pokemon-finder {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  grid-area: main;
+}
+
+.player {
+  width: 60px;
+  height: 75px;
+  background-image: url("../assets/finder-files/player_front.png");
+  background-size: 180px 75px;
+  background-position: -60px 0;
+  position: fixed;
+  z-index: 999;
+}
+
+.player.active {
+  animation: .35s walk infinite;
+}
+
+.bush {
+  width: 50px;
+  height: 40px;
+  background-image: url("../assets/finder-files/bush.png");
+  background-size: 100% 100%;
+  position: absolute;
+  z-index: 10;
+}
+
+.pokeball {
+  width: 30px;
+  height: 30px;
+  background-image: url("../assets/finder-files/pokeball.png");
+  background-size: 100% 100%;
+  position: absolute;
+}
+#finder .modal-content{
+  background-color: var(--pokemonToGuess-bg);
+}
+#finder .modal-title{
+  text-align: center;
+  width: 100%;
+}
+
+#finder i{
+  /* flip */
+  transform: scaleX(-1);
+}
+
+#finder .modal-body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+#finder .modal-footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+#finder .modal-footer button,
+#finder .modal-footer a {
+  width: 100px;
+  height: 80px;
+}
+
+#finder .modal-footer i{
+  font-size: 2rem;
+}
+
+#finder .modal-footer img{
+  width: 40px;
+  height: 40px;
 }
