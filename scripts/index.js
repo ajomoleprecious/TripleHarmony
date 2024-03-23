@@ -1,6 +1,3 @@
-let body = document.querySelector("body");
-let projects = document.querySelectorAll(".projects ul li");
-let projectsContainer = document.querySelector(".projects");
 function showBg() {
     let body = document.querySelector("body");
     let projects = document.querySelectorAll(".projects ul li");
