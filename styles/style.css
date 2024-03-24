@@ -1144,8 +1144,9 @@ nav p {
   width: 100%;
 }
 
-#finder .modal-footer i{
+#finder .modal-footer svg{
   transform: scaleX(-1);
+  font-size: 8rem;
 }
 
 #finder .modal-body{
@@ -1168,13 +1169,10 @@ nav p {
   height: 80px;
 }
 
-#finder .modal-footer i{
-  font-size: 2rem;
-}
 
 #finder .modal-footer img{
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
 }
 
 .pokemon-finder #joyDiv {

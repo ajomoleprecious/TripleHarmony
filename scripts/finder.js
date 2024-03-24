@@ -12,7 +12,8 @@ const player_vel = {
     y: 0
 }
 const balls = []
-const sound = new Audio('https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/6.ogg')
+const walking = new Audio('../assets/finder-files/walking.ogg');
+const battleSound = new Audio('../assets/finder-files/battle_sound.ogg');
 const mainTag = document.querySelector('main');
 
 var joy = new JoyStick('joyDiv');
@@ -184,23 +185,33 @@ function checkCollisions() {
 }
 
 // Function to play the sound
-function playSound() {
+function playSound(sound) {
     // Check if the audio element is paused or ended
     if (sound.paused || sound.ended) {
         // Play the sound
         sound.play().catch(error => {
             console.error('Failed to play sound:', error.message);
         });
-    } else {
-        // If the sound is already playing, restart it
-        sound.currentTime = 0;
-    }
+        sound.loop = true; // Loop the sound effect
+    } 
 }
 
+function stopSound(sound) {
+    sound.pause();
+    sound.currentTime = 0;
+}
 
 function run() {
     player_pos.x += player_vel.x;
     player_pos.y += player_vel.y;
+
+    if (player_vel.x !== 0 || player_vel.y !== 0) {
+        // If moving, play the walking sound
+        playSound(walking);
+    } else {
+        // If not moving, stop the walking sound
+        stopSound(walking);
+    }
 
     // Check if the player exceeds the screen bounds on X-axis
     if (player_pos.x < 0) {
@@ -231,39 +242,50 @@ function init() {
 }
 
 init()
+
+// Handle movement using joystick for mobile view
 if (window.innerWidth <= 800) {
-    setInterval(handleJoystickMovement, 50);
+    setInterval(handleJoystickMovement, 20);
 }
 
+// Event listener for modal hidden event
+modal._element.addEventListener('hidden.bs.modal', () => {
+    stopSound(battleSound);
+});
 
 const keysPressed = new Set();
 
 window.addEventListener('keydown', function (e) {
     keysPressed.add(e.key);
-
+    
     // Check if modal is shown
     if (modal && modal._element.classList.contains('show')) {
+        
         // If modal is shown, do not update player velocity
         player_vel.x = 0;
         player_vel.y = 0;
-    } else {
+        
+        playSound(battleSound);
+        
+    } else { 
         // Update player velocity based on pressed keys
         if (keysPressed.has("ArrowUp")) {
-            player_vel.y = .35;
+            player_vel.y = .55;
             player.style.backgroundImage = 'url("../assets/finder-files/player_front.png")';
         }
         if (keysPressed.has("ArrowDown")) {
-            player_vel.y = -.35;
+            player_vel.y = -.55;
             player.style.backgroundImage = 'url("../assets/finder-files/player_back.png")';
         }
         if (keysPressed.has("ArrowLeft")) {
-            player_vel.x = -.35;
+            player_vel.x = -.55;
             player.style.backgroundImage = 'url("../assets/finder-files/player_left.png")';
         }
         if (keysPressed.has("ArrowRight")) {
-            player_vel.x = .35;
+            player_vel.x = .55;
             player.style.backgroundImage = 'url("../assets/finder-files/player_right.png")';
         }
+        
         player.classList.add('active');
     }
 });
