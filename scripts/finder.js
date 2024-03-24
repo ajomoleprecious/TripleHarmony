@@ -12,8 +12,8 @@ const player_vel = {
     y: 0
 }
 const balls = []
-const walking = new Audio('../assets/finder-files/walking.ogg');
-const battleSound = new Audio('../assets/finder-files/battle_sound.ogg');
+let walking = new Audio('../assets/finder-files/walking.ogg');
+let battleSound = new Audio('../assets/finder-files/battle_sound.ogg');
 const mainTag = document.querySelector('main');
 
 var joy = new JoyStick('joyDiv');
@@ -23,46 +23,46 @@ function handleJoystickMovement() {
 
     switch (direction) {
         case "N":
-            player_vel.y = 0.35;
+            player_vel.y = 0.50;
             player.style.backgroundImage = 'url("../assets/finder-files/player_front.png")';
             player.classList.add('active');
             break;
         case "NE":
-            player_vel.y = 0.35;
-            player_vel.x = 0.35;
+            player_vel.y = 0.50;
+            player_vel.x = 0.50;
             player.style.backgroundImage = 'url("../assets/finder-files/player_front.png")';
             player.classList.add('active');
             break;
         case "E":
-            player_vel.x = 0.35;
+            player_vel.x = 0.50;
             player.style.backgroundImage = 'url("../assets/finder-files/player_right.png")';
             player.classList.add('active');
             break;
         case "SE":
-            player_vel.y = -0.35;
-            player_vel.x = 0.35;
+            player_vel.y = -0.50;
+            player_vel.x = 0.50;
             player.style.backgroundImage = 'url("../assets/finder-files/player_back.png")';
             player.classList.add('active');
             break;
         case "S":
-            player_vel.y = -0.35;
+            player_vel.y = -0.50;
             player.style.backgroundImage = 'url("../assets/finder-files/player_back.png")';
             player.classList.add('active');
             break;
         case "SW":
-            player_vel.y = -0.35;
-            player_vel.x = -0.35;
+            player_vel.y = -0.50;
+            player_vel.x = -0.50;
             player.style.backgroundImage = 'url("../assets/finder-files/player_back.png")';
             player.classList.add('active');
             break;
         case "W":
-            player_vel.x = -0.35;
+            player_vel.x = -0.50;
             player.style.backgroundImage = 'url("../assets/finder-files/player_left.png")';
             player.classList.add('active');
             break;
         case "NW":
-            player_vel.y = 0.35;
-            player_vel.x = -0.35;
+            player_vel.y = 0.50;
+            player_vel.x = -0.50;
             player.style.backgroundImage = 'url("../assets/finder-files/player_front.png")';
             player.classList.add('active');
             break;
@@ -179,26 +179,57 @@ function checkCollisions() {
             balls.splice(index, 1);
             generateBall();
             modal.show();
-            //playSound();
         }
     });
 }
 
 // Function to play the sound
 function playSound(sound) {
-    // Check if the audio element is paused or ended
-    if (sound.paused || sound.ended) {
-        // Play the sound
-        sound.play().catch(error => {
-            console.error('Failed to play sound:', error.message);
-        });
+    // Function to play sound after user interaction
+    var playWithInteraction = function() {
+        var promise = sound.play();
+        if (promise !== undefined) {
+            promise.then(_ => {
+                // Autoplay started!
+            }).catch(error => {
+                // Autoplay was prevented.
+                console.error("Autoplay prevented:", error);
+            });
+        }
         sound.loop = true; // Loop the sound effect
-    } 
+    };
+
+    // Function to handle user interaction events (click or swipe)
+    var handleInteraction = function() {
+        // Remove the interaction event listeners after the first interaction
+        document.removeEventListener('click', handleInteraction);
+        document.removeEventListener('touchstart', handleInteraction);
+        playWithInteraction(); // Play sound after interaction
+    };
+
+    // Check if the document already has an interaction event listener
+    if (!document.interactionListener) {
+        // Add interaction event listeners to the document
+        document.addEventListener('click', handleInteraction);
+        document.addEventListener('touchstart', handleInteraction);
+        document.interactionListener = true; // Set a flag to indicate listener is added
+    } else {
+        // If interaction event listener already exists, play sound immediately
+        playWithInteraction();
+    }
 }
 
+
 function stopSound(sound) {
-    sound.pause();
-    sound.currentTime = 0;
+    var promise = sound.pause();
+
+    if (promise !== undefined) {
+        promise.then(_ => {
+        }).catch(_ => {
+            sound.currentTime = 0;
+            sound.pause();
+        });
+    }
 }
 
 function run() {
@@ -238,7 +269,6 @@ function init() {
     createBushes()
     createBalls()
     run()
-
 }
 
 init()
@@ -250,42 +280,42 @@ if (window.innerWidth <= 800) {
 
 // Event listener for modal hidden event
 modal._element.addEventListener('hidden.bs.modal', () => {
+    stopSound(walking);
     stopSound(battleSound);
+});
+modal._element.addEventListener('shown.bs.modal', () => {
+    playSound(battleSound);
 });
 
 const keysPressed = new Set();
 
 window.addEventListener('keydown', function (e) {
     keysPressed.add(e.key);
-    
+
     // Check if modal is shown
     if (modal && modal._element.classList.contains('show')) {
-        
         // If modal is shown, do not update player velocity
         player_vel.x = 0;
         player_vel.y = 0;
-        
-        playSound(battleSound);
-        
-    } else { 
+    } else {
         // Update player velocity based on pressed keys
         if (keysPressed.has("ArrowUp")) {
-            player_vel.y = .55;
+            player_vel.y = .75;
             player.style.backgroundImage = 'url("../assets/finder-files/player_front.png")';
         }
         if (keysPressed.has("ArrowDown")) {
-            player_vel.y = -.55;
+            player_vel.y = -.75;
             player.style.backgroundImage = 'url("../assets/finder-files/player_back.png")';
         }
         if (keysPressed.has("ArrowLeft")) {
-            player_vel.x = -.55;
+            player_vel.x = -.75;
             player.style.backgroundImage = 'url("../assets/finder-files/player_left.png")';
         }
         if (keysPressed.has("ArrowRight")) {
-            player_vel.x = .55;
+            player_vel.x = .75;
             player.style.backgroundImage = 'url("../assets/finder-files/player_right.png")';
         }
-        
+
         player.classList.add('active');
     }
 });

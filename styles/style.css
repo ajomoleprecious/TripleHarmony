@@ -230,7 +230,12 @@ main {
   align-items: center;
   margin: 0;
   padding: 0;
-  gap: 10px;
+  gap: 1rem;
+}
+.right-container ul li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .right-container ul li:nth-child(1) button {
@@ -245,7 +250,8 @@ main {
   height: 40px;
   border-radius: 100%;
   color: var(--black);
-  background-color: var(--pokemonToGuess-bg);
+  background-color: var(--body-bg);
+  border: 2px solid var(--avatar-border-color);
   cursor: pointer;
 }
 .right-container ul li:nth-child(2) button img,
@@ -257,6 +263,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 .modal-content {
@@ -1183,8 +1190,8 @@ nav p {
   margin: 0;
   padding: 0;
   /* Position the joy div */
-  bottom: 70px;
-  left: 70px;
+  bottom: 50px;
+  left: 50px;
   /* Add some styling */
   background-color: var(--white);
   border: 8px solid var(--red);
