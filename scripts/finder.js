@@ -13,7 +13,7 @@ const player_vel = {
 }
 const balls = []
 let walking = new Audio('../assets/finder-files/walking.ogg');
-let battleSound = new Audio('../assets/finder-files/battle_sound.ogg');
+let battleSound = new Audio('../assets/finder-files/tension_sound.ogg');
 const mainTag = document.querySelector('main');
 
 var joy = new JoyStick('joyDiv');
@@ -341,3 +341,10 @@ window.addEventListener('resize', function () {
     // reload page
     location.reload();
 });
+
+let hulpModal = new bootstrap.Modal(document.getElementById('hulp'), {
+    keyboard: false
+});
+window.onload = function () {
+    hulpModal.show();
+}
