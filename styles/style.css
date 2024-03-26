@@ -232,11 +232,6 @@ main {
   padding: 0;
   gap: 1rem;
 }
-.right-container ul li {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .right-container ul li:nth-child(1) button {
   border-radius: 10px;
@@ -433,15 +428,18 @@ nav p {
 .pokemon-bekijken-main>.list-nav {
   grid-area: list-nav;
   width: 100%;
-  height: fit-content;
+  height: max-content;
   margin-top: 0.3rem;
+  z-index: 11;
 }
 
 .pokemon-bekijken-main {
   grid-area: main;
   display: grid;
+  width: 100dvw;
+  height: 100dvh;
   grid-template-areas: "title" "pokemon-list" "list-nav";
-  grid-template-rows: 10dvh 68dvh auto;
+  grid-template-rows: 10dvh 77dvh auto;
 }
 
 

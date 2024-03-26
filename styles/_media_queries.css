@@ -32,6 +32,9 @@
         font-size: 1rem;
         width: 150px;
     }
+    .ingelogd .pokemon-bekijken-main {
+        grid-template-rows: 10dvh 72dvh auto;
+    }
 }
 
 @media (max-width: 950px) {
@@ -301,8 +304,6 @@
         font-size: 1.1rem;
     }
 
-
-
     .ingelogd .progress {
         width: 7rem;
     }
@@ -356,6 +357,10 @@
     .ingelogd .avatars li img {
         width: 100px;
         height: 100px;
+    }
+
+    .ingelogd .pokemon-bekijken-main {
+        grid-template-rows: 10dvh 73dvh auto;
     }
 
     .pokemon-bekijken .modal-body>img:nth-child(1) {
