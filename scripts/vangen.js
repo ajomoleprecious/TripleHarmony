@@ -23,6 +23,9 @@ function checkScreenSize() {
         showCursorAsGlove();
         document.addEventListener("mousemove", TrackCursor);
     }
+    else{
+        glove.style.pointerEvents = "auto";
+    }
 }
 
 checkScreenSize();
