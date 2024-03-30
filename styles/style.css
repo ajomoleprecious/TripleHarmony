@@ -752,6 +752,12 @@ nav p {
   justify-content: space-evenly;
 }
 
+.submenu article{
+  opacity: 0;
+  animation: slideUp 1s forwards;
+  animation-delay: calc(.2s * var(--i));
+}
+
 .submenu-button {
   margin: 10px;
   border-radius: 10px;
