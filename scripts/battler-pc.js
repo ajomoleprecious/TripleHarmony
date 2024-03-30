@@ -15,10 +15,3 @@ fightButtons.forEach((button) => {
         }, 1500);
     });
 });
-
-let modal = new bootstrap.Modal(document.getElementById('battleChoice'), {
-    keyboard: false,
-    backdrop: 'static'
-});
-
-modal.show();

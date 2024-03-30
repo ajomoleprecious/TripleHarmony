@@ -16,7 +16,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script defer src="../scripts/general.js"></script>
-    <script defer src="../scripts/battler.js"></script>
+    <script defer src="../scripts/battler-pc.js"></script>
 </head>
 
 <body class="ingelogd battler">
@@ -47,8 +47,8 @@
                 <ul>
                     <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>
-                                <i class="fa-solid fa-question"></i>
-                            </button></a></li>
+                        <i class="fa-solid fa-question"></i>
+                    </button></a></li>
                     <li><a href="../pokemon_pages/pokemon-auth.html"
                             class="fa-solid fa-right-from-bracket btn btn-dark"></a>
                     </li>
@@ -58,7 +58,7 @@
     </header>
     <main>
         <section class="battlefield">
-            <!--<article>
+            <article>
             </article>
             <article>
                 <section class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75"
@@ -95,7 +95,7 @@
                     <li>ice-punch</li>
                     <li>thunder-punch</li>
                 </ul>
-            </article>-->
+            </article>
         </section>
         <!-- Modal voor help-->
         <section class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
@@ -131,26 +131,6 @@
                             <li><img src="../assets/avatars/may.png" alt=""></li>
                             <li><img src="../assets/avatars/serena.png" alt=""></li>
                         </ul>
-                    </section>
-                </section>
-            </section>
-        </section>
-        <!-- Modal voor keuze van gevecht -->
-        <section class="modal fade" id="battleChoice" tabindex="-1">
-            <section class="modal-dialog modal-dialog-centered">
-                <section class="modal-content">
-                    <section class="modal-header">
-                        <h5 class="modal-title">Kies een optie</h5>
-                    </section>
-                    <section class="modal-footer">
-                        Spelen met:
-                        <button type="button" class="btn btn-primary">
-                            <i class="fa-solid fa-user-group"> Vriend</i>
-                        </button>
-                        <button type="button" class="btn btn-primary">
-                            <i class="fa-solid fa-globe"> Willekeurig</i>
-                        </button>
-                        <a href="pokemon-submenu.html">Terug gaan</a>
                     </section>
                 </section>
             </section>

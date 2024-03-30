@@ -882,6 +882,29 @@ nav p {
   animation-duration: 2s;
 }
 
+#battleChoice .modal-content{
+  background-color: var(--pokemonToGuess-bg);
+  border-radius: 20px;
+  border: 4px solid var(--black);
+}
+#battleChoice .modal-title{
+  font-size: 1.5rem;
+  text-align: center;
+  width: 100%;
+}
+#battleChoice .modal-footer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
+}
+
+#battleChoice .modal-footer i{
+  letter-spacing: 5px;
+}
+
 /* WHO'S THAT POKEMON & RESULT */
 
 .pokemonToGuess {
