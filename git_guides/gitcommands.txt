@@ -1,8 +1,8 @@
 git add . => alles selecteren
 git add FILENAME => file selecteren
 git commit -m " " => commentaar bij de verandering
-git push => doorsturen naar repository is online, bv. github
 git pull => veranderingen ontvangen
+git push => doorsturen naar repository is online, bv. github
 mv huidige bestandsnaam nieuwe bestandsnaam => bestandsnaam veranderen
 ctrl c => command cancel
 git switch main - switchen van branch

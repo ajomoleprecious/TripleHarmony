@@ -6,6 +6,14 @@
 	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/ts-node:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"j69.ejs-beautify",
+				"DigitalBrainstem.javascript-ejs-support"
+			]
+		}
 	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
