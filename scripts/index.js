@@ -1,6 +1,7 @@
 function showBg() {
     let body = document.querySelector("body");
     let projects = document.querySelectorAll(".projects ul li");
+    let projectContainer = document.querySelector(".projects");
 
     projects.forEach((project, index) => {
         project.addEventListener("mouseover", () => {
@@ -10,10 +11,31 @@ function showBg() {
             body.style.backgroundRepeat = "no-repeat";
             body.style.width = "100%";
             body.style.height = "100vh";
+            switch (index) {
+                case 0:
+                    projectContainer.style.backgroundColor = "#f3f2b3";
+                    break;
+                case 1:
+                    
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    
+                    break;
+                case 4:
+                    
+                    break;
+                case 5:
+                    
+                    break;
+            }
         });
 
         project.addEventListener("mouseout", () => {
             body.style.backgroundImage = "none";
+            projectContainer.style.backgroundColor = "#f3f2b3";
         });
     });
 
