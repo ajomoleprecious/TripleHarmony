@@ -23,8 +23,8 @@ header {
 
 aside {
   grid-area: aside;
-  color: var(--white);
-  background-color: #ff3c00;
+  color: var(--black);
+  background-color: var(--orange);
 }
 
 main {
