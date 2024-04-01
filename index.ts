@@ -1,13 +1,17 @@
+import { log } from 'console';
 import express from 'express';
 
 const app = express();
+
+let pokemons: any = [];
+let pokemonsImg: any = [];
 
 app.set('view engine', 'ejs');
 app.set('port', 3000);
 
 app.use(express.static('public'));
 
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
   res.render('index');
 });
 
@@ -15,7 +19,7 @@ app.get("/huidige-pokemon", (req, res) => {
   res.render('huidige-pokemon');
 });
 
-app.get("/pokemon-auth", (req, res) => {
+app.get('/pokemon-auth', (req, res) => {
   res.render('pokemon-auth');
 });
 
@@ -27,7 +31,7 @@ app.get("/pokemon-battler", (req, res) => {
   res.render('pokemon-battler');
 });
 
-app.get("/pokemon-submenu", (req, res) => {
+app.get('/pokemon-submenu', (req, res) => {
   res.render('pokemon-submenu');
 });
 
@@ -63,5 +67,6 @@ app.use((_, res) => {
 });
 
 app.listen(app.get('port'), async () => {
-  console.log( '[server] http://localhost:' + app.get('port'));
+  
+  console.log('[server] http://localhost:' + app.get('port'));
 });
