@@ -8,7 +8,7 @@ app.use(express.static('public'));
 
 
 router.get('/', (req, res) => {
-    res.render('index');
+    res.sendFile('views/index.html');
 });
 
 app.use('/.netlify/functions/api', router);  // path must route to lambda
