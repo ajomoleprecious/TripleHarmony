@@ -55,6 +55,13 @@ app.get("/pokemon-finder", (req, res) => {
   res.render("pokemon-finder");
 });
 
+/* Als route niet bestaat */
+app.use((_, res) => {
+  res.type('text/html');
+  res.status(404);
+  res.sendFile('./views/404.html', { root: __dirname });
+});
+
 app.listen(app.get('port'), async () => {
   console.log( '[server] http://localhost:' + app.get('port'));
 });
