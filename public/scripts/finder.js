@@ -222,6 +222,7 @@ function playSound(sound) {
 
 function stopSound(sound) {
     var promise = sound.pause();
+    sound.currentTime = 0;
 
     if (promise !== undefined) {
         promise.then(_ => {

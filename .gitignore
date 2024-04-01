@@ -211,3 +211,7 @@ project.lock.json
 
 # UWP Projects
 AppPackages/
+
+
+# Local Netlify folder
+.netlify
