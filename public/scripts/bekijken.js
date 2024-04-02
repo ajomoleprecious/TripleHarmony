@@ -1,0 +1,1 @@
+let amountOfpokemons = document.getElementById('amountOfPokemons');

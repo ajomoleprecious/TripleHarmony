@@ -417,12 +417,27 @@ nav p {
 
 /* POKEMON BEKIJKEN */
 
-.pokemon-bekijken-main>h1 {
+.pokemon-bekijken-main> .title {
   grid-area: title;
+  margin: 0 6rem 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
 }
 
 .pokemon-bekijken-main>.pokemon-list {
   grid-area: pokemon-list;
+}
+
+.pokemon-bekijken-main> .title section{
+  margin-top: 1rem;
+}
+
+.pokemon-bekijken-main .title section form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
 }
 
 .pokemon-bekijken-main>.list-nav {
@@ -439,7 +454,7 @@ nav p {
   width: 100dvw;
   height: 100dvh;
   grid-template-areas: "title" "pokemon-list" "list-nav";
-  grid-template-rows: 10dvh 77dvh auto;
+  grid-template-rows: 12dvh 75dvh auto;
 }
 
 
