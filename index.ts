@@ -36,7 +36,11 @@ app.get('/pokemon-submenu', (req, res) => {
 });
 
 app.get("/pokemons-bekijken", (req, res) => {
-  res.render('pokemons-bekijken');
+  for (let i = 0; i < pokemons.results.length; i++) {
+    let pokemonId = pokemons.results[i].url.split('/');
+    pokemonsImg.push(pokemonId[6]);
+  }
+  res.render('pokemons-bekijken', { pokemons: pokemons.results, pokemonsImg: pokemonsImg });
 });
 
 app.get("/pokemons-vangen", (req, res) => {
@@ -67,6 +71,7 @@ app.use((_, res) => {
 });
 
 app.listen(app.get('port'), async () => {
-  
+  let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=50');
+  pokemons = await response.json();
   console.log('[server] http://localhost:' + app.get('port'));
 });
