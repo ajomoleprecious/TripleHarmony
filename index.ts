@@ -1,5 +1,6 @@
 import { log } from 'console';
 import express from 'express';
+import { getPokemon } from './functions';
 
 const app = express();
 
@@ -10,7 +11,9 @@ app.set('view engine', 'ejs');
 app.set('port', 3000);
 
 app.use(express.static('public'));
-
+getPokemon('https://pokeapi.co/api/v2/pokemon').then(data => {
+  pokemons = data;
+});
 app.get('/', (req, res) => {
   res.render('index');
 });
