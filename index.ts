@@ -6,12 +6,14 @@ const app = express();
 
 let pokemons: any = [];
 let pokemonsImg: any = [];
+let pokemonImage: string = "";
 
 app.set('view engine', 'ejs');
 app.set('port', 3000);
 
 app.use(express.static('public'));
-getPokemon('https://pokeapi.co/api/v2/pokemon').then(data => {
+
+getPokemon().then(data => {
   pokemons = data;
 });
 app.get('/', (req, res) => {
@@ -47,7 +49,8 @@ app.get("/pokemons-bekijken", (req, res) => {
 });
 
 app.get("/pokemons-vangen", (req, res) => {
-  res.render('pokemons-vangen');
+  let randomNumber: number = Math.floor(Math.random() * 898) + 1;
+  res.render('pokemons-vangen', { randomNumber });
 });
 
 app.get("/pokemon-vergelijken", (req, res) => {
@@ -74,7 +77,8 @@ app.use((_, res) => {
 });
 
 app.listen(app.get('port'), async () => {
-  let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=50');
-  pokemons = await response.json();
+  let response = await getPokemon();
+  pokemons = response;
+  
   console.log('[server] http://localhost:' + app.get('port'));
 });
