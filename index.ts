@@ -79,6 +79,5 @@ app.use((_, res) => {
 app.listen(app.get('port'), async () => {
   let response = await getPokemon();
   pokemons = response;
-  
   console.log('[server] http://localhost:' + app.get('port'));
 });
