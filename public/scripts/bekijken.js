@@ -1,6 +1,5 @@
 let amountOfpokemons = document.getElementById('amountOfPokemons');
 let listForm = document.getElementById('getAmountOfPokemons');
-let body = document.querySelector('body');
 // on DOMContentloaded
 
 // get the value from local storage
@@ -23,7 +22,7 @@ let nextButton = document.getElementById('next');
 
 previousButton.addEventListener('click', function () {
     let currentPage = parseInt(listForm.querySelector('input[name="page"]').value);
-    if (currentPage > 1) {
+    if (currentPage > 0) {
         listForm.querySelector('input[name="page"]').value = currentPage - 1;
         localStorage.setItem('page', currentPage - 1);
         listForm.submit();
@@ -39,4 +38,8 @@ nextButton.addEventListener('click', function () {
 
 if (localStorage.getItem('page')) {
     listForm.querySelector('input[name="page"]').value = localStorage.getItem('page');
+}
+
+window.onload = function () {
+    localStorage.setItem('page', 0);
 }

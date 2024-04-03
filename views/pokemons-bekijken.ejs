@@ -103,7 +103,7 @@
             <option value="50">50</option>
             <option value="100">100</option>
           </select>
-          <input type="hidden" name="page" value="1">
+          <input type="hidden" name="page" value="0">
         </form>
       </section>
     </section>
@@ -111,11 +111,32 @@
     <section class="pokemon-list">
       <ul>
         <% for (let i = 0; i < pokemons.length; i++) { %>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#">
-            <img<li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/<%= pokemonsImg[i] %>.gif" alt=""></a>
-              <p><%= pokemons[i].name %></p>
+        <li data-bs-toggle="modal" data-bs-target="#detail">
+          <a data-bs-toggle="modal" data-bs-target="#detail" href="#">
+            <% if (pokemonsImg[i]) { %>
+            <img id="pokemonImage<%= i %>" src="" alt="<%= pokemons[i].name %>">
+            <script>
+              fetch(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/<%= pokemonsImg[i] %>.gif`)
+                .then(response => {
+                  if (response.ok) {
+                    document.getElementById('pokemonImage<%= i %>').src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/<%= pokemonsImg[i] %>.gif`;
+                  } else {
+                    document.getElementById('pokemonImage<%= i %>').src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/<%= pokemonsImg[i] %>.png`;
+                  }
+                })
+                .catch(error => {
+                  console.error('Error fetching image:', error);
+                });
+            </script>
+            <% } else { %>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/<%= pokemonsImg[i] %>.gif" alt="<%= pokemons[i].name %>">
+            <% } %>
+          </a>
+          <p><%= pokemons[i].name %></p>
         </li>
         <% } %>
+
+
       </ul>
     </section>
     <section class="list-nav">

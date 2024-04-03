@@ -40,10 +40,9 @@ app.get('/pokemon-submenu', (req, res) => {
   res.render('pokemon-submenu');
 });
 
-app.get("/pokemons-bekijken", async(req, res) => {  
+app.get("/pokemons-bekijken", async(req, res) => { 
   let offset = req.query.page? req.query.page : 0;
   offset = Number(offset) * Number(req.query.amountOfPokemons? req.query.amountOfPokemons : 50);
-  console.log(offset - Number(req.query.amountOfPokemons? req.query.amountOfPokemons : 50));
   let response = await 
   fetch(`https://pokeapi.co/api/v2/pokemon?limit=${req.query.amountOfPokemons ? req.query.amountOfPokemons : 50}&offset=${offset}`);
   pokemons = await response.json();
