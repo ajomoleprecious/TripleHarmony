@@ -527,8 +527,8 @@ nav p {
   flex-direction: column;
   justify-content: end;
   align-items: center;
-  width: 100px;
-  height: 130px;
+  width: 110px;
+  height: 150px;
   box-shadow: 0 0 8px var(--black);
   border-radius: 10px;
   transition: 0.5s;
@@ -542,6 +542,9 @@ nav p {
 
 .pokemon-list>ul>li p {
   margin: 0;
+  font-size: .85rem;
+  text-align: center;
+  flex-wrap: nowrap;
 }
 
 .list-nav {
