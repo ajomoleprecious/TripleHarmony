@@ -54,38 +54,41 @@
   </header>
   <aside>
     <button type="button" class="btn-close filter-close" aria-label="Close"></button>
-    <h2>Filter de pokémons</h2>
-    <section class="input-group mb-3">
-      <input type="text" class="form-control" name="pokemon_name" placeholder="Zoek op naam">
-      <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
-    </section>
-    <select class="form-select form-select-lg mb-3" name="pokemon_type" aria-label="Large select example">
-      <option value="none" selected>Pokémon type</option>
-      <hr class="dropdown-sectionider">
-      <option value="all">Alle types</option>
-      <option value="electric">Elektrische</option>
-      <option value="fire">Vuur</option>
-      <option value="water">Water</option>
-      <option value="poison">Vergif</option>
-      <option value="bug">Insect</option>
-      <option value="ground">Bodem</option>
-    </select>
-    <section class="form-floating mb-3">
-      <select class="form-select form-select-sm" name="sort_by" id="floatingSelect" aria-label="Floating label select example">
-        <option value="naam" selected>Naam (alfabetisch)</option>
-        <option value="pokemon_nr">Pokémon nummer</option>
-        <option value="weight">Gewicht</option>
-        <option value="height">Lengte</option>
+    <form action="#" method="get">
+      <h2>Filter de pokémons</h2>
+      <section class="input-group mb-3">
+        <input type="text" class="form-control" name="pokemon_name" placeholder="Zoek op naam">
+        <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+      </section>
+      <select class="form-select form-select-lg mb-3" name="pokemon_type" aria-label="Large select example">
+        <option value="none" selected>Pokémon type</option>
+        <hr class="dropdown-sectionider">
+        <option value="all">Alle types</option>
+        <option value="electric">Elektrische</option>
+        <option value="fire">Vuur</option>
+        <option value="water">Water</option>
+        <option value="poison">Vergif</option>
+        <option value="bug">Insect</option>
+        <option value="ground">Bodem</option>
       </select>
-      <label for="floatingSelect">Sorteer op:</label>
-    </section>
-    <section class="form-check form-switch mb-3">
-      <input class="form-check-input" name="only_my_pokémons" id="myPokémons" type="checkbox" role="switch">
-      <label class="form-check-label" for="myPokémons">Toon mijn pokémons</label>
-    </section>
-    <section class="d-grid gap-2 mb-2">
-      <button class="btn btn-dark" type="button">Filter</button>
-    </section>
+      <section class="form-floating mb-3">
+        <select class="form-select form-select-sm" name="sort_by" id="floatingSelect" aria-label="Floating label select example">
+          <option value="naam" selected>Naam (alfabetisch)</option>
+          <option value="pokemon_nr">Pokémon nummer</option>
+          <option value="weight">Gewicht</option>
+          <option value="height">Lengte</option>
+        </select>
+        <label for="floatingSelect">Sorteer op:</label>
+      </section>
+      <section class="form-check form-switch mb-3">
+        <input class="form-check-input" name="only_my_pokémons" id="myPokémons" type="checkbox" role="switch">
+        <label class="form-check-label" for="myPokémons">Toon mijn pokémons</label>
+      </section>
+      <section class="d-grid gap-2 mb-2">
+        <button class="btn btn-dark" type="submit">Filter</button>
+      </section>
+    </form>
+
   </aside>
   <main class="pokemon-bekijken-main">
     <section><i class="fa-solid fa-filter"></i></section>
@@ -94,14 +97,13 @@
       <section>
         <form method="get" id="getAmountOfPokemons">
           Toon:
-          <select class="form-select" id="amountOfPokemons" name="amountOfPokemons" aria-label="Amount of pokemons">
+          <select class="form-select" id="amountOfPokemons" name="amountOfPokemons" aria-label="Amount of pokemons" onchange="this.form.submit()">
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="50">50</option>
             <option value="100">100</option>
           </select>
         </form>
-
       </section>
     </section>
 
@@ -116,9 +118,9 @@
       </ul>
     </section>
     <section class="list-nav">
-      <button><i class="fa-solid fa-angles-left"></i>Vorige</button>
+      <button id="previous"><i class="fa-solid fa-angles-left"></i>Vorige</button>
       1 / ...
-      <button>Volgende<i class="fa-solid fa-angles-right"></i></button>
+      <button id="next">Volgende<i class="fa-solid fa-angles-right"></i></button>
     </section>
     <section class="pokemon_hide">
       <img src="../assets/pokemon_logo.png" alt="">

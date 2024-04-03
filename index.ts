@@ -40,7 +40,7 @@ app.get('/pokemon-submenu', (req, res) => {
 
 app.get("/pokemons-bekijken", async(req, res) => {
   let response = await 
-  fetch(`https://pokeapi.co/api/v2/pokemon?limit=${req.query.amountOfPokemons ? req.query.amountOfPokemons : 50}`);
+  fetch(`https://pokeapi.co/api/v2/pokemon?limit=${req.query.amountOfPokemons ? req.query.amountOfPokemons : 50}&offset=${req.query.amountOfPokemons ? req.query.amountOfPokemons : 0}`);
   pokemons = await response.json();
   pokemonsImg = [];
   for (let i = 0; i < pokemons.results.length; i++) {

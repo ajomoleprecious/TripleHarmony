@@ -14,7 +14,7 @@ body, .ingelogd {
 }
 
 body * ::-webkit-scrollbar {
-  display: none;
+  display: block;
 }
 
 header {
@@ -505,6 +505,7 @@ nav p {
 
 .pokemon-list {
   display: flex;
+  justify-content: center;
   overflow-y: scroll;
 }
 
