@@ -7,6 +7,8 @@ const app = express();
 let pokemons: any = [];
 let pokemonsImg: any = [];
 
+
+
 app.set('view engine', 'ejs');
 app.set('port', 3000);
 
@@ -38,9 +40,12 @@ app.get('/pokemon-submenu', (req, res) => {
   res.render('pokemon-submenu');
 });
 
-app.get("/pokemons-bekijken", async(req, res) => {
+app.get("/pokemons-bekijken", async(req, res) => {  
+  let offset = req.query.page? req.query.page : 0;
+  offset = Number(offset) * Number(req.query.amountOfPokemons? req.query.amountOfPokemons : 50);
+  console.log(offset - Number(req.query.amountOfPokemons? req.query.amountOfPokemons : 50));
   let response = await 
-  fetch(`https://pokeapi.co/api/v2/pokemon?limit=${req.query.amountOfPokemons ? req.query.amountOfPokemons : 50}&offset=${req.query.amountOfPokemons ? req.query.amountOfPokemons : 0}`);
+  fetch(`https://pokeapi.co/api/v2/pokemon?limit=${req.query.amountOfPokemons ? req.query.amountOfPokemons : 50}&offset=${offset}`);
   pokemons = await response.json();
   pokemonsImg = [];
   for (let i = 0; i < pokemons.results.length; i++) {
