@@ -92,12 +92,12 @@
     <section class="title">
       <h1>Alle Pokémons</h1>
       <section>
-        <form action="#" method="post">
+        <form method="get" id="getAmountOfPokemons">
           Toon:
-          <select class="form-select" id="amountOfPokemons">
+          <select class="form-select" id="amountOfPokemons" name="amountOfPokemons" aria-label="Amount of pokemons">
             <option value="10">10</option>
             <option value="20">20</option>
-            <option selected value="50">50</option>
+            <option value="50">50</option>
             <option value="100">100</option>
           </select>
         </form>
