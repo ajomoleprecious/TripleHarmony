@@ -6,7 +6,6 @@ const app = express();
 
 let pokemons: any = [];
 let pokemonsImg: any = [];
-let pokemonImage: string = "";
 
 app.set('view engine', 'ejs');
 app.set('port', 3000);
