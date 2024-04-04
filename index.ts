@@ -42,6 +42,7 @@ app.get('/pokemon-submenu', (req, res) => {
 
 app.get("/pokemons-bekijken", async(req, res) => { 
   let offset = req.query.page? req.query.page : 0;
+  let pageNumber = Number(req.query.page? req.query.page : 0) + 1;
   offset = Number(offset) * Number(req.query.amountOfPokemons? req.query.amountOfPokemons : 50);
   let response = await 
   fetch(`https://pokeapi.co/api/v2/pokemon?limit=${req.query.amountOfPokemons ? req.query.amountOfPokemons : 50}&offset=${offset}`);
@@ -51,7 +52,7 @@ app.get("/pokemons-bekijken", async(req, res) => {
     let pokemonId = pokemons.results[i].url.split('/');
     pokemonsImg.push(pokemonId[6]);
   }
-  res.render('pokemons-bekijken', { pokemons: pokemons.results, pokemonsImg: pokemonsImg });
+  res.render('pokemons-bekijken', { pokemons: pokemons.results, pokemonsImg: pokemonsImg, pageNumber : pageNumber});
 });
 
 app.get("/pokemons-vangen", (req, res) => {
