@@ -111,7 +111,7 @@
     <section class="pokemon-list">
       <ul>
         <% for (let i = 0; i < pokemons.length; i++) { %>
-        <li data-bs-toggle="modal" data-bs-target="#detail">
+        <li data-bs-toggle="modal" data-bs-target="#detail" onclick="showDetails(<%= pokemonsImg[i] %>)" >
           <a data-bs-toggle="modal" data-bs-target="#detail" href="#">
             <% if (pokemonsImg[i]) { %>
             <img id="pokemonImage<%= i %>" src="" alt="<%= pokemons[i].name %>">
@@ -128,20 +128,17 @@
                   console.error('Error fetching image:', error);
                 });
             </script>
-            <% } else { %>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/<%= pokemonsImg[i] %>.gif" alt="<%= pokemons[i].name %>">
             <% } %>
           </a>
           <p><%= pokemons[i].name %></p>
+          
         </li>
         <% } %>
-
-
       </ul>
     </section>
     <section class="list-nav">
       <button id="previous"><i class="fa-solid fa-angles-left"></i>Vorige</button>
-      1 / ...
+      <b><%= pageNumber %></b>
       <button id="next">Volgende<i class="fa-solid fa-angles-right"></i></button>
     </section>
     <section class="pokemon_hide">
@@ -189,17 +186,17 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </section>
           <section class="modal-body">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif" alt="">
+            <img id="detailImg" src="" alt="">
             <section>
               <table class="table table-dark table-striped">
                 <tbody>
                   <tr>
                     <th scope="row">Gewicht</th>
-                    <td>60</td>
+                    <td id="detailWeight">60</td>
                   </tr>
                   <tr>
                     <th scope="row">Lengte</th>
-                    <td>4</td>
+                    <td id="detailLength">4</td>
                   </tr>
                   <tr>
                     <th scope="row">Type</th>
@@ -210,7 +207,7 @@
               <section>
                 <h3>Niveaus</h3>
                 <section class="pokemon-levels">
-                  <ul>
+                  <!--<ul>
                     <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif" alt=""></a>
                       <p>Pokémon</p>
                     </li>
@@ -220,7 +217,7 @@
                     <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif" alt=""></a>
                       <p>Pokémon</p>
                     </li>
-                  </ul>
+                  </ul>-->
                 </section>
               </section>
             </section>

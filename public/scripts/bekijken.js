@@ -36,6 +36,18 @@ nextButton.addEventListener('click', function () {
     listForm.submit();
 });
 
+let detailImg = document.getElementById("detailImg");
+let detailWeight = document.getElementById("detailWeight");
+let detailLength = document.getElementById("detailLength");
+
+function showDetails(id) {
+    detailImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+    detailWeight.innerText = "test";
+    detailLength.innerText = "test";
+
+}
+
+
 if (localStorage.getItem('page')) {
     listForm.querySelector('input[name="page"]').value = localStorage.getItem('page');
 }
