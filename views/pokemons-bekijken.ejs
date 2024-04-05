@@ -111,7 +111,7 @@
     <section class="pokemon-list">
       <ul>
         <% for (let i = 0; i < pokemons.length; i++) { %>
-        <li data-bs-toggle="modal" data-bs-target="#detail" onclick="showDetails(<%= pokemonsImg[i] %>)" >
+        <li data-bs-toggle="modal" data-bs-target="#detail" onclick="showDetails(<%= pokemonsImg[i] %>)">
           <a data-bs-toggle="modal" data-bs-target="#detail" href="#">
             <% if (pokemonsImg[i]) { %>
             <img id="pokemonImage<%= i %>" src="" alt="<%= pokemons[i].name %>">
@@ -131,7 +131,7 @@
             <% } %>
           </a>
           <p><%= pokemons[i].name %></p>
-          
+
         </li>
         <% } %>
       </ul>
@@ -182,28 +182,32 @@
       <section class="modal-dialog modal-dialog-centered">
         <section class="modal-content">
           <section class="modal-header">
-            <h1 class="modal-title fs-5" id="detailLabel">Detail over Pokémon</h1>
+            <h1 class="modal-title fs-5" id="detailLabel">Detail over Pokémon - <span id="detailName"></span></h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </section>
           <section class="modal-body">
-            <img id="detailImg" src="" alt="">
             <section>
-              <table class="table table-dark table-striped">
+              <img id="detailImg" src="" alt="">
+              <table class="table table-dark table-striped table-hover table-lg table-borderless">
                 <tbody>
                   <tr>
                     <th scope="row">Gewicht</th>
-                    <td id="detailWeight">60</td>
+                    <td id="detailWeight"></td>
                   </tr>
                   <tr>
                     <th scope="row">Lengte</th>
-                    <td id="detailLength">4</td>
+                    <td id="detailLength"></td>
                   </tr>
                   <tr>
                     <th scope="row">Type</th>
-                    <td>Elektrisch</td>
+                    <td id="detailType"></td>
                   </tr>
                 </tbody>
               </table>
+            </section>
+
+            <section>
+
               <section>
                 <h3>Niveaus</h3>
                 <section class="pokemon-levels">
@@ -221,6 +225,9 @@
                 </section>
               </section>
             </section>
+          </section>
+          <section class="modal-footer">
+            <p>Meer details zien? Bekijk ze hier <a href="#">link</a></p>
           </section>
         </section>
       </section>

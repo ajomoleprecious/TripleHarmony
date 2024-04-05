@@ -584,10 +584,29 @@ nav p {
   align-items: center;
   justify-content: center;
 }
+#detail .modal-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-#detail .modal-body>img {
+#detail .modal-body img {
   margin: 0 auto 0 auto;
-  width: 30%;
+  width: 50%;
+}
+
+#detail table tbody tr:nth-child(1) th{
+  border-radius: 10px 0 0 0;
+}
+#detail table tbody tr:nth-child(3) th{
+  border-radius: 0 0 0 10px;
+}
+#detail table tbody tr:nth-child(1) td{
+  border-radius: 0 10px 0 0;
+}
+#detail table tbody tr:nth-child(3) td{
+  border-radius: 0 0 10px 0;
 }
 
 #detail .modal-body>div {
@@ -606,6 +625,18 @@ nav p {
 
 #detail .modal-body h3 {
   text-align: center;
+}
+
+#detail .modal-body section:nth-child(1){
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+#detail .modal-body section table {
+  width: 100%;
 }
 
 .pokemon-levels ul {

@@ -39,11 +39,19 @@ nextButton.addEventListener('click', function () {
 let detailImg = document.getElementById("detailImg");
 let detailWeight = document.getElementById("detailWeight");
 let detailLength = document.getElementById("detailLength");
+let detailType = document.getElementById("detailType");
+let detailName = document.getElementById("detailName");
 
-function showDetails(id) {
+async function showDetails(id) {
+    await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            detailWeight.innerText = `${data.weight}`;
+            detailLength.innerText = `${data.height}`;
+            detailType.innerText = `${data.types.map(type => type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)).join(', ')}`;
+            detailName.innerText = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)}`;
+        });
     detailImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-    detailWeight.innerText = "test";
-    detailLength.innerText = "test";
 
 }
 
