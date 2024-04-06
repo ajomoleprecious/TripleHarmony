@@ -111,27 +111,15 @@
     <section class="pokemon-list">
       <ul>
         <% for (let i = 0; i < pokemons.length; i++) { %>
-        <li data-bs-toggle="modal" data-bs-target="#detail" onclick="showDetails(<%= pokemonsImg[i] %>)">
+        <li data-bs-toggle="modal" data-bs-target="#detail" onclick="showDetails(<%= pokemonsID[i] %>)">
           <a data-bs-toggle="modal" data-bs-target="#detail" href="#">
-            <% if (pokemonsImg[i]) { %>
-            <img id="pokemonImage<%= i %>" src="" alt="<%= pokemons[i].name %>">
-            <script>
-              fetch(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/<%= pokemonsImg[i] %>.gif`)
-                .then(response => {
-                  if (response.ok) {
-                    document.getElementById('pokemonImage<%= i %>').src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/<%= pokemonsImg[i] %>.gif`;
-                  } else {
-                    document.getElementById('pokemonImage<%= i %>').src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/<%= pokemonsImg[i] %>.png`;
-                  }
-                })
-                .catch(error => {
-                  console.error('Error fetching image:', error);
-                });
-            </script>
+            <% if(pokemonsGif[i]) { %>
+            <img src="<%= pokemonsGif[i] %>" alt="<%= pokemons[i].name %>"
+            <% } else { %>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/<%= pokemonsID[i] %>.png" alt="<%= pokemons[i].name %>"
             <% } %>
           </a>
-          <p><%= pokemons[i].name %></p>
-
+          <p><%= pokemons[i] %></p>
         </li>
         <% } %>
       </ul>
@@ -211,15 +199,16 @@
               <section>
                 <h3>Niveaus</h3>
                 <section class="pokemon-levels">
+                  <ul id="evolutionChain"></ul>
                   <!--<ul>
                     <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif" alt=""></a>
-                      <p>Pokémon</p>
+                      <p>Pokémon naam</p>
                     </li>
                     <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/26.gif" alt=""></a>
-                      <p>Pokémon</p>
+                      <p>Pokémon naam</p>
                     </li>
                     <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif" alt=""></a>
-                      <p>Pokémon</p>
+                      <p>Pokémon naam</p>
                     </li>
                   </ul>-->
                 </section>

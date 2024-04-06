@@ -1,11 +1,14 @@
 import { log } from 'console';
 import express from 'express';
 import { getPokemon } from './functions';
+import { createPokemonList, fetchPokemonByName } from './public/ts-scripts/bekijken';
 
 const app = express();
 
-let pokemons: any = [];
-let pokemonsImg: any = [];
+let pokemonsEvolution: any = [];
+let pokemonsGif: any = [];
+let pokemons : any = [];
+let pokemonsID : number[] = [];
 
 
 
@@ -13,9 +16,7 @@ app.set('view engine', 'ejs');
 app.set('port', 3000);
 
 app.use(express.static('public'));
-getPokemon('https://pokeapi.co/api/v2/pokemon').then(data => {
-  pokemons = data;
-});
+
 app.get('/', (req, res) => {
   res.render('index');
 });
@@ -45,14 +46,34 @@ app.get("/pokemons-bekijken", async(req, res) => {
   let pageNumber = Number(req.query.page? req.query.page : 0) + 1;
   offset = Number(offset) * Number(req.query.amountOfPokemons? req.query.amountOfPokemons : 50);
   let response = await 
-  fetch(`https://pokeapi.co/api/v2/pokemon?limit=${req.query.amountOfPokemons ? req.query.amountOfPokemons : 50}&offset=${offset}`);
-  pokemons = await response.json();
-  pokemonsImg = [];
-  for (let i = 0; i < pokemons.results.length; i++) {
-    let pokemonId = pokemons.results[i].url.split('/');
-    pokemonsImg.push(pokemonId[6]);
+  fetch(`https://pokeapi.co/api/v2/evolution-chain?limit=${req.query.amountOfPokemons ? req.query.amountOfPokemons : 50}&offset=${offset}`);
+  pokemonsEvolution = await response.json();
+  pokemonsGif = [];
+  pokemons = [];
+  for (let i = 0; i < pokemonsEvolution.results.length; i++) {
+    let pokemonId = pokemonsEvolution.results[i].url.split('/');
+    await createPokemonList(pokemonId[6]).then((pokemonName) => {
+      pokemons.push(pokemonName);
+      pokemonsID.push(pokemonId[6]);
+    });
   }
-  res.render('pokemons-bekijken', { pokemons: pokemons.results, pokemonsImg: pokemonsImg, pageNumber : pageNumber});
+  pokemons = pokemons.flat();
+  for (let i = 0; i < pokemons.length; i++) {
+    const pokemonData : any = await fetchPokemonByName(pokemons[i]);
+    await fetch(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemonsID[i]}.gif`)
+    .then(response => {
+      if (response.ok) {
+        pokemonsGif.push(pokemonData.sprites.other['showdown'].front_default);
+      }
+    })
+  }
+  console.log(pokemonsGif);
+  res.render('pokemons-bekijken', { 
+    pokemons: pokemons,
+    pokemonsGif: pokemonsGif,
+    pageNumber: pageNumber,
+    pokemonsID: pokemonsID
+  });
 });
 
 app.get("/pokemons-vangen", (req, res) => {
