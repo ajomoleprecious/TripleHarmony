@@ -21,7 +21,7 @@ let previousButton = document.getElementById('previous');
 let nextButton = document.getElementById('next');
 
 previousButton.addEventListener('click', function () {
-    let currentPage = parseInt(listForm.querySelector('input[name="page"]').value);
+    let currentPage = parseInt(localStorage.getItem('page'));
     if (currentPage > 0) {
         listForm.querySelector('input[name="page"]').value = currentPage - 1;
         localStorage.setItem('page', currentPage - 1);
@@ -30,7 +30,7 @@ previousButton.addEventListener('click', function () {
 });
 
 nextButton.addEventListener('click', function () {
-    let currentPage = parseInt(listForm.querySelector('input[name="page"]').value);
+    let currentPage = parseInt(localStorage.getItem('page'));
     listForm.querySelector('input[name="page"]').value = currentPage + 1;
     localStorage.setItem('page', currentPage + 1);
     listForm.submit();
@@ -48,43 +48,51 @@ async function showDetails(id) {
         .then(data => {
             detailWeight.innerText = `${data.weight}`;
             detailLength.innerText = `${data.height}`;
-            detailType.innerText = `${data.types.map(type => type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)).join(', ')}`;
+            detailType.innerHTML = `<span class="bg-primary">${data.types.map(type => type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)).join('</span> <span class="bg-primary">')}</span>`;
             detailName.innerText = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)}`;
         });
     detailImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
     // Roep de functie op om de evolutieketen op te halen en weer te geven
-    await fetchAndDisplayEvolutionChain(`https://pokeapi.co/api/v2/evolution-chain/${id}`);
+    await createPokemonList(id);
 }
 
-// Functie om de evolutieketen op te halen en aan te passen in de HTML
-async function fetchAndDisplayEvolutionChain(chainURL) {
-    try {
-        const response = await fetch(chainURL);
-        const data = await response.json();
+// Function to fetch evolution chain data based on ID
+async function fetchEvolutionChain(id) {
+    const response = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${id}`);
+    const data = await response.json();
+    return data;
+}
 
-        // De eerste Pokémon in de keten
-        const firstPokemon = data.chain.species.name;
-        const firstPokemonImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.chain.species.url.split('/')[6]}.png`;
+// Function to create HTML list from evolution chain data
+async function createPokemonList(id) {
+    const evolutionChain = await fetchEvolutionChain(id);
+    const pokemonNames = [];
 
-        // Voeg de eerste Pokémon toe aan de HTML
-        const evolutionChainElement = document.getElementById('evolutionChain');
-
-        evolutionChainElement.innerHTML = '';
-
-        evolutionChainElement.innerHTML += `
-        <li>
-          <a href="#">
-            <img src="${firstPokemonImage}" alt="${firstPokemon}">
-          </a>
-          <p>${firstPokemon}</p>
-        </li>
-      `;
-            
-    } catch (error) {
-        console.error('Er is een fout opgetreden bij het ophalen en weergeven van de evolutieketen:', error);
+    // Extract Pokemon names from the evolution chain data
+    function extractNames(chain) {
+        pokemonNames.push(chain.species.name);
+        if (chain.evolves_to.length > 0) {
+            chain.evolves_to.forEach((evolution) => {
+                extractNames(evolution);
+            });
+        }
     }
-}
+    extractNames(evolutionChain.chain);
 
+    // Create HTML list dynamically
+    const ul = document.getElementById('evolutionChain');
+    ul.innerHTML = '';
+    pokemonNames.forEach((name) => {
+        /*ul.innerHTML += `
+        <li>
+        <a href="#">
+          <img src="" alt="${name}">
+        </a>
+        <p>${name}</p>
+        </li>`;*/
+        console.log(name);
+    });
+}
 
 
 
@@ -93,5 +101,5 @@ if (localStorage.getItem('page')) {
 }
 
 window.onload = function () {
-    localStorage.setItem('page', 0);
+    //localStorage.setItem('page', 0);
 }
