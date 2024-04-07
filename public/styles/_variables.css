@@ -11,5 +11,22 @@
     --pokemonToGuess-bg : #f3f2b3;
     --pokeBall-color : #7cfc00;
     --body-bg : #f7f7afb2;
-    --test : rgb()
+    --normal : #9fa19f;
+    --fighting : #ff8000;
+    --flying : #81b9ef;
+    --poison : #9b69da;
+    --ground : #915121;
+    --rock : #a38c21;
+    --bug : #8bc34a;
+    --ghost : #7b62a3;
+    --steel : #b8b8d0;
+    --fire : #ff6b6b;
+    --water : #6495ed;
+    --grass : #90ee90;
+    --electric : #ffff00;
+    --psychic : #ff6b6b;
+    --ice : #00ffff;
+    --dragon : #4169e1;
+    --dark : #8b4513;
+    --fairy : #ff69b4;
 }
