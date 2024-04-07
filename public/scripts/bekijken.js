@@ -45,8 +45,20 @@ let detailLength = document.getElementById("detailLength");
 let detailType = document.getElementById("detailType");
 let detailName = document.getElementById("detailName");
 
-async function showDetails(id) {
-    await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+async function DetailOfPokemon(name) {
+    await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+        .then(response => response.json())
+        .then(data => {
+            detailWeight.innerText = `${data.weight}`;
+            detailLength.innerText = `${data.height}`;
+            detailType.innerHTML = `<span class="bg-primary">${data.types.map(type => type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)).join('</span> <span class="bg-primary">')}</span>`;
+            detailName.innerText = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)}`;
+            detailImg.src = data.sprites.other['official-artwork'].front_default;
+        });
+}
+
+async function showDetails(evolutionId, pokemonId) {
+    await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
         .then(response => response.json())
         .then(data => {
             detailWeight.innerText = `${data.weight}`;
@@ -54,9 +66,9 @@ async function showDetails(id) {
             detailType.innerHTML = `<span class="bg-primary">${data.types.map(type => type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)).join('</span> <span class="bg-primary">')}</span>`;
             detailName.innerText = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)}`;
         });
-    detailImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+    detailImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
     // Roep de functie op om de evolutieketen op te halen en weer te geven
-    await createPokemonList(id);
+    await createPokemonList(evolutionId);
 }
 
 // Function to fetch evolution chain data based on ID
@@ -81,19 +93,34 @@ async function createPokemonList(id) {
         }
     }
     extractNames(evolutionChain.chain);
-
-    // Create HTML list dynamically
     const ul = document.getElementById('evolutionChain');
     ul.innerHTML = '';
-    pokemonNames.forEach((name) => {
-        ul.innerHTML += `
-        <li>
-        <a href="#">
-          <img src="" alt="${name}">
-        </a>
-        <p>${name}</p>
-        </li>`;
-        console.log(name);
+    pokemonNames.forEach( async (name) => {
+        await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+            .then(response => response.json())
+            .then(data => {  
+                const li = document.createElement('li');
+
+                if(data.sprites.other['showdown'].front_default) {
+                    li.innerHTML = `
+                    <a href="#" onclick="showDetails(${evolutionChain.id}, ${data.id})">
+                        <img src="${data.sprites.other['showdown'].front_default}" alt="${data.name}">
+                    </a>
+                    <p>${data.name.charAt(0).toUpperCase() + data.name.slice(1)}</p>
+                    `;
+                    ul.appendChild(li);
+                    return;
+                } else {
+                    li.innerHTML = `
+                    <a href="#" onclick="showDetails(${evolutionChain.id}, ${data.id})">
+                        <img src="${data.sprites.other['official-artwork'].front_default}" alt="${data.name}">
+                    </a>
+                    <p>${data.name.charAt(0).toUpperCase() + data.name.slice(1)}</p>
+                    `;
+                    ul.appendChild(li);
+                    return;
+                }
+            });
     });
 }
 

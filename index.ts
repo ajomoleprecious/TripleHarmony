@@ -1,6 +1,5 @@
 import { log } from 'console';
 import express from 'express';
-import axio from 'axios';
 import { getPokemon } from './functions';
 
 import { get } from 'http';
@@ -48,6 +47,7 @@ app.get("/pokemons-bekijken", async (req, res) => {
   let amountOfPokemons = req.query.amountOfPokemons ? Number(req.query.amountOfPokemons) : 50;
   let offset = page * amountOfPokemons;
   let evolution_chain_ids : any[] = [];
+  let pokemonIDs : any[] = [];
 
   try {
     const pokemonsChainResponse = await axios.get(`https://pokeapi.co/api/v2/evolution-chain?offset=${offset}&limit=${amountOfPokemons}`);
@@ -57,12 +57,16 @@ app.get("/pokemons-bekijken", async (req, res) => {
       let id : number = item.url.split('/')[6];
       evolution_chain_ids.push(id);
       let lastPokemon = await getLastPokemonFromChain(id);
-      return fetchPokemonByName(lastPokemon);
+      return await fetchPokemonByName(lastPokemon);
     });
 
     const pokemonData = await Promise.all(pokemonPromises);
+    for (let i = 0; i < pokemonData.length; i++) {
+      pokemonIDs.push(pokemonData[i].id);
+    }
+    console.log(pokemonIDs);
     console.log(evolution_chain_ids);
-    res.render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, evolution_chain_ids });
+    res.render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, pokemonIDs, evolution_chain_ids });
   } catch (error) {
     console.error("Error fetching data:", error);
     res.status(500).send("Error fetching data");
@@ -98,6 +102,6 @@ app.use((_, res) => {
 });
 
 app.listen(app.get('port'), async () => {
-  getPokemon(pokemons);
+  await getPokemon(pokemons);
   console.log('[server] http://localhost:' + app.get('port'));
 });
