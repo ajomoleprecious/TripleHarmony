@@ -649,8 +649,8 @@ nav p {
 }
 
 .pokemon-levels ul li {
-  width: 90px;
-  height: 180px;
+  width: 120px;
+  height: 170px;
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -659,6 +659,7 @@ nav p {
   border: 1.5px solid var(--black);
   border-radius: 10px;
   background-color: var(--pokemonToGuess-bg);
+  cursor: pointer;
 }
 
 .pokemon-levels ul li p {

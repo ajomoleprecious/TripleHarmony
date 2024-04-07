@@ -44,6 +44,7 @@ let detailWeight = document.getElementById("detailWeight");
 let detailLength = document.getElementById("detailLength");
 let detailType = document.getElementById("detailType");
 let detailName = document.getElementById("detailName");
+const moreDetails = document.getElementById("moreDetails");
 
 async function DetailOfPokemon(name) {
     await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
@@ -89,6 +90,7 @@ async function showDetails(evolutionId, pokemonId) {
             const typeSpans = data.types.map(type => `<span style="background-color: ${typeColors[type.type.name]}">${type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}</span>`);
             detailType.innerHTML = typeSpans.join(' ');
             detailName.innerText = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)}`;
+            moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${data.name}`;
         });
     detailImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
     // Call the function to fetch and display the evolution chain
@@ -135,6 +137,7 @@ async function createPokemonList(id) {
     // Process the results in order
     pokemonDataList.forEach(({ name, data }) => {
         const li = document.createElement('li');
+        li.onclick = () => showDetails(evolutionChain.id, data.id);
         li.innerHTML = `
             <a href="#" onclick="showDetails(${evolutionChain.id}, ${data.id})">
                 <img src="${data.sprites.other['showdown'].front_default || data.sprites.other['official-artwork'].front_default}" alt="${data.name}">
