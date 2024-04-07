@@ -1,6 +1,5 @@
 let amountOfpokemons = document.getElementById('amountOfPokemons');
 let listForm = document.getElementById('getAmountOfPokemons');
-// on DOMContentloaded
 
 // get the value from local storage
 if (localStorage.getItem('amountOfPokemons')) {
@@ -21,18 +20,22 @@ let previousButton = document.getElementById('previous');
 let nextButton = document.getElementById('next');
 
 previousButton.addEventListener('click', function () {
-    let currentPage = parseInt(localStorage.getItem('page'));
+    /*let currentPage = parseInt(localStorage.getItem('page'));
     if (currentPage > 0) {
         listForm.querySelector('input[name="page"]').value = currentPage - 1;
         localStorage.setItem('page', currentPage - 1);
         listForm.submit();
-    }
+    }*/
+    listForm.querySelector('input[name="page"]').value = parseInt(listForm.querySelector('input[name="page"]').value) - 1;
+    listForm.submit();
 });
 
 nextButton.addEventListener('click', function () {
-    let currentPage = parseInt(localStorage.getItem('page'));
+    /*let currentPage = parseInt(localStorage.getItem('page'));
     listForm.querySelector('input[name="page"]').value = currentPage + 1;
     localStorage.setItem('page', currentPage + 1);
+    listForm.submit();*/
+    listForm.querySelector('input[name="page"]').value = parseInt(listForm.querySelector('input[name="page"]').value) + 1;
     listForm.submit();
 });
 
@@ -83,23 +86,21 @@ async function createPokemonList(id) {
     const ul = document.getElementById('evolutionChain');
     ul.innerHTML = '';
     pokemonNames.forEach((name) => {
-        /*ul.innerHTML += `
+        ul.innerHTML += `
         <li>
         <a href="#">
           <img src="" alt="${name}">
         </a>
         <p>${name}</p>
-        </li>`;*/
+        </li>`;
         console.log(name);
     });
 }
 
-
-
-if (localStorage.getItem('page')) {
-    listForm.querySelector('input[name="page"]').value = localStorage.getItem('page');
-}
-
 window.onload = function () {
-    //localStorage.setItem('page', 0);
+    // Get the current page number from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentPage = parseInt(urlParams.get('page')) || 0;
+    listForm.querySelector('input[name="page"]').value = currentPage;
+    localStorage.setItem('page', currentPage);
 }
