@@ -1,6 +1,7 @@
 import { log } from 'console';
 import express from 'express';
 import { getPokemon } from './functions';
+import { get } from 'http';
 
 const app = express();
 
@@ -12,9 +13,6 @@ app.set('port', 3000);
 
 app.use(express.static('public'));
 
-getPokemon().then(data => {
-  pokemons = data;
-});
 app.get('/', (req, res) => {
   res.render('index');
 });
@@ -76,7 +74,6 @@ app.use((_, res) => {
 });
 
 app.listen(app.get('port'), async () => {
-  let response = await getPokemon();
-  pokemons = response;
+  getPokemon(pokemons);
   console.log('[server] http://localhost:' + app.get('port'));
 });
