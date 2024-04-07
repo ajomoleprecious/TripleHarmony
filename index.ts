@@ -1,7 +1,7 @@
 import { log } from 'console';
 import express from 'express';
 import axio from 'axios';
-import { getPokeData } from './functions';
+import { getPokeImages } from './functions';
 
 import { get } from 'http';
 
@@ -73,7 +73,7 @@ app.get("/pokemons-bekijken", async (req, res) => {
 
 app.get("/pokemons-vangen", async(req, res) => {
   let randomNumber: number = Math.floor(Math.random() * 898) + 1;
-
+  
   res.render('pokemons-vangen', { randomNumber });
 });
 
@@ -101,6 +101,6 @@ app.use((_, res) => {
 });
 
 app.listen(app.get('port'), async () => {
-  pokemons = await getPokeData();
+  pokemonImages = await getPokeImages();
   console.log('[server] http://localhost:' + app.get('port'));
 });
