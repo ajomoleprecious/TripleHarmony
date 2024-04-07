@@ -2,7 +2,11 @@ import { log } from 'console';
 import express from 'express';
 import axio from 'axios';
 import { getPokemon } from './functions';
+
+import { get } from 'http';
+
 import { getLastPokemonFromChain, fetchPokemonByName } from './public/ts-scripts/bekijken';
+
 
 const app = express();
 const axios = require('axios');
@@ -64,7 +68,8 @@ app.get("/pokemons-bekijken", async (req, res) => {
 });
 
 app.get("/pokemons-vangen", (req, res) => {
-  res.render('pokemons-vangen');
+  let randomNumber: number = Math.floor(Math.random() * 898) + 1;
+  res.render('pokemons-vangen', { randomNumber });
 });
 
 app.get("/pokemon-vergelijken", (req, res) => {
@@ -91,5 +96,6 @@ app.use((_, res) => {
 });
 
 app.listen(app.get('port'), async () => {
+  getPokemon(pokemons);
   console.log('[server] http://localhost:' + app.get('port'));
 });
