@@ -1,15 +1,11 @@
 import { log } from 'console';
 import express from 'express';
+import axio from 'axios';
 import { getPokemon } from './functions';
-import { createPokemonList, fetchPokemonByName } from './public/ts-scripts/bekijken';
+import { getLastPokemonFromChain, fetchPokemonByName } from './public/ts-scripts/bekijken';
 
 const app = express();
-
-let pokemonsEvolution: any = [];
-let pokemonsGif: any = [];
-let pokemons : any = [];
-let pokemonsID : number[] = [];
-
+const axios = require('axios');
 
 
 app.set('view engine', 'ejs');
@@ -41,39 +37,30 @@ app.get('/pokemon-submenu', (req, res) => {
   res.render('pokemon-submenu');
 });
 
-app.get("/pokemons-bekijken", async(req, res) => { 
-  let offset = req.query.page? req.query.page : 0;
-  let pageNumber = Number(req.query.page? req.query.page : 0) + 1;
-  offset = Number(offset) * Number(req.query.amountOfPokemons? req.query.amountOfPokemons : 50);
-  let response = await 
-  fetch(`https://pokeapi.co/api/v2/evolution-chain?limit=${req.query.amountOfPokemons ? req.query.amountOfPokemons : 50}&offset=${offset}`);
-  pokemonsEvolution = await response.json();
-  pokemonsGif = [];
-  pokemons = [];
-  for (let i = 0; i < pokemonsEvolution.results.length; i++) {
-    let pokemonId = pokemonsEvolution.results[i].url.split('/');
-    await createPokemonList(pokemonId[6]).then((pokemonName) => {
-      pokemons.push(pokemonName);
-      pokemonsID.push(pokemonId[6]);
+app.get("/pokemons-bekijken", async (req, res) => {
+  let page = req.query.page ? Number(req.query.page) : 0;
+  let amountOfPokemons = req.query.amountOfPokemons ? Number(req.query.amountOfPokemons) : 50;
+  let offset = page * amountOfPokemons;
+  let evolution_chain_ids : any[] = [];
+
+  try {
+    const pokemonsChainResponse = await axios.get(`https://pokeapi.co/api/v2/evolution-chain?offset=${offset}&limit=${amountOfPokemons}`);
+    const pokemonsChain = pokemonsChainResponse.data;
+
+    const pokemonPromises = pokemonsChain.results.map(async (item : any) => {
+      let id : number = item.url.split('/')[6];
+      evolution_chain_ids.push(id);
+      let lastPokemon = await getLastPokemonFromChain(id);
+      return fetchPokemonByName(lastPokemon);
     });
+
+    const pokemonData = await Promise.all(pokemonPromises);
+    console.log(evolution_chain_ids);
+    res.render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, evolution_chain_ids });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).send("Error fetching data");
   }
-  pokemons = pokemons.flat();
-  for (let i = 0; i < pokemons.length; i++) {
-    const pokemonData : any = await fetchPokemonByName(pokemons[i]);
-    await fetch(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemonsID[i]}.gif`)
-    .then(response => {
-      if (response.ok) {
-        pokemonsGif.push(pokemonData.sprites.other['showdown'].front_default);
-      }
-    })
-  }
-  console.log(pokemonsGif);
-  res.render('pokemons-bekijken', { 
-    pokemons: pokemons,
-    pokemonsGif: pokemonsGif,
-    pageNumber: pageNumber,
-    pokemonsID: pokemonsID
-  });
 });
 
 app.get("/pokemons-vangen", (req, res) => {

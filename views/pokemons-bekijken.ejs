@@ -110,16 +110,16 @@
 
     <section class="pokemon-list">
       <ul>
-        <% for (let i = 0; i < pokemons.length; i++) { %>
-        <li data-bs-toggle="modal" data-bs-target="#detail" onclick="showDetails(<%= pokemonsID[i] %>)">
+        <% for (let i = 0; i < pokemonData.length; i++) { %>
+        <li data-bs-toggle="modal" data-bs-target="#detail" onclick="showDetails(<%= evolution_chain_ids[i] %>)">
           <a data-bs-toggle="modal" data-bs-target="#detail" href="#">
-            <% if(pokemonsGif[i]) { %>
-            <img src="<%= pokemonsGif[i] %>" alt="<%= pokemons[i].name %>"
-            <% } else { %>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/<%= pokemonsID[i] %>.png" alt="<%= pokemons[i].name %>"
+            <% if (pokemonData[i].sprites.other['showdown'].front_default) { %> 
+            <img src="<%= pokemonData[i].sprites.other['showdown'].front_default %>" alt="<%= pokemonData[i].name %>"> 
+            <% } else { %> 
+            <img src="<%= pokemonData[i].sprites.other['official-artwork'].front_default %>" alt="<%= pokemonData[i].name %>"> 
             <% } %>
           </a>
-          <p><%= pokemons[i] %></p>
+          <p><%= pokemonData[i].name.charAt(0).toUpperCase() %><%=  pokemonData[i].name.slice(1) %></p>
         </li>
         <% } %>
       </ul>
