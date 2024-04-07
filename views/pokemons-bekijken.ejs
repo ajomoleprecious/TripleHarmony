@@ -111,7 +111,7 @@
     <section class="pokemon-list">
       <ul>
         <% for (let i = 0; i < pokemonData.length; i++) { %>
-        <li data-bs-toggle="modal" data-bs-target="#detail" onclick="showDetails(<%= evolution_chain_ids[i] %>)">
+        <li data-bs-toggle="modal" data-bs-target="#detail" onclick="showDetails(<%= evolution_chain_ids[i] %>,<%= pokemonIDs[i] %>)">
           <a data-bs-toggle="modal" data-bs-target="#detail" href="#">
             <% if (pokemonData[i].sprites.other['showdown'].front_default) { %> 
             <img src="<%= pokemonData[i].sprites.other['showdown'].front_default %>" alt="<%= pokemonData[i].name %>"> 
@@ -200,17 +200,6 @@
                 <h3>Niveaus</h3>
                 <section class="pokemon-levels">
                   <ul id="evolutionChain"></ul>
-                  <!--<ul>
-                    <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif" alt=""></a>
-                      <p>Pokémon naam</p>
-                    </li>
-                    <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/26.gif" alt=""></a>
-                      <p>Pokémon naam</p>
-                    </li>
-                    <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif" alt=""></a>
-                      <p>Pokémon naam</p>
-                    </li>
-                  </ul>-->
                 </section>
               </section>
             </section>
