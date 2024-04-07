@@ -7,6 +7,8 @@ import { get } from 'http';
 
 import { getLastPokemonFromChain, fetchPokemonByName } from './public/ts-scripts/bekijken';
 
+let pokemons: any = [];
+
 
 const app = express();
 const axios = require('axios');
