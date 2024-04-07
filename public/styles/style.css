@@ -14,7 +14,7 @@ body, .ingelogd {
 }
 
 body * ::-webkit-scrollbar {
-  display: none;
+  display: block;
 }
 
 header {
@@ -505,6 +505,7 @@ nav p {
 
 .pokemon-list {
   display: flex;
+  justify-content: center;
   overflow-y: scroll;
 }
 
@@ -520,14 +521,14 @@ nav p {
   height: 100%;
 }
 
-.pokemon-list>ul>li {
+.ingelogd .pokemon-list>ul>li {
   margin: 0;
   display: flex;
   flex-direction: column;
   justify-content: end;
   align-items: center;
-  width: 100px;
-  height: 130px;
+  width: 120px;
+  height: 150px;
   box-shadow: 0 0 8px var(--black);
   border-radius: 10px;
   transition: 0.5s;
@@ -539,8 +540,13 @@ nav p {
   transition: 0.5s;
 }
 
-.pokemon-list>ul>li p {
+.pokemon-list p {
   margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  width: 100%;
+  text-align: center;
+  color: var(--black);
 }
 
 .list-nav {
@@ -564,6 +570,8 @@ nav p {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  text-decoration: none;
+  color: var(--black);
 }
 
 .list-nav button:nth-child(1) {
@@ -580,10 +588,24 @@ nav p {
   align-items: center;
   justify-content: center;
 }
+#detail .modal-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-#detail .modal-body>img {
-  margin: 0 auto 0 auto;
-  width: 30%;
+#detail table tbody tr:nth-child(1) th{
+  border-radius: 10px 0 0 0;
+}
+#detail table tbody tr:nth-child(3) th{
+  border-radius: 0 0 0 10px;
+}
+#detail table tbody tr:nth-child(1) td{
+  border-radius: 0 10px 0 0;
+}
+#detail table tbody tr:nth-child(3) td{
+  border-radius: 0 0 10px 0;
 }
 
 #detail .modal-body>div {
@@ -604,10 +626,22 @@ nav p {
   text-align: center;
 }
 
+#detail .modal-body section:nth-child(1){
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+#detail .modal-body section table {
+  width: 100%;
+}
+
 .pokemon-levels ul {
   display: flex;
   height: 150px;
-  width: 300px;
+  width: 100%;
   padding: 0;
   justify-content: center;
   align-items: end;
@@ -619,11 +653,21 @@ nav p {
   margin: 0;
 }
 
-.pokemon-bekijken .modal-body>img:nth-child(1) {
+#detail .modal-body > section:nth-child(1) img {
   padding: .7rem;
   border-radius: 10px;
   border: 4px solid var(--black);
   background-color: var(--pokemonToGuess-bg);
+  margin: 0 auto 0 auto;
+  width: 50%;
+}
+
+#detailType span{
+  padding: 0.2rem .4rem;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  color: white;
+  letter-spacing: 0.05rem;
 }
 
 /* POKEMON AUTH & SUBMENU */
