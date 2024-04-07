@@ -58,18 +58,43 @@ async function DetailOfPokemon(name) {
 }
 
 async function showDetails(evolutionId, pokemonId) {
+    // Mapping of Pokemon types to colors
+    const typeColors = {
+        normal: "var(--normal)",
+        fire: "var(--fire)",
+        water: "var(--water)",
+        electric: "var(--electric)",
+        grass: "var(--grass)",
+        ice: "var(--ice)",
+        fighting: "var(--fighting)",
+        poison: "var(--poison)",
+        ground: "var(--ground)",
+        flying: "var(--flying)",
+        psychic: "var(--psychic)",
+        bug: "var(--bug)",
+        rock: "var(--rock)",
+        ghost: "var(--ghost)",
+        dragon: "var(--dragon)",
+        dark: "var(--dark)",
+        steel: "var(--steel)",
+        fairy: "var(--fairy)"
+    };
+
     await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
         .then(response => response.json())
         .then(data => {
             detailWeight.innerText = `${data.weight}`;
             detailLength.innerText = `${data.height}`;
-            detailType.innerHTML = `<span class="bg-primary">${data.types.map(type => type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)).join('</span> <span class="bg-primary">')}</span>`;
+            // Mapping types to colored spans
+            const typeSpans = data.types.map(type => `<span style="background-color: ${typeColors[type.type.name]}">${type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}</span>`);
+            detailType.innerHTML = typeSpans.join(' ');
             detailName.innerText = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)}`;
         });
     detailImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
-    // Roep de functie op om de evolutieketen op te halen en weer te geven
+    // Call the function to fetch and display the evolution chain
     await createPokemonList(evolutionId);
 }
+
 
 // Function to fetch evolution chain data based on ID
 async function fetchEvolutionChain(id) {
@@ -93,36 +118,33 @@ async function createPokemonList(id) {
         }
     }
     extractNames(evolutionChain.chain);
+
     const ul = document.getElementById('evolutionChain');
     ul.innerHTML = '';
-    pokemonNames.forEach( async (name) => {
-        await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-            .then(response => response.json())
-            .then(data => {  
-                const li = document.createElement('li');
 
-                if(data.sprites.other['showdown'].front_default) {
-                    li.innerHTML = `
-                    <a href="#" onclick="showDetails(${evolutionChain.id}, ${data.id})">
-                        <img src="${data.sprites.other['showdown'].front_default}" alt="${data.name}">
-                    </a>
-                    <p>${data.name.charAt(0).toUpperCase() + data.name.slice(1)}</p>
-                    `;
-                    ul.appendChild(li);
-                    return;
-                } else {
-                    li.innerHTML = `
-                    <a href="#" onclick="showDetails(${evolutionChain.id}, ${data.id})">
-                        <img src="${data.sprites.other['official-artwork'].front_default}" alt="${data.name}">
-                    </a>
-                    <p>${data.name.charAt(0).toUpperCase() + data.name.slice(1)}</p>
-                    `;
-                    ul.appendChild(li);
-                    return;
-                }
-            });
+    // Array to store all fetch promises
+    const fetchPromises = pokemonNames.map(async (name) => {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+        const data = await response.json();
+        return { name, data };
+    });
+
+    // Wait for all fetch requests to resolve
+    const pokemonDataList = await Promise.all(fetchPromises);
+
+    // Process the results in order
+    pokemonDataList.forEach(({ name, data }) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <a href="#" onclick="showDetails(${evolutionChain.id}, ${data.id})">
+                <img src="${data.sprites.other['showdown'].front_default || data.sprites.other['official-artwork'].front_default}" alt="${data.name}">
+            </a>
+            <p>${data.name.charAt(0).toUpperCase() + data.name.slice(1)}</p>
+        `;
+        ul.appendChild(li);
     });
 }
+
 
 window.onload = function () {
     // Get the current page number from the URL
