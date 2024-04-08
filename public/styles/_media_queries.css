@@ -177,10 +177,6 @@
         top: 200px;
     }
 
-    .pokemon-levels ul {
-        width: 200px;
-    }
-
     .pokemon-bekijken {
         grid-template-areas: "header header" "main main";
     }
@@ -332,7 +328,7 @@
     }
 
     .pokemon-levels ul {
-        width: 150px;
+        width: 300px;
     }
 
     .landing-main .projects {
