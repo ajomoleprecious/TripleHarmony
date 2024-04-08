@@ -7,9 +7,6 @@ import { get } from 'http';
 
 import { getLastPokemonFromChain, fetchPokemonByName } from './public/ts-scripts/bekijken';
 
-let pokemons: any = [];
-
-
 const app = express();
 const axios = require('axios');
 
@@ -74,7 +71,7 @@ app.get("/pokemons-bekijken", async (req, res) => {
 app.get("/pokemons-vangen", async(req, res) => {
   let randomNumber: number = Math.floor(Math.random() * 898) + 1;
   
-  res.render('pokemons-vangen', { randomNumber });
+  res.render('pokemons-vangen');
 });
 
 app.get("/pokemon-vergelijken", (req, res) => {

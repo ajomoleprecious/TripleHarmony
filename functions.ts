@@ -10,7 +10,6 @@ export async function getPokeImages()
       const pokemon: any = await response.json();
       let image = pokemon.sprites.other.showdown.front_shiny;
       dataArray.push(image);
-      console.log(image);
     }     
     return dataArray;
   } 
