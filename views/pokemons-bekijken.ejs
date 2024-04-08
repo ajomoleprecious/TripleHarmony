@@ -54,7 +54,7 @@
   </header>
   <aside>
     <button type="button" class="btn-close filter-close" aria-label="Close"></button>
-    <form action="#" method="get">
+    <form action="/pokemons-bekijken/filter" method="get" id="pokemon-filter-form">
       <h2>Filter de pokémons</h2>
       <section class="input-group mb-3">
         <input type="text" class="form-control" name="pokemon_name" placeholder="Zoek op naam">
@@ -96,10 +96,9 @@
         <label class="form-check-label" for="myPokémons">Toon mijn pokémons</label>
       </section>
       <section class="d-grid gap-2 mb-2">
-        <button class="btn btn-dark" type="submit">Filter</button>
+          <button class="btn btn-dark" type="submit">Filter</button>
       </section>
     </form>
-
   </aside>
   <main class="pokemon-bekijken-main">
     <section><i class="fa-solid fa-filter"></i></section>
@@ -124,10 +123,10 @@
         <% for (let i = 0; i < pokemonData.length; i++) { %>
         <li data-bs-toggle="modal" data-bs-target="#detail" onclick="showDetails(<%= evolution_chain_ids[i] %>,<%= pokemonIDs[i] %>)">
           <a data-bs-toggle="modal" data-bs-target="#detail" href="#">
-            <% if (pokemonData[i].sprites.other['showdown'].front_default) { %> 
-            <img src="<%= pokemonData[i].sprites.other['showdown'].front_default %>" alt="<%= pokemonData[i].name %>"> 
-            <% } else { %> 
-            <img src="<%= pokemonData[i].sprites.other['official-artwork'].front_default %>" alt="<%= pokemonData[i].name %>"> 
+            <% if (pokemonData[i].sprites.other['showdown'].front_default) { %>
+            <img src="<%= pokemonData[i].sprites.other['showdown'].front_default %>" alt="<%= pokemonData[i].name %>">
+            <% } else { %>
+            <img src="<%= pokemonData[i].sprites.other['official-artwork'].front_default %>" alt="<%= pokemonData[i].name %>">
             <% } %>
           </a>
           <p><%= pokemonData[i].name.charAt(0).toUpperCase() %><%=  pokemonData[i].name.slice(1) %></p>

@@ -1,5 +1,26 @@
 let amountOfpokemons = document.getElementById('amountOfPokemons');
 let listForm = document.getElementById('getAmountOfPokemons');
+// Mapping of Pokemon types to colors
+const typeColors = {
+    normal: "var(--normal)",
+    fire: "var(--fire)",
+    water: "var(--water)",
+    electric: "var(--electric)",
+    grass: "var(--grass)",
+    ice: "var(--ice)",
+    fighting: "var(--fighting)",
+    poison: "var(--poison)",
+    ground: "var(--ground)",
+    flying: "var(--flying)",
+    psychic: "var(--psychic)",
+    bug: "var(--bug)",
+    rock: "var(--rock)",
+    ghost: "var(--ghost)",
+    dragon: "var(--dragon)",
+    dark: "var(--dark)",
+    steel: "var(--steel)",
+    fairy: "var(--fairy)"
+};
 
 // get the value from local storage
 if (localStorage.getItem('amountOfPokemons')) {
@@ -52,34 +73,17 @@ async function DetailOfPokemon(name) {
         .then(data => {
             detailWeight.innerText = `${data.weight}`;
             detailLength.innerText = `${data.height}`;
-            detailType.innerHTML = `<span class="bg-primary">${data.types.map(type => type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)).join('</span> <span class="bg-primary">')}</span>`;
+            // Mapping types to colored spans
+            const typeSpans = data.types.map(type => `<span style="background-color: ${typeColors[type.type.name]}">${type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}</span>`);
+            detailType.innerHTML = typeSpans.join(' ');
             detailName.innerText = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)}`;
+            moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${data.name}`;
             detailImg.src = data.sprites.other['official-artwork'].front_default;
         });
 }
 
 async function showDetails(evolutionId, pokemonId) {
-    // Mapping of Pokemon types to colors
-    const typeColors = {
-        normal: "var(--normal)",
-        fire: "var(--fire)",
-        water: "var(--water)",
-        electric: "var(--electric)",
-        grass: "var(--grass)",
-        ice: "var(--ice)",
-        fighting: "var(--fighting)",
-        poison: "var(--poison)",
-        ground: "var(--ground)",
-        flying: "var(--flying)",
-        psychic: "var(--psychic)",
-        bug: "var(--bug)",
-        rock: "var(--rock)",
-        ghost: "var(--ghost)",
-        dragon: "var(--dragon)",
-        dark: "var(--dark)",
-        steel: "var(--steel)",
-        fairy: "var(--fairy)"
-    };
+
 
     await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
         .then(response => response.json())
@@ -91,8 +95,8 @@ async function showDetails(evolutionId, pokemonId) {
             detailType.innerHTML = typeSpans.join(' ');
             detailName.innerText = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)}`;
             moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${data.name}`;
+            detailImg.src = data.sprites.other['official-artwork'].front_default;
         });
-    detailImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
     // Call the function to fetch and display the evolution chain
     await createPokemonList(evolutionId);
 }
@@ -137,11 +141,9 @@ async function createPokemonList(id) {
     // Process the results in order
     pokemonDataList.forEach(({ name, data }) => {
         const li = document.createElement('li');
-        li.onclick = () => showDetails(evolutionChain.id, data.id);
+        li.onclick = () => DetailOfPokemon(name);
         li.innerHTML = `
-            <a href="#" onclick="showDetails(${evolutionChain.id}, ${data.id})">
-                <img src="${data.sprites.other['showdown'].front_default || data.sprites.other['official-artwork'].front_default}" alt="${data.name}">
-            </a>
+            <img src="${data.sprites.other['showdown'].front_default || data.sprites.other['official-artwork'].front_default}" alt="${data.name}">
             <p>${data.name.charAt(0).toUpperCase() + data.name.slice(1)}</p>
         `;
         ul.appendChild(li);
