@@ -36,6 +36,26 @@ router.get("/", async (req: Request, res: Response) => {
     }
 });
 
+router.get("/filter", async (req: Request, res: Response) => {
+    let page = req.query.page ? Number(req.query.page) : 0;
+    let amountOfPokemons = req.query.amountOfPokemons ? Number(req.query.amountOfPokemons) : 50;
+    let offset = page * amountOfPokemons;
+    let evolution_chain_ids: number[] = [];
+    let pokemonIDs: number[] = [];
+    let pokemon_name = req.query.pokemon_name ? req.query.pokemon_name.toString() : '';
+
+    try {
+        const pokemonsResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon_name}`);
+        const pokemonData = pokemonsResponse.data;
+        console.log(pokemonData);
+        res.json(pokemonData);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).type('text/html').sendFile('./views/error.html', { root: __dirname });
+    }
+});
+
+
 async function getLastPokemonFromChain(id: number): Promise<string> {
     const evolutionChain: any = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${id}`)
         .then(response => response.json());
