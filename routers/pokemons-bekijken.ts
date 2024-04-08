@@ -43,15 +43,27 @@ router.get("/filter", async (req: Request, res: Response) => {
     let evolution_chain_ids: number[] = [];
     let pokemonIDs: number[] = [];
     let pokemon_name = req.query.pokemon_name ? req.query.pokemon_name.toString() : '';
+    let pokemon_type = req.query.pokemon_type ? req.query.pokemon_type.toString() : '';
+    let sort_by = req.query.sort_by ? req.query.sort_by.toString() : '';
 
     try {
-        const pokemonsResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon_name}`);
-        const pokemonData = pokemonsResponse.data;
-        console.log(pokemonData);
-        res.render('pokemons-bekijken', {});
+        if (pokemon_name) {
+            const pokemonData : any = await fetchPokemonByName(pokemon_name);
+            evolution_chain_ids.push(pokemonData.id);
+            pokemonIDs.push(pokemonData.id);
+            res.render('pokemons-bekijken', { pageNumber: page + 1, pokemonData: [pokemonData], pokemonIDs, evolution_chain_ids });
+        }
+
+        if(pokemon_type && sort_by) {
+            const pokemonData: any[] = await fetchPokemonsByTypeAndSort(pokemon_type, sort_by, offset, amountOfPokemons);
+            pokemonIDs = pokemonData.map(pokemon => pokemon.id);
+            evolution_chain_ids = pokemonData.map(pokemon => pokemon.evolution_chain_id);
+            res.render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, pokemonIDs, evolution_chain_ids });
+        }
+
     } catch (error) {
         console.error("Error fetching data:", error);
-        res.status(500).type('text/html').sendFile('./views/error.html', { root: __dirname });
+        res.status(500).type('text/html').sendFile('../views/error.html', { root: __dirname });
     }
 });
 
@@ -85,6 +97,39 @@ async function fetchPokemonByName(name: string) {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
     const data = await response.json();
     return data;
+}
+
+async function fetchPokemonsByTypeAndSort(type: string, sortBy: string, offset: number, limit: number) {
+    const response = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
+    const data : any = await response.json();
+    const pokemons = data.pokemon.map((item: any) => item.pokemon);
+    let pokemonData: any[] = [];
+
+    // Create an array of promises to fetch Pokémon data concurrently
+    const pokemonPromises = pokemons.map(async (item: any) => {
+        let name: string = item.name;
+        let pokemonData = await fetchPokemonByName(name);
+        return pokemonData;
+    });
+
+    // Wait for all Pokémon data to be fetched concurrently
+    pokemonData = await Promise.all(pokemonPromises);
+
+    // Sort the data by the given sort_by parameter
+    switch (sortBy) {
+        case 'name':
+            pokemonData.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+        case 'height':
+            pokemonData.sort((a, b) => a.height - b.height);
+            break;
+        case 'weight':
+            pokemonData.sort((a, b) => a.weight - b.weight);
+            break;
+    }
+
+    // Return the requested amount of Pokémon data
+    return pokemonData.slice(offset, offset + limit);
 }
 
 export default router;
