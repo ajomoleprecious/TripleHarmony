@@ -41,22 +41,19 @@ let previousButton = document.getElementById('previous');
 let nextButton = document.getElementById('next');
 
 previousButton.addEventListener('click', function () {
-    /*let currentPage = parseInt(localStorage.getItem('page'));
+    let currentPage = parseInt(localStorage.getItem('page'));
     if (currentPage > 0) {
         listForm.querySelector('input[name="page"]').value = currentPage - 1;
         localStorage.setItem('page', currentPage - 1);
         listForm.submit();
-    }*/
-    listForm.querySelector('input[name="page"]').value = parseInt(listForm.querySelector('input[name="page"]').value) - 1;
-    listForm.submit();
+    }
+
 });
 
 nextButton.addEventListener('click', function () {
-    /*let currentPage = parseInt(localStorage.getItem('page'));
+    let currentPage = parseInt(localStorage.getItem('page'));
     listForm.querySelector('input[name="page"]').value = currentPage + 1;
     localStorage.setItem('page', currentPage + 1);
-    listForm.submit();*/
-    listForm.querySelector('input[name="page"]').value = parseInt(listForm.querySelector('input[name="page"]').value) + 1;
     listForm.submit();
 });
 
@@ -65,6 +62,7 @@ let detailWeight = document.getElementById("detailWeight");
 let detailLength = document.getElementById("detailLength");
 let detailType = document.getElementById("detailType");
 let detailName = document.getElementById("detailName");
+let detailbox =  document.getElementById('detailbox');
 const moreDetails = document.getElementById("moreDetails");
 
 async function DetailOfPokemon(name) {
@@ -79,6 +77,8 @@ async function DetailOfPokemon(name) {
             detailName.innerText = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)}`;
             moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${data.name}`;
             detailImg.src = data.sprites.other['official-artwork'].front_default;
+            // show color of the type in the detail box
+            detailbox.style.backgroundColor = typeColors[data.types[0].type.name];
         });
 }
 
@@ -96,6 +96,8 @@ async function showDetails(evolutionId, pokemonId) {
             detailName.innerText = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)}`;
             moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${data.name}`;
             detailImg.src = data.sprites.other['official-artwork'].front_default;
+            // show color of the type in the detail box
+            detailbox.style.backgroundColor = typeColors[data.types[0].type.name];
         });
     // Call the function to fetch and display the evolution chain
     await createPokemonList(evolutionId);
