@@ -32,7 +32,7 @@ router.get("/", async (req: Request, res: Response) => {
         res.render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, pokemonIDs, evolution_chain_ids });
     } catch (error) {
         console.error("Error fetching data:", error);
-        res.status(500).type('text/html').sendFile('./views/error.html', { root: __dirname });
+        res.status(500).type('text/html').sendFile('../views/error.html', { root: __dirname });
     }
 });
 
@@ -48,7 +48,7 @@ router.get("/filter", async (req: Request, res: Response) => {
         const pokemonsResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon_name}`);
         const pokemonData = pokemonsResponse.data;
         console.log(pokemonData);
-        res.json(pokemonData);
+        res.render('pokemons-bekijken', {});
     } catch (error) {
         console.error("Error fetching data:", error);
         res.status(500).type('text/html').sendFile('./views/error.html', { root: __dirname });
