@@ -1126,6 +1126,10 @@ nav p {
   margin-bottom: 3rem;
 }
 
+.poke-catch-container {
+  display: inline-block;
+}
+
 .poke-catch-img {
   width: 17rem;
 }
