@@ -1132,6 +1132,7 @@ nav p {
 
 .poke-catch-img {
   width: 17rem;
+  animation: spin 2s linear infinite; 
 }
 
 .poke-catch-img:hover {
