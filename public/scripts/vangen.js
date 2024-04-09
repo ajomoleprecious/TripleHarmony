@@ -34,35 +34,49 @@ window.addEventListener("resize", checkScreenSize);
 ///////////////////////////////////////////////////////////////////////////////
 //-----------------------WILLEKEURIGE AFBEELDINGEN--------------------------//
 
-// Functie om een willekeurig getal tussen min (inclusief) en max (exclusief) te genereren
 function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-  
-  // Functie om een willekeurige afbeeldings-URL te genereren
-  function generateRandomImageUrl() {
-    const randomImageNumber = getRandomInt(1, 101); // Van 1 tot 100 (inclusief)
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/shiny/${randomImageNumber}.gif`; // Pas de URL-structuur aan naar je behoefte
-  }
-  
-  // Vind het DOM-element waarin de afbeelding wordt weergegeven
-  const imageElements = document.getElementsByClassName('poke-catch-img');
-  
-  // Functie om elke seconde een nieuwe willekeurige afbeelding weer te geven
-  function changeImage() {
-    let count = 0;
-    const interval = setInterval(() => {
-      const imageUrl = generateRandomImageUrl();
-      Array.from(imageElements).forEach((element) => {
-        element.src = imageUrl;
-      });
-      count++;
-      if (count >= 10) {
-        clearInterval(interval); // Stop het interval na 10 seconden
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function generateRandomPokemonDataUrl() {
+  const randomPokemonId = getRandomInt(1, 101);
+  return `https://pokeapi.co/api/v2/pokemon/${randomPokemonId}`;
+}
+
+const imageElements = document.getElementsByClassName('poke-catch-img');
+const titleElement = document.getElementById('poke-title');
+const countdownElement = document.getElementById('countdown');
+
+// Functie om elke seconde een nieuwe willekeurige afbeelding en titel weer te geven
+async function changeImageAndTitle() {
+  let count = 10; // Start de aftelling vanaf 10
+  const interval = setInterval(async () => {
+      const pokemonDataUrl = generateRandomPokemonDataUrl();
+      try {
+          const response = await fetch(pokemonDataUrl);
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          const pokemonData = await response.json();
+          const imageUrl = pokemonData.sprites.other.showdown.front_shiny;
+          const pokemonName = pokemonData.name;
+          Array.from(imageElements).forEach((element) => {
+              element.src = imageUrl;
+          });
+          if (titleElement) {
+              titleElement.innerText = pokemonName;
+          }
+          count--;
+          if (count <= 0) {
+              clearInterval(interval);
+          }
+          if (countdownElement) {
+              countdownElement.innerText = `${count}`;
+          }
+      } catch (error) {
+          console.error('Error fetching data:', error);
       }
-    }, 1000); // Elke seconde
-  }
-  
-  // Start het proces van het wijzigen van afbeeldingen
-  changeImage();
-  
+  }, 1000);
+}
+
+changeImageAndTitle();
