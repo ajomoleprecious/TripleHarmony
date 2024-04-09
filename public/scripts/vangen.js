@@ -46,10 +46,11 @@ function generateRandomPokemonDataUrl() {
 const imageElements = document.getElementsByClassName('poke-catch-img');
 const titleElement = document.getElementById('poke-title');
 const countdownElement = document.getElementById('countdown');
+const hourglassElement = document.getElementById('hourglass');
 
 // Functie om elke seconde een nieuwe willekeurige afbeelding en titel weer te geven
 async function changeImageAndTitle() {
-  let count = 10; // Start de aftelling vanaf 10
+  let count = 10; 
   const interval = setInterval(async () => {
       const pokemonDataUrl = generateRandomPokemonDataUrl();
       try {
@@ -73,6 +74,10 @@ async function changeImageAndTitle() {
           if (countdownElement) {
               countdownElement.innerText = `${count}`;
           }
+          if (count === 0) {
+            hourglassElement.style.display = 'none'; // Verberg de zandloper als de aftelling is voltooid
+            countdownElement.innerText = 'vang!';
+        }
       } catch (error) {
           console.error('Error fetching data:', error);
       }
@@ -80,3 +85,4 @@ async function changeImageAndTitle() {
 }
 
 changeImageAndTitle();
+

@@ -1132,12 +1132,21 @@ nav p {
 
 .poke-catch-img {
   width: 17rem;
-  /*animation: spin 2s linear infinite; */
 }
 
 .poke-catch-img:hover {
   cursor: none;
   animation: boxing 1s infinite;
+}
+
+#countdown-container {
+  display: flex;
+  align-items: center;
+}
+
+#hourglass {
+  animation: spin 2s linear infinite;
+  width: 4rem;
 }
 
 .poke-catch-ball {
