@@ -1108,8 +1108,9 @@ nav p {
 
 .poke-catch {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-around;
   gap: 3rem;
 }
 
@@ -1142,11 +1143,30 @@ nav p {
 #countdown-container {
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+
+.roulette-container {
+  background-image: url("../assets/roulette-removebg-preview.png");
+  width: 33%;
+  height: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.roulette-arrow {
+  width: 12rem;
+  animation: spin 2s linear infinite;
 }
 
 #hourglass {
   animation: spin 2s linear infinite;
   width: 4rem;
+}
+
+#poke-title {
+  font-size: 2rem;
 }
 
 .poke-catch-ball {

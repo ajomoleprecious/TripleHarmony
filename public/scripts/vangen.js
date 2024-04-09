@@ -47,6 +47,7 @@ const imageElements = document.getElementsByClassName('poke-catch-img');
 const titleElement = document.getElementById('poke-title');
 const countdownElement = document.getElementById('countdown');
 const hourglassElement = document.getElementById('hourglass');
+const arrowElement = document.getElementsByClassName('roulette-arrow');
 
 // Functie om elke seconde een nieuwe willekeurige afbeelding en titel weer te geven
 async function changeImageAndTitle() {
@@ -64,19 +65,14 @@ async function changeImageAndTitle() {
           Array.from(imageElements).forEach((element) => {
               element.src = imageUrl;
           });
-          if (titleElement) {
-              titleElement.innerText = pokemonName;
-          }
           count--;
           if (count <= 0) {
               clearInterval(interval);
           }
-          if (countdownElement) {
-              countdownElement.innerText = `${count}`;
-          }
           if (count === 0) {
-            hourglassElement.style.display = 'none'; // Verberg de zandloper als de aftelling is voltooid
-            countdownElement.innerText = 'vang!';
+            hourglassElement.style.display = 'none';
+            arrowElement[0].style.animation = 'none';
+            titleElement.innerText = pokemonName;
         }
       } catch (error) {
           console.error('Error fetching data:', error);
