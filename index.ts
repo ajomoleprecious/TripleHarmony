@@ -11,7 +11,7 @@ const app = express();
 
 
 app.set('view engine', 'ejs');
-app.set('port', 3000);
+app.set('port', 10000);
 
 app.use(express.static('public'));
 app.use('/pokemons-bekijken', pokemonsBekijkenRouter);
