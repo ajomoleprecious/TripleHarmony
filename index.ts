@@ -11,7 +11,7 @@ const app = express();
 
 
 app.set('view engine', 'ejs');
-app.set('port', 10000);
+app.set('port', 3000);
 
 app.use(express.static('public'));
 app.use('/pokemons-bekijken', pokemonsBekijkenRouter);
@@ -67,7 +67,7 @@ app.use((_, res) => {
   res.sendFile('./views/404.html', { root: __dirname });
 });
 
-app.listen(app.get('port'), async () => {
+app.listen(process.env.PORT || app.get('port'), async () => {
   await getPokemon(pokemons);
   console.log('[server] http://localhost:' + app.get('port'));
 });
