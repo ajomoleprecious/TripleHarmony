@@ -1,8 +1,7 @@
 import { log } from 'console';
 import express from 'express';
 import axio from 'axios';
-import { getPokeImages, getPokemon } from './functions';
-import { getLastPokemonFromChain, fetchPokemonByName } from './public/ts-scripts/bekijken';
+import { getPokeImages } from './functions';
 import pokemonsBekijkenRouter from './routers/pokemons-bekijken';
 import huidigePokemonRouter from './routers/huidige-pokemon';
 
@@ -10,7 +9,6 @@ let pokemons: any = [];
 
 const app = express();
 
-let pokemons: any[] = [];
 let pokemonImages: any[] = [];
 
 app.set('view engine', 'ejs');
@@ -74,6 +72,5 @@ app.use((_, res) => {
 
 app.listen(process.env.PORT || app.get('port'), async () => {
   pokemonImages = await getPokeImages();
-  await getPokemon(pokemons);
   console.log('[server] http://localhost:' + app.get('port'));
 });
