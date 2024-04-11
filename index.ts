@@ -1,14 +1,17 @@
 import { log } from 'console';
 import express from 'express';
-import { getPokemon } from './functions';
+import axio from 'axios';
+import { getPokeImages, getPokemon } from './functions';
+import { getLastPokemonFromChain, fetchPokemonByName } from './public/ts-scripts/bekijken';
 import pokemonsBekijkenRouter from './routers/pokemons-bekijken';
 import huidigePokemonRouter from './routers/huidige-pokemon';
-import { get } from 'http';
 
 let pokemons: any = [];
 
 const app = express();
 
+let pokemons: any[] = [];
+let pokemonImages: any[] = [];
 
 app.set('view engine', 'ejs');
 app.set('port', 3000);
@@ -39,9 +42,11 @@ app.get('/pokemon-submenu', (req, res) => {
   res.render('pokemon-submenu');
 });
 
-app.get("/pokemons-vangen", (req, res) => {
+app.get("/pokemons-vangen", async(req, res) => {
+
   let randomNumber: number = Math.floor(Math.random() * 898) + 1;
-  res.render('pokemons-vangen', { randomNumber });
+  
+  res.render('pokemons-vangen');
 });
 
 app.get("/pokemon-vergelijken", (req, res) => {
@@ -68,6 +73,7 @@ app.use((_, res) => {
 });
 
 app.listen(process.env.PORT || app.get('port'), async () => {
+  pokemonImages = await getPokeImages();
   await getPokemon(pokemons);
   console.log('[server] http://localhost:' + app.get('port'));
 });
