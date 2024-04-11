@@ -35,6 +35,10 @@
     .ingelogd .pokemon-bekijken-main {
         grid-template-rows: 10dvh 72dvh auto;
     }
+
+    .ingelogd.pokemon-bekijken {
+        grid-template-columns: 1.7fr 4fr;
+    }
 }
 
 @media (max-width: 950px) {
@@ -175,14 +179,6 @@
     aside.active {
         position: fixed;
         top: 200px;
-    }
-
-    .pokemon-levels ul {
-        width: 200px;
-    }
-
-    .pokemon-bekijken {
-        grid-template-areas: "header header" "main main";
     }
 
     .aanvallen li {
@@ -332,7 +328,7 @@
     }
 
     .pokemon-levels ul {
-        width: 150px;
+        width: 300px;
     }
 
     .landing-main .projects {
@@ -362,7 +358,9 @@
     .ingelogd .pokemon-bekijken-main {
         grid-template-rows: 10dvh 73dvh auto;
     }
-
+    #detailLabel {
+        font-size: 1rem;
+    }
     .pokemon-bekijken .modal-body>img:nth-child(1) {
         width: fit-content;
         height: 100%;

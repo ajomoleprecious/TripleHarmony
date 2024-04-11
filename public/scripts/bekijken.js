@@ -1,5 +1,26 @@
 let amountOfpokemons = document.getElementById('amountOfPokemons');
 let listForm = document.getElementById('getAmountOfPokemons');
+// Mapping of Pokemon types to colors
+const typeColors = {
+    normal: "var(--normal)",
+    fire: "var(--fire)",
+    water: "var(--water)",
+    electric: "var(--electric)",
+    grass: "var(--grass)",
+    ice: "var(--ice)",
+    fighting: "var(--fighting)",
+    poison: "var(--poison)",
+    ground: "var(--ground)",
+    flying: "var(--flying)",
+    psychic: "var(--psychic)",
+    bug: "var(--bug)",
+    rock: "var(--rock)",
+    ghost: "var(--ghost)",
+    dragon: "var(--dragon)",
+    dark: "var(--dark)",
+    steel: "var(--steel)",
+    fairy: "var(--fairy)"
+};
 
 // get the value from local storage
 if (localStorage.getItem('amountOfPokemons')) {
@@ -20,22 +41,19 @@ let previousButton = document.getElementById('previous');
 let nextButton = document.getElementById('next');
 
 previousButton.addEventListener('click', function () {
-    /*let currentPage = parseInt(localStorage.getItem('page'));
+    let currentPage = parseInt(localStorage.getItem('page'));
     if (currentPage > 0) {
         listForm.querySelector('input[name="page"]').value = currentPage - 1;
         localStorage.setItem('page', currentPage - 1);
         listForm.submit();
-    }*/
-    listForm.querySelector('input[name="page"]').value = parseInt(listForm.querySelector('input[name="page"]').value) - 1;
-    listForm.submit();
+    }
+
 });
 
 nextButton.addEventListener('click', function () {
-    /*let currentPage = parseInt(localStorage.getItem('page'));
+    let currentPage = parseInt(localStorage.getItem('page'));
     listForm.querySelector('input[name="page"]').value = currentPage + 1;
     localStorage.setItem('page', currentPage + 1);
-    listForm.submit();*/
-    listForm.querySelector('input[name="page"]').value = parseInt(listForm.querySelector('input[name="page"]').value) + 1;
     listForm.submit();
 });
 
@@ -44,20 +62,47 @@ let detailWeight = document.getElementById("detailWeight");
 let detailLength = document.getElementById("detailLength");
 let detailType = document.getElementById("detailType");
 let detailName = document.getElementById("detailName");
+let detailbox =  document.getElementById('detailbox');
+const moreDetails = document.getElementById("moreDetails");
 
-async function showDetails(id) {
-    await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+async function DetailOfPokemon(name) {
+    await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
         .then(response => response.json())
         .then(data => {
             detailWeight.innerText = `${data.weight}`;
             detailLength.innerText = `${data.height}`;
-            detailType.innerHTML = `<span class="bg-primary">${data.types.map(type => type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)).join('</span> <span class="bg-primary">')}</span>`;
+            // Mapping types to colored spans
+            const typeSpans = data.types.map(type => `<span style="background-color: ${typeColors[type.type.name]}">${type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}</span>`);
+            detailType.innerHTML = typeSpans.join(' ');
             detailName.innerText = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)}`;
+            moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${data.name}`;
+            detailImg.src = data.sprites.other['official-artwork'].front_default;
+            // show color of the type in the detail box
+            detailbox.style.backgroundColor = typeColors[data.types[0].type.name];
         });
-    detailImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-    // Roep de functie op om de evolutieketen op te halen en weer te geven
-    await createPokemonList(id);
 }
+
+async function showDetails(evolutionId, pokemonId) {
+
+
+    await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
+        .then(response => response.json())
+        .then(data => {
+            detailWeight.innerText = `${data.weight}`;
+            detailLength.innerText = `${data.height}`;
+            // Mapping types to colored spans
+            const typeSpans = data.types.map(type => `<span style="background-color: ${typeColors[type.type.name]}">${type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}</span>`);
+            detailType.innerHTML = typeSpans.join(' ');
+            detailName.innerText = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)}`;
+            moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${data.name}`;
+            detailImg.src = data.sprites.other['official-artwork'].front_default;
+            // show color of the type in the detail box
+            detailbox.style.backgroundColor = typeColors[data.types[0].type.name];
+        });
+    // Call the function to fetch and display the evolution chain
+    await createPokemonList(evolutionId);
+}
+
 
 // Function to fetch evolution chain data based on ID
 async function fetchEvolutionChain(id) {
@@ -82,20 +127,31 @@ async function createPokemonList(id) {
     }
     extractNames(evolutionChain.chain);
 
-    // Create HTML list dynamically
     const ul = document.getElementById('evolutionChain');
     ul.innerHTML = '';
-    pokemonNames.forEach((name) => {
-        ul.innerHTML += `
-        <li>
-        <a href="#">
-          <img src="" alt="${name}">
-        </a>
-        <p>${name}</p>
-        </li>`;
-        console.log(name);
+
+    // Array to store all fetch promises
+    const fetchPromises = pokemonNames.map(async (name) => {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+        const data = await response.json();
+        return { name, data };
+    });
+
+    // Wait for all fetch requests to resolve
+    const pokemonDataList = await Promise.all(fetchPromises);
+
+    // Process the results in order
+    pokemonDataList.forEach(({ name, data }) => {
+        const li = document.createElement('li');
+        li.onclick = () => DetailOfPokemon(name);
+        li.innerHTML = `
+            <img src="${data.sprites.other['showdown'].front_default || data.sprites.other['official-artwork'].front_default}" alt="${data.name}">
+            <p>${data.name.charAt(0).toUpperCase() + data.name.slice(1)}</p>
+        `;
+        ul.appendChild(li);
     });
 }
+
 
 window.onload = function () {
     // Get the current page number from the URL

@@ -487,10 +487,9 @@ nav p {
   margin: 0 0 0 auto;
 }
 
-.pokemon-bekijken>aside>h2 {
+.pokemon-bekijken aside h2 {
   font-size: 1rem;
   text-align: center;
-  margin: 2rem auto;
 }
 
 .pokemon-bekijken>main>h1 {
@@ -638,15 +637,35 @@ nav p {
   width: 100%;
 }
 
+#detail .modal-body section:nth-child(2) {
+  width: 100%;
+}
+#detailLabel {
+  font-size: 1.5rem;
+}
 .pokemon-levels ul {
   display: flex;
-  height: 150px;
+  height: 100%;
   width: 100%;
   padding: 0;
   justify-content: center;
-  align-items: end;
-  gap: 1rem;
+  align-items: center;
+  gap: .5rem;
   overflow-x: scroll;
+}
+
+.pokemon-levels ul li {
+  width: 120px;
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  padding: .2rem;
+  border: 1.5px solid var(--black);
+  border-radius: 10px;
+  background-color: var(--pokemonToGuess-bg);
+  cursor: pointer;
 }
 
 .pokemon-levels ul li p {
@@ -666,8 +685,10 @@ nav p {
   padding: 0.2rem .4rem;
   border-radius: 10px;
   font-size: 1.2rem;
-  color: white;
+  color: black;
   letter-spacing: 0.05rem;
+  /* outline on text */
+  text-shadow: -1px -1px 0 var(--white), 1px -1px 0 var(--white), -1px 1px 0 var(--white), 1px 1px 0 var(--white);
 }
 
 /* POKEMON AUTH & SUBMENU */

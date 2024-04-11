@@ -54,7 +54,7 @@
   </header>
   <aside>
     <button type="button" class="btn-close filter-close" aria-label="Close"></button>
-    <form action="#" method="get">
+    <form action="/pokemons-bekijken/filter" method="get" id="pokemon-filter-form">
       <h2>Filter de pokémons</h2>
       <section class="input-group mb-3">
         <input type="text" class="form-control" name="pokemon_name" placeholder="Zoek op naam">
@@ -64,12 +64,23 @@
         <option value="none" selected>Pokémon type</option>
         <hr class="dropdown-sectionider">
         <option value="all">Alle types</option>
-        <option value="electric">Elektrische</option>
+        <option value="normal">Normaal</option>
+        <option value="fighting">Vechten</option>
+        <option value="flying">Vliegend</option>
+        <option value="poison">Vergif</option>
+        <option value="ground">Grond</option>
+        <option value="rock">Steen</option>
+        <option value="bug">Insect</option>
+        <option value="ghost">Geest</option>
+        <option value="steel">Staal</option>
         <option value="fire">Vuur</option>
         <option value="water">Water</option>
-        <option value="poison">Vergif</option>
-        <option value="bug">Insect</option>
-        <option value="ground">Bodem</option>
+        <option value="electric">Elektrisch</option>
+        <option value="psychic">Psychisch</option>
+        <option value="ice">IJs</option>
+        <option value="dragon">Draak</option>
+        <option value="dark">Donker</option>
+        <option value="fairy">Fee</option>
       </select>
       <section class="form-floating mb-3">
         <select class="form-select form-select-sm" name="sort_by" id="floatingSelect" aria-label="Floating label select example">
@@ -85,10 +96,9 @@
         <label class="form-check-label" for="myPokémons">Toon mijn pokémons</label>
       </section>
       <section class="d-grid gap-2 mb-2">
-        <button class="btn btn-dark" type="submit">Filter</button>
+          <button class="btn btn-dark" type="submit">Filter</button>
       </section>
     </form>
-
   </aside>
   <main class="pokemon-bekijken-main">
     <section><i class="fa-solid fa-filter"></i></section>
@@ -111,12 +121,12 @@
     <section class="pokemon-list">
       <ul>
         <% for (let i = 0; i < pokemonData.length; i++) { %>
-        <li data-bs-toggle="modal" data-bs-target="#detail" onclick="showDetails(<%= evolution_chain_ids[i] %>)">
+        <li data-bs-toggle="modal" data-bs-target="#detail" onclick="showDetails(<%= evolution_chain_ids[i] %>,<%= pokemonIDs[i] %>)">
           <a data-bs-toggle="modal" data-bs-target="#detail" href="#">
-            <% if (pokemonData[i].sprites.other['showdown'].front_default) { %> 
-            <img src="<%= pokemonData[i].sprites.other['showdown'].front_default %>" alt="<%= pokemonData[i].name %>"> 
-            <% } else { %> 
-            <img src="<%= pokemonData[i].sprites.other['official-artwork'].front_default %>" alt="<%= pokemonData[i].name %>"> 
+            <% if (pokemonData[i].sprites.other['showdown'].front_default) { %>
+            <img src="<%= pokemonData[i].sprites.other['showdown'].front_default %>" alt="<%= pokemonData[i].name %>">
+            <% } else { %>
+            <img src="<%= pokemonData[i].sprites.other['official-artwork'].front_default %>" alt="<%= pokemonData[i].name %>">
             <% } %>
           </a>
           <p><%= pokemonData[i].name.charAt(0).toUpperCase() %><%=  pokemonData[i].name.slice(1) %></p>
@@ -168,9 +178,9 @@
     <!-- Modal voor detail -->
     <section class="modal fade" id="detail" tabindex="-1" aria-labelledby="detailLabel" aria-hidden="true">
       <section class="modal-dialog modal-dialog-centered">
-        <section class="modal-content">
+        <section class="modal-content" id="detailbox">
           <section class="modal-header">
-            <h1 class="modal-title fs-5" id="detailLabel">Detail over Pokémon - <span id="detailName"></span></h1>
+            <h1 class="modal-title" id="detailLabel">Detail over Pokémon - <span id="detailName"></span></h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </section>
           <section class="modal-body">
@@ -200,23 +210,12 @@
                 <h3>Niveaus</h3>
                 <section class="pokemon-levels">
                   <ul id="evolutionChain"></ul>
-                  <!--<ul>
-                    <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif" alt=""></a>
-                      <p>Pokémon naam</p>
-                    </li>
-                    <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/26.gif" alt=""></a>
-                      <p>Pokémon naam</p>
-                    </li>
-                    <li><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif" alt=""></a>
-                      <p>Pokémon naam</p>
-                    </li>
-                  </ul>-->
                 </section>
               </section>
             </section>
           </section>
           <section class="modal-footer">
-            <p>Meer details zien? Bekijk ze hier <a href="#">link</a></p>
+            <p>Meer details zien? Bekijk ze hier <a id="moreDetails" href="#">link</a></p>
           </section>
         </section>
       </section>
