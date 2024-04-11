@@ -148,3 +148,27 @@
       transform: rotate(360deg);
     }
   }
+
+  /* vang animatie */
+
+  @keyframes catch {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(30deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    75% {
+        transform: rotate(-185deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}

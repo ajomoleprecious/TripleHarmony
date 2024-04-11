@@ -1168,7 +1168,7 @@ nav p {
 }
 
 .roulette-container {
-  background-image: url("../assets/roulette-removebg-preview.png");
+  background-image: url("../assets/black_circle-removebg-preview.png");
   width: 33%;
   height: 30rem;
   display: flex;
@@ -1188,6 +1188,24 @@ nav p {
 
 #poke-title {
   font-size: 2rem;
+}
+
+.poke-catch-buttons {
+  display: flex;
+  flex-direction: column; 
+}
+
+.poke-catch-buttons button {
+  width: 6rem;
+  margin: 1rem 0 1rem 0;
+}
+
+.poke-catch-buttons a {
+  margin: 1rem 0 1rem 0;
+}
+
+.poke-catch-buttons button:hover {
+  animation: catch 1s infinite;
 }
 
 .poke-catch-ball {
