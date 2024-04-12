@@ -25,18 +25,18 @@
       </section>
       <section id="nav-menus" class="nav-container">
         <ul class="">
-          <li><a href="./pokemons-bekijken"><img src="../assets/nav-icons-black/bekijken.png" alt=""></a></a>
+          <li><a href="/pokemons-bekijken"><img src="../assets/nav-icons-black/bekijken.png" alt=""></a></a>
           </li>
-          <li><a href="./pokemon-vergelijken"><img src="../assets/nav-icons-black/vergelijken.png" alt=""></a>
+          <li><a href="/pokemon-vergelijken"><img src="../assets/nav-icons-black/vergelijken.png" alt=""></a>
           </li>
-          <li><a href="./pokemons-vangen"><img src="../assets/nav-icons-black/vangen.png" alt=""></a>
+          <li><a href="/pokemons-vangen"><img src="../assets/nav-icons-black/vangen.png" alt=""></a>
           </li>
           <li class="active"><a href="./huidige-pokemon"><img src="../assets/nav-icons-red/huidige.png" alt=""></a></li>
-          <li><a href="./pokemon-battler"><img src="../assets/nav-icons-black/battler.png" alt=""></a>
+          <li><a href="/pokemon-battler"><img src="../assets/nav-icons-black/battler.png" alt=""></a>
           </li>
-          <li><a href="./who's-that-pokemon"><img src="../assets/nav-icons-black/who.png" alt=""></a>
+          <li><a href="/who's-that-pokemon"><img src="../assets/nav-icons-black/who.png" alt=""></a>
           </li>
-          <li><a href="./pokemon-finder"><i class="fa-solid fa-magnifying-glass"></i></a>
+          <li><a href="/pokemon-finder"><i class="fa-solid fa-magnifying-glass"></i></a>
           </li>
         </ul>
       </section>
@@ -93,7 +93,21 @@
   </aside>
   <main class="pokemon-bekijken-main">
     <section><i class="fa-solid fa-filter"></i></section>
-    <h1>Jouw Pokémons</h1>
+    <section class="title">
+      <h1>Jouw Pokémons</h1>
+      <section>
+        <form method="get" id="getAmountOfPokemons">
+          Toon:
+          <select class="form-select" id="amountOfPokemons" name="amountOfPokemons" aria-label="Amount of pokemons">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+          <input type="hidden" name="page" value="0">
+        </form>
+      </section>
+    </section>
     <section class="pokemon-list">
       <ul>
         <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif" alt=""></a>
@@ -154,7 +168,7 @@
     </section>
     <section class="list-nav">
       <button><i class="fa-solid fa-angles-left"></i>Vorige</button>
-      1 / ...
+      <b>1</b>
       <button>Volgende<i class="fa-solid fa-angles-right"></i></button>
     </section>
     <section class="pokemon_hide">
