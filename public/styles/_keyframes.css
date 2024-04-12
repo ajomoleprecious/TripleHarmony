@@ -151,7 +151,7 @@
 
   /* vang animatie */
 
-  @keyframes catch {
+  @keyframes swing {
     0% {
         transform: rotate(0deg);
     }
@@ -165,7 +165,29 @@
     }
 
     75% {
-        transform: rotate(-185deg);
+        transform: rotate(-130deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes catch {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(30deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    75% {
+        transform: rotate(-300deg);
     }
 
     100% {

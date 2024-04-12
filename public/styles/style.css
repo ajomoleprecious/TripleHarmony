@@ -1178,11 +1178,9 @@ nav p {
 
 .roulette-arrow {
   width: 12rem;
-  animation: spin 2s linear infinite;
 }
 
 #hourglass {
-  animation: spin 2s linear infinite;
   width: 4rem;
 }
 
@@ -1195,7 +1193,7 @@ nav p {
   flex-direction: column; 
 }
 
-.poke-catch-buttons button {
+#catch-button {
   width: 6rem;
   margin: 1rem 0 1rem 0;
 }
@@ -1204,7 +1202,11 @@ nav p {
   margin: 1rem 0 1rem 0;
 }
 
-.poke-catch-buttons button:hover {
+.clicked:hover {
+  animation: swing 1s infinite;
+}
+
+#catch-button:active {
   animation: catch 1s infinite;
 }
 
