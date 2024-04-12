@@ -337,7 +337,7 @@ nav p {
 .projects ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 600px));
-  gap: 1rem;
+  gap: .1rem;
   padding: 0;
   margin: 0;
   width: 100%;
