@@ -11,6 +11,9 @@ function showBg() {
             body.style.backgroundRepeat = "no-repeat";
             body.style.width = "100%";
             body.style.height = "100vh";
+            // add delay animation to opacity change
+            projectContainer.style.transition = "opacity 2s ease-in-out";
+            projectContainer.style.opacity = "0.5";
             switch (index) {
                 case 0:
                     projectContainer.style.backgroundColor = "#f3f2b3";
@@ -36,6 +39,8 @@ function showBg() {
         project.addEventListener("mouseout", () => {
             body.style.backgroundImage = "none";
             projectContainer.style.backgroundColor = "#f3f2b3";
+            projectContainer.style.transition = "opacity 0.3s ease-in-out";
+            projectContainer.style.opacity = "1";
         });
     });
 
