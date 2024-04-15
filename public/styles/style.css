@@ -457,6 +457,9 @@ nav p {
   grid-template-rows: 12dvh 75dvh auto;
 }
 
+.pokemon-bekijken-main .modal-footer a{
+  color: #fff;
+}
 
 .pokemon-bekijken {
   display: grid;
