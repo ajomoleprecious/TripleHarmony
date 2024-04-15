@@ -9,7 +9,7 @@ const router = Router();
 router.get("/", async (req: Request, res: Response) => {
     // Extract query parameters or set defaults
     let page = req.query.page ? Number(req.query.page) : 0;
-    let amountOfPokemons = req.query.amountOfPokemons ? Number(req.query.amountOfPokemons) : 50;
+    let amountOfPokemons = req.query.amountOfPokemons ? Number(req.query.amountOfPokemons) : 10;
     let offset = page * amountOfPokemons;
     let evolution_chain_ids: number[] = [];
     let pokemonIDs: number[] = [];
