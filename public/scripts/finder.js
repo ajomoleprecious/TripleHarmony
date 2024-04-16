@@ -2,6 +2,7 @@ const NUM_BUSHES_PC = 2000
 const NUM_BUSHES_MOBILE = 400
 const NUM_BALLS = 5
 
+const hideHelp = document.getElementById('hideHelp');
 const player = document.querySelector('.player')
 const player_pos = {
     x: parseInt(window.innerWidth / 2),
@@ -346,6 +347,13 @@ window.addEventListener('resize', function () {
 let hulpModal = new bootstrap.Modal(document.getElementById('hulp'), {
     keyboard: false
 });
+
 window.onload = function () {
-    hulpModal.show();
+    if ((localStorage.getItem('hideHelp') === 'false') || (localStorage.getItem('hideHelp') === null)) {
+        hulpModal.show();
+    }
 }
+
+hideHelp.addEventListener('change', function () {
+    localStorage.setItem('hideHelp', hideHelp.checked);
+});

@@ -1252,7 +1252,7 @@ nav p {
 .player {
   width: 60px;
   height: 75px;
-  background-image: url("../assets/finder-files/player_front.png");
+  background-image: url("../assets/finder-files/player_back.png");
   background-size: 180px 75px;
   background-position: -60px 0;
   position: fixed;
@@ -1306,10 +1306,37 @@ nav p {
   gap: 1rem;
 }
 
-#finder .modal-footer button,
-#finder .modal-footer a {
+#pokemonFinder .modal-footer button,
+#pokemonFinder .modal-footer a {
   width: 100px;
   height: 80px;
+}
+
+#hulp .modal-footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#hulp .modal-footer button{
+  background-color: var(--orange);
+  border-color: var(--orange);
+  color: var(--black);
+}
+
+#hulp label{
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+#hulp input[type="checkbox"]{
+  background-color: var(--orange);
+  border-color: var(--orange);
+}
+
+#hulp input[type="checkbox"]:checked{
+  background-color: var(--black);
+  border-color: var(--black);
 }
 
 
