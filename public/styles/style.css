@@ -196,14 +196,6 @@ main {
   border-bottom: 7px solid var(--nav-link-border);
 }
 
-#nav-menus ul li i{
-  margin: 0;
-  padding: 0;
-  font-size: 2.4rem;
-  color: #000;
-  transform: rotate(360deg);
-}
-
 .nav-container ul {
   display: flex;
   justify-content: space-between;
@@ -847,7 +839,7 @@ nav p {
 }
 
 .submenu-button img {
-  width: 40rem;
+  width: 30rem;
   border-radius: 20px;
 }
 
