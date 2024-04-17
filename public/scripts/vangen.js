@@ -61,7 +61,7 @@ async function changeImageAndTitle() {
               throw new Error('Network response was not ok');
           }
           const pokemonData = await response.json();
-          const imageUrl = pokemonData.sprites.other.showdown.front_shiny;
+          const imageUrl = pokemonData.sprites.other.showdown.front_default;
           const pokemonName = pokemonData.name;
           Array.from(imageElements).forEach((element) => {
               element.src = imageUrl;
