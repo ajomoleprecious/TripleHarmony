@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 import bcrypt from "bcrypt";
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 const uri = "mongodb+srv://DBManager:HmnVABk3hUo3zL9P@tripleharmony.9nn57t6.mongodb.net/"
 
@@ -16,8 +16,23 @@ router.post('/register', async (req: Request, res: Response) => {
     const { email, username, password } = req.body;
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    console.log(`Received register request for user: ${username} with email: ${email} and password: ${hashedPassword}`);
-    res.render('pokemon-auth');
+    const user = {
+        email,
+        username,
+        password: hashedPassword,
+        verified: false
+    };
+    try {
+        await client.connect();
+        await client.db("users").collection("usersAccounts").insertOne(user);
+        res.status(201).render('pokemon-auth');
+    }
+    catch (_) {
+        res.status(500).send("Error bij het registreren van de gebruiker. Probeer het later opnieuw.");
+    }
+    finally {
+        await client.close();
+    }
 });
 
 export default router;
