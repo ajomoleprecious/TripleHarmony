@@ -1159,7 +1159,8 @@ nav p {
 }
 
 .roulette-container {
-  background-image: url("../assets/black_circle-removebg-preview.png");
+  background-image: url("../assets/black_circle-with-question-mark.png");
+  background-repeat: no-repeat;
   width: 33%;
   height: 30rem;
   display: flex;
