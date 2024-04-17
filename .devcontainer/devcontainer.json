@@ -25,6 +25,8 @@
 	// "customizations": {},
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
+	// Set working directory inside the container. This is the working directory used when opening a terminal in the container.
+	"workspaceFolder": "/workspaces/TripleHarmony",
 	// Use 'postStartCommand' to run commands after the container is started.
 	"postStartCommand": "git pull origin main && npm install"
 }
