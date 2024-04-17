@@ -2,195 +2,178 @@
 <html lang="nl-BE">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../assets/pokemonICO.ico" type="image/x-icon">
-    <title>Authentication | TripleHarmony</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/reset.css">
-    <link rel="stylesheet" href="../styles/style.css">
-    <!--SCRIPTS-->
-    <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script defer src="../scripts/modal.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../assets/pokemonICO.ico" type="image/x-icon">
+  <title>Authentication | TripleHarmony</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="../styles/reset.css">
+  <link rel="stylesheet" href="../styles/style.css">
+  <!--SCRIPTS-->
+  <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script defer src="../scripts/auth.js"></script>
 </head>
 
 <body id="poke-bg" class="ingelogd">
-    <header>
-        <nav>
-            <section class="left-container">
-                <img src="../assets/pokemon_logo.png" alt="logo">
-            </section>
-            <section id="nav-menus" class="nav-container">
-            </section>
-            <section class="right-container">
-                <ul>
-                    <li><button class="btn btn-dark" data-bs-toggle="modal"
-                            data-bs-target="#register">Registreren</button></li>
-                    <li><button>
-                        <i class="fa-solid fa-question"></i>
-                    </button></li>
-                    <li><a href="../index"><i class="fa-solid fa-grip btn btn-dark"></i></a></li>
-                </ul>
-            </section>
-        </nav>
-    </header>
-    <main>
-        <!-- Modal voor registreren-->
-        <section class="modal fade" id="register" tabindex="-1" aria-labelledby="registerLabel" aria-hidden="true">
-            <section class="modal-dialog modal-dialog-centered">
-                <section class="modal-content">
-                    <section class="modal-header">
-                        <h1 class="modal-title fs-5" id="registerLabel">Registreer je</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </section>
-                    <section class="modal-body">
-                        <section class="mb-2">
-                            <label for="emailInput" class="form-label">E-mail adres</label>
-                            <section class="input-group">
-                                <input type="email" class="form-control" id="emailInput"
-                                    placeholder="naam@voorbeeld.com" autocomplete="email">
-                                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-at"></i></span>
-                            </section>
-                        </section>
-                        <section class="mb-2">
-                            <label for="usernameInput" class="form-label">Gebruikersnaam</label>
-                            <section class="input-group">
-                                <input type="text" class="form-control" id="usernameInput" placeholder="gebruiker_123"
-                                    autocomplete="additional-name">
-                                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-user"></i></span>
-                            </section>
-                        </section>
-                        <section class="mb-2">
-                            <label for="passwordInput" class="form-label">Wachtwoord</label>
-                            <section class="input-group">
-                                <input type="password" class="form-control" id="passwordInput" placeholder="**********"
-                                    autocomplete="new-password">
-                                <span class="input-group-text"><i class="fa-solid fa-eye-slash"></i></span>
-                                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-lock"></i></span>
-                            </section>
-                        </section>
-                        <section class="mb-4">
-                            <label for="confirmPasswordInput" class="form-label">Bevestig wachtwoord</label>
-                            <section class="input-group">
-                                <input type="password" class="form-control" id="confirmPasswordInput"
-                                    placeholder="**********">
-                                <span class="input-group-text"><i class="fa-solid fa-eye-slash"></i></span>
-                                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-lock"></i></span>
-                            </section>
-                        </section>
-                        <section class="d-grid gap-2 mb-2">
-                            <button data-bs-target="#success-registratie" data-bs-toggle="modal" class="btn btn-dark"
-                                type="button">Registreer je</button>
-                        </section>
-                        Heeft u al een account? <a href="" data-bs-toggle="modal" data-bs-target="#login">Meld je
-                            aan</a>
-                    </section>
+  <header>
+    <nav>
+      <section class="left-container">
+        <img src="../assets/pokemon_logo.png" alt="logo">
+      </section>
+      <section id="nav-menus" class="nav-container">
+      </section>
+      <section class="right-container">
+        <ul>
+          <li><button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#register">Registreren</button></li>
+          <li><button>
+              <i class="fa-solid fa-question"></i>
+            </button></li>
+          <li><a href="/"><i class="fa-solid fa-grip btn btn-dark"></i></a></li>
+        </ul>
+      </section>
+    </nav>
+  </header>
+  <main>
+    <!-- Modal voor registreren-->
+    <section class="modal fade" id="register" tabindex="-1" aria-labelledby="registerLabel" aria-hidden="true">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header">
+            <h1 class="modal-title fs-5" id="registerLabel">Registreer je</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </section>
+          <section class="modal-body">
+            <form action="/pokemon-auth/register" method="post" id="register-form">
+              <section class="mb-2">
+                <label for="registerEmail" class="form-label">E-mail adres</label>
+                <section class="input-group">
+                  <input type="email" name="email" class="form-control" id="registerEmail" placeholder="naam@voorbeeld.com" autocomplete="email" required>
+                  <span class="input-group-text btn btn-primary"><i class="fa-solid fa-at"></i></span>
                 </section>
-            </section>
-        </section>
-        <!-- Modal voor aan te melden-->
-        <section class="modal fade" id="login" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
-            <section class="modal-dialog modal-dialog-centered">
-                <section class="modal-content">
-                    <section class="modal-header">
-                        <h1 class="modal-title fs-5" id="loginLabel">Meldt u aan</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </section>
-                    <section class="modal-body">
-                        <section class="mb-2">
-                            <label for="usernameInput" class="form-label">Gebruikersnaam</label>
-                            <section class="input-group">
-                                <input type="text" class="form-control" id="usernameInput" placeholder="gebruiker_123"
-                                    autocomplete="additional-name">
-                                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-user"></i></span>
-                            </section>
-                        </section>
-                        <section class="mb-4">
-                            <label for="passwordInput" class="form-label">Wachtwoord</label>
-                            <section class="input-group">
-                                <input type="password" class="form-control" id="passwordInput" placeholder="**********"
-                                    autocomplete="current-password">
-                                <span class="input-group-text"><i class="fa-solid fa-eye-slash"></i></span>
-                                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-lock"></i></span>
-                            </section>
-                            Wachtwoord vergeten? <a href="" data-bs-toggle="modal"
-                                data-bs-target="#resetPassword">Terugstellen</a>
-                        </section>
-                        <section class="d-grid gap-2 mb-2">
-                            <a href="/pokemon-submenu" class="btn btn-dark">Meld je aan</a>
-                        </section>
-                        Heeft u nog geen account? <a href="" data-bs-toggle="modal" data-bs-target="#register">Registeer
-                            je</a>
-                    </section>
+              </section>
+              <section class="mb-2">
+                <label for="registerUsername" class="form-label">Gebruikersnaam</label>
+                <section class="input-group">
+                  <input type="text" name="username" class="form-control" id="registerUsername" placeholder="gebruiker_123" autocomplete="additional-name" required>
+                  <span class="input-group-text btn btn-primary"><i class="fa-solid fa-user"></i></span>
                 </section>
-            </section>
-        </section>
-        <!-- Modal voor wachtwoord herstel-->
-        <section class="modal fade" id="resetPassword" tabindex="-1" aria-labelledby="resetPasswordLabel"
-            aria-hidden="true">
-            <section class="modal-dialog modal-dialog-centered">
-                <section class="modal-content">
-                    <section class="modal-header">
-                        <h1 class="modal-title fs-5" id="resetPasswordLabel">Herstel je wachtwoord</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </section>
-                    <section class="modal-body">
-                        <section class="mb-3">
-                            <label for="emailInput" class="form-label">E-mail adres</label>
-                            <section class="input-group">
-                                <input type="email" class="form-control" id="emailInput"
-                                    placeholder="naam@voorbeeld.com" autocomplete="email">
-                                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-at"></i></span>
-                            </section>
-                        </section>
-                        <section class="d-grid gap-2 mb-2">
-                            <button class="btn btn-dark" type="button" data-bs-toggle="modal"
-                                data-bs-target="#confirmatie">Herstel uw wachtwoord</button>
-                        </section>
-                        Terug naar aanmelden? <a href="" data-bs-toggle="modal" data-bs-target="#login">Aanmelden</a>
-                    </section>
+              </section>
+              <section class="mb-2">
+                <label for="registerPassword" class="form-label">Wachtwoord</label>
+                <section class="input-group">
+                  <input type="password" name="password" class="form-control" id="registerPassword" placeholder="**********" autocomplete="new-password" required>
+                  <span class="input-group-text btn btn-dark" id="registerPasswordReveal"><i class="fa-solid fa-eye"></i></span>
+                  <span class="input-group-text btn btn-primary"><i class="fa-solid fa-lock"></i></span>
                 </section>
-            </section>
-        </section>
-        <!-- Modal voor confirmatie wachtwoord herstel-->
-        <section class="modal fade" id="confirmatie" tabindex="-1" aria-labelledby="confirmatieLabel"
-            aria-hidden="true">
-            <section class="modal-dialog modal-dialog-centered">
-                <section class="modal-content">
-                    <section class="modal-header">
-                        <h1 class="modal-title fs-5" id="confirmatieLabel">Successvol</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </section>
-                    <section class="modal-body">
-                        Uw nieuwe wachtwoord is succesvol verzonden naar uw e-mailadres. Wenst u terug te keren naar het
-                        aanmeldscherm? Klik dan op <a href="" data-bs-toggle="modal"
-                            data-bs-target="#login">Aanmelden</a>.
-                    </section>
+              </section>
+              <section class="mb-4">
+                <label for="registerConfirmPassword" class="form-label">Geef wachtwoord opnieuw in</label>
+                <section class="input-group">
+                  <input type="password" class="form-control" id="registerConfirmPassword" placeholder="**********" required>
+                  <span class="input-group-text btn btn-dark" id="registerConfirmPasswordReveal"><i class="fa-solid fa-eye"></i></span>
+                  <span class="input-group-text btn btn-primary"><i class="fa-solid fa-lock"></i></span>
                 </section>
-            </section>
+              </section>
+              <section class="d-grid gap-2 mb-2">
+                <button class="btn btn-dark" type="submit">Registreer je</button>
+              </section>
+            </form>
+            Heeft u al een account? <a href="" data-bs-toggle="modal" data-bs-target="#login">Meld je
+              aan</a>
+          </section>
         </section>
-        <!-- Modal voor successvol registratie-->
-        <section class="modal fade" id="success-registratie" tabindex="-1" aria-labelledby="success-registratieLabel"
-            aria-hidden="true">
-            <section class="modal-dialog modal-dialog-centered">
-                <section class="modal-content">
-                    <section class="modal-header">
-                        <h1 class="modal-title fs-5" id="success-registratieLabel">Successvol</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </section>
-                    <section class="modal-body">
-                        Uw nieuwe account is succesvol aangemaakt en een bevestigingsbericht is verzonden naar uw
-                        e-mailadres. Wenst u terug te keren naar het aanmeldscherm? Klik dan op <a href=""
-                            data-bs-toggle="modal" data-bs-target="#login">Aanmelden</a>.
-                    </section>
-                </section>
+      </section>
+    </section>
+    <!-- Modal voor aan te melden-->
+    <section class="modal fade" id="login" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header">
+            <h1 class="modal-title fs-5" id="loginLabel">Meldt u aan</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </section>
+          <section class="modal-body">
+            <section class="mb-2">
+              <label for="loginUsername" class="form-label">Gebruikersnaam</label>
+              <section class="input-group">
+                <input type="text" class="form-control" id="loginUsername" placeholder="gebruiker_123" autocomplete="additional-name">
+                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-user"></i></span>
+              </section>
             </section>
+            <section class="mb-4">
+              <label for="loginPassword" class="form-label">Wachtwoord</label>
+              <section class="input-group">
+                <input type="password" class="form-control" id="loginPassword" placeholder="**********" autocomplete="current-password">
+                <span class="input-group-text"><i class="fa-solid fa-eye-slash"></i></span>
+                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-lock"></i></span>
+              </section>
+              Wachtwoord vergeten? <a href="" data-bs-toggle="modal" data-bs-target="#resetPassword">Terugstellen</a>
+            </section>
+            <section class="d-grid gap-2 mb-2">
+              <a href="/pokemon-submenu" class="btn btn-dark">Meld je aan</a>
+            </section>
+            Heeft u nog geen account? <a href="" data-bs-toggle="modal" data-bs-target="#register">Registeer
+              je</a>
+          </section>
         </section>
-    </main>
+      </section>
+    </section>
+    <!-- Modal voor wachtwoord herstel-->
+    <section class="modal fade" id="resetPassword" tabindex="-1" aria-labelledby="resetPasswordLabel" aria-hidden="true">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header">
+            <h1 class="modal-title fs-5" id="resetPasswordLabel">Herstel je wachtwoord</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </section>
+          <section class="modal-body">
+            <section class="mb-3">
+              <label for="resetEmail" class="form-label">E-mail adres</label>
+              <section class="input-group">
+                <input type="email" class="form-control" id="resetEmail" placeholder="naam@voorbeeld.com" autocomplete="email">
+                <span class="input-group-text btn btn-primary"><i class="fa-solid fa-at"></i></span>
+              </section>
+            </section>
+            <section class="d-grid gap-2 mb-2">
+              <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#confirmatie">Herstel uw wachtwoord</button>
+            </section>
+            Terug naar aanmelden? <a href="" data-bs-toggle="modal" data-bs-target="#login">Aanmelden</a>
+          </section>
+        </section>
+      </section>
+    </section>
+    <!-- Modal voor confirmatie wachtwoord herstel-->
+    <section class="modal fade" id="confirmatie" tabindex="-1" aria-labelledby="confirmatieLabel" aria-hidden="true">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header">
+            <h1 class="modal-title fs-5" id="confirmatieLabel">Successvol</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </section>
+          <section class="modal-body">
+            Uw nieuwe wachtwoord is succesvol verzonden naar uw e-mailadres. Wenst u terug te keren naar het
+            aanmeldscherm? Klik dan op <a href="" data-bs-toggle="modal" data-bs-target="#login">Aanmelden</a>.
+          </section>
+        </section>
+      </section>
+    </section>
+    <!-- Modal voor successvol registratie-->
+    <section class="modal fade" id="success-registratie" tabindex="-1" aria-labelledby="success-registratieLabel" aria-hidden="true">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header">
+            <h1 class="modal-title fs-5" id="success-registratieLabel">Successvol</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </section>
+          <section class="modal-body">
+            Uw nieuwe account is succesvol aangemaakt en een bevestigingsbericht is verzonden naar uw
+            e-mailadres. Wenst u terug te keren naar het aanmeldscherm? Klik dan op <a href="" data-bs-toggle="modal" data-bs-target="#login">Aanmelden</a>.
+          </section>
+        </section>
+      </section>
+    </section>
+  </main>
 </body>
 
 </html>

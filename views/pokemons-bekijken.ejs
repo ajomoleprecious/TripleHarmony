@@ -22,21 +22,21 @@
   <header>
     <nav>
       <section class="left-container">
-        <a href="pokemon-submenu"><img src="../assets/pokemon_logo.png" alt="logo"></a>
+        <a href="/pokemon-submenu"><img src="../assets/pokemon_logo.png" alt="logo"></a>
       </section>
       <section id="nav-menus" class="nav-container">
         <ul class="">
-          <li class="active"><a href="./pokemons-bekijken"><img src="../assets/nav-icons-red/bekijken.png" alt=""></a></a></li>
-          <li><a href="./pokemon-vergelijken"><img src="../assets/nav-icons-black/vergelijken.png" alt=""></a></li>
-          <li><a href="./pokemons-vangen"><img src="../assets/nav-icons-black/vangen.png" alt=""></a>
+          <li class="active"><a href="/pokemons-bekijken"><img src="../assets/nav-icons-red/bekijken.png" alt=""></a></a></li>
+          <li><a href="/pokemon-vergelijken"><img src="../assets/nav-icons-black/vergelijken.png" alt=""></a></li>
+          <li><a href="/pokemons-vangen"><img src="../assets/nav-icons-black/vangen.png" alt=""></a>
           </li>
-          <li><a href="./huidige-pokemon"><img src="../assets/nav-icons-black/huidige.png" alt=""></a>
+          <li><a href="/huidige-pokemon"><img src="../assets/nav-icons-black/huidige.png" alt=""></a>
           </li>
-          <li><a href="./pokemon-battler"><img src="../assets/nav-icons-black/battler.png" alt=""></a>
+          <li><a href="/pokemon-battler"><img src="../assets/nav-icons-black/battler.png" alt=""></a>
           </li>
-          <li><a href="./who's-that-pokemon"><img src="../assets/nav-icons-black/who.png" alt=""></a>
+          <li><a href="/who's-that-pokemon"><img src="../assets/nav-icons-black/who.png" alt=""></a>
           </li>
-          <li><a href="./pokemon-finder"><i class="fa-solid fa-magnifying-glass"></i></a>
+          <li><a href="/pokemon-finder"><img src="../assets/nav-icons-black/tracker.png" alt=""></a>
           </li>
         </ul>
       </section>
@@ -61,9 +61,8 @@
         <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
       </section>
       <select class="form-select form-select-lg mb-3" name="pokemon_type" aria-label="Large select example">
-        <option value="none" selected>Pokémon type</option>
+        <option selected>Pokémon type</option>
         <hr class="dropdown-sectionider">
-        <option value="all">Alle types</option>
         <option value="normal">Normaal</option>
         <option value="fighting">Vechten</option>
         <option value="flying">Vliegend</option>
@@ -84,10 +83,10 @@
       </select>
       <section class="form-floating mb-3">
         <select class="form-select form-select-sm" name="sort_by" id="floatingSelect" aria-label="Floating label select example">
-          <option value="naam" selected>Naam (alfabetisch)</option>
+          <option value="name" selected>Naam (alfabetisch)</option>
           <option value="pokemon_nr">Pokémon nummer</option>
           <option value="weight">Gewicht</option>
-          <option value="height">Lengte</option>
+          <option value="length">Lengte</option>
         </select>
         <label for="floatingSelect">Sorteer op:</label>
       </section>
@@ -197,7 +196,7 @@
                     <td id="detailLength"></td>
                   </tr>
                   <tr>
-                    <th scope="row">Type</th>
+                    <th scope="row">Pokémon Type</th>
                     <td id="detailType"></td>
                   </tr>
                 </tbody>
@@ -215,7 +214,7 @@
             </section>
           </section>
           <section class="modal-footer">
-            <p>Meer details zien? Bekijk ze hier <a id="moreDetails" href="#">link</a></p>
+            <p>Meer details zien? Bekijk ze hier: <a id="moreDetails" href="#">link</a></p>
           </section>
         </section>
       </section>

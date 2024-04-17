@@ -4,6 +4,7 @@ import axio from 'axios';
 import { getPokeImages } from './functions';
 import pokemonsBekijkenRouter from './routers/pokemons-bekijken';
 import huidigePokemonRouter from './routers/huidige-pokemon';
+import pokemonAuthRouter from './routers/pokemon-auth';
 
 let pokemons: any = [];
 
@@ -14,19 +15,21 @@ let pokemonImages: any[] = [];
 app.set('view engine', 'ejs');
 app.set('port', 3000);
 
+// Parse JSON bodies for this app
+app.use(express.json());
+// Parse URL-encoded bodies for this app
+app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static('public'));
 app.use('/pokemons-bekijken', pokemonsBekijkenRouter);
 app.use('/huidige-pokemon', huidigePokemonRouter);
+app.use('/pokemon-auth', pokemonAuthRouter);
 
 
 app.get('/', (req, res) => {
   res.render('index');
 });
 
-
-app.get('/pokemon-auth', (req, res) => {
-  res.render('pokemon-auth');
-});
 
 app.get("/pokemon-battler-vs-pc", (req, res) => {
   res.render('pokemon-battler-vs-pc');

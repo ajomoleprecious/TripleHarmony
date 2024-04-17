@@ -131,10 +131,6 @@ main {
   margin: 0;
 }
 
-.fa-eye-slash {
-  cursor: pointer;
-}
-
 .fa-filter {
   cursor: pointer;
   padding: .7rem;
@@ -194,14 +190,6 @@ main {
 
 #nav-menus ul li.active {
   border-bottom: 7px solid var(--nav-link-border);
-}
-
-#nav-menus ul li i{
-  margin: 0;
-  padding: 0;
-  font-size: 2.4rem;
-  color: #000;
-  transform: rotate(360deg);
 }
 
 .nav-container ul {
@@ -337,7 +325,7 @@ nav p {
 .projects ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 600px));
-  gap: 1rem;
+  gap: .1rem;
   padding: 0;
   margin: 0;
   width: 100%;
@@ -457,6 +445,9 @@ nav p {
   grid-template-rows: 12dvh 75dvh auto;
 }
 
+.pokemon-bekijken-main .modal-footer a{
+  color: #fff;
+}
 
 .pokemon-bekijken {
   display: grid;
@@ -844,7 +835,7 @@ nav p {
 }
 
 .submenu-button img {
-  width: 40rem;
+  width: 30rem;
   border-radius: 20px;
 }
 
@@ -1277,7 +1268,7 @@ nav p {
 .player {
   width: 60px;
   height: 75px;
-  background-image: url("../assets/finder-files/player_front.png");
+  background-image: url("../assets/finder-files/player_back.png");
   background-size: 180px 75px;
   background-position: -60px 0;
   position: fixed;
@@ -1331,10 +1322,37 @@ nav p {
   gap: 1rem;
 }
 
-#finder .modal-footer button,
-#finder .modal-footer a {
+#pokemonFinder .modal-footer button,
+#pokemonFinder .modal-footer a {
   width: 100px;
   height: 80px;
+}
+
+#hulp .modal-footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#hulp .modal-footer button{
+  background-color: var(--orange);
+  border-color: var(--orange);
+  color: var(--black);
+}
+
+#hulp label{
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+#hulp input[type="checkbox"]{
+  background-color: var(--orange);
+  border-color: var(--orange);
+}
+
+#hulp input[type="checkbox"]:checked{
+  background-color: var(--black);
+  border-color: var(--black);
 }
 
 
