@@ -15,6 +15,11 @@ let pokemonImages: any[] = [];
 app.set('view engine', 'ejs');
 app.set('port', 3000);
 
+// Parse JSON bodies for this app
+app.use(express.json());
+// Parse URL-encoded bodies for this app
+app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static('public'));
 app.use('/pokemons-bekijken', pokemonsBekijkenRouter);
 app.use('/huidige-pokemon', huidigePokemonRouter);

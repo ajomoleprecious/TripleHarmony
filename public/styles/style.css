@@ -131,10 +131,6 @@ main {
   margin: 0;
 }
 
-.fa-eye-slash {
-  cursor: pointer;
-}
-
 .fa-filter {
   cursor: pointer;
   padding: .7rem;
