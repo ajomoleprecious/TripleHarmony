@@ -1,5 +1,5 @@
 window.onload = function () {
-    let modal = new bootstrap.Modal(document.getElementById('register'), {
+    const modal = new bootstrap.Modal(document.getElementById('register'), {
         keyboard: false
     });
     modal.show();
@@ -8,6 +8,7 @@ window.onload = function () {
 const registerForm = document.getElementById('register-form');
 const registerPassword = document.getElementById('registerPassword');
 const registerConfirmPassword = document.getElementById('registerConfirmPassword');
+const passwordLabel = document.querySelector('label[for="registerPassword"]');
 const confirmPasswordLabel = document.querySelector('label[for="registerConfirmPassword"]');
 const registerPasswordReveal = document.getElementById('registerPasswordReveal');
 const registerConfirmPasswordReveal = document.getElementById('registerConfirmPasswordReveal');
@@ -15,7 +16,8 @@ const registerConfirmPasswordReveal = document.getElementById('registerConfirmPa
 registerForm.addEventListener('submit', async (event) => {
     if(registerPassword.value !== registerConfirmPassword.value) {
         event.preventDefault();
-        alert('Wachtwoord en bevestig wachtwoord komen niet overeen.');
+        confirmPasswordLabel.style.color = 'red';
+        confirmPasswordLabel.textContent = 'Wachtwoorden komen niet overeen.';
         return;
     }
     else {
@@ -29,7 +31,7 @@ registerConfirmPassword.addEventListener('change', () => {
         confirmPasswordLabel.textContent = 'Wachtwoorden komen niet overeen.';
     }
     else {
-        confirmPasswordLabel.style.color = 'blue';
+        confirmPasswordLabel.style.color = 'darkgreen';
         confirmPasswordLabel.textContent = 'Wachtwoorden komen overeen.';
     }
 });
