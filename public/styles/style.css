@@ -690,6 +690,19 @@ nav p {
   background-position: right;
 }
 
+#error h5 {
+  text-align: center;
+  width: 100%;
+}
+
+.keer-terug {
+  color: black;
+}
+
+.keer-terug:hover {
+  color: rgb(255, 255, 255);
+}
+
 /* POKEMON VERGELIJKEN */
 
 .left-container {

@@ -45,7 +45,7 @@ router.post('/login', async (req: Request, res: Response) => {
             res.status(200).render('pokemon-submenu');
         }
         else {
-            res.status(401).send("Ongeldige gebruikersnaam of wachtwoord.");
+            res.status(401).render('pokemon-auth-error');
         }
     }
     catch (_) {
