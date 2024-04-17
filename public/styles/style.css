@@ -1159,7 +1159,7 @@ nav p {
 }
 
 .roulette-container {
-  background-image: url("../assets/roulette-removebg-preview.png");
+  background-image: url("../assets/black_circle-removebg-preview.png");
   width: 33%;
   height: 30rem;
   display: flex;
@@ -1169,16 +1169,36 @@ nav p {
 
 .roulette-arrow {
   width: 12rem;
-  animation: spin 2s linear infinite;
 }
 
 #hourglass {
-  animation: spin 2s linear infinite;
   width: 4rem;
 }
 
 #poke-title {
   font-size: 2rem;
+}
+
+.poke-catch-buttons {
+  display: flex;
+  flex-direction: column; 
+}
+
+#catch-button {
+  width: 6rem;
+  margin: 1rem 0 1rem 0;
+}
+
+.poke-catch-buttons a {
+  margin: 1rem 0 1rem 0;
+}
+
+.clicked:hover {
+  animation: swing 1s infinite;
+}
+
+#catch-button:active {
+  animation: catch 1s infinite;
 }
 
 .poke-catch-ball {

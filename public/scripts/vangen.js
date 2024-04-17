@@ -48,6 +48,7 @@ const titleElement = document.getElementById('poke-title');
 const countdownElement = document.getElementById('countdown');
 const hourglassElement = document.getElementById('hourglass');
 const arrowElement = document.getElementsByClassName('roulette-arrow');
+const catchElement = document.getElementById('catch-button');
 
 // Functie om elke seconde een nieuwe willekeurige afbeelding en titel weer te geven
 async function changeImageAndTitle() {
@@ -60,7 +61,7 @@ async function changeImageAndTitle() {
               throw new Error('Network response was not ok');
           }
           const pokemonData = await response.json();
-          const imageUrl = pokemonData.sprites.other.showdown.front_shiny;
+          const imageUrl = pokemonData.sprites.other.showdown.front_default;
           const pokemonName = pokemonData.name;
           Array.from(imageElements).forEach((element) => {
               element.src = imageUrl;
@@ -80,5 +81,29 @@ async function changeImageAndTitle() {
   }, 1000);
 }
 
-changeImageAndTitle();
+catchElement.addEventListener('mouseover', function() {
+    if (catchElement.classList.contains('clicked')) {
+        catchElement.style.animation = 'swing 1s infinite';
+    }
+    else
+    {
+        catchElement.style.animation = 'swing 1s infinite';
+    }
+});
 
+catchElement.addEventListener('mouseout', function() {
+    catchElement.style.animation = 'none'; 
+});
+
+catchElement.addEventListener('click', function(event) {
+    event.preventDefault();
+    catchElement.style.animation = 'catch 1s';
+    titleElement.innerText = '';
+    hourglassElement.src = '../assets/hourglass.gif';
+    hourglassElement.alt = 'Hourglass Image';
+    hourglassElement.style.animation = 'spin 2s linear infinite';
+    arrowElement[0].style.animation = 'spin 2s linear infinite';
+    changeImageAndTitle();
+    hourglassElement.style.display = 'block';
+    catchElement.classList.add('clicked');
+});
