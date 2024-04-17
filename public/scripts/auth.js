@@ -57,3 +57,19 @@ registerConfirmPasswordReveal.addEventListener('click', () => {
         registerConfirmPasswordReveal.innerHTML = '<i class="fas fa-eye"></i>';
     }
 });
+
+const loginForm = document.getElementById('login-form');
+const userName = document.getElementById('loginUsername');
+const password = document.getElementById('loginPassword');
+
+loginForm.addEventListener('submit', async (event) => {
+    if (userName.value === '' || password.value === '') {
+        event.preventDefault();
+        passwordLabel.style.color ='red';
+        passwordLabel.textContent = 'Gebruikersnaam en wachtwoord zijn verplicht.';
+        return;
+    }
+    else {
+        window.href = '/login';
+    }
+});

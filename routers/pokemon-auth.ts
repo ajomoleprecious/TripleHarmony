@@ -35,4 +35,25 @@ router.post('/register', async (req: Request, res: Response) => {
     }
 });
 
+router.post('/login', async (req: Request, res: Response) => {
+    const { username, password } = req.body;
+
+    try {
+        await client.connect();
+        const user = await client.db("users").collection("usersAccounts").findOne({ username });
+        if(user && await bcrypt.compare(password, user.password)) {
+            res.status(200).render('pokemon-submenu');
+        }
+        else {
+            res.status(401).send("Ongeldige gebruikersnaam of wachtwoord.");
+        }
+    }
+    catch (_) {
+        res.status(500).send("Error bij het inloggen van de gebruiker. Probeer het later opnieuw.");
+    }
+    finally {
+        await client.close();
+    }
+});
+
 export default router;
