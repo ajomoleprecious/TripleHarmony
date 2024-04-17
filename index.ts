@@ -5,6 +5,7 @@ import { getPokeImages } from './functions';
 import pokemonsBekijkenRouter from './routers/pokemons-bekijken';
 import huidigePokemonRouter from './routers/huidige-pokemon';
 import pokemonAuthRouter from './routers/pokemon-auth';
+import whosThatPokemonRouter from "./routers/who's-that-pokemon";
 
 let pokemons: any = [];
 
@@ -24,6 +25,7 @@ app.use(express.static('public'));
 app.use('/pokemons-bekijken', pokemonsBekijkenRouter);
 app.use('/huidige-pokemon', huidigePokemonRouter);
 app.use('/pokemon-auth', pokemonAuthRouter);
+app.use(`/who's-that-pokemon`, whosThatPokemonRouter);
 
 
 app.get('/', (req, res) => {
@@ -54,13 +56,7 @@ app.get("/pokemon-vergelijken", (req, res) => {
   res.render('pokemon-vergelijken');
 });
 
-app.get("/result-who's-that-pokemon", (req, res) => {
-  res.render("result-who's-that-pokemon");
-});
 
-app.get("/who's-that-pokemon", (req, res) => {
-  res.render("who's-that-pokemon");
-});
 
 app.get("/pokemon-finder", (req, res) => {
   res.render("pokemon-finder");
