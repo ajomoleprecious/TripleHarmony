@@ -690,6 +690,19 @@ nav p {
   background-position: right;
 }
 
+#error h5 {
+  text-align: center;
+  width: 100%;
+}
+
+.keer-terug {
+  color: black;
+}
+
+.keer-terug:hover {
+  color: rgb(255, 255, 255);
+}
+
 /* POKEMON VERGELIJKEN */
 
 .left-container {
@@ -995,8 +1008,7 @@ nav p {
   border-radius: 20px;
   height: 85dvh;
   width: 90dvw;
-  padding-bottom: 50px;
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 
 .pokemonToGuess .result {
@@ -1098,6 +1110,10 @@ nav p {
 #cardTitle {
   color: var(--avatar-border-color);
   font-size: 30px;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 #dontKnow {
