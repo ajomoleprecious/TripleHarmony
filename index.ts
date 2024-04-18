@@ -6,6 +6,10 @@ import pokemonsBekijkenRouter from './routers/pokemons-bekijken';
 import huidigePokemonRouter from './routers/huidige-pokemon';
 import pokemonAuthRouter from './routers/pokemon-auth';
 import whosThatPokemonRouter from "./routers/who's-that-pokemon";
+import { MongoClient, ObjectId } from 'mongodb';
+
+const uri = "mongodb+srv://DBManager:HmnVABk3hUo3zL9P@tripleharmony.9nn57t6.mongodb.net/";
+const client = new MongoClient(uri);
 
 let pokemons: any = [];
 
@@ -56,7 +60,26 @@ app.get("/pokemon-vergelijken", (req, res) => {
   res.render('pokemon-vergelijken');
 });
 
-
+app.get('/pokemon-auth/verify/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+      await client.connect();
+      const user = await client.db("users").collection("usersAccounts").findOne({ _id: new ObjectId(id) });
+      if (user) {
+          await client.db("users").collection("usersAccounts").updateOne({ _id: new ObjectId(id) }, { $set: { verified: true } });
+          res.status(200).render('pokemon-auth-message', { title: "Account geverifieerd", message: "Uw account is succesvol geverifieerd. U kunt nu inloggen op onze website." });
+      }
+      else {
+          res.status(404).render('pokemon-auth-message', { title: "Account verifiëren is mislukt", message: "De gebruiker met het opgegeven ID bestaat niet." });
+      }
+  }
+  catch (_) {
+      res.status(500).render('pokemon-auth-message', { title: "Account verifiëren is mislukt", message: "Er is een fout opgetreden bij het verifiëren van uw account. Probeer het later opnieuw." });
+  }
+  finally {
+      await client.close();
+  }
+});
 
 app.get("/pokemon-finder", (req, res) => {
   res.render("pokemon-finder");
