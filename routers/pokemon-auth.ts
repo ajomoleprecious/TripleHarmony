@@ -1,8 +1,13 @@
-import { Request, Response, Router, text } from "express";
+import { Request, Response, Router } from "express";
 import bcrypt from "bcrypt";
 import { MongoClient, ObjectId } from "mongodb";
 import { User } from "../interfaces";
 const nodemailer = require("nodemailer");
+
+// add static files from public folder
+const express = require('express');
+const app = express();
+app.use(express.static('public'));
 
 
 const uri = "mongodb+srv://DBManager:HmnVABk3hUo3zL9P@tripleharmony.9nn57t6.mongodb.net/";
