@@ -20,12 +20,12 @@ let pokemonImages: any[] = [];
 app.set('view engine', 'ejs');
 app.set('port', 3000);
 
+app.use(express.static('public'));
 // Parse JSON bodies for this app
 app.use(express.json());
 // Parse URL-encoded bodies for this app
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static('public'));
 app.use('/pokemons-bekijken', pokemonsBekijkenRouter);
 app.use('/huidige-pokemon', huidigePokemonRouter);
 app.use('/pokemon-auth', pokemonAuthRouter);
@@ -67,7 +67,7 @@ app.get('/pokemon-auth/verify/:id', async (req, res) => {
       const user = await client.db("users").collection("usersAccounts").findOne({ _id: new ObjectId(id) });
       if (user) {
           await client.db("users").collection("usersAccounts").updateOne({ _id: new ObjectId(id) }, { $set: { verified: true } });
-          res.status(200).render('pokemon-auth-message', { title: "Account geverifieerd", message: "Uw account is succesvol geverifieerd. U kunt nu inloggen op onze website." });
+          res.status(200).sendFile('verifcation.html', { root: __dirname });
       }
       else {
           res.status(404).render('pokemon-auth-message', { title: "Account verifiëren is mislukt", message: "De gebruiker met het opgegeven ID bestaat niet." });
