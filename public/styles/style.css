@@ -1174,6 +1174,10 @@ nav p {
   justify-content: center;
 }
 
+#countdown {
+  font-size: 1.5rem;
+}
+
 .roulette-container {
   background-image: url("../assets/black_circle-with-question-mark.png");
   background-repeat: no-repeat;

@@ -49,10 +49,10 @@ const countdownElement = document.getElementById('countdown');
 const hourglassElement = document.getElementById('hourglass');
 const arrowElement = document.getElementsByClassName('roulette-arrow');
 const catchElement = document.getElementById('catch-button');
+let count = 10;
 
 // Functie om elke seconde een nieuwe willekeurige afbeelding en titel weer te geven
-async function changeImageAndTitle() {
-  let count = 10; 
+async function changeImageAndTitle() { 
   const interval = setInterval(async () => {
       const pokemonDataUrl = generateRandomPokemonDataUrl();
       try {
@@ -66,15 +66,18 @@ async function changeImageAndTitle() {
           Array.from(imageElements).forEach((element) => {
               element.src = imageUrl;
           });
-          count--;
           if (count <= 0) {
               clearInterval(interval);
+              countdownElement.style.display = 'none'; // Hide countdown element when count reaches 0
           }
           if (count === 0) {
             hourglassElement.style.display = 'none';
             arrowElement[0].style.animation = 'none';
             titleElement.innerText = pokemonName;
         }
+        countdownElement.innerText = count; // Update countdown element with count value
+        count--;
+
       } catch (error) {
           console.error('Error fetching data:', error);
       }
@@ -103,6 +106,9 @@ catchElement.addEventListener('click', function(event) {
     hourglassElement.alt = 'Hourglass Image';
     hourglassElement.style.animation = 'spin 2s linear infinite';
     arrowElement[0].style.animation = 'spin 2s linear infinite';
+    count = 10;
+    countdownElement.innerText = count; // Initialize countdown element with initial count value
+    countdownElement.style.display = 'block'; // Show countdown element
     changeImageAndTitle();
     hourglassElement.style.display = 'block';
     catchElement.classList.add('clicked');
