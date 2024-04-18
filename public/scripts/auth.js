@@ -8,7 +8,6 @@ window.onload = function () {
 const registerForm = document.getElementById('register-form');
 const registerPassword = document.getElementById('registerPassword');
 const registerConfirmPassword = document.getElementById('registerConfirmPassword');
-const passwordLabel = document.querySelector('label[for="registerPassword"]');
 const confirmPasswordLabel = document.querySelector('label[for="registerConfirmPassword"]');
 const registerPasswordReveal = document.getElementById('registerPasswordReveal');
 const registerConfirmPasswordReveal = document.getElementById('registerConfirmPasswordReveal');
@@ -61,6 +60,8 @@ registerConfirmPasswordReveal.addEventListener('click', () => {
 const loginForm = document.getElementById('login-form');
 const userName = document.getElementById('loginUsername');
 const password = document.getElementById('loginPassword');
+const passwordLabel = document.querySelector('label[for="loginPassword"]');
+const loginPasswordReveal = document.getElementById('loginPasswordReveal');
 
 loginForm.addEventListener('submit', async (event) => {
     if (userName.value === '' || password.value === '') {
@@ -71,5 +72,32 @@ loginForm.addEventListener('submit', async (event) => {
     }
     else {
         window.href = '/login';
+    }
+});
+
+loginPasswordReveal.addEventListener('click', () => {
+    if (password.type === 'password') {
+        password.type = 'text';
+        loginPasswordReveal.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    }
+    else {
+        password.type = 'password';
+        loginPasswordReveal.innerHTML = '<i class="fas fa-eye"></i>';
+    }
+});
+
+const resetForm = document.getElementById('reset-form');
+const resetEmail = document.getElementById('resetEmail');
+const resetEmailLabel = document.querySelector('label[for="resetEmail"]');
+
+resetForm.addEventListener('submit', async (event) => {
+    if (resetEmail.value === '') {
+        event.preventDefault();
+        resetEmailLabel.style.color = 'red';
+        resetEmailLabel.textContent = 'E-mailadres is verplicht.';
+        return;
+    }
+    else {
+        window.href = '/reset';
     }
 });

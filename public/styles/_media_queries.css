@@ -212,7 +212,7 @@
     }
 }
 
-@media (min-width: 300px) and (max-width: 800px) {
+@media (min-width: 300px) and (max-width: 710px) {
 
     .ingelogd {
         background-position: right;
@@ -381,5 +381,9 @@
         border: none;
         border-left: 7px solid var(--nav-link-border);
 
+    }
+
+    .pokemonToGuess #inputWho, .pokemonToGuess a.result {
+        width: 290px;
     }
 }
