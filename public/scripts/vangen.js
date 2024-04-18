@@ -50,6 +50,7 @@ const hourglassElement = document.getElementById('hourglass');
 const arrowElement = document.getElementsByClassName('roulette-arrow');
 const catchElement = document.getElementById('catch-button');
 let count = 10;
+const linkElement = document.getElementsByClassName('poke-catch-container')[0];
 
 // Functie om elke seconde een nieuwe willekeurige afbeelding en titel weer te geven
 async function changeImageAndTitle() { 
@@ -74,6 +75,7 @@ async function changeImageAndTitle() {
             hourglassElement.style.display = 'none';
             arrowElement[0].style.animation = 'none';
             titleElement.innerText = pokemonName;
+            linkElement.style.pointerEvents = 'auto';
         }
         countdownElement.innerText = count; // Update countdown element with count value
         count--;
@@ -100,6 +102,7 @@ catchElement.addEventListener('mouseout', function() {
 
 catchElement.addEventListener('click', function(event) {
     event.preventDefault();
+    linkElement.style.pointerEvents = 'none';
     catchElement.style.animation = 'catch 1s';
     titleElement.innerText = '';
     hourglassElement.src = '../assets/hourglass.gif';

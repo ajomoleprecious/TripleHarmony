@@ -1157,10 +1157,13 @@ nav p {
 
 .poke-catch-container {
   display: inline-block;
+  pointer-events: none;
+  cursor: pointer;
 }
 
 .poke-catch-img {
   width: 17rem;
+  cursor: pointer;
 }
 
 .poke-catch-img:hover {
