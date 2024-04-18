@@ -3,6 +3,10 @@ import bcrypt from "bcrypt";
 import { MongoClient, ObjectId } from "mongodb";
 import { User } from "../interfaces";
 const nodemailer = require("nodemailer");
+const express = require("express");
+const app = express();
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
 
 const uri = "mongodb+srv://DBManager:HmnVABk3hUo3zL9P@tripleharmony.9nn57t6.mongodb.net/";
 const client = new MongoClient(uri);
@@ -27,7 +31,7 @@ router.post('/register', async (req: Request, res: Response) => {
     const { email, username, password } = req.body;
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    const user : User = {
+    const user: User = {
         _id: new ObjectId(),
         email,
         username,
@@ -61,7 +65,7 @@ router.post('/register', async (req: Request, res: Response) => {
             to: email,
             subject: "Welkom bij Triple Harmony - Verifieer uw account",
             html: emailMessage,
-            priority : "high"
+            priority: "high"
         });
 
         res.status(201).render('pokemon-auth-message', { title: "Registreren is gelukt", message: "Uw account is succesvol geregistreerd. Controleer uw e-mail om uw account te verifiëren. Bekijk eventueel in uw spam folder of ongewenste e-mailmap als u de verificatie-e-mail niet in uw inbox kunt vinden." });
@@ -147,7 +151,7 @@ router.post('/reset', async (req: Request, res: Response) => {
                 to: email,
                 subject: "Wachtwoord herstellen",
                 html: emailMessage,
-                priority : "high"
+                priority: "high"
             });
             res.status(200).render('pokemon-auth-message', { title: "Wachtwoord resetten", message: "Een e-mail is verzonden naar uw e-mailadres met uw nieuwe wachtwoord." });
         }

@@ -6,12 +6,6 @@ import pokemonsBekijkenRouter from './routers/pokemons-bekijken';
 import huidigePokemonRouter from './routers/huidige-pokemon';
 import pokemonAuthRouter from './routers/pokemon-auth';
 import whosThatPokemonRouter from "./routers/who's-that-pokemon";
-import { MongoClient, ObjectId } from 'mongodb';
-
-const uri = "mongodb+srv://DBManager:HmnVABk3hUo3zL9P@tripleharmony.9nn57t6.mongodb.net/";
-const client = new MongoClient(uri);
-
-let pokemons: any = [];
 
 const app = express();
 
@@ -20,12 +14,12 @@ let pokemonImages: any[] = [];
 app.set('view engine', 'ejs');
 app.set('port', 3000);
 
-app.use(express.static('public'));
 // Parse JSON bodies for this app
 app.use(express.json());
 // Parse URL-encoded bodies for this app
 app.use(express.urlencoded({ extended: true }));
 
+app.use(express.static('public'));
 app.use('/pokemons-bekijken', pokemonsBekijkenRouter);
 app.use('/huidige-pokemon', huidigePokemonRouter);
 app.use('/pokemon-auth', pokemonAuthRouter);
@@ -58,27 +52,6 @@ app.get("/pokemons-vangen", async(req, res) => {
 
 app.get("/pokemon-vergelijken", (req, res) => {
   res.render('pokemon-vergelijken');
-});
-
-app.get('/pokemon-auth/verify/:id', async (req, res) => {
-  const id = req.params.id;
-  try {
-      await client.connect();
-      const user = await client.db("users").collection("usersAccounts").findOne({ _id: new ObjectId(id) });
-      if (user) {
-          await client.db("users").collection("usersAccounts").updateOne({ _id: new ObjectId(id) }, { $set: { verified: true } });
-          res.status(200).sendFile('verifcation.html', { root: __dirname });
-      }
-      else {
-          res.status(404).render('pokemon-auth-message', { title: "Account verifiëren is mislukt", message: "De gebruiker met het opgegeven ID bestaat niet." });
-      }
-  }
-  catch (_) {
-      res.status(500).render('pokemon-auth-message', { title: "Account verifiëren is mislukt", message: "Er is een fout opgetreden bij het verifiëren van uw account. Probeer het later opnieuw." });
-  }
-  finally {
-      await client.close();
-  }
 });
 
 app.get("/pokemon-finder", (req, res) => {
