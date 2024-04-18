@@ -1158,12 +1158,10 @@ nav p {
 .poke-catch-container {
   display: inline-block;
   pointer-events: none;
-  cursor: pointer;
 }
 
 .poke-catch-img {
   width: 17rem;
-  cursor: pointer;
 }
 
 .poke-catch-img:hover {
@@ -1208,9 +1206,14 @@ nav p {
   flex-direction: column; 
 }
 
+.poke-catch-buttons a {
+  cursor: none; 
+}
+
 #catch-button {
   width: 6rem;
   margin: 1rem 0 1rem 0;
+  cursor: none;
 }
 
 .poke-catch-buttons a {
