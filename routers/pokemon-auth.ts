@@ -92,7 +92,7 @@ router.post('/login', async (req: Request, res: Response) => {
                 res.status(401).render('pokemon-auth-message', { title: "Aanmelden is mislukt", message: "Uw account is nog niet geverifieerd. Controleer uw e-mail om uw account te verifiëren." });
                 return;
             }
-            res.status(200).render('pokemon-submenu');
+            res.status(200).redirect('/pokemon-submenu')
         }
         else {
             res.status(401).render('pokemon-auth-message', { title: "Aanmelden is mislukt", message: "Gebruikersnaam of wachtwoord is onjuist." });

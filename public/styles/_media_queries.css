@@ -386,4 +386,16 @@
     .pokemonToGuess #inputWho, .pokemonToGuess a.result {
         width: 290px;
     }
+
+    .pokemon-bekijken-main .pokemon-list ul {
+        gap: .4rem;
+    }
+    .ingelogd .pokemon-bekijken-main .pokemon-list ul li {
+        width: 100px;
+    }
+
+    .ingelogd .pokemon-bekijken-main .pokemon-list ul li:hover{
+        transform: scale(1.05);
+        transition: .3s;
+    }
 }

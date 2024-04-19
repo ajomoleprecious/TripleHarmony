@@ -144,7 +144,7 @@ main {
   height: fit-content;
   position: fixed;
   left: 20px;
-  top: 110px;
+  top: 70px;
 }
 
 .help {
@@ -409,8 +409,10 @@ nav p {
   grid-area: title;
   margin: 0 6rem 0 1rem;
   display: flex;
-  justify-content: space-between;
-  align-items: start;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .1rem;
 }
 
 .pokemon-bekijken-main>.pokemon-list {
@@ -418,7 +420,8 @@ nav p {
 }
 
 .pokemon-bekijken-main> .title section{
-  margin-top: 1rem;
+  align-self: flex-end;
+
 }
 
 .pokemon-bekijken-main .title section form{
@@ -618,7 +621,7 @@ nav p {
 
 #detail .modal-body section:nth-child(1){
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 1rem;
@@ -672,6 +675,12 @@ nav p {
   width: 50%;
 }
 
+#detail .modal-body table td,
+#detail .modal-body table th {
+  vertical-align: middle;
+  text-align: center;
+}
+
 #detailType span{
   padding: 0.2rem .4rem;
   border-radius: 10px;
@@ -680,6 +689,10 @@ nav p {
   letter-spacing: 0.05rem;
   /* outline on text */
   text-shadow: -1px -1px 0 var(--white), 1px -1px 0 var(--white), -1px 1px 0 var(--white), 1px 1px 0 var(--white);
+}
+
+#moreDetails{
+  color: var(--black);
 }
 
 /* POKEMON AUTH & SUBMENU */

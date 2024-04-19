@@ -24,7 +24,7 @@ registerForm.addEventListener('submit', async (event) => {
     }
 });
 
-registerConfirmPassword.addEventListener('change', () => {
+registerConfirmPassword.addEventListener('focusout', () => {
     if (registerPassword.value !== registerConfirmPassword.value) {
         confirmPasswordLabel.style.color = 'red';
         confirmPasswordLabel.textContent = 'Wachtwoorden komen niet overeen.';
