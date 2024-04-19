@@ -500,8 +500,17 @@ nav p {
 
 .pokemon-list {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  height: 100%;
+  width: 100%;
   overflow-y: scroll;
+}
+
+.pokemon-list::-webkit-scrollbar {
+  display: none;
 }
 
 .pokemon-list>ul {
@@ -514,6 +523,7 @@ nav p {
   align-items: center;
   align-content: flex-start;
   height: 100%;
+  width: 100%;
 }
 
 .ingelogd .pokemon-list>ul>li {
@@ -858,11 +868,13 @@ nav p {
 /* POKEMON SUBMENU */
 
 .submenu {
-  margin: 1rem;
+  margin: 1rem 0 0 1rem;
   height: 100%;
+  width: 30rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  gap: 1rem;
 }
 
 .submenu article {
@@ -871,31 +883,23 @@ nav p {
   animation-delay: calc(.2s * var(--i));
 }
 
-.submenu-button {
-  margin: 10px;
-  border-radius: 10px;
-
+.submenu-button{
+  width: 100%;
 }
-
-.submenu-button div {
-  /*----*/
+.submenu-button section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 30rem;
   padding: .5rem 1.5rem .5rem 1rem;
   background-color: var(--orange);
   border-radius: 20px;
 }
-.submenu-button div span {
+.submenu-button section span {
   font-size: 1.8rem;
   color: var(--black);
 }
-.submenu-button img {
-  width: 30rem;
-  border-radius: 20px;
-}
-.submenu-button div img{
+
+.submenu-button section img{
   width: fit-content;
   border-radius: 0;
 }
