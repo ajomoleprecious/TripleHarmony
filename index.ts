@@ -1,11 +1,16 @@
 import { log } from 'console';
 import express from 'express';
 import axio from 'axios';
+import { MongoClient } from "mongodb";
 import { getPokeImages } from './functions';
 import pokemonsBekijkenRouter from './routers/pokemons-bekijken';
 import huidigePokemonRouter from './routers/huidige-pokemon';
 import pokemonAuthRouter from './routers/pokemon-auth';
 import whosThatPokemonRouter from "./routers/who's-that-pokemon";
+
+const uri = "mongodb+srv://DBManager:HmnVABk3hUo3zL9P@tripleharmony.9nn57t6.mongodb.net/";
+export const client = new MongoClient(uri);
+
 
 const app = express();
 
@@ -66,5 +71,6 @@ app.use((_, res) => {
 
 app.listen(process.env.PORT || app.get('port'), async () => {
   pokemonImages = await getPokeImages();
+  await client.connect();
   console.log('[server] http://localhost:' + app.get('port'));
 });

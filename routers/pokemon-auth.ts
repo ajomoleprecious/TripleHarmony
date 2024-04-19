@@ -1,15 +1,10 @@
 import { Request, Response, Router } from "express";
 import bcrypt from "bcrypt";
-import { MongoClient, ObjectId } from "mongodb";
+import { ObjectId } from "mongodb";
 import { User } from "../interfaces";
-const nodemailer = require("nodemailer");
-const express = require("express");
-const app = express();
-app.set('view engine', 'ejs');
-app.use(express.static('public'));
+import nodemailer from "nodemailer";
+import { client } from "../index";
 
-const uri = "mongodb+srv://DBManager:HmnVABk3hUo3zL9P@tripleharmony.9nn57t6.mongodb.net/";
-const client = new MongoClient(uri);
 
 const transporter = nodemailer.createTransport({
     host: "mail.smtp2go.com",
@@ -39,7 +34,6 @@ router.post('/register', async (req: Request, res: Response) => {
         verified: false
     };
     try {
-        await client.connect();
         if (await client.db("users").collection("usersAccounts").findOne({ email })) {
             res.status(409).render('pokemon-auth-message', { title: "Registreren is mislukt", message: "Er bestaat al een account met het opgegeven e-mailadres." });
             return;
@@ -76,16 +70,12 @@ router.post('/register', async (req: Request, res: Response) => {
     catch (_) {
         res.status(500).render('pokemon-auth-message', { title: "Registreren is mislukt", message: "Er is een fout opgetreden bij het registreren van je account. " });
     }
-    finally {
-        await client.close();
-    }
 });
 
 router.post('/login', async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
     try {
-        await client.connect();
         const user = await client.db("users").collection("usersAccounts").findOne({ username });
         if (user && await bcrypt.compare(password, user.password)) {
             if (!user.verified) {
@@ -101,15 +91,11 @@ router.post('/login', async (req: Request, res: Response) => {
     catch (_) {
         res.status(500).send("Error bij het inloggen van de gebruiker. Probeer het later opnieuw.");
     }
-    finally {
-        await client.close();
-    }
 });
 
 router.get('/verify/:id', async (req: Request, res: Response) => {
     const id = req.params.id;
     try {
-        await client.connect();
         const user = await client.db("users").collection("usersAccounts").findOne({ _id: new ObjectId(id) });
         if (user) {
             await client.db("users").collection("usersAccounts").updateOne({ _id: new ObjectId(id) }, { $set: { verified: true } });
@@ -122,15 +108,11 @@ router.get('/verify/:id', async (req: Request, res: Response) => {
     catch (_) {
         res.status(500).render('pokemon-auth-message', { title: "Account verifiëren is mislukt", message: "Er is een fout opgetreden bij het verifiëren van uw account. Probeer het later opnieuw." });
     }
-    finally {
-        await client.close();
-    }
 });
 
 router.post('/reset', async (req: Request, res: Response) => {
     const { email } = req.body;
     try {
-        await client.connect();
         const user = await client.db("users").collection("usersAccounts").findOne({ email });
         await client.db("users").collection("usersAccounts").updateOne({ email }, { $set: { password: "wachtwoord123" } });
         if (user) {
@@ -164,9 +146,6 @@ router.post('/reset', async (req: Request, res: Response) => {
     }
     catch (_) {
         res.status(500).render('pokemon-auth-message', { title: "Wachtwoord resetten", message: "Er is een fout opgetreden bij het herstellen van uw wachtwoord. Probeer het later opnieuw." });
-    }
-    finally {
-        await client.close();
     }
 });
 
