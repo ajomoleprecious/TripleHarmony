@@ -27,7 +27,7 @@ if (localStorage.getItem('amountOfPokemons')) {
     amountOfpokemons.value = localStorage.getItem('amountOfPokemons');
 }
 else {
-    amountOfpokemons.value = 50;
+    amountOfpokemons.value = 10;
 }
 // on change
 amountOfpokemons.addEventListener('change', function () {

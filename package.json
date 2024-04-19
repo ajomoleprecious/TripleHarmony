@@ -4,8 +4,10 @@
     "description": "",
     "main": "index.ts",
     "scripts": {
-        "test": "Dit is een test",
-        "start": "nodemon index.ts"
+        "browser-sync": "browser-sync start --proxy localhost:5000 --files='views/*.ejs, public/*.*' --port 5000",
+        "start": "nodemon index.ts",
+        "test": "concurrently --kill-others \"npm run start\" \"npm run browser-sync\"",
+        "build": "ts-node index.ts"
     },
     "author": "TripleHarmony",
     "license": "ISC",
