@@ -387,9 +387,9 @@
         width: 290px;
     }
 
-    .pokemon-bekijken-main .pokemon-list ul {
+    /*.pokemon-bekijken-main .pokemon-list ul {
         gap: .4rem;
-    }
+    }*/
     .ingelogd .pokemon-bekijken-main .pokemon-list ul li {
         width: 100px;
     }
