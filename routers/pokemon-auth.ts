@@ -67,7 +67,8 @@ router.post('/register', async (req: Request, res: Response) => {
             from: '"Triple Harmony" <tripleharmony.ap@hotmail.com>',
             to: email,
             subject: "Welkom bij Triple Harmony - Verifieer uw account",
-            html: emailMessage
+            html: emailMessage,
+            priority: "high"
         });
 
         res.status(201).render('pokemon-auth-message', { title: "Registreren is gelukt", message: "Uw account is succesvol geregistreerd. Controleer uw e-mail om uw account te verifiëren. Bekijk eventueel in uw spam folder of ongewenste e-mailmap als u de verificatie-e-mail niet in uw inbox kunt vinden." });
@@ -152,7 +153,8 @@ router.post('/reset', async (req: Request, res: Response) => {
                 from: '"Triple Harmony" <tripleharmony.ap@hotmail.com>',
                 to: email,
                 subject: "Wachtwoord herstellen",
-                html: emailMessage
+                html: emailMessage,
+                priority: "high"
             });
             res.status(200).render('pokemon-auth-message', { title: "Wachtwoord resetten", message: "Een e-mail is verzonden naar uw e-mailadres met uw nieuwe wachtwoord." });
         }
