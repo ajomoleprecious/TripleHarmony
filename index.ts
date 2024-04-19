@@ -1,6 +1,5 @@
 import { log } from 'console';
 import express from 'express';
-import axio from 'axios';
 import { MongoClient } from "mongodb";
 import { getPokeImages } from './functions';
 import pokemonsBekijkenRouter from './routers/pokemons-bekijken';
