@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
     port: 2525,
     secure: false, // Use `true` for port 465, `false` for all other ports
     auth: {
-        user: "no-reply@tripleharmony.be",
+        user: "tripleharmony.ap@hotmail.com",
         pass: "nXhWE8ZraSZoYONO",
     },
 });
@@ -40,8 +40,11 @@ router.post('/register', async (req: Request, res: Response) => {
     };
     try {
         await client.connect();
+        if (await client.db("users").collection("usersAccounts").findOne({ email })) {
+            res.status(409).render('pokemon-auth-message', { title: "Registreren is mislukt", message: "Er bestaat al een account met het opgegeven e-mailadres." });
+            return;
+        }
         await client.db("users").collection("usersAccounts").insertOne(user);
-
         // Constructing the email message
         const emailMessage = `
             <h2>Beste ${user.username},</h2>
@@ -54,18 +57,17 @@ router.post('/register', async (req: Request, res: Response) => {
             <br>
             <p>Zodra uw account is geverifieerd, heeft u volledige toegang tot alle functies en inhoud op onze website. We hopen dat u een plezierige ervaring heeft met het verkennen en interactie met ons platform.</p>
             <br>
-            <p>Als u vragen heeft of hulp nodig heeft, neem dan gerust contact op met ons ondersteuningsteam op <a href="mailto:s153159@ap.be">deze email</a>.</p>
+            <p>Als u vragen heeft of hulp nodig heeft, neem dan gerust contact op met ons ondersteuningsteam op <a href="mailto:tripleharmony.ap@hotmail.com">deze email</a>.</p>
             <br>
             <p>Met vriendelijke groet,</p>
             <p>Het Triple Harmony-team</p>`;
 
         // Sending the email
         await transporter.sendMail({
-            from: '"Triple Harmony" <s153159@ap.be>',
+            from: '"Triple Harmony" <tripleharmony.ap@hotmail.com>',
             to: email,
             subject: "Welkom bij Triple Harmony - Verifieer uw account",
-            html: emailMessage,
-            priority: "high"
+            html: emailMessage
         });
 
         res.status(201).render('pokemon-auth-message', { title: "Registreren is gelukt", message: "Uw account is succesvol geregistreerd. Controleer uw e-mail om uw account te verifiëren. Bekijk eventueel in uw spam folder of ongewenste e-mailmap als u de verificatie-e-mail niet in uw inbox kunt vinden." });
@@ -142,16 +144,15 @@ router.post('/reset', async (req: Request, res: Response) => {
                 <br>
                 <p>Als u geen verzoek heeft ingediend om uw wachtwoord te resetten, kunt u deze e-mail veilig negeren.</p>
                 <br>
-                <p>Als u vragen heeft of hulp nodig heeft, neem dan gerust contact op met ons ondersteuningsteam op <a href="mailto:s153159@ap.be">deze email</a>.</p>
+                <p>Als u vragen heeft of hulp nodig heeft, neem dan gerust contact op met ons ondersteuningsteam op <a href="mailto:tripleharmony.ap@hotmail.com">deze email</a>.</p>
                 <br>
                 <p>Met vriendelijke groet,</p>
                 <p>Het Triple Harmony-team</p>`;
             await transporter.sendMail({
-                from: '"Triple Harmony" <s153159@ap.be>',
+                from: '"Triple Harmony" <tripleharmony.ap@hotmail.com>',
                 to: email,
                 subject: "Wachtwoord herstellen",
-                html: emailMessage,
-                priority: "high"
+                html: emailMessage
             });
             res.status(200).render('pokemon-auth-message', { title: "Wachtwoord resetten", message: "Een e-mail is verzonden naar uw e-mailadres met uw nieuwe wachtwoord." });
         }
