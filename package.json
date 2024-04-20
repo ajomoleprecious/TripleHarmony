@@ -6,8 +6,7 @@
     "scripts": {
         "browser-sync": "browser-sync start --proxy localhost:5000 --files='views/*.ejs, public/*.*' --port 5000",
         "start": "nodemon index.ts",
-        "test": "concurrently --kill-others \"npm run start\" \"npm run browser-sync\"",
-        "build": "ts-node index.ts"
+        "sync": "concurrently --kill-others \"npm run start\" \"npm run browser-sync\""
     },
     "author": "TripleHarmony",
     "license": "ISC",
