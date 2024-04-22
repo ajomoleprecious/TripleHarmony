@@ -1,10 +1,13 @@
 import { Request, Response, Router } from "express";
 import bcrypt from "bcrypt";
 import { ObjectId } from "mongodb";
-import { User } from "../interfaces";
+//import { User } from "../interfaces";
 import nodemailer from "nodemailer";
 import { client } from "../index";
 
+const User = require('../models/User') as any;
+
+const router = Router();
 
 const transporter = nodemailer.createTransport({
     host: "mail.smtp2go.com",
@@ -16,7 +19,10 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-const router = Router();
+const handleErrors = (err: any) => {
+    console.log(err.message, err.code);
+}
+
 
 router.get('/', async (req: Request, res: Response) => {
     res.render('pokemon-auth');
@@ -24,7 +30,15 @@ router.get('/', async (req: Request, res: Response) => {
 
 router.post('/register', async (req: Request, res: Response) => {
     const { email, username, password } = req.body;
-    const saltRounds = 10;
+    try{
+        const user = await User.create({ email, username, password });
+        res.status(201).render('pokemon-auth-message', { title: "Registreren is gelukt", message: "Uw account is succesvol geregistreerd. Controleer uw e-mail om uw account te verifiëren. Bekijk eventueel in uw spam folder of ongewenste e-mailmap als u de verificatie-e-mail niet in uw inbox kunt vinden." });
+    }
+    catch (error) {
+        handleErrors(error);
+        //res.status(500).render('pokemon-auth-message', { title: "Registreren is mislukt", message: "Er is een fout opgetreden bij het registreren van de gebruiker. Probeer het later opnieuw." });
+    }
+    /*const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     const user: User = {
         _id: new ObjectId(),
@@ -69,13 +83,20 @@ router.post('/register', async (req: Request, res: Response) => {
     }
     catch (_) {
         res.status(500).render('pokemon-auth-message', { title: "Registreren is mislukt", message: "Er is een fout opgetreden bij het registreren van je account. " });
-    }
+    }*/
 });
 
 router.post('/login', async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
-    try {
+    try{
+        
+    }
+    catch (error) {
+        res.status(500).render('pokemon-auth-message', { title: "Aanmelden is mislukt", message: "Er is een fout opgetreden bij het inloggen van de gebruiker. Probeer het later opnieuw." });
+    }
+
+    /*try {
         const user = await client.db("users").collection("usersAccounts").findOne({ username });
         if (user && await bcrypt.compare(password, user.password)) {
             if (!user.verified) {
@@ -90,7 +111,7 @@ router.post('/login', async (req: Request, res: Response) => {
     }
     catch (_) {
         res.status(500).send("Error bij het inloggen van de gebruiker. Probeer het later opnieuw.");
-    }
+    }*/
 });
 
 router.get('/verify/:id', async (req: Request, res: Response) => {
