@@ -1,6 +1,6 @@
 import { log } from 'console';
 import express from 'express';
-import { MongoClient } from "mongodb";
+const mongoose = require('mongoose');
 import { getPokeImages } from './functions';
 import pokemonsBekijkenRouter from './routers/pokemons-bekijken';
 import huidigePokemonRouter from './routers/huidige-pokemon';
@@ -8,7 +8,7 @@ import pokemonAuthRouter from './routers/pokemon-auth';
 import whosThatPokemonRouter from "./routers/who's-that-pokemon";
 
 const uri = "mongodb+srv://DBManager:HmnVABk3hUo3zL9P@tripleharmony.9nn57t6.mongodb.net/";
-export const client = new MongoClient(uri);
+
 
 
 const app = express();
@@ -47,10 +47,10 @@ app.get('/pokemon-submenu', (req, res) => {
   res.render('pokemon-submenu');
 });
 
-app.get("/pokemons-vangen", async(req, res) => {
+app.get("/pokemons-vangen", async (req, res) => {
 
   let randomNumber: number = Math.floor(Math.random() * 898) + 1;
-  
+
   res.render('pokemons-vangen');
 });
 
@@ -68,8 +68,13 @@ app.use((_, res) => {
   res.status(404).render('404');
 });
 
-app.listen(process.env.PORT || app.get('port'), async () => {
-  pokemonImages = await getPokeImages();
-  await client.connect();
-  console.log('[server] http://localhost:' + app.get('port'));
+export const client = mongoose.connect(uri).then(() => {
+  console.log("Connected to MongoDB");
+  app.listen(process.env.PORT || app.get('port'), async () => {
+    pokemonImages = await getPokeImages();
+
+    console.log('[server] http://localhost:' + app.get('port'));
+  });
+}).catch((err : any) => {
+  console.error('Error connecting to MongoDB:', err);
 });

@@ -7,6 +7,12 @@ import { client } from "../index";
 
 const User = require('../models/User') as any;
 
+const spanForEmail = (typeof window !== 'undefined' && window.document.getElementsByClassName('text-danger registerEmailError')[0]) as HTMLSpanElement | null;
+
+if(spanForEmail) {
+    spanForEmail.textContent = 'hallo'
+}
+
 const router = Router();
 
 const transporter = nodemailer.createTransport({
@@ -24,9 +30,9 @@ const handleErrors = (err: any) => {
     let errors: any = { email: '', username: '', password: '' };
 
     /*if (err.message.includes('User validation failed')) {
-        Object.values(err.errors).forEach(({ properties }: any) => {
-            errors[properties.path] = properties.message;
-        });
+    Object.values(err.errors).forEach(({ properties }: any) => {
+    errors[properties.path] = properties.message;
+    });
     }*/
     if (err.message.includes('User validation failed')) {
         console.log(err);
@@ -40,7 +46,7 @@ router.get('/', async (req: Request, res: Response) => {
 
 router.post('/register', async (req: Request, res: Response) => {
     const { email, username, password } = req.body;
-    try{
+    try {
         const user = await User.create({ email, username, password });
         res.status(201).render('pokemon-auth-message', { title: "Registreren is gelukt", message: "Uw account is succesvol geregistreerd. Controleer uw e-mail om uw account te verifiëren. Bekijk eventueel in uw spam folder of ongewenste e-mailmap als u de verificatie-e-mail niet in uw inbox kunt vinden." });
     }
@@ -99,8 +105,8 @@ router.post('/register', async (req: Request, res: Response) => {
 router.post('/login', async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
-    try{
-        
+    try {
+
     }
     catch (error) {
         res.status(500).render('pokemon-auth-message', { title: "Aanmelden is mislukt", message: "Er is een fout opgetreden bij het inloggen van de gebruiker. Probeer het later opnieuw." });
