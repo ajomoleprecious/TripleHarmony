@@ -615,6 +615,7 @@ nav p {
 
 #detail table tbody tr:nth-child(3) td {
   border-radius: 0 0 10px 0;
+  
 }
 
 #detail .modal-body>div {
@@ -697,7 +698,9 @@ nav p {
 #detail .modal-body table th {
   vertical-align: middle;
   text-align: center;
+  min-height: 4rem;
 }
+
 
 #detailType span {
   padding: 0.2rem .4rem;

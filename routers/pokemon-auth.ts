@@ -21,6 +21,16 @@ const transporter = nodemailer.createTransport({
 
 const handleErrors = (err: any) => {
     console.log(err.message, err.code);
+    let errors: any = { email: '', username: '', password: '' };
+
+    /*if (err.message.includes('User validation failed')) {
+        Object.values(err.errors).forEach(({ properties }: any) => {
+            errors[properties.path] = properties.message;
+        });
+    }*/
+    if (err.message.includes('User validation failed')) {
+        console.log(err);
+    }
 }
 
 
