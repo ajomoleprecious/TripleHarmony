@@ -4,16 +4,19 @@ import { ObjectId } from "mongodb";
 //import { User } from "../interfaces";
 import nodemailer from "nodemailer";
 import { client } from "../index";
+const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 
 const User = require('../models/User') as any;
 
 const spanForEmail = (typeof window !== 'undefined' && window.document.getElementsByClassName('text-danger registerEmailError')[0]) as HTMLSpanElement | null;
 
-if(spanForEmail) {
+if (spanForEmail) {
     spanForEmail.textContent = 'hallo'
 }
 
 const router = Router();
+router.use(cookieParser());
 
 const transporter = nodemailer.createTransport({
     host: "mail.smtp2go.com",
@@ -25,18 +28,35 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-const handleErrors = (err: any) => {
-    console.log(err.message, err.code);
+// Handles errors
+export const handleErrors = (err: any) => {
     let errors: any = { email: '', username: '', password: '' };
 
-    /*if (err.message.includes('User validation failed')) {
-    Object.values(err.errors).forEach(({ properties }: any) => {
-    errors[properties.path] = properties.message;
-    });
-    }*/
-    if (err.message.includes('User validation failed')) {
-        console.log(err);
+    // Duplicate error code
+    if (err.code === 11000) {
+        if (err.keyValue.email) {
+            errors.email = 'Dit e-mailadres is al geregistreerd';
+        }
+        if (err.keyValue.username) {
+            errors.username = 'Deze gebruikersnaam is al geregistreerd';
+        }
+        return errors;
     }
+
+    // Validation errors
+    if (err.message.includes('User validation failed')) {
+        Object.values(err.errors).forEach(({ properties }: any) => {
+            errors[properties.path] = properties.message;
+        });
+    }
+    console.log(err.message);
+    return errors;
+}
+
+// Create JSON web token
+const maxAge = 1 * 24 * 60 * 60; // 1 day
+const createToken = (id: string) => {
+    return jwt.sign({ id }, 'Precious_Aziz_Mohammed', { expiresIn: maxAge });
 }
 
 
@@ -47,30 +67,11 @@ router.get('/', async (req: Request, res: Response) => {
 router.post('/register', async (req: Request, res: Response) => {
     const { email, username, password } = req.body;
     try {
-        const user = await User.create({ email, username, password });
-        res.status(201).render('pokemon-auth-message', { title: "Registreren is gelukt", message: "Uw account is succesvol geregistreerd. Controleer uw e-mail om uw account te verifiëren. Bekijk eventueel in uw spam folder of ongewenste e-mailmap als u de verificatie-e-mail niet in uw inbox kunt vinden." });
-    }
-    catch (error) {
-        handleErrors(error);
-        //res.status(500).render('pokemon-auth-message', { title: "Registreren is mislukt", message: "Er is een fout opgetreden bij het registreren van de gebruiker. Probeer het later opnieuw." });
-    }
-    /*const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-    const user: User = {
-        _id: new ObjectId(),
-        email,
-        username,
-        password: hashedPassword,
-        verified: false
-    };
-    try {
-        if (await client.db("users").collection("usersAccounts").findOne({ email })) {
-            res.status(409).render('pokemon-auth-message', { title: "Registreren is mislukt", message: "Er bestaat al een account met het opgegeven e-mailadres." });
-            return;
-        }
-        await client.db("users").collection("usersAccounts").insertOne(user);
+        await User.create({ email, username, password });
+        res.status(201).json({ user: username });
+        
         // Constructing the email message
-        const emailMessage = `
+        /*const emailMessage = `
             <h2>Beste ${user.username},</h2>
             <br>
             <b>Welkom bij Triple Harmony! We zijn verheugd om u als lid van onze gemeenschap te verwelkomen.</b>
@@ -93,23 +94,24 @@ router.post('/register', async (req: Request, res: Response) => {
             subject: "Welkom bij Triple Harmony - Verifieer uw account",
             html: emailMessage,
             priority: "high"
-        });
-
-        res.status(201).render('pokemon-auth-message', { title: "Registreren is gelukt", message: "Uw account is succesvol geregistreerd. Controleer uw e-mail om uw account te verifiëren. Bekijk eventueel in uw spam folder of ongewenste e-mailmap als u de verificatie-e-mail niet in uw inbox kunt vinden." });
+        });*/
     }
-    catch (_) {
-        res.status(500).render('pokemon-auth-message', { title: "Registreren is mislukt", message: "Er is een fout opgetreden bij het registreren van je account. " });
-    }*/
+    catch (error) {
+        handleErrors(error);
+    }
 });
 
 router.post('/login', async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
     try {
-
+        const user = await User.login(username, password);
+        const token = createToken(user._id);
+        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+        res.status(200).redirect('/pokemon-submenu');
     }
     catch (error) {
-        res.status(500).render('pokemon-auth-message', { title: "Aanmelden is mislukt", message: "Er is een fout opgetreden bij het inloggen van de gebruiker. Probeer het later opnieuw." });
+
     }
 
     /*try {

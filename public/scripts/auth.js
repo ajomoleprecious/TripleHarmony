@@ -6,32 +6,98 @@ window.onload = function () {
 }
 
 const registerForm = document.getElementById('register-form');
+const registerEmail = document.getElementById('registerEmail');
+const registerEmailLabel = document.querySelector('label[for="registerEmail"]');
+const registerUsername = document.getElementById('registerUsername');
+const registerUsernameLabel = document.querySelector('label[for="registerUsername"]');
 const registerPassword = document.getElementById('registerPassword');
+const registerPasswordLabel = document.querySelector('label[for="registerPassword"]');
+const registerConfirmPasswordLabel = document.querySelector('label[for="registerConfirmPassword"]');
 const registerConfirmPassword = document.getElementById('registerConfirmPassword');
-const confirmPasswordLabel = document.querySelector('label[for="registerConfirmPassword"]');
 const registerPasswordReveal = document.getElementById('registerPasswordReveal');
 const registerConfirmPasswordReveal = document.getElementById('registerConfirmPasswordReveal');
+const registerEmailError = document.getElementById('registerEmailError');
+const registerUsernameError = document.getElementById('registerUsernameError');
+const registerPasswordError = document.getElementById('registerPasswordError');
+const registerConfirmPasswordError = document.getElementById('registerConfirmPasswordError');
 
-registerForm.addEventListener('submit', async (event) => {
-    if(registerPassword.value !== registerConfirmPassword.value) {
-        event.preventDefault();
-        confirmPasswordLabel.style.color = 'red';
-        confirmPasswordLabel.textContent = 'Wachtwoorden komen niet overeen.';
-        return;
+
+/*registerForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(registerForm);
+    const registerData = Object.fromEntries(formData);
+
+    // Reset the error messages
+    registerEmailError.textContent = '';
+    registerUsernameError.textContent = '';
+    registerPasswordError.textContent = '';
+    registerConfirmPasswordError.textContent = '';
+
+    try {
+        const response = await fetch('/pokemon-auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/html'
+            },
+            body: JSON.stringify(registerData)
+        });
+        const data = await response.json();
+        if (data.errors) {
+            if (data.errors.email) {
+                registerEmailError.textContent = `• ${data.errors.email}`
+            }
+            if (data.errors.username) {
+                registerUsernameError.textContent = `• ${data.errors.username}`
+            }
+            if (data.errors.password) {
+                registerPasswordError.textContent = `• ${data.errors.password}`
+            }
+        }
+    }
+    catch (error) {
+        console.log('Error:', error.message);
+    }
+
+});*/
+
+registerEmail.addEventListener('input', () => {
+    if (registerEmail.value === '') {
+        registerEmailLabel.style.color = 'red';
     }
     else {
-        window.href = '/register';
+        registerEmailLabel.style.color = 'black';
+        registerEmailError.textContent = '';
     }
 });
 
-registerConfirmPassword.addEventListener('focusout', () => {
-    if (registerPassword.value !== registerConfirmPassword.value) {
-        confirmPasswordLabel.style.color = 'red';
-        confirmPasswordLabel.textContent = 'Wachtwoorden komen niet overeen.';
+registerUsername.addEventListener('input', () => {
+    if (registerUsername.value === '') {
+        registerUsernameLabel.style.color = 'red';
     }
     else {
-        confirmPasswordLabel.style.color = 'darkgreen';
-        confirmPasswordLabel.textContent = 'Wachtwoorden komen overeen.';
+        registerUsernameLabel.style.color = 'black';
+        registerUsernameError.textContent = '';
+    }
+});
+
+registerPassword.addEventListener('input', () => {
+    if (registerPassword.value.length < 8) {
+        registerPasswordLabel.style.color = 'red';
+    }
+    else {
+        registerPasswordLabel.style.color = 'black';
+        registerPasswordError.textContent = '';
+    }
+});
+
+registerConfirmPassword.addEventListener('input', () => {
+    if (registerConfirmPassword.value !== registerPassword.value) {
+        registerConfirmPasswordLabel.style.color = 'red';
+        registerConfirmPasswordError.textContent = '• Wachtwoorden komen niet overeen';
+    }
+    else {
+        registerConfirmPasswordLabel.style.color = 'black';
+        registerConfirmPasswordError.textContent = '';
     }
 });
 
@@ -59,19 +125,63 @@ registerConfirmPasswordReveal.addEventListener('click', () => {
 
 const loginForm = document.getElementById('login-form');
 const userName = document.getElementById('loginUsername');
+const userNameError = document.getElementById('loginUsernameError');
+const userNameLabel = document.querySelector('label[for="loginUsername"]');
 const password = document.getElementById('loginPassword');
+const passwordError = document.getElementById('loginPasswordError');
 const passwordLabel = document.querySelector('label[for="loginPassword"]');
 const loginPasswordReveal = document.getElementById('loginPasswordReveal');
 
 loginForm.addEventListener('submit', async (event) => {
-    if (userName.value === '' || password.value === '') {
-        event.preventDefault();
-        passwordLabel.style.color ='red';
-        passwordLabel.textContent = 'Gebruikersnaam en wachtwoord zijn verplicht.';
-        return;
+    event.preventDefault();
+    const formData = new FormData(loginForm);
+    const loginData = Object.fromEntries(formData);
+
+    // Reset the error messages
+    userNameError.textContent = '';
+    passwordError.textContent = '';
+
+    try {
+        const response = await fetch('/pokemon-auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(loginData)
+        });
+        const data = await response.json();
+        if (data.errors) {
+            if (data.errors.username) {
+                userNameError.textContent = `• ${data.errors.username}`
+            }
+            if (data.errors.password) {
+                passwordError.textContent = `• ${data.errors.password}`
+            }
+        }
+        if (data.user) {
+            window.location.href = '/pokemon-submenu';
+        }
+    }
+    catch (error) {
+        console.error('Error:', error);
+    }
+});
+
+userName.addEventListener('input', () => {
+    if (userName.value === '') {
+        userNameLabel.style.color = 'red';
     }
     else {
-        window.href = '/login';
+        userNameLabel.style.color = 'black';
+    }
+});
+
+password.addEventListener('input', () => {
+    if (password.value === '' || password.value.length < 8) {
+        passwordLabel.style.color = 'red';
+    }
+    else {
+        passwordLabel.style.color = 'black';
     }
 });
 

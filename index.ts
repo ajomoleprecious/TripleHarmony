@@ -9,8 +9,6 @@ import whosThatPokemonRouter from "./routers/who's-that-pokemon";
 
 const uri = "mongodb+srv://DBManager:HmnVABk3hUo3zL9P@tripleharmony.9nn57t6.mongodb.net/";
 
-
-
 const app = express();
 
 let pokemonImages: any[] = [];
