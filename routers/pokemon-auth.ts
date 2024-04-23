@@ -43,9 +43,44 @@ const transporter = nodemailer.createTransport({
             errors[properties.path] = properties.message;
         });
     }
-    console.error(errors.email, errors.username, errors.password);
+    console.log(errors);
     return errors;
 }*/
+
+export function handleErrors(error: any) {
+    console.log(error.message, error.code);
+    let errors: any = { email: '', username: '', password: '' };
+
+    // Incorrect email
+    if (error.message === 'incorrect email') {
+        errors['email'] = 'Dit e-mailadres is niet geregistreerd';
+    }
+
+    // Incorrect password
+    if (error.message === 'incorrect password') {
+        errors['password'] = 'Dit wachtwoord is niet correct';
+    }
+
+    // Duplicate error code
+    if (error.code === 11000) {
+        if (error.keyValue.email) {
+            errors['email'] = 'Dit e-mailadres is al geregistreerd';
+        }
+        if (error.keyValue.username) {
+            errors['username'] = 'Deze gebruikersnaam is al geregistreerd';
+        }
+        return errors;
+    }
+
+    // Validation errors
+    if (error.message.includes('User validation failed')) {
+        Object.values(error.errors).forEach(({ properties }: any) => {
+            errors[properties.path] = properties.message;
+        });
+    }
+    return errors;
+}
+
 
 // Create JSON web token
 const maxAge = 1 * 24 * 60 * 60; // 1 day
@@ -65,8 +100,8 @@ router.post('/register', async (req: Request, res: Response) => {
             const token = createToken(user._id);
             res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
             res.status(201).render('pokemon-auth-message', { title: "Registratie voltooid", message: "Uw account is succesvol geregistreerd. U kunt nu inloggen op onze website." });
-        }).catch((_ : any) => {
-                
+        }).catch((error: any) => {
+            res.status(400).json({ error: handleErrors(error) });
         });
         
         // Constructing the email message
@@ -95,7 +130,7 @@ router.post('/register', async (req: Request, res: Response) => {
             priority: "high"
         });*/
     }
-    catch (error) {
+    catch (_) {
         //handleErrors(error);
     }
 });

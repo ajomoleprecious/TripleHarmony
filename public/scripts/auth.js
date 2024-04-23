@@ -46,7 +46,7 @@ const registerConfirmPasswordError = document.getElementById('registerConfirmPas
 
 
 registerForm.addEventListener('submit', async (event) => {
-    //event.preventDefault();
+    event.preventDefault();
     const formData = new FormData(registerForm);
     const registerData = Object.fromEntries(formData);
 
@@ -56,7 +56,7 @@ registerForm.addEventListener('submit', async (event) => {
     registerPasswordError.textContent = '';
     registerConfirmPasswordError.textContent = '';
 
-    try {
+    /*try {
         const response = await fetch('/pokemon-auth/register', {
             method: 'POST',
             headers: {
@@ -74,7 +74,7 @@ registerForm.addEventListener('submit', async (event) => {
         }
     } catch (_) {
         
-    }
+    }*/
 
 });
 
