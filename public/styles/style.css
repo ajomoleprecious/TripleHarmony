@@ -1138,8 +1138,9 @@ nav p {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   gap: 1rem;
+  height: 90vh;
 }
 
 .poke-catch article:nth-child(1) p {
@@ -1182,15 +1183,14 @@ nav p {
 /* VANGEN ROULETTE */
 
 .roulette-container {
-  margin:0;
-	padding:0;
-  width: 33%;
-  height: 80vh;
-	display:flex;
+  margin: 0;
+	padding: 0;
+	display: flex;
 	align-items: center;
 	justify-content: center;
   overflow: hidden;
   flex-direction: column;
+  height: 85vh;
 }
 
 .roulette-box {

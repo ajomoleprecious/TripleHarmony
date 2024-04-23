@@ -64,6 +64,7 @@
 @media (max-width: 800px) {
     .poke-catch {
         flex-direction: column-reverse;
+        justify-content: space-around;
     }
 }
 
