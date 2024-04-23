@@ -5,6 +5,29 @@ window.onload = function () {
     modal.show();
 }
 
+const handleErrors = (err) => {
+    let errors = { email: '', username: '', password: '' };
+
+    // Duplicate error code
+    if (err.code === 11000) {
+        if (err.keyValue.email) {
+            errors.email = 'Dit e-mailadres is al geregistreerd';
+        }
+        if (err.keyValue.username) {
+            errors.username = 'Deze gebruikersnaam is al geregistreerd';
+        }
+    }
+
+    // Validation errors
+    if (err.message.includes('User validation failed')) {
+        Object.values(err.errors).forEach(({ properties }) => {
+            errors[properties.path] = properties.message;
+        });
+    }
+
+    return errors;
+}
+
 const registerForm = document.getElementById('register-form');
 const registerEmail = document.getElementById('registerEmail');
 const registerEmailLabel = document.querySelector('label[for="registerEmail"]');
@@ -22,8 +45,8 @@ const registerPasswordError = document.getElementById('registerPasswordError');
 const registerConfirmPasswordError = document.getElementById('registerConfirmPasswordError');
 
 
-/*registerForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
+registerForm.addEventListener('submit', async (event) => {
+    //event.preventDefault();
     const formData = new FormData(registerForm);
     const registerData = Object.fromEntries(formData);
 
@@ -37,28 +60,23 @@ const registerConfirmPasswordError = document.getElementById('registerConfirmPas
         const response = await fetch('/pokemon-auth/register', {
             method: 'POST',
             headers: {
-                'Content-Type': 'text/html'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(registerData)
         });
         const data = await response.json();
+
         if (data.errors) {
-            if (data.errors.email) {
-                registerEmailError.textContent = `• ${data.errors.email}`
-            }
-            if (data.errors.username) {
-                registerUsernameError.textContent = `• ${data.errors.username}`
-            }
-            if (data.errors.password) {
-                registerPasswordError.textContent = `• ${data.errors.password}`
-            }
+            const errors = handleErrors(data.errors);
+            registerEmailError.textContent = errors.email;
+            registerUsernameError.textContent = errors.username;
+            registerPasswordError.textContent = errors.password;
         }
-    }
-    catch (error) {
-        console.log('Error:', error.message);
+    } catch (_) {
+        
     }
 
-});*/
+});
 
 registerEmail.addEventListener('input', () => {
     if (registerEmail.value === '') {

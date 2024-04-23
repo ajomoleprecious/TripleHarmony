@@ -9,12 +9,6 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/User') as any;
 
-const spanForEmail = (typeof window !== 'undefined' && window.document.getElementsByClassName('text-danger registerEmailError')[0]) as HTMLSpanElement | null;
-
-if (spanForEmail) {
-    spanForEmail.textContent = 'hallo'
-}
-
 const router = Router();
 router.use(cookieParser());
 
@@ -28,8 +22,8 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-// Handles errors
-export const handleErrors = (err: any) => {
+// Handles errors and exports them
+/*const handleErrors = (err: any) => {
     let errors: any = { email: '', username: '', password: '' };
 
     // Duplicate error code
@@ -49,9 +43,9 @@ export const handleErrors = (err: any) => {
             errors[properties.path] = properties.message;
         });
     }
-    console.log(err.message);
+    console.error(errors.email, errors.username, errors.password);
     return errors;
-}
+}*/
 
 // Create JSON web token
 const maxAge = 1 * 24 * 60 * 60; // 1 day
@@ -67,8 +61,13 @@ router.get('/', async (req: Request, res: Response) => {
 router.post('/register', async (req: Request, res: Response) => {
     const { email, username, password } = req.body;
     try {
-        await User.create({ email, username, password });
-        res.status(201).json({ user: username });
+        await User.create({ email, username, password }).then((user: any) => {
+            const token = createToken(user._id);
+            res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+            res.status(201).render('pokemon-auth-message', { title: "Registratie voltooid", message: "Uw account is succesvol geregistreerd. U kunt nu inloggen op onze website." });
+        }).catch((_ : any) => {
+                
+        });
         
         // Constructing the email message
         /*const emailMessage = `
@@ -97,7 +96,7 @@ router.post('/register', async (req: Request, res: Response) => {
         });*/
     }
     catch (error) {
-        handleErrors(error);
+        //handleErrors(error);
     }
 });
 
