@@ -1138,8 +1138,8 @@ nav p {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
-  gap: 3rem;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .poke-catch article:nth-child(1) p {
@@ -1179,18 +1179,85 @@ nav p {
   font-size: 1.5rem;
 }
 
+/* VANGEN ROULETTE */
+
 .roulette-container {
-  background-image: url("../assets/black_circle-with-question-mark.png");
-  background-repeat: no-repeat;
+  margin:0;
+	padding:0;
   width: 33%;
-  height: 30rem;
+  height: 80vh;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.roulette-box {
+  width: 15.625rem; /* helft van 31.25rem */
+  height: 15.625rem; /* helft van 31.25rem */
+  background-color: #ccc;
+  border-radius: 50%;
+  border: 0.5rem solid #dde; /* ik heb de dikte van de rand ook verminderd voor verhouding */
+  position: relative;
+  overflow: hidden;
+  transition: 1s;
+}
+
+.roulette-box li {
+  height: 50%;
+  width: 6.25rem; /* helft van 12.5rem */
+  position: absolute;
+  clip-path: polygon(100% 0 , 50% 100% , 0 0 );
+  transform: translateX(-50%);
+  transform-origin: bottom;
+  text-align: center;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  font-size: 0.625rem; /* helft van 1.25rem */
+  font-weight: bold;
+  font-family: sans-serif;
+  color: #fff;
+  left: 4.21875rem; /* helft van 8.4375rem */
+}
+
+.roulette-box .one{
+	background-color: #3f51b5;
+	left: 50%;
+}
+.roulette-box .two{
+	background-color: #ff9800;
+	transform: rotate(45deg);
+}
+.roulette-box .three{
+	background-color: #e91e63;
+	transform: rotate(90deg);
+}
+.roulette-box .four{
+	background-color: #4caf50;
+	transform: rotate(135deg);
+}
+.roulette-box .five{
+	background-color: #009688;
+	transform: rotate(180deg);
+}
+.roulette-box .six{
+	background-color: #795548;
+	transform: rotate(225deg);
+}
+.roulette-box .seven{
+	background-color: #9c27b0;
+	transform: rotate(270deg);
+}
+.roulette-box .eight{
+	background-color: #f44336;
+	transform: rotate(315deg);
 }
 
 .roulette-arrow {
-  width: 12rem;
+  font-size: 2rem;
+  margin-top: -4rem;
 }
 
 #hourglass {

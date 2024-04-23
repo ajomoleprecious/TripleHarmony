@@ -47,9 +47,9 @@ const imageElements = document.getElementsByClassName('poke-catch-img');
 const titleElement = document.getElementById('poke-title');
 const countdownElement = document.getElementById('countdown');
 const hourglassElement = document.getElementById('hourglass');
-const arrowElement = document.getElementsByClassName('roulette-arrow');
+const rouletteElement = document.getElementsByClassName('roulette-box')[0];
 const catchElement = document.getElementById('catch-button');
-let count = 10;
+let count = 8;
 const linkElement = document.getElementsByClassName('poke-catch-container')[0];
 
 // Functie om elke seconde een nieuwe willekeurige afbeelding en titel weer te geven
@@ -62,7 +62,7 @@ async function changeImageAndTitle() {
               throw new Error('Network response was not ok');
           }
           const pokemonData = await response.json();
-          const imageUrl = pokemonData.sprites.other.showdown.front_default;
+          const imageUrl = pokemonData.sprites.front_default;
           const pokemonName = pokemonData.name;
           Array.from(imageElements).forEach((element) => {
               element.src = imageUrl;
@@ -73,7 +73,7 @@ async function changeImageAndTitle() {
           }
           if (count === 0) {
             hourglassElement.style.display = 'none';
-            arrowElement[0].style.animation = 'none';
+            rouletteElement.style.animation = 'none';
             titleElement.innerText = pokemonName;
             linkElement.style.pointerEvents = 'auto';
         }
@@ -100,6 +100,8 @@ catchElement.addEventListener('mouseout', function() {
     catchElement.style.animation = 'none'; 
 });
 
+
+
 catchElement.addEventListener('click', function(event) {
     event.preventDefault();
     linkElement.style.pointerEvents = 'none';
@@ -108,8 +110,8 @@ catchElement.addEventListener('click', function(event) {
     hourglassElement.src = '../assets/hourglass.gif';
     hourglassElement.alt = 'Hourglass Image';
     hourglassElement.style.animation = 'spin 2s linear infinite';
-    arrowElement[0].style.animation = 'spin 2s linear infinite';
-    count = 10;
+    rouletteElement.style.animation = 'spin 9s linear infinite';
+    count = 8;
     countdownElement.innerText = count; // Initialize countdown element with initial count value
     countdownElement.style.display = 'block'; // Show countdown element
     changeImageAndTitle();

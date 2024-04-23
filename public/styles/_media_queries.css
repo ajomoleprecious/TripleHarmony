@@ -61,6 +61,12 @@
     }
 }
 
+@media (max-width: 800px) {
+    .poke-catch {
+        flex-direction: column-reverse;
+    }
+}
+
 @media (max-width: 768px) {
     .pokemon-list>ul {
         justify-content: center;
@@ -80,6 +86,16 @@
         top: 15rem;
     }
     
+    .roulette-box {
+        width: 7.8125rem; /* helft van 15.625rem */
+        height: 7.8125rem; /* helft van 15.625rem */
+        border-width: 0.25rem; /* halveer de dikte van de rand */
+      }
+      
+      .roulette-box li {
+        width: 3.125rem; /* helft van 6.25rem */
+        left: 2.109375rem; /* helft van 4.21875rem */
+      }
 }
 
 @media (max-width: 710px) {
