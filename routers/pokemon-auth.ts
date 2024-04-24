@@ -7,10 +7,13 @@ import { client } from "../index";
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
+
 const User = require('../models/User') as any;
 
 const router = Router();
 router.use(cookieParser());
+
+
 
 const transporter = nodemailer.createTransport({
     host: "mail.smtp2go.com",
@@ -22,33 +25,8 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-// Handles errors and exports them
-/*const handleErrors = (err: any) => {
-    let errors: any = { email: '', username: '', password: '' };
 
-    // Duplicate error code
-    if (err.code === 11000) {
-        if (err.keyValue.email) {
-            errors.email = 'Dit e-mailadres is al geregistreerd';
-        }
-        if (err.keyValue.username) {
-            errors.username = 'Deze gebruikersnaam is al geregistreerd';
-        }
-        return errors;
-    }
-
-    // Validation errors
-    if (err.message.includes('User validation failed')) {
-        Object.values(err.errors).forEach(({ properties }: any) => {
-            errors[properties.path] = properties.message;
-        });
-    }
-    console.log(errors);
-    return errors;
-}*/
-
-export function handleErrors(error: any) {
-    console.log(error.message, error.code);
+function handleErrors(error: any) {
     let errors: any = { email: '', username: '', password: '' };
 
     // Incorrect email
@@ -88,11 +66,11 @@ const createToken = (id: string) => {
     return jwt.sign({ id }, 'Precious_Aziz_Mohammed', { expiresIn: maxAge });
 }
 
-
 router.get('/', async (req: Request, res: Response) => {
     res.render('pokemon-auth');
 });
 
+//pokemon-auth/register
 router.post('/register', async (req: Request, res: Response) => {
     const { email, username, password } = req.body;
     try {
@@ -100,10 +78,12 @@ router.post('/register', async (req: Request, res: Response) => {
             const token = createToken(user._id);
             res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
             res.status(201).render('pokemon-auth-message', { title: "Registratie voltooid", message: "Uw account is succesvol geregistreerd. U kunt nu inloggen op onze website." });
-        }).catch((error: any) => {
-            res.status(400).json({ error: handleErrors(error) });
+        })
+        .catch((err: any) => {
+            const errors = handleErrors(err);
+            res.status(400).json({ errors });
         });
-        
+
         // Constructing the email message
         /*const emailMessage = `
             <h2>Beste ${user.username},</h2>
@@ -131,9 +111,9 @@ router.post('/register', async (req: Request, res: Response) => {
         });*/
     }
     catch (_) {
-        //handleErrors(error);
     }
 });
+
 
 router.post('/login', async (req: Request, res: Response) => {
     const { username, password } = req.body;

@@ -5,25 +5,38 @@ window.onload = function () {
     modal.show();
 }
 
-const handleErrors = (err) => {
+function handleErrors(error) {
+    console.log(error.message, error.code);
     let errors = { email: '', username: '', password: '' };
 
+    // Incorrect email
+    if (error.message === 'incorrect email') {
+        errors['email'] = 'Dit e-mailadres is niet geregistreerd';
+    }
+
+    // Incorrect password
+    if (error.message === 'incorrect password') {
+        errors['password'] = 'Dit wachtwoord is niet correct';
+    }
+
     // Duplicate error code
-    if (err.code === 11000) {
-        if (err.keyValue.email) {
-            errors.email = 'Dit e-mailadres is al geregistreerd';
+    if (error.code === 11000) {
+        if (error.keyValue.email) {
+            errors['email'] = 'Dit e-mailadres is al geregistreerd';
         }
-        if (err.keyValue.username) {
-            errors.username = 'Deze gebruikersnaam is al geregistreerd';
+        if (error.keyValue.username) {
+            errors['username'] = 'Deze gebruikersnaam is al geregistreerd';
         }
+        return errors;
     }
 
     // Validation errors
-    if (err.message.includes('User validation failed')) {
-        Object.values(err.errors).forEach(({ properties }) => {
+    if (error.message.includes('User validation failed')) {
+        Object.values(error.errors).forEach(({ properties }) => {
             errors[properties.path] = properties.message;
         });
     }
+
 
     return errors;
 }
@@ -45,37 +58,26 @@ const registerPasswordError = document.getElementById('registerPasswordError');
 const registerConfirmPasswordError = document.getElementById('registerConfirmPasswordError');
 
 
+
+
 registerForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const formData = new FormData(registerForm);
     const registerData = Object.fromEntries(formData);
 
+    console.log(registerData);
     // Reset the error messages
     registerEmailError.textContent = '';
     registerUsernameError.textContent = '';
     registerPasswordError.textContent = '';
     registerConfirmPasswordError.textContent = '';
 
-    /*try {
-        const response = await fetch('/pokemon-auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(registerData)
-        });
-        const data = await response.json();
 
-        if (data.errors) {
-            const errors = handleErrors(data.errors);
-            registerEmailError.textContent = errors.email;
-            registerUsernameError.textContent = errors.username;
-            registerPasswordError.textContent = errors.password;
-        }
-    } catch (_) {
-        
-    }*/
-
+    try {
+    
+    } catch (error) {
+        // handle network errors
+    }
 });
 
 registerEmail.addEventListener('input', () => {
