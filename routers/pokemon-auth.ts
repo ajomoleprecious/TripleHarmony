@@ -1,9 +1,17 @@
-import { Request, Response, Router } from "express";
+import { Request, Response, Router, NextFunction } from "express";
 import bcrypt from "bcrypt";
 import { ObjectId } from "mongodb";
-import { User } from "../interfaces";
+//import { User } from "../interfaces";
 import nodemailer from "nodemailer";
 import { client } from "../index";
+
+const jwt = require('jsonwebtoken');
+
+
+const User = require('../models/User') as any;
+
+const router = Router();
+
 
 
 const transporter = nodemailer.createTransport({
@@ -16,29 +24,70 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-const router = Router();
+interface ErrorMessages {
+    [key: string]: string;
+}
+
+function handleErrors(error: any): ErrorMessages {
+    const errors: ErrorMessages = {
+        email: '',
+        username: '',
+        password: ''
+    };
+
+    // Incorrect username
+    if (error.message === 'incorrect username') {
+        errors.username = 'Dit gebruikersnaam is niet geregistreerd';
+    }
+
+    // Incorrect password
+    if (error.message === 'incorrect password') {
+        errors.password = 'Het ingevoerde wachtwoord is onjuist.';
+    }
+
+    // Not verified
+    if (error.message === 'account not verified') {
+        errors.username = 'Uw account is nog niet geverifieerd. Controleer uw e-mail voor de verificatielink.';
+    }
+
+    // Duplicate error code
+    if (error.code === 11000) {
+        if (error.keyValue.email) {
+            errors.email = 'Dit e-mailadres is al geregistreerd';
+        }
+        if (error.keyValue.username) {
+            errors.username = 'Deze gebruikersnaam is al geregistreerd';
+        }
+        return errors;
+    }
+
+    // Validation errors
+    if (error.message.includes('User validation failed')) {
+        Object.values(error.errors).forEach(({ path, message }: any) => {
+            errors[path] = message;
+        });
+    }
+    return errors;
+}
+
+
+// Create JSON web token
+const maxAge = 1 * 24 * 60 * 60; // 1 day
+const createToken = (id: string) => {
+    return jwt.sign({ id }, 'Precious_Aziz_Mohammed', { expiresIn: maxAge });
+}
 
 router.get('/', async (req: Request, res: Response) => {
     res.render('pokemon-auth');
 });
 
+//pokemon-auth/register
 router.post('/register', async (req: Request, res: Response) => {
     const { email, username, password } = req.body;
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-    const user: User = {
-        _id: new ObjectId(),
-        email,
-        username,
-        password: hashedPassword,
-        verified: false
-    };
     try {
-        if (await client.db("users").collection("usersAccounts").findOne({ email })) {
-            res.status(409).render('pokemon-auth-message', { title: "Registreren is mislukt", message: "Er bestaat al een account met het opgegeven e-mailadres." });
-            return;
-        }
-        await client.db("users").collection("usersAccounts").insertOne(user);
+        const user = await User.create({ email, username, password });
+        res.status(201).json({ user: user._id });
+
         // Constructing the email message
         const emailMessage = `
             <h2>Beste ${user.username},</h2>
@@ -64,32 +113,26 @@ router.post('/register', async (req: Request, res: Response) => {
             html: emailMessage,
             priority: "high"
         });
-
-        res.status(201).render('pokemon-auth-message', { title: "Registreren is gelukt", message: "Uw account is succesvol geregistreerd. Controleer uw e-mail om uw account te verifiëren. Bekijk eventueel in uw spam folder of ongewenste e-mailmap als u de verificatie-e-mail niet in uw inbox kunt vinden." });
     }
-    catch (_) {
-        res.status(500).render('pokemon-auth-message', { title: "Registreren is mislukt", message: "Er is een fout opgetreden bij het registreren van je account. " });
+    catch (error: any) {
+        const errors = handleErrors(error);
+        res.status(400).json({ errors });
     }
 });
+
 
 router.post('/login', async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
     try {
-        const user = await client.db("users").collection("usersAccounts").findOne({ username });
-        if (user && await bcrypt.compare(password, user.password)) {
-            if (!user.verified) {
-                res.status(401).render('pokemon-auth-message', { title: "Aanmelden is mislukt", message: "Uw account is nog niet geverifieerd. Controleer uw e-mail om uw account te verifiëren." });
-                return;
-            }
-            res.status(200).redirect('/pokemon-submenu')
-        }
-        else {
-            res.status(401).render('pokemon-auth-message', { title: "Aanmelden is mislukt", message: "Gebruikersnaam of wachtwoord is onjuist." });
-        }
+        const user = await User.login(username, password);
+        const token = createToken(user._id);
+        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+        res.status(200).json({ user: user._id });
     }
-    catch (_) {
-        res.status(500).send("Error bij het inloggen van de gebruiker. Probeer het later opnieuw.");
+    catch (error) {
+        const errors = handleErrors(error);
+        res.status(400).json({ errors });
     }
 });
 
@@ -123,7 +166,7 @@ router.post('/reset', async (req: Request, res: Response) => {
                 <br>
                 <p>U heeft een verzoek ingediend om uw wachtwoord te resetten.</p>
                 <br>
-                <p> Uw nieuwe wachtwoord is: <b>wachtwoord123</b></p>
+                <p> Uw nieuwe wachtwoord is: <b style="color: red;">wachtwoord123</b></p>
                 <br>
                 <p>Als u geen verzoek heeft ingediend om uw wachtwoord te resetten, kunt u deze e-mail veilig negeren.</p>
                 <br>
@@ -134,7 +177,7 @@ router.post('/reset', async (req: Request, res: Response) => {
             await transporter.sendMail({
                 from: '"Triple Harmony" <tripleharmony.ap@hotmail.com>',
                 to: email,
-                subject: "Wachtwoord herstellen",
+                subject: "Wachtwoord hersteld",
                 html: emailMessage,
                 priority: "high"
             });
