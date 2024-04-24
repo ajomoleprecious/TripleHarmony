@@ -5,42 +5,6 @@ window.onload = function () {
     modal.show();
 }
 
-function handleErrors(error) {
-    console.log(error.message, error.code);
-    let errors = { email: '', username: '', password: '' };
-
-    // Incorrect email
-    if (error.message === 'incorrect email') {
-        errors['email'] = 'Dit e-mailadres is niet geregistreerd';
-    }
-
-    // Incorrect password
-    if (error.message === 'incorrect password') {
-        errors['password'] = 'Dit wachtwoord is niet correct';
-    }
-
-    // Duplicate error code
-    if (error.code === 11000) {
-        if (error.keyValue.email) {
-            errors['email'] = 'Dit e-mailadres is al geregistreerd';
-        }
-        if (error.keyValue.username) {
-            errors['username'] = 'Deze gebruikersnaam is al geregistreerd';
-        }
-        return errors;
-    }
-
-    // Validation errors
-    if (error.message.includes('User validation failed')) {
-        Object.values(error.errors).forEach(({ properties }) => {
-            errors[properties.path] = properties.message;
-        });
-    }
-
-
-    return errors;
-}
-
 const registerForm = document.getElementById('register-form');
 const registerEmail = document.getElementById('registerEmail');
 const registerEmailLabel = document.querySelector('label[for="registerEmail"]');
@@ -64,8 +28,6 @@ registerForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const formData = new FormData(registerForm);
     const registerData = Object.fromEntries(formData);
-
-    console.log(registerData);
     // Reset the error messages
     registerEmailError.textContent = '';
     registerUsernameError.textContent = '';
@@ -74,9 +36,34 @@ registerForm.addEventListener('submit', async (event) => {
 
 
     try {
+        const response = await fetch('/pokemon-auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(registerData)
+        });
+        const data = await response.json();
+        if (data.errors) {
+            if (data.errors.email) {
+                registerEmailError.textContent = `• ${data.errors.email}`;
+            }
+            if (data.errors.username) {
+                registerUsernameError.textContent = `• ${data.errors.username}`;
+            }
+            if (data.errors.password) {
+                registerPasswordError.textContent = `• ${data.errors.password}`;
+            }
+            if(registerPassword.value !== registerConfirmPassword.value){
+                registerConfirmPasswordError.textContent = '• Wachtwoorden komen niet overeen';
+            }
+        }
+        if (data.user) {
+            window.location.href = '/register-success';
+        }
     
     } catch (error) {
-        // handle network errors
+        console.error('Error:', error);
     }
 });
 
@@ -112,11 +99,9 @@ registerPassword.addEventListener('input', () => {
 
 registerConfirmPassword.addEventListener('input', () => {
     if (registerConfirmPassword.value !== registerPassword.value) {
-        registerConfirmPasswordLabel.style.color = 'red';
         registerConfirmPasswordError.textContent = '• Wachtwoorden komen niet overeen';
     }
     else {
-        registerConfirmPasswordLabel.style.color = 'black';
         registerConfirmPasswordError.textContent = '';
     }
 });
