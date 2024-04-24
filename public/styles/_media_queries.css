@@ -88,17 +88,21 @@
         top: 15rem;
     }
 
-    
     .roulette-box {
-        width: 7.8125rem; /* helft van 15.625rem */
-        height: 7.8125rem; /* helft van 15.625rem */
-        border-width: 0.25rem; /* halveer de dikte van de rand */
-      }
-      
-      .roulette-box li {
-        width: 3.125rem; /* helft van 6.25rem */
-        left: 2.109375rem; /* helft van 4.21875rem */
-      }
+        width: 7.8125rem;
+        /* helft van 15.625rem */
+        height: 7.8125rem;
+        /* helft van 15.625rem */
+        border-width: 0.25rem;
+        /* halveer de dikte van de rand */
+    }
+
+    .roulette-box li {
+        width: 3.125rem;
+        /* helft van 6.25rem */
+        left: 2.109375rem;
+        /* helft van 4.21875rem */
+    }
 }
 
 @media (max-width: 710px) {
@@ -113,7 +117,6 @@
 
     .ingelogd .hamMenu {
         display: block;
-        animation: pop 1.5s ease-in-out;
     }
 
     .ingelogd header nav {
@@ -198,7 +201,7 @@
 @media (max-width: 475px) {
     aside.active {
         position: fixed;
-        top: 150px;
+        top: 200px;
     }
 
     .aanvallen li {
@@ -411,9 +414,15 @@
     .pokemonToGuess a.result {
         width: 290px;
     }
+}
 
-    .ingelogd .pokemon-bekijken-main .pokemon-list ul li {
-        width: 100px;
+@media (max-height: 900px) {
+    .ingelogd .poke-catch-buttons {
+        flex-direction: row;
+    }
+
+    .ingelogd .poke-catch-buttons a {
+        margin: 0;
     }
 
     .ingelogd .pokemon-bekijken-main .pokemon-list ul li:hover {
@@ -435,11 +444,15 @@
 
     .ingelogd .submenu-button section img {
         width: 30px;
-  }
-  
+    }
+
 }
-      @media (max-height: 900px) {
+
+@media (max-height: 900px) {
     .poke-catch-buttons {
         flex-direction: row;
+    }
+    .ingelogd .poke-catch article:nth-child(2) {
+        margin: 0;
     }
 }
