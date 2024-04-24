@@ -404,3 +404,9 @@
         width: 290px;
     }
 }
+
+@media (max-height: 900px) {
+    .poke-catch-buttons {
+        flex-direction: row;
+    }
+}
