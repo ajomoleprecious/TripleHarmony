@@ -1,9 +1,13 @@
 // Import necessary modules and dependencies
 import { Request, Response, Router } from "express";
+import { verifyUser } from "../middleware/verifyUser";
+
 import axios from 'axios';
 
 // Initialize router
 const router = Router();
+// Use the verifyUser middleware
+router.use(verifyUser);
 
 // Route handler for fetching and rendering Pokémon data
 router.get("/", async (req: Request, res: Response) => {

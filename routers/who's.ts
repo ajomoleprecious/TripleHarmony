@@ -1,9 +1,9 @@
 import { Request, Response, Router } from "express";
+import { verifyUser } from "../middleware/verifyUser";
 import axios from "axios";
-import { get } from "http";
-import { name } from "ejs";
 
 const router = Router();
+router.use(verifyUser);
 
 // Function to fetch a random Pokémon
 async function getRandomPokemon() {
