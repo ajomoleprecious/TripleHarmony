@@ -1,7 +1,5 @@
-import { Request, Response, Router, NextFunction } from "express";
-import bcrypt from "bcrypt";
+import { Request, Response, Router } from "express";
 import { ObjectId } from "mongodb";
-//import { User } from "../interfaces";
 import nodemailer from "nodemailer";
 import { client } from "../index";
 
