@@ -40,6 +40,19 @@
     .ingelogd.pokemon-bekijken {
         grid-template-columns: 1.7fr 4fr;
     }
+
+    #poke-bg .submenu,
+    #poke-bg .submenu .submenu-button {
+        width: 100%;
+    }
+    
+    #poke-bg .submenu-button section span {
+        font-size: 1.5rem;
+    }
+
+    #poke-bg .submenu-button section img {
+        width: 30px;
+    }
 }
 
 @media (max-width: 950px) {
@@ -414,6 +427,11 @@
     .pokemonToGuess a.result {
         width: 290px;
     }
+
+    #poke-bg .pokesubmenu {
+        padding: 1rem;
+    }
+
 }
 
 @media (max-height: 900px) {
@@ -430,29 +448,12 @@
         transition: .3s;
     }
 
-    .ingelogd .pokesubmenu {
-        width: 90vw;
-    }
-
-    .ingelogd .submenu {
-        width: 100%;
-    }
-
-    .ingelogd .submenu-button section span {
-        font-size: 1rem;
-    }
-
-    .ingelogd .submenu-button section img {
-        width: 30px;
-    }
-
-}
-
-@media (max-height: 900px) {
     .poke-catch-buttons {
         flex-direction: row;
     }
+
     .ingelogd .poke-catch article:nth-child(2) {
         margin: 0;
     }
+
 }

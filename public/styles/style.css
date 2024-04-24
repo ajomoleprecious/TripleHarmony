@@ -828,25 +828,30 @@ nav p {
 
 /* POKEMON SUBMENU */
 
+.ingelogd .pokesubmenu {
+  padding: 1rem 1rem 1rem 3rem;
+}
+
+.ingelogd .submenu-button {
+  width: 100%;
+}
+
 .ingelogd .submenu {
-  margin: 1rem 0 0 1rem;
   height: 100%;
-  width: 30rem;
+  width: 40%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   gap: 1rem;
 }
  
-.submenu article {
+.ingelogd .submenu article {
+  width: 100%;
   opacity: 0;
   animation: slideUp 1s forwards;
   animation-delay: calc(.2s * var(--i));
 }
  
-.submenu-button{
-  width: 100%;
-}
 .submenu-button section {
   display: flex;
   justify-content: space-between;
