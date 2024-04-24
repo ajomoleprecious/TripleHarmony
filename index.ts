@@ -37,9 +37,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.get("/pokemon-battler-vs-pc/:id", verifyUser, (req, res) => {
-  const id = req.params.id;
-  console.log(id);
+app.get("/pokemon-battler-vs-pc", verifyUser, (req, res) => {
   res.render('pokemon-battler-vs-pc');
 });
 
@@ -48,7 +46,6 @@ app.get("/pokemon-battler", verifyUser, (req, res) => {
 });
 
 app.get('/pokemon-submenu', verifyUser, (req, res) => {
-  res.locals.currentpokemonId = 25;
   res.render('pokemon-submenu');
 });
 
