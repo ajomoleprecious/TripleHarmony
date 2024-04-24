@@ -915,6 +915,8 @@ nav p {
   transform: scale(1.1);
 }
 
+
+
 /* POKEMON BATTLER */
 
 .battler {
@@ -1055,7 +1057,10 @@ nav p {
 /* WHO'S THAT POKEMON & RESULT */
 
 .pokemonToGuess {
-  margin: auto;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: var(--pokemonToGuess-bg);
   display: flex;
   align-items: center;
@@ -1063,11 +1068,10 @@ nav p {
   flex-direction: column;
   box-shadow: 0 0 15px var(--black);
   border-radius: 20px;
-  height: 85dvh;
-  width: 90dvw;
-  margin-top: 1rem;
+  padding: 50px;
+  max-width: 200vw; /* Set maximum width relative to viewport width */
+  overflow: hidden; /* Hide overflow content */
 }
-
 .pokemonToGuess .result {
   cursor: pointer;
   color: var(--pokemonToGuess-bg);
@@ -1078,11 +1082,6 @@ nav p {
   font-size: 1.3rem;
   width: 300px;
   text-decoration: none;
-}
-
-.pokemonToGuess .result:hover {
-  transform: scale(1.1);
-  transition: 0.5s ease-in-out;
 }
 
 .pokemonToGuess .skip {
@@ -1101,7 +1100,7 @@ nav p {
 
 .silhouette {
   filter: brightness(0);
-  width: 320px;
+  width: 400px;
   animation: infinite 1s ease-in-out;
   animation-name: move;
   animation-duration: 2s;
@@ -1166,7 +1165,7 @@ nav p {
 
 #cardTitle {
   color: var(--avatar-border-color);
-  font-size: 30px;
+  font-size: 25px;
   text-align: center;
   width: 100%;
   margin: 0;
@@ -1187,6 +1186,14 @@ nav p {
 #dontKnow:hover {
   transform: scale(1.1);
   transition: 0.5s ease-in-out;
+}
+
+.hidden {
+  display: none;
+}
+
+#loadingGif {
+  width: 15%;
 }
 
 /* POKEMON VANGEN */

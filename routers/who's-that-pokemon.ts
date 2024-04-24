@@ -20,6 +20,12 @@ router.get('/', async (req: Request, res: Response) => {
 });
 
 
+router.get('/new-pokemon', async (req: Request, res: Response) => {
+    let randomPokemon = await getRandomPokemon();
+    res.json({ name: randomPokemon.name, image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${randomPokemon.url.split("/")[6]}.png` });
+});
+
+
 export default router;
 
 
