@@ -828,38 +828,50 @@ nav p {
 
 /* POKEMON SUBMENU */
 
-.submenu {
-  margin: 1rem;
+.ingelogd .submenu {
+  margin: 1rem 0 0 1rem;
   height: 100%;
+  width: 30rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  gap: 1rem;
 }
-
-.submenu article{
+ 
+.submenu article {
   opacity: 0;
   animation: slideUp 1s forwards;
   animation-delay: calc(.2s * var(--i));
 }
-
-.submenu-button {
-  margin: 10px;
-  border-radius: 10px;
+ 
+.submenu-button{
+  width: 100%;
 }
-
-.submenu-button img {
-  width: 30rem;
+.submenu-button section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem 1.5rem .5rem 1rem;
+  background-color: var(--orange);
   border-radius: 20px;
 }
-
+.submenu-button section span {
+  font-size: 1.8rem;
+  color: var(--black);
+}
+ 
+.submenu-button section img{
+  width: fit-content;
+  border-radius: 0;
+}
+ 
 .submenu-button {
   transition: transform 0.3s ease-in-out;
 }
-
+ 
 .submenu-button:hover {
   transform: scale(1.1);
 }
-
 /* POKEMON BATTLER */
 
 .battler {
@@ -1273,6 +1285,10 @@ nav p {
   flex-direction: column; 
   align-items: center;
   justify-content: center;
+}
+
+.poke-catch-buttons a {
+  cursor: none; 
 }
 
 .poke-catch-buttons a {
