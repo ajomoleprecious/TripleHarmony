@@ -6,8 +6,7 @@
 
 /* ALGEMEEN */
 
-body,
-.ingelogd {
+body, .ingelogd {
   background-color: var(--body-bg);
   width: 100%;
   height: 100dvh;
@@ -145,7 +144,7 @@ main {
   height: fit-content;
   position: fixed;
   left: 20px;
-  top: 70px;
+  top: 110px;
 }
 
 .help {
@@ -238,9 +237,8 @@ main {
   border: 2px solid var(--avatar-border-color);
   cursor: pointer;
 }
-
 .right-container ul li:nth-child(2) button img,
-.right-container ul li:nth-child(2) button i {
+.right-container ul li:nth-child(2) button i{
   padding: 0;
   border-radius: 100%;
   width: 100%;
@@ -248,7 +246,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-
+  
 }
 
 .modal-content {
@@ -309,7 +307,7 @@ nav p {
   font-family: "Anta", sans-serif;
 }
 
-.landing-main>p {
+.landing-main > p {
   border-radius: 20px;
   background-color: var(--pokemonToGuess-bg);
   width: 69%;
@@ -407,26 +405,23 @@ nav p {
 
 /* POKEMON BEKIJKEN */
 
-.pokemon-bekijken-main>.title {
+.pokemon-bekijken-main> .title {
   grid-area: title;
   margin: 0 6rem 0 1rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: .1rem;
+  justify-content: space-between;
+  align-items: start;
 }
 
 .pokemon-bekijken-main>.pokemon-list {
   grid-area: pokemon-list;
 }
 
-.pokemon-bekijken-main>.title section {
-  align-self: flex-end;
-
+.pokemon-bekijken-main> .title section{
+  margin-top: 1rem;
 }
 
-.pokemon-bekijken-main .title section form {
+.pokemon-bekijken-main .title section form{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -450,7 +445,7 @@ nav p {
   grid-template-rows: 12dvh 75dvh auto;
 }
 
-.pokemon-bekijken-main .modal-footer a {
+.pokemon-bekijken-main .modal-footer a{
   color: #fff;
 }
 
@@ -500,17 +495,8 @@ nav p {
 
 .pokemon-list {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  height: 100%;
-  width: 100%;
   overflow-y: scroll;
-}
-
-.pokemon-list::-webkit-scrollbar {
-  display: none;
 }
 
 .pokemon-list>ul {
@@ -523,7 +509,6 @@ nav p {
   align-items: center;
   align-content: flex-start;
   height: 100%;
-  width: 100%;
 }
 
 .ingelogd .pokemon-list>ul>li {
@@ -593,7 +578,6 @@ nav p {
   align-items: center;
   justify-content: center;
 }
-
 #detail .modal-footer {
   display: flex;
   flex-direction: column;
@@ -601,21 +585,17 @@ nav p {
   justify-content: center;
 }
 
-#detail table tbody tr:nth-child(1) th {
+#detail table tbody tr:nth-child(1) th{
   border-radius: 10px 0 0 0;
 }
-
-#detail table tbody tr:nth-child(3) th {
+#detail table tbody tr:nth-child(3) th{
   border-radius: 0 0 0 10px;
 }
-
-#detail table tbody tr:nth-child(1) td {
+#detail table tbody tr:nth-child(1) td{
   border-radius: 0 10px 0 0;
 }
-
-#detail table tbody tr:nth-child(3) td {
+#detail table tbody tr:nth-child(3) td{
   border-radius: 0 0 10px 0;
-  
 }
 
 #detail .modal-body>div {
@@ -636,9 +616,9 @@ nav p {
   text-align: center;
 }
 
-#detail .modal-body section:nth-child(1) {
+#detail .modal-body section:nth-child(1){
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
@@ -651,11 +631,9 @@ nav p {
 #detail .modal-body section:nth-child(2) {
   width: 100%;
 }
-
 #detailLabel {
   font-size: 1.5rem;
 }
-
 .pokemon-levels ul {
   display: flex;
   height: 100%;
@@ -685,7 +663,7 @@ nav p {
   margin: 0;
 }
 
-#detail .modal-body>section:nth-child(1) img {
+#detail .modal-body > section:nth-child(1) img {
   padding: .7rem;
   border-radius: 10px;
   border: 4px solid var(--black);
@@ -694,15 +672,7 @@ nav p {
   width: 50%;
 }
 
-#detail .modal-body table td,
-#detail .modal-body table th {
-  vertical-align: middle;
-  text-align: center;
-  min-height: 4rem;
-}
-
-
-#detailType span {
+#detailType span{
   padding: 0.2rem .4rem;
   border-radius: 10px;
   font-size: 1.2rem;
@@ -710,18 +680,6 @@ nav p {
   letter-spacing: 0.05rem;
   /* outline on text */
   text-shadow: -1px -1px 0 var(--white), 1px -1px 0 var(--white), -1px 1px 0 var(--white), 1px 1px 0 var(--white);
-}
-
-#moreDetails {
-  color: var(--black);
-}
-
-#detailType {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: .5rem;
 }
 
 /* POKEMON AUTH & SUBMENU */
@@ -871,40 +829,27 @@ nav p {
 /* POKEMON SUBMENU */
 
 .submenu {
-  margin: 1rem 0 0 1rem;
+  margin: 1rem;
   height: 100%;
-  width: 30rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  gap: 1rem;
 }
 
-.submenu article {
+.submenu article{
   opacity: 0;
   animation: slideUp 1s forwards;
   animation-delay: calc(.2s * var(--i));
 }
 
-.submenu-button{
-  width: 100%;
-}
-.submenu-button section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: .5rem 1.5rem .5rem 1rem;
-  background-color: var(--orange);
-  border-radius: 20px;
-}
-.submenu-button section span {
-  font-size: 1.8rem;
-  color: var(--black);
+.submenu-button {
+  margin: 10px;
+  border-radius: 10px;
 }
 
-.submenu-button section img{
-  width: fit-content;
-  border-radius: 0;
+.submenu-button img {
+  width: 30rem;
+  border-radius: 20px;
 }
 
 .submenu-button {
@@ -1027,19 +972,17 @@ nav p {
   animation-duration: 2s;
 }
 
-#battleChoice .modal-content {
+#battleChoice .modal-content{
   background-color: var(--pokemonToGuess-bg);
   border-radius: 20px;
   border: 4px solid var(--black);
 }
-
-#battleChoice .modal-title {
+#battleChoice .modal-title{
   font-size: 1.5rem;
   text-align: center;
   width: 100%;
 }
-
-#battleChoice .modal-footer {
+#battleChoice .modal-footer{
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1048,7 +991,7 @@ nav p {
   gap: 1rem;
 }
 
-#battleChoice .modal-footer i {
+#battleChoice .modal-footer i{
   letter-spacing: 5px;
 }
 
@@ -1196,7 +1139,8 @@ nav p {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  gap: 3rem;
+  gap: 1rem;
+  height: 90vh;
 }
 
 .poke-catch article:nth-child(1) p {
@@ -1214,6 +1158,7 @@ nav p {
 
 .poke-catch-container {
   display: inline-block;
+  pointer-events: none;
 }
 
 .poke-catch-img {
@@ -1231,17 +1176,88 @@ nav p {
   justify-content: center;
 }
 
+#countdown {
+  font-size: 1.5rem;
+}
+
+/* VANGEN ROULETTE */
+
 .roulette-container {
-  background-image: url("../assets/black_circle-removebg-preview.png");
-  width: 33%;
-  height: 30rem;
+  margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  overflow: hidden;
+  flex-direction: column;
+  height: 85vh;
+}
+
+.roulette-box {
+  width: 15.625rem; /* helft van 31.25rem */
+  height: 15.625rem; /* helft van 31.25rem */
+  background-color: #ccc;
+  border-radius: 50%;
+  border: 0.5rem solid #dde; /* ik heb de dikte van de rand ook verminderd voor verhouding */
+  position: relative;
+  overflow: hidden;
+  transition: 1s;
+}
+
+.roulette-box li {
+  height: 50%;
+  width: 6.25rem; /* helft van 12.5rem */
+  position: absolute;
+  clip-path: polygon(100% 0 , 50% 100% , 0 0 );
+  transform: translateX(-50%);
+  transform-origin: bottom;
+  text-align: center;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  font-size: 0.625rem; /* helft van 1.25rem */
+  font-weight: bold;
+  font-family: sans-serif;
+  color: #fff;
+  left: 4.21875rem; /* helft van 8.4375rem */
+}
+
+.roulette-box .one{
+	background-color: #3f51b5;
+	left: 50%;
+}
+.roulette-box .two{
+	background-color: #ff9800;
+	transform: rotate(45deg);
+}
+.roulette-box .three{
+	background-color: #e91e63;
+	transform: rotate(90deg);
+}
+.roulette-box .four{
+	background-color: #4caf50;
+	transform: rotate(135deg);
+}
+.roulette-box .five{
+	background-color: #009688;
+	transform: rotate(180deg);
+}
+.roulette-box .six{
+	background-color: #795548;
+	transform: rotate(225deg);
+}
+.roulette-box .seven{
+	background-color: #9c27b0;
+	transform: rotate(270deg);
+}
+.roulette-box .eight{
+	background-color: #f44336;
+	transform: rotate(315deg);
 }
 
 .roulette-arrow {
-  width: 12rem;
+  font-size: 2rem;
+  margin-top: -4rem;
 }
 
 #hourglass {
@@ -1252,14 +1268,21 @@ nav p {
   font-size: 2rem;
 }
 
-.poke-catch-buttons {
+.ingelogd .poke-catch-buttons {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+}
+
+.poke-catch-buttons a {
+  cursor: none; 
 }
 
 #catch-button {
   width: 6rem;
   margin: 1rem 0 1rem 0;
+  cursor: none;
 }
 
 .poke-catch-buttons a {
@@ -1324,7 +1347,7 @@ nav p {
   padding: 0;
 }
 
-#finder header {
+#finder header{
   grid-area: header;
 }
 
@@ -1368,29 +1391,27 @@ nav p {
   background-size: 100% 100%;
   position: absolute;
 }
-
-#finder .modal-content {
+#finder .modal-content{
   background-color: var(--pokemonToGuess-bg);
 }
-
-#finder .modal-title {
+#finder .modal-title{
   text-align: center;
   width: 100%;
 }
 
-#finder .modal-footer svg {
+#finder .modal-footer svg{
   transform: scaleX(-1);
   font-size: 8rem;
 }
 
-#finder .modal-body {
+#finder .modal-body{
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
 }
 
-#finder .modal-footer {
+#finder .modal-footer{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1403,42 +1424,41 @@ nav p {
   height: 80px;
 }
 
-#hulp .modal-footer {
+#hulp .modal-footer{
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-#hulp .modal-footer button {
+#hulp .modal-footer button{
   background-color: var(--orange);
   border-color: var(--orange);
   color: var(--black);
 }
 
-#hulp label {
+#hulp label{
   font-size: 1.2rem;
   cursor: pointer;
 }
 
-#hulp input[type="checkbox"] {
+#hulp input[type="checkbox"]{
   background-color: var(--orange);
   border-color: var(--orange);
 }
 
-#hulp input[type="checkbox"]:checked {
+#hulp input[type="checkbox"]:checked{
   background-color: var(--black);
   border-color: var(--black);
 }
 
 
-#finder .modal-footer img {
+#finder .modal-footer img{
   width: 48px;
   height: 48px;
 }
 
 .pokemon-finder #joyDiv {
-  visibility: hidden;
-  /* Hide the joy div by default */
+  visibility: hidden; /* Hide the joy div by default */
   width: 100px;
   height: 100px;
   position: fixed;
@@ -1452,5 +1472,5 @@ nav p {
   border: 8px solid var(--red);
   border-radius: 49%;
   z-index: 20;
-
+  
 }
