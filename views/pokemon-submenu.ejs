@@ -8,8 +8,8 @@
     <title>Pokémon Submenu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/reset.css">
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="/styles/reset.css">
+    <link rel="stylesheet" href="/styles/style.css">
     <!--SCRIPTS-->
     <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -21,7 +21,7 @@
     <header>
         <nav>
             <section class="left-container">
-                <a href="/pokemon-submenu"><img src="../assets/pokemon_logo.png" alt="logo"></a>
+                <a href="/pokemon-submenu"><img src="/assets/pokemon_logo.png" alt="logo"></a>
             </section>
             <section id="nav-menus" class="nav-container">
             </section>
@@ -37,35 +37,56 @@
             </section>
         </nav>
     </header>
-    <main>
+    <main class="pokesubmenu">
         <section class="submenu">
             <article class="article" style="--i:1">
-                <a href="/pokemons-bekijken"><button class="submenu-button"><img
-                            src="../assets/submenu-buttons/pokemons-bekijken.png" alt=""></button></a>
+                <a href="/pokemons-bekijken"><button class="submenu-button">
+                    <section><span>Pokémons bekijken</span>
+                    <img src="/assets/nav-icons-black/bekijken.png" alt="">
+                    </section>  
+                </button></a>
             </article>
             <article class="article" style="--i:2">
-                <a href="/pokemon-vergelijken"><button class="submenu-button"><img
-                            src="../assets/submenu-buttons/pokemons-vergelijken.png" alt=""></button></a>
+                <a href="/pokemon-vergelijken"><button class="submenu-button">
+                    <section><span>Pokémons vergelijken</span>
+                    <img src="/assets/nav-icons-black/vergelijken.png" alt="">
+                    </section>  
+                </button></a>
             </article>
             <article class="article" style="--i:3">
-                <a href="/pokemons-vangen"><button class="submenu-button"><img
-                            src="../assets/submenu-buttons/pokemons-vangen.png" alt=""></button></a>
+                <a href="/pokemons-vangen"><button class="submenu-button">
+                    <section><span>Pokémons vangen</span>
+                    <img src="/assets/nav-icons-black/vangen.png" alt="">
+                    </section>  
+                </button></a>
             </article>
             <article class="article" style="--i:4">
-                <a href="/huidige-pokemon"><button class="submenu-button"><img
-                            src="../assets/submenu-buttons/huidige-pokemon.png" alt=""></button></a>
+                <a href="/huidige-pokemon"><button class="submenu-button">
+                    <section><span>Huidige Pokémon</span>
+                    <img src="/assets/nav-icons-black/huidige.png" alt="">
+                    </section>  
+                </button></a>
             </article>
             <article class="article" style="--i:5">
-                <a href="/pokemon-battler"><button class="submenu-button"><img
-                            src="../assets/submenu-buttons/pokemon-battler.png" alt=""></button></a>
+                <a href="/pokemon-battler"><button class="submenu-button">
+                    <section><span>Pokémon battler</span>
+                    <img src="/assets/nav-icons-black/battler.png" alt="">
+                    </section>  
+                </button></a>
             </article>
             <article class="article" style="--i:6">
-                <a href="/who's-that-pokemon"><button class="submenu-button"><img
-                            src="../assets/submenu-buttons/who's-that.png" alt=""></button></a>
+                <a href="/who's-that-pokemon"><button class="submenu-button">
+                    <section><span>Wie is deze pokémon?</span>
+                    <img src="/assets/nav-icons-black/who.png" alt="">
+                    </section>  
+                </button></a>
             </article>
             <article class="article" style="--i:7">
-                <a href="/pokemon-finder"><button class="submenu-button"><img
-                            src="../assets/submenu-buttons/pokemon-tracker.png" alt=""></button></a>
+                <a href="/pokemon-finder"><button class="submenu-button">
+                    <section><span>Pokémon tracker</span>
+                    <img src="/assets/nav-icons-black/tracker.png" alt="">
+                    </section>  
+                </button></a>
             </article>
         </section>
         <!-- Modal voor help-->
@@ -92,13 +113,13 @@
                     </section>
                     <section class="modal-body">
                         <ul class="avatars">
-                            <li><img src="../assets/avatars/ash_ketchum.png" alt=""></li>
-                            <li><img src="../assets/avatars/dawn.png" alt=""></li>
-                            <li><img src="../assets/avatars/chloe.png" alt=""></li>
-                            <li><img src="../assets/avatars/james.png" alt=""></li>
-                            <li><img src="../assets/avatars/jessie.png" alt=""></li>
-                            <li><img src="../assets/avatars/may.png" alt=""></li>
-                            <li><img src="../assets/avatars/serena.png" alt=""></li>
+                            <li><img src="/assets/avatars/ash_ketchum.png" alt=""></li>
+                            <li><img src="/assets/avatars/dawn.png" alt=""></li>
+                            <li><img src="/assets/avatars/chloe.png" alt=""></li>
+                            <li><img src="/assets/avatars/james.png" alt=""></li>
+                            <li><img src="/assets/avatars/jessie.png" alt=""></li>
+                            <li><img src="/assets/avatars/may.png" alt=""></li>
+                            <li><img src="/assets/avatars/serena.png" alt=""></li>
                         </ul>
                     </section>
                 </section>

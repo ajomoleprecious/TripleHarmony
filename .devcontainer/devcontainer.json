@@ -28,5 +28,5 @@
 	// Set working directory inside the container. This is the working directory used when opening a terminal in the container.
 	"workspaceFolder": "/workspaces/TripleHarmony",
 	// Use 'postStartCommand' to run commands after the container is started.
-	"postStartCommand": "git pull origin main && npm install"
+	"postStartCommand": "git pull && npm install"
 }

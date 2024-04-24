@@ -1,17 +1,15 @@
 import { log } from 'console';
 import express from 'express';
-import axio from 'axios';
+import cookieParser from 'cookie-parser';
+const mongoose = require('mongoose');
 import { getPokeImages } from './functions';
 import pokemonsBekijkenRouter from './routers/pokemons-bekijken';
 import huidigePokemonRouter from './routers/huidige-pokemon';
 import pokemonAuthRouter from './routers/pokemon-auth';
 import whosThatPokemonRouter from "./routers/who's-that-pokemon";
-import { MongoClient, ObjectId } from 'mongodb';
+const { verifyUser } = require('./middleware/verifyUser');
 
 const uri = "mongodb+srv://DBManager:HmnVABk3hUo3zL9P@tripleharmony.9nn57t6.mongodb.net/";
-const client = new MongoClient(uri);
-
-let pokemons: any = [];
 
 const app = express();
 
@@ -26,10 +24,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
-app.use('/pokemons-bekijken', pokemonsBekijkenRouter);
-app.use('/huidige-pokemon', huidigePokemonRouter);
+app.use(cookieParser());
+
+app.use('/pokemons-bekijken', pokemonsBekijkenRouter, verifyUser);
+app.use('/huidige-pokemon', huidigePokemonRouter, verifyUser);
 app.use('/pokemon-auth', pokemonAuthRouter);
-app.use(`/who's-that-pokemon`, whosThatPokemonRouter);
+app.use(`/who's-that-pokemon`, whosThatPokemonRouter, verifyUser);
 
 
 app.get('/', (req, res) => {
@@ -37,52 +37,35 @@ app.get('/', (req, res) => {
 });
 
 
-app.get("/pokemon-battler-vs-pc", (req, res) => {
+app.get("/pokemon-battler-vs-pc", verifyUser, (req, res) => {
   res.render('pokemon-battler-vs-pc');
 });
 
-app.get("/pokemon-battler", (req, res) => {
+app.get("/pokemon-battler", verifyUser, (req, res) => {
   res.render('pokemon-battler');
 });
 
-app.get('/pokemon-submenu', (req, res) => {
+app.get('/pokemon-submenu', verifyUser, (req, res) => {
   res.render('pokemon-submenu');
 });
 
-app.get("/pokemons-vangen", async(req, res) => {
+app.get("/pokemons-vangen", verifyUser, async (req, res) => {
 
   let randomNumber: number = Math.floor(Math.random() * 898) + 1;
-  
+
   res.render('pokemons-vangen');
 });
 
-app.get("/pokemon-vergelijken", (req, res) => {
+app.get("/pokemon-vergelijken", verifyUser,  (req, res) => {
   res.render('pokemon-vergelijken');
 });
 
-app.get('/pokemon-auth/verify/:id', async (req, res) => {
-  const id = req.params.id;
-  try {
-      await client.connect();
-      const user = await client.db("users").collection("usersAccounts").findOne({ _id: new ObjectId(id) });
-      if (user) {
-          await client.db("users").collection("usersAccounts").updateOne({ _id: new ObjectId(id) }, { $set: { verified: true } });
-          res.status(200).render('pokemon-auth-message', { title: "Account geverifieerd", message: "Uw account is succesvol geverifieerd. U kunt nu inloggen op onze website." });
-      }
-      else {
-          res.status(404).render('pokemon-auth-message', { title: "Account verifiëren is mislukt", message: "De gebruiker met het opgegeven ID bestaat niet." });
-      }
-  }
-  catch (_) {
-      res.status(500).render('pokemon-auth-message', { title: "Account verifiëren is mislukt", message: "Er is een fout opgetreden bij het verifiëren van uw account. Probeer het later opnieuw." });
-  }
-  finally {
-      await client.close();
-  }
+app.get("/pokemon-finder", verifyUser,  (req, res) => {
+  res.render("pokemon-finder");
 });
 
-app.get("/pokemon-finder", (req, res) => {
-  res.render("pokemon-finder");
+app.get("/register-success", (req, res) => {
+  res.render("register-success");
 });
 
 /* Als route niet bestaat */
@@ -91,7 +74,13 @@ app.use((_, res) => {
   res.status(404).render('404');
 });
 
-app.listen(process.env.PORT || app.get('port'), async () => {
-  pokemonImages = await getPokeImages();
-  console.log('[server] http://localhost:' + app.get('port'));
+export const client = mongoose.connect(uri).then(() => {
+  console.log("Connected to MongoDB");
+  app.listen(process.env.PORT || app.get('port'), async () => {
+    pokemonImages = await getPokeImages();
+
+    console.log('[server] http://localhost:' + app.get('port'));
+  });
+}).catch((err : any) => {
+  console.error('Error connecting to MongoDB:', err);
 });

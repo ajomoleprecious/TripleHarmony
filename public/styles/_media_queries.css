@@ -32,6 +32,7 @@
         font-size: 1rem;
         width: 150px;
     }
+
     .ingelogd .pokemon-bekijken-main {
         grid-template-rows: 10dvh 72dvh auto;
     }
@@ -86,6 +87,7 @@
         right: 1rem;
         top: 15rem;
     }
+
     
     .roulette-box {
         width: 7.8125rem; /* helft van 15.625rem */
@@ -111,6 +113,7 @@
 
     .ingelogd .hamMenu {
         display: block;
+        animation: pop 1.5s ease-in-out;
     }
 
     .ingelogd header nav {
@@ -195,7 +198,7 @@
 @media (max-width: 475px) {
     aside.active {
         position: fixed;
-        top: 200px;
+        top: 150px;
     }
 
     .aanvallen li {
@@ -375,22 +378,26 @@
     .ingelogd .pokemon-bekijken-main {
         grid-template-rows: 10dvh 73dvh auto;
     }
+
     #detailLabel {
         font-size: 1rem;
     }
+
     .pokemon-bekijken .modal-body>img:nth-child(1) {
         width: fit-content;
         height: 100%;
     }
-    .ingelogd .pokemon-bekijken-main .title{
+
+    .ingelogd .pokemon-bekijken-main .title {
         margin-right: 3.7rem;
     }
+
     .ingelogd .pokemon-bekijken-main .title h1 {
         font-size: 1.5rem;
     }
 
     .ingelogd .pokemon-bekijken-main .title section,
-    .ingelogd .pokemon-bekijken-main .title section select{
+    .ingelogd .pokemon-bekijken-main .title section select {
         font-size: .7rem;
     }
 
@@ -400,12 +407,38 @@
 
     }
 
-    .pokemonToGuess #inputWho, .pokemonToGuess a.result {
+    .pokemonToGuess #inputWho,
+    .pokemonToGuess a.result {
         width: 290px;
     }
-}
 
-@media (max-height: 900px) {
+    .ingelogd .pokemon-bekijken-main .pokemon-list ul li {
+        width: 100px;
+    }
+
+    .ingelogd .pokemon-bekijken-main .pokemon-list ul li:hover {
+        transform: scale(1.05);
+        transition: .3s;
+    }
+
+    .ingelogd .pokesubmenu {
+        width: 90vw;
+    }
+
+    .ingelogd .submenu {
+        width: 100%;
+    }
+
+    .ingelogd .submenu-button section span {
+        font-size: 1rem;
+    }
+
+    .ingelogd .submenu-button section img {
+        width: 30px;
+  }
+  
+}
+      @media (max-height: 900px) {
     .poke-catch-buttons {
         flex-direction: row;
     }

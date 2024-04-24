@@ -27,7 +27,7 @@ if (localStorage.getItem('amountOfPokemons')) {
     amountOfpokemons.value = localStorage.getItem('amountOfPokemons');
 }
 else {
-    amountOfpokemons.value = 50;
+    amountOfpokemons.value = 10;
 }
 // on change
 amountOfpokemons.addEventListener('change', function () {
@@ -69,16 +69,14 @@ async function DetailOfPokemon(name) {
     await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
         .then(response => response.json())
         .then(data => {
-            detailWeight.innerText = `${data.weight}`;
-            detailLength.innerText = `${data.height}`;
+            detailWeight.innerHTML = `${data.weight}<sub> kg</sub>`;
+            detailLength.innerHTML = `${data.height}<sub> m</sub>`;
             // Mapping types to colored spans
             const typeSpans = data.types.map(type => `<span style="background-color: ${typeColors[type.type.name]}">${type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}</span>`);
             detailType.innerHTML = typeSpans.join(' ');
             detailName.innerText = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)}`;
             moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${data.name}`;
             detailImg.src = data.sprites.other['official-artwork'].front_default;
-            // show color of the type in the detail box
-            detailbox.style.backgroundColor = typeColors[data.types[0].type.name];
         });
 }
 
@@ -88,16 +86,14 @@ async function showDetails(evolutionId, pokemonId) {
     await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
         .then(response => response.json())
         .then(data => {
-            detailWeight.innerText = `${data.weight}`;
-            detailLength.innerText = `${data.height}`;
+            detailWeight.innerHTML = `${data.weight}<sub> kg</sub>`;
+            detailLength.innerHTML = `${data.height}<sub> m</sub>`;
             // Mapping types to colored spans
             const typeSpans = data.types.map(type => `<span style="background-color: ${typeColors[type.type.name]}">${type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}</span>`);
             detailType.innerHTML = typeSpans.join(' ');
             detailName.innerText = `${data.name.charAt(0).toUpperCase() + data.name.slice(1)}`;
             moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${data.name}`;
             detailImg.src = data.sprites.other['official-artwork'].front_default;
-            // show color of the type in the detail box
-            detailbox.style.backgroundColor = typeColors[data.types[0].type.name];
         });
     // Call the function to fetch and display the evolution chain
     await createPokemonList(evolutionId);
