@@ -190,4 +190,9 @@ router.post('/reset', async (req: Request, res: Response) => {
     }
 });
 
+router.get('/logout', (req: Request, res: Response) => {
+    res.cookie('jwt', '', { maxAge: 1 });
+    res.redirect('/pokemon-auth');
+});
+
 export default router;
