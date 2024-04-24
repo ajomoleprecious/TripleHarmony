@@ -41,17 +41,20 @@
         grid-template-columns: 1.7fr 4fr;
     }
 
-    #poke-bg .submenu,
-    #poke-bg .submenu .submenu-button {
-        width: 100%;
-    }
-    
-    #poke-bg .submenu-button section span {
-        font-size: 1.5rem;
+    #poke-bg main.pokesubmenu {
+        padding: 1rem;
     }
 
-    #poke-bg .submenu-button section img {
-        width: 30px;
+    #poke-bg section.submenu{
+        width: 100%;
+    }
+
+    #poke-bg button.submenu-button section {
+        width: 100%;
+    }
+
+    #poke-bg button.submenu-button:hover{
+        transform: scale(1.02);
     }
 }
 
@@ -433,11 +436,22 @@
     .pokemonToGuess a.result {
         width: 290px;
     }
+
 */
-    #poke-bg .pokesubmenu {
+
+    #poke-bg main.pokesubmenu {
         padding: 1rem;
     }
 
+    
+
+    #poke-bg button.submenu-button section img {
+        width: 30px;
+    }
+
+    #poke-bg button.submenu-button span{
+        font-size: 1.5rem;
+    }
 }
 
 @media (max-height: 900px) {
@@ -454,12 +468,13 @@
         transition: .3s;
     }
 
+}
+
+@media (max-height: 900px) {
     .poke-catch-buttons {
         flex-direction: row;
     }
-
     .ingelogd .poke-catch article:nth-child(2) {
         margin: 0;
     }
-
 }
