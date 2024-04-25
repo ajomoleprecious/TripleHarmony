@@ -4,8 +4,20 @@ import { verifyUser } from "../middleware/verifyUser";
 const router = Router();
 router.use(verifyUser);
 
-router.get("/", (req: Request, res: Response) => {
-  res.render("pokemon-submenu");
+router.get("/", async (req: Request, res: Response) => {
+  try
+  {
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon/pikachu");
+    const pikaData = await response.json();
+    const pikaUrl = await pikaData.sprites.front_default;
+    console.log(pikaUrl);
+
+    res.render("pokemon-submenu", { pikaUrl });
+  }
+  catch (error: any)
+  {
+    res.status(404).json({ error: error.message });
+  }
 });
 
 
