@@ -12,7 +12,10 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 router.get("/", (req: Request, res: Response) => {
-    res.render("pokemon-battler");
+    // get full URL
+    const url = req.protocol + '://' + req.get('host') + req.originalUrl;
+    const roomID = req.query.roomID ? `${url}/?roomID=${req.params.roomID}` : `${url}/?roomID=${Math.floor(Math.random() * 1000)}`;
+    res.render("pokemon-battler", { roomID });
 });
 
 
