@@ -1,5 +1,5 @@
 @media (max-width: 1100px) {
-    .pokemonToGuess {
+/* .pokemonToGuess {
         height: 55vh;
         width: 40vh;
         margin-top: 8rem;
@@ -32,7 +32,7 @@
         font-size: 1rem;
         width: 150px;
     }
-
+*/
     .ingelogd .pokemon-bekijken-main {
         grid-template-rows: 10dvh 72dvh auto;
     }
@@ -41,17 +41,20 @@
         grid-template-columns: 1.7fr 4fr;
     }
 
-    #poke-bg .submenu,
-    #poke-bg .submenu .submenu-button {
-        width: 100%;
-    }
-    
-    #poke-bg .submenu-button section span {
-        font-size: 1.5rem;
+    #poke-bg main.pokesubmenu {
+        padding: 1rem;
     }
 
-    #poke-bg .submenu-button section img {
-        width: 30px;
+    #poke-bg section.submenu{
+        width: 100%;
+    }
+
+    #poke-bg button.submenu-button section {
+        width: 100%;
+    }
+
+    #poke-bg button.submenu-button:hover{
+        transform: scale(1.02);
     }
 }
 
@@ -348,7 +351,13 @@
         justify-content: center;
     }
 
-    .ingelogd .pokemonToGuess {
+    .ingelogd {
+        height: 80vh;
+        width: 90vw;
+        margin-top: 1rem;
+    }
+/*
+    .pokemonToGuess {
         height: 80vh;
         width: 90vw;
         margin-top: 1rem;
@@ -366,7 +375,7 @@
     .pokemonToGuess input {
         width: 150px;
     }
-
+*/
     .pokemon-levels ul {
         width: 300px;
     }
@@ -426,16 +435,27 @@
         border-left: 7px solid var(--nav-link-border);
 
     }
-
+/*
     .pokemonToGuess #inputWho,
     .pokemonToGuess a.result {
         width: 290px;
     }
 
-    #poke-bg .pokesubmenu {
+*/
+
+    #poke-bg main.pokesubmenu {
         padding: 1rem;
     }
 
+    
+
+    #poke-bg button.submenu-button section img {
+        width: 30px;
+    }
+
+    #poke-bg button.submenu-button span{
+        font-size: 1.5rem;
+    }
 }
 
 @media (max-height: 900px) {
@@ -452,12 +472,13 @@
         transition: .3s;
     }
 
+}
+
+@media (max-height: 900px) {
     .poke-catch-buttons {
         flex-direction: row;
     }
-
     .ingelogd .poke-catch article:nth-child(2) {
         margin: 0;
     }
-
 }
