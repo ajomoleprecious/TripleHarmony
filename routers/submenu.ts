@@ -9,8 +9,7 @@ router.get("/", async (req: Request, res: Response) => {
   {
     const response = await fetch("https://pokeapi.co/api/v2/pokemon/pikachu");
     const pikaData = await response.json();
-    const pikaUrl = await pikaData.sprites.front_default;
-    console.log(pikaUrl);
+    const pikaUrl = await pikaData.sprites.other.showdown.front_default;
 
     res.render("pokemon-submenu", { pikaUrl });
   }
