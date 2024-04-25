@@ -11,6 +11,7 @@ body, .ingelogd {
   width: 100%;
   height: 100dvh;
   font-family: 'Anta', sans-serif;
+  margin: 0;
 }
 
 body * ::-webkit-scrollbar {
@@ -405,23 +406,26 @@ nav p {
 
 /* POKEMON BEKIJKEN */
 
-.pokemon-bekijken-main> .title {
+.pokemon-bekijken-main>.title {
   grid-area: title;
   margin: 0 6rem 0 1rem;
   display: flex;
-  justify-content: space-between;
-  align-items: start;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .1rem;
 }
 
 .pokemon-bekijken-main>.pokemon-list {
   grid-area: pokemon-list;
 }
 
-.pokemon-bekijken-main> .title section{
-  margin-top: 1rem;
+.pokemon-bekijken-main>.title section {
+  align-self: flex-end;
+
 }
 
-.pokemon-bekijken-main .title section form{
+.pokemon-bekijken-main .title section form {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -445,7 +449,7 @@ nav p {
   grid-template-rows: 12dvh 75dvh auto;
 }
 
-.pokemon-bekijken-main .modal-footer a{
+.pokemon-bekijken-main .modal-footer a {
   color: #fff;
 }
 
@@ -495,8 +499,17 @@ nav p {
 
 .pokemon-list {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  height: 100%;
+  width: 100%;
   overflow-y: scroll;
+}
+
+.pokemon-list::-webkit-scrollbar {
+  display: none;
 }
 
 .pokemon-list>ul {
@@ -509,6 +522,7 @@ nav p {
   align-items: center;
   align-content: flex-start;
   height: 100%;
+  width: 100%;
 }
 
 .ingelogd .pokemon-list>ul>li {
@@ -578,6 +592,7 @@ nav p {
   align-items: center;
   justify-content: center;
 }
+
 #detail .modal-footer {
   display: flex;
   flex-direction: column;
@@ -585,17 +600,21 @@ nav p {
   justify-content: center;
 }
 
-#detail table tbody tr:nth-child(1) th{
+#detail table tbody tr:nth-child(1) th {
   border-radius: 10px 0 0 0;
 }
-#detail table tbody tr:nth-child(3) th{
+
+#detail table tbody tr:nth-child(3) th {
   border-radius: 0 0 0 10px;
 }
-#detail table tbody tr:nth-child(1) td{
+
+#detail table tbody tr:nth-child(1) td {
   border-radius: 0 10px 0 0;
 }
-#detail table tbody tr:nth-child(3) td{
+
+#detail table tbody tr:nth-child(3) td {
   border-radius: 0 0 10px 0;
+  
 }
 
 #detail .modal-body>div {
@@ -616,9 +635,9 @@ nav p {
   text-align: center;
 }
 
-#detail .modal-body section:nth-child(1){
+#detail .modal-body section:nth-child(1) {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 1rem;
@@ -631,9 +650,11 @@ nav p {
 #detail .modal-body section:nth-child(2) {
   width: 100%;
 }
+
 #detailLabel {
   font-size: 1.5rem;
 }
+
 .pokemon-levels ul {
   display: flex;
   height: 100%;
@@ -663,7 +684,7 @@ nav p {
   margin: 0;
 }
 
-#detail .modal-body > section:nth-child(1) img {
+#detail .modal-body>section:nth-child(1) img {
   padding: .7rem;
   border-radius: 10px;
   border: 4px solid var(--black);
@@ -672,7 +693,15 @@ nav p {
   width: 50%;
 }
 
-#detailType span{
+#detail .modal-body table td,
+#detail .modal-body table th {
+  vertical-align: middle;
+  text-align: center;
+  min-height: 4rem;
+}
+
+
+#detailType span {
   padding: 0.2rem .4rem;
   border-radius: 10px;
   font-size: 1.2rem;
@@ -680,6 +709,18 @@ nav p {
   letter-spacing: 0.05rem;
   /* outline on text */
   text-shadow: -1px -1px 0 var(--white), 1px -1px 0 var(--white), -1px 1px 0 var(--white), 1px 1px 0 var(--white);
+}
+
+#moreDetails {
+  color: var(--black);
+}
+
+#detailType {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
 }
 
 /* POKEMON AUTH & SUBMENU */
@@ -1015,7 +1056,10 @@ nav p {
 /* WHO'S THAT POKEMON & RESULT */
 
 .pokemonToGuess {
-  margin: auto;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: var(--pokemonToGuess-bg);
   display: flex;
   align-items: center;
@@ -1023,11 +1067,10 @@ nav p {
   flex-direction: column;
   box-shadow: 0 0 15px var(--black);
   border-radius: 20px;
-  height: 85dvh;
-  width: 90dvw;
-  margin-top: 1rem;
+  padding: 50px;
+  max-width: 200vw; /* Set maximum width relative to viewport width */
+  overflow: hidden; /* Hide overflow content */
 }
-
 .pokemonToGuess .result {
   cursor: pointer;
   color: var(--pokemonToGuess-bg);
@@ -1038,11 +1081,6 @@ nav p {
   font-size: 1.3rem;
   width: 300px;
   text-decoration: none;
-}
-
-.pokemonToGuess .result:hover {
-  transform: scale(1.1);
-  transition: 0.5s ease-in-out;
 }
 
 .pokemonToGuess .skip {
@@ -1061,7 +1099,7 @@ nav p {
 
 .silhouette {
   filter: brightness(0);
-  width: 320px;
+  width: 400px;
   animation: infinite 1s ease-in-out;
   animation-name: move;
   animation-duration: 2s;
@@ -1126,7 +1164,7 @@ nav p {
 
 #cardTitle {
   color: var(--avatar-border-color);
-  font-size: 30px;
+  font-size: 25px;
   text-align: center;
   width: 100%;
   margin: 0;
@@ -1147,6 +1185,14 @@ nav p {
 #dontKnow:hover {
   transform: scale(1.1);
   transition: 0.5s ease-in-out;
+}
+
+.hidden {
+  display: none;
+}
+
+#loadingGif {
+  width: 15%;
 }
 
 /* POKEMON VANGEN */

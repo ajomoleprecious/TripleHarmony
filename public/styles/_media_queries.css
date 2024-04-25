@@ -1,5 +1,5 @@
 @media (max-width: 1100px) {
-    .pokemonToGuess {
+/* .pokemonToGuess {
         height: 55vh;
         width: 40vh;
         margin-top: 8rem;
@@ -32,7 +32,7 @@
         font-size: 1rem;
         width: 150px;
     }
-
+*/
     .ingelogd .pokemon-bekijken-main {
         grid-template-rows: 10dvh 72dvh auto;
     }
@@ -351,7 +351,13 @@
         justify-content: center;
     }
 
-    .ingelogd .pokemonToGuess {
+    .ingelogd {
+        height: 80vh;
+        width: 90vw;
+        margin-top: 1rem;
+    }
+/*
+    .pokemonToGuess {
         height: 80vh;
         width: 90vw;
         margin-top: 1rem;
@@ -369,7 +375,7 @@
     .pokemonToGuess input {
         width: 150px;
     }
-
+*/
     .pokemon-levels ul {
         width: 300px;
     }
@@ -429,11 +435,13 @@
         border-left: 7px solid var(--nav-link-border);
 
     }
-
+/*
     .pokemonToGuess #inputWho,
     .pokemonToGuess a.result {
         width: 290px;
     }
+
+*/
 
     #poke-bg main.pokesubmenu {
         padding: 1rem;
