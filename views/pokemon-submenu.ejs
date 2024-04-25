@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl-BE">
- 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
         crossorigin="anonymous"></script>
     <script defer src="/scripts/submenu.js"></script>
 </head>
- 
+
 <body id="poke-bg" class="ingelogd">
     <header>
         <nav>
@@ -30,8 +30,8 @@
                 <ul>
                     <li></li>
                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>
-                                <i class="fa-solid fa-question"></i>
-                            </button></a></li>
+                        <i class="fa-solid fa-question"></i>
+                    </button></a></li>
                     <li><a href="/pokemon-auth/logout" class="fa-solid fa-right-from-bracket btn btn-dark"></a>
                     </li>
                 </ul>
@@ -126,21 +126,26 @@
                 </section>
             </section>
         </section>
-        <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i class="fa-solid fa-question"></i></button></section>
-        <section class="modal fade" id="receive-poke" tabindex="-1" aria-labelledby="chooseAvatar" aria-hidden="true">
-            <section class="modal-dialog modal-dialog-centered">
-                <section class="modal-content">
-                    <section class="modal-header">
-                        <h1 class="modal-title fs-5" id="chooseAvatarLabel">Titel</h1>
+        <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i
+                    class="fa-solid fa-question"></i></button></section>
+        <div class="modal fade" id="receive-poke" tabindex="-1">
+            <div class="modal-dialog">  
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </section>
-                    <section class="modal-body">
-                        Hier is de body
-                    </section>
-                </section>
-            </section>
-        </section>
+                    </div>
+                    <div class="modal-body">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 </body>
- 
+
 </html>
