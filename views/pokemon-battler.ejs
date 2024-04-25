@@ -144,13 +144,48 @@
                     </section>
                     <section class="modal-footer">
                         Spelen met:
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pvpfriend">
                             <i class="fa-solid fa-user-group"> Vriend</i>
                         </button>
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pvpstranger">
                             <i class="fa-solid fa-globe"> Willekeurig</i>
                         </button>
                         <a href="pokemon-submenu">Terug gaan</a>
+                    </section>
+                </section>
+            </section>
+        </section>
+        <!-- Modal voor pvp met vriend -->
+        <section class="modal fade" id="pvpfriend" tabindex="-1">
+            <section class="modal-dialog modal-dialog-centered">
+                <section class="modal-content">
+                    <section class="modal-header">
+                        <h5 class="modal-title">Speel met een vriend</h5>
+                    </section>
+                    <section class="modal-footer">
+                        Kopieer de link en stuur deze naar je vriend:
+                        <section class="input-group" mb-3>
+                            <input type="text" readonly class="form-control" value="https://pokemonbattler.be/pvpfriend">
+                            <span class="input-group-text"><button><i class="fa-solid fa-copy"></i></button></span>
+                        </section>
+                        <a href="pokemon-battler">Terug gaan</a>
+                    </section>
+                </section>
+            </section>
+        </section>
+        <!-- Modal voor pvp met online tegenstander -->
+        <section class="modal fade" id="pvpstranger" tabindex="-1">
+            <section class="modal-dialog modal-dialog-centered">
+                <section class="modal-content">
+                    <section class="modal-header">
+                        <h5 class="modal-title">Speel met een tegenstander</h5>
+                    </section>
+                    <section class="modal-footer">
+                        Wacht voor een online tegenstander.
+                        <section>
+                            <img src="/assets/others/loading.gif" alt="">
+                        </section>
+                        <a href="pokemon-battler">Terug gaan</a>
                     </section>
                 </section>
             </section>
