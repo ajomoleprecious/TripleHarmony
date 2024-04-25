@@ -1053,6 +1053,24 @@ nav p {
   letter-spacing: 5px;
 }
 
+#pvpstranger .modal-footer,
+#pvpfriend .modal-footer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
+}
+
+#pvpfriend .modal-footer .input-group{
+  cursor: pointer;
+}
+
+#pvpstranger img{
+  width: 3rem;
+}
+
 /* WHO'S THAT POKEMON & RESULT */
 
 .pokemonToGuess {

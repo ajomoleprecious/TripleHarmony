@@ -16,9 +16,10 @@ fightButtons.forEach((button) => {
     });
 });
 
-let modal = new bootstrap.Modal(document.getElementById('battleChoice'), {
+let choiceModal = new bootstrap.Modal(document.getElementById('battleChoice'), {
     keyboard: false,
     backdrop: 'static'
 });
 
-modal.show();
+choiceModal.show();
+
