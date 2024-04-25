@@ -111,7 +111,7 @@ router.post('/register', async (req: Request, res: Response) => {
             <br>
             <p>Zodra uw account is geverifieerd, heeft u volledige toegang tot alle functies en inhoud op onze website. We hopen dat u een plezierige ervaring heeft met het verkennen en interactie met ons platform.</p>
             <br>
-            <p>Als u vragen heeft of hulp nodig heeft, neem dan gerust contact op met ons ondersteuningsteam op <a href="mailto:tripleharmony.ap@hotmail.com">deze email</a>.</p>
+            <p>Als u vragen heeft of hulp nodig heeft, neem dan gerust contact op met ons ondersteuningsteam op <a href="mailto:tripleharmony.ap@gmail.com">deze email</a>.</p>
             <br>
             <p>Met vriendelijke groet,</p>
             <p>Het Triple Harmony-team</p>`;
@@ -179,7 +179,7 @@ router.post('/reset', async (req: Request, res: Response) => {
                 <br>
                 <p>Als u geen verzoek heeft ingediend om uw wachtwoord te resetten, kunt u deze e-mail veilig negeren.</p>
                 <br>
-                <p>Als u vragen heeft of hulp nodig heeft, neem dan gerust contact op met ons ondersteuningsteam op <a href="mailto:tripleharmony.ap@hotmail.com">deze email</a>.</p>
+                <p>Als u vragen heeft of hulp nodig heeft, neem dan gerust contact op met ons ondersteuningsteam op <a href="mailto:tripleharmony.ap@gmail.com">deze email</a>.</p>
                 <br>
                 <p>Met vriendelijke groet,</p>
                 <p>Het Triple Harmony-team</p>`;
