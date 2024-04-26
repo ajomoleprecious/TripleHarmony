@@ -2,63 +2,56 @@
 <html lang="nl-BE">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/assets/pokemonICO.ico" type="image/x-icon">
-    <title>Pokémon Battler</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles/reset.css">
-    <link rel="stylesheet" href="/styles/style.css">
-    <!--SCRIPTS-->
-    <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script defer src="/scripts/general.js"></script>
-    <script defer src="/scripts/battler.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/assets/pokemonICO.ico" type="image/x-icon">
+  <title>Pokémon Battler</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles/reset.css">
+  <link rel="stylesheet" href="/styles/style.css">
+  <!--SCRIPTS-->
+  <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script defer src="/scripts/general.js"></script>
+  <script defer src="/scripts/battler.js"></script>
 </head>
 
 <body class="ingelogd battler">
-    <header>
-        <nav>
-            <section class="left-container">
-                <a href="pokemon-submenu"><img src="/assets/pokemon_logo.png" alt="logo"></a>
-            </section>
-            <section id="nav-menus" class="nav-container">
-                <ul class="">
-                    <li><a href="/pokemons-bekijken"><img src="/assets/nav-icons-black/bekijken.png"
-                                alt=""></a></a></li>
-                    <li><a href="/pokemon-vergelijken"><img src="/assets/nav-icons-black/vergelijken.png"
-                                alt=""></a></li>
-                    <li><a href="/pokemons-vangen"><img src="/assets/nav-icons-black/vangen.png" alt=""></a>
-                    </li>
-                    <li><a href="/huidige-pokemon"><img src="/assets/nav-icons-black/huidige.png" alt=""></a>
-                    </li>
-                    <li class="active"><a href="./pokemon-battler"><img src="/assets/nav-icons-red/battler.png"
-                                alt=""></a></li>
-                    <li><a href="/who's-that-pokemon"><img src="/assets/nav-icons-black/who.png" alt=""></a>
-                    </li>
-                    <li><a href="/pokemon-finder"><img src="/assets/nav-icons-black/tracker.png" alt=""></a>
-                    </li>
-                </ul>
-            </section>
-            <section class="right-container">
-                <ul>
-                    <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
-                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>
-                                <i class="fa-solid fa-question"></i>
-                            </button></a></li>
-                    <li><a href="/pokemon-auth/logout"
-                            class="fa-solid fa-right-from-bracket btn btn-dark"></a>
-                    </li>
-                </ul>
-            </section>
-        </nav>
-    </header>
-    <main>
-        <section class="battlefield">
-            <!--<article>
+  <header>
+    <nav>
+      <section class="left-container">
+        <a href="pokemon-submenu"><img src="/assets/pokemon_logo.png" alt="logo"></a>
+      </section>
+      <section id="nav-menus" class="nav-container">
+        <ul class="">
+          <li><a href="/pokemons-bekijken"><img src="/assets/nav-icons-black/bekijken.png" alt=""></a></a></li>
+          <li><a href="/pokemon-vergelijken"><img src="/assets/nav-icons-black/vergelijken.png" alt=""></a></li>
+          <li><a href="/pokemons-vangen"><img src="/assets/nav-icons-black/vangen.png" alt=""></a>
+          </li>
+          <li><a href="/huidige-pokemon"><img src="/assets/nav-icons-black/huidige.png" alt=""></a>
+          </li>
+          <li class="active"><a href="./pokemon-battler"><img src="/assets/nav-icons-red/battler.png" alt=""></a></li>
+          <li><a href="/who's-that-pokemon"><img src="/assets/nav-icons-black/who.png" alt=""></a>
+          </li>
+          <li><a href="/pokemon-finder"><img src="/assets/nav-icons-black/tracker.png" alt=""></a>
+          </li>
+        </ul>
+      </section>
+      <section class="right-container">
+        <ul>
+          <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
+          <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>
+                <i class="fa-solid fa-question"></i>
+              </button></a></li>
+          <li><a href="/pokemon-auth/logout" class="fa-solid fa-right-from-bracket btn btn-dark"></a>
+          </li>
+        </ul>
+      </section>
+    </nav>
+  </header>
+  <main>
+    <section class="battlefield">
+      <!--<article>
             </article>
             <article>
                 <section class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75"
@@ -96,103 +89,112 @@
                     <li>thunder-punch</li>
                 </ul>
             </article>-->
+    </section>
+    <!-- Modal voor help-->
+    <section class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header">
+            <h1 class="modal-title fs-5" id="hulpLabel">Hulp</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </section>
+          <section class="modal-body">
+            Hier kunt u uw Pokémons tegen elkaar laten vechten. <br> Indien u nog geen Pokémon heeft
+            gekozen, moet u dat eerst doen op de pagina <a href="huidige-pokemon">huidige-pokemon</a>.
+            Kies één aanvalstechniek van de 4 en kijk wie er wint!
+          </section>
         </section>
-        <!-- Modal voor help-->
-        <section class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
-            <section class="modal-dialog modal-dialog-centered">
-                <section class="modal-content">
-                    <section class="modal-header">
-                        <h1 class="modal-title fs-5" id="hulpLabel">Hulp</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </section>
-                    <section class="modal-body">
-                        Hier kunt u uw Pokémons tegen elkaar laten vechten. <br> Indien u nog geen Pokémon heeft
-                        gekozen, moet u dat eerst doen op de pagina <a href="huidige-pokemon">huidige-pokemon</a>.
-                        Kies één aanvalstechniek van de 4 en kijk wie er wint!
-                    </section>
-                </section>
+      </section>
+    </section>
+    <!-- Modal voor avatar-->
+    <section class="modal fade" id="chooseAvatar" tabindex="-1" aria-labelledby="chooseAvatar" aria-hidden="true">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header">
+            <h1 class="modal-title fs-5" id="chooseAvatarLabel">Kies je nieuwe avatar</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </section>
+          <section class="modal-body">
+            <ul class="avatars">
+              <li><img src="/assets/avatars/ash_ketchum.png" alt=""></li>
+              <li><img src="/assets/avatars/chloe.png" alt=""></li>
+              <li><img src="/assets/avatars/dawn.png" alt=""></li>
+              <li><img src="/assets/avatars/james.png" alt=""></li>
+              <li><img src="/assets/avatars/jessie.png" alt=""></li>
+              <li><img src="/assets/avatars/may.png" alt=""></li>
+              <li><img src="/assets/avatars/serena.png" alt=""></li>
+            </ul>
+          </section>
+        </section>
+      </section>
+    </section>
+    <!-- Modal voor keuze van gevecht -->
+    <section class="modal fade" id="battleChoice" tabindex="-1">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header">
+            <h5 class="modal-title">Kies een optie</h5>
+          </section>
+          <section class="modal-footer">
+            Spelen met:
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pvpfriend">
+              <i class="fa-solid fa-user-group"> Vriend</i>
+            </button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pvpstranger">
+              <i class="fa-solid fa-globe"> Willekeurig</i>
+            </button>
+            <a href="/pokemon-submenu">Terug gaan</a>
+          </section>
+        </section>
+      </section>
+    </section>
+    <!-- Modal voor pvp met vriend -->
+    <section class="modal fade" id="pvpfriend" tabindex="-1">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header">
+            <h5 class="modal-title">Speel met een vriend</h5>
+          </section>
+          <section class="modal-footer">
+            Kopieer de link en stuur deze naar je vriend:
+            <section class="input-group" mb-3>
+              <input type="text" readonly class="form-control" value="<%= roomID %>">
+              <span class="input-group-text"><button><i class="fa-solid fa-copy"></i></button></span>
             </section>
+            <a href="/pokemon-battler">Terug gaan</a>
+          </section>
         </section>
-        <!-- Modal voor avatar-->
-        <section class="modal fade" id="chooseAvatar" tabindex="-1" aria-labelledby="chooseAvatar" aria-hidden="true">
-            <section class="modal-dialog modal-dialog-centered">
-                <section class="modal-content">
-                    <section class="modal-header">
-                        <h1 class="modal-title fs-5" id="chooseAvatarLabel">Kies je nieuwe avatar</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </section>
-                    <section class="modal-body">
-                        <ul class="avatars">
-                            <li><img src="/assets/avatars/ash_ketchum.png" alt=""></li>
-                            <li><img src="/assets/avatars/chloe.png" alt=""></li>
-                            <li><img src="/assets/avatars/dawn.png" alt=""></li>
-                            <li><img src="/assets/avatars/james.png" alt=""></li>
-                            <li><img src="/assets/avatars/jessie.png" alt=""></li>
-                            <li><img src="/assets/avatars/may.png" alt=""></li>
-                            <li><img src="/assets/avatars/serena.png" alt=""></li>
-                        </ul>
-                    </section>
-                </section>
+      </section>
+    </section>
+    <!-- Modal voor pvp met online tegenstander -->
+    <section class="modal fade" id="pvpstranger" tabindex="-1">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header">
+            <h5 class="modal-title">Speel met een tegenstander</h5>
+          </section>
+          <section class="modal-footer">
+            Wacht voor een online tegenstander.
+            <section>
+              <img src="/assets/others/loading.gif" alt="">
             </section>
+            <a href="/pokemon-battler">Terug gaan</a>
+          </section>
         </section>
-        <!-- Modal voor keuze van gevecht -->
-        <section class="modal fade" id="battleChoice" tabindex="-1">
-            <section class="modal-dialog modal-dialog-centered">
-                <section class="modal-content">
-                    <section class="modal-header">
-                        <h5 class="modal-title">Kies een optie</h5>
-                    </section>
-                    <section class="modal-footer">
-                        Spelen met:
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pvpfriend">
-                            <i class="fa-solid fa-user-group"> Vriend</i>
-                        </button>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pvpstranger">
-                            <i class="fa-solid fa-globe"> Willekeurig</i>
-                        </button>
-                        <a href="pokemon-submenu">Terug gaan</a>
-                    </section>
-                </section>
-            </section>
-        </section>
-        <!-- Modal voor pvp met vriend -->
-        <section class="modal fade" id="pvpfriend" tabindex="-1">
-            <section class="modal-dialog modal-dialog-centered">
-                <section class="modal-content">
-                    <section class="modal-header">
-                        <h5 class="modal-title">Speel met een vriend</h5>
-                    </section>
-                    <section class="modal-footer">
-                        Kopieer de link en stuur deze naar je vriend:
-                        <section class="input-group" mb-3>
-                            <input type="text" readonly class="form-control" value="<%= roomID %>">
-                            <span class="input-group-text"><button><i class="fa-solid fa-copy"></i></button></span>
-                        </section>
-                        <a href="pokemon-battler">Terug gaan</a>
-                    </section>
-                </section>
-            </section>
-        </section>
-        <!-- Modal voor pvp met online tegenstander -->
-        <section class="modal fade" id="pvpstranger" tabindex="-1">
-            <section class="modal-dialog modal-dialog-centered">
-                <section class="modal-content">
-                    <section class="modal-header">
-                        <h5 class="modal-title">Speel met een tegenstander</h5>
-                    </section>
-                    <section class="modal-footer">
-                        Wacht voor een online tegenstander.
-                        <section>
-                            <img src="/assets/others/loading.gif" alt="">
-                        </section>
-                        <a href="pokemon-battler">Terug gaan</a>
-                    </section>
-                </section>
-            </section>
-        </section>
-        <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i
-                    class="fa-solid fa-question"></i></button></section>
-    </main>
+      </section>
+    </section>
+    <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i class="fa-solid fa-question"></i></button></section>
+  </main>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js">
+    const socket = io('http://localhost:3000/pokemon-battler');
+
+    socket.on('connection', (socket) => {
+      console.log('Connected to server');
+    });
+  </script>
+  <script>
+
+  </script>
 </body>
 
 </html>

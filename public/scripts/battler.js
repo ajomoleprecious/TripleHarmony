@@ -22,4 +22,3 @@ let choiceModal = new bootstrap.Modal(document.getElementById('battleChoice'), {
 });
 
 choiceModal.show();
-
