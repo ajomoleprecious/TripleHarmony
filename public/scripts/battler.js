@@ -23,3 +23,33 @@ let choiceModal = new bootstrap.Modal(document.getElementById('battleChoice'), {
 
 choiceModal.show();
 
+/*import express from 'express';
+const app = express();
+
+let players = [];
+
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+
+const server = createServer(app);
+const io = new Server(server);
+
+io.on('connection', (socket) => {
+    socket.on('message', (msg) => {
+        console.log('message: ' + msg);
+        if (players.length < 2) {
+            players.push(socket.id);
+        }
+        console.log(players);
+        if (players.length === 2) {
+            io.emit('startGame');
+        }
+    });
+    console.log('a user connected');
+});
+
+const socket = io();
+
+socket.emit('message', 'Hello World');*/
+
+
