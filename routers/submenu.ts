@@ -36,7 +36,8 @@ router.post("/", async (req: Request, res: Response) => {
   let pokemonList : any[] = [{ pokemonId : 25 }];
  
   try{
-    await client.db("users").collection("usersPokemons").insertOne({ _id: new ObjectId(userID), pokemons: pokemonList });
+    await client.db("users").collection("usersPokemons").insertOne({ _id: new ObjectId(userID), pokemons: pokemonList, currentPokemon: 25});
+    res.locals.pokemonID = 25;
     res.status(200).json({ message: "Pikachu is toegevoegd aan je lijst van pokemons." });
   }
   catch(error: any){

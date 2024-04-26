@@ -21,7 +21,7 @@
   <header>
     <nav>
       <section class="left-container">
-        <a href="pokemon-submenu"><img src="/assets/pokemon_logo.png" alt="logo"></a>
+        <a href="/pokemon-submenu"><img src="/assets/pokemon_logo.png" alt="logo"></a>
       </section>
       <section id="nav-menus" class="nav-container">
         <ul class="">
@@ -177,18 +177,18 @@
     </section>
     <section class="current-pokemon">
       <a href="huidige-pokemon">
-        <img class="pokemon-pic" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="my-pokemon">
+        <img class="pokemon-pic" src="<%= currentPokemon.sprites.other['showdown'].front_default %>" alt="my-pokemon">
       </a>
       <img class="pokemon_podioum" src="assets/podium.png" alt="pokemon-podium">
       <section class="pokemon-stats">
         <section class="pokemon-hp">
           <img id="life" src="assets/red-heart.png" alt="leven">
-          <p>78</p>
+          <p><%= pokemonHP %></p>
         </section>
         |
         <section class="pokemon-shield">
           <img id="shield" src="assets/shield.png" alt="verdediging">
-          <p>78</p>
+          <p><%= pokemonDefense %></p>
         </section>
       </section>
     </section>

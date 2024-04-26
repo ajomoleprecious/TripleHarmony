@@ -62,8 +62,8 @@ main {
   justify-content: center;
   align-items: center;
   position: fixed;
-  right: 15px;
-  top: 65px;
+  right: .8rem;
+  top: 4.3rem;
   cursor: pointer;
 }
 
@@ -77,6 +77,8 @@ main {
   z-index: 100;
   grid-area: 1/1;
   margin: auto;
+  /* Shake animation every 30 seconds on repeat */
+  animation: shake 5s infinite;
 }
 
 .pokemon_hide img:nth-child(2) {
@@ -87,12 +89,13 @@ main {
 }
 
 .current-pokemon .pokemon-pic {
-  width: 100px;
-  height: 90px;
+  width: 3.8rem;
+  height: 3.6rem;
   animation: infinite 2s ease-in-out;
   animation-name: move;
   animation-duration: 2s;
   margin-bottom: -15px;
+  margin-top: 2rem;
 }
 
 .current-pokemon .pokemon_podioum {
@@ -487,9 +490,9 @@ nav p {
   text-align: center;
 }
 
-.pokemon-bekijken>main>h1 {
-  font-size: 1.5rem;
-  margin: .5rem auto 0 1.5rem;
+body.pokemon-bekijken h1 {
+  font-size: 2rem;
+  margin: .5rem auto 0 auto;
 }
 
 .pokemon-bekijken>main {
