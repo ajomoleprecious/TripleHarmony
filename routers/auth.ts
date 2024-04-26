@@ -4,23 +4,37 @@ import nodemailer from "nodemailer";
 import { client } from "../index";
 
 const jwt = require('jsonwebtoken');
-
-
+const bcrypt = require('bcrypt');
 const User = require('../models/User') as any;
 
 const router = Router();
 
 
-
+// Nodemailer transporter
 const transporter = nodemailer.createTransport({
-    host: "mail.smtp2go.com",
-    port: 2525,
-    secure: false, // Use `true` for port 465, `false` for all other ports
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: {
-        user: "tripleharmony.ap@hotmail.com",
-        pass: "nXhWE8ZraSZoYONO",
-    },
+        user: "tripleharmony.ap@gmail.com",
+        pass: "ylgp voca gsuo mbot"
+    }
 });
+
+// Send email
+async function sendMail(recipient: string, subject: string, message: string) {
+    try {
+        await transporter.sendMail({
+            from: '"Triple Harmony" <tripleharmony.ap@gmail.com>',
+            to: recipient,
+            subject: subject,
+            html: message
+        });
+    }
+    catch (error: any) {
+        console.log(error);
+    }
+}
 
 interface ErrorMessages {
     [key: string]: string;
@@ -79,7 +93,6 @@ router.get('/', async (req: Request, res: Response) => {
     res.render('pokemon-auth');
 });
 
-//pokemon-auth/register
 router.post('/register', async (req: Request, res: Response) => {
     const { email, username, password } = req.body;
     try {
@@ -98,19 +111,13 @@ router.post('/register', async (req: Request, res: Response) => {
             <br>
             <p>Zodra uw account is geverifieerd, heeft u volledige toegang tot alle functies en inhoud op onze website. We hopen dat u een plezierige ervaring heeft met het verkennen en interactie met ons platform.</p>
             <br>
-            <p>Als u vragen heeft of hulp nodig heeft, neem dan gerust contact op met ons ondersteuningsteam op <a href="mailto:tripleharmony.ap@hotmail.com">deze email</a>.</p>
+            <p>Als u vragen heeft of hulp nodig heeft, neem dan gerust contact op met ons ondersteuningsteam op <a href="mailto:tripleharmony.ap@gmail.com">deze email</a>.</p>
             <br>
             <p>Met vriendelijke groet,</p>
             <p>Het Triple Harmony-team</p>`;
 
         // Sending the email
-        await transporter.sendMail({
-            from: '"Triple Harmony" <tripleharmony.ap@hotmail.com>',
-            to: email,
-            subject: "Welkom bij Triple Harmony - Verifieer uw account",
-            html: emailMessage,
-            priority: "high"
-        });
+        await sendMail(email, "Welkom bij Triple Harmony - Verifieer uw account", emailMessage);
     }
     catch (error: any) {
         const errors = handleErrors(error);
@@ -137,7 +144,7 @@ router.post('/login', async (req: Request, res: Response) => {
 router.get('/verify/:id', async (req: Request, res: Response) => {
     const id = req.params.id;
     try {
-        const user = await client.db("users").collection("usersAccounts").findOne({ _id: new ObjectId(id) });
+        const user = await client.db("users").collection("usersAccounts").findOne({ _id: new ObjectId(id)});
         if (user) {
             await client.db("users").collection("usersAccounts").updateOne({ _id: new ObjectId(id) }, { $set: { verified: true } });
             res.status(200).render('pokemon-auth-message', { title: "Account geverifieerd", message: "Uw account is succesvol geverifieerd. U kunt nu inloggen op onze website." });
@@ -154,9 +161,11 @@ router.get('/verify/:id', async (req: Request, res: Response) => {
 router.post('/reset', async (req: Request, res: Response) => {
     const { email } = req.body;
     try {
+        // find user by email
         const user = await client.db("users").collection("usersAccounts").findOne({ email });
         await client.db("users").collection("usersAccounts").updateOne({ email }, { $set: { password: "wachtwoord123" } });
         if (user) {
+            // Constructing the email message
             const emailMessage = `
                 <h2>Beste ${user.username},</h2>
                 <br>
@@ -164,21 +173,18 @@ router.post('/reset', async (req: Request, res: Response) => {
                 <br>
                 <p>U heeft een verzoek ingediend om uw wachtwoord te resetten.</p>
                 <br>
-                <p> Uw nieuwe wachtwoord is: <b style="color: red;">wachtwoord123</b></p>
+                <p> Uw tijdelijke wachtwoord is: <b style="color: red;">wachtwoord123</b></p>
+                <br>
+                <p>Wij raden u aan om uw wachtwoord zo snel mogelijk te wijzigen met deze <a href="https://tripleharmony.azurewebsites.net/pokemon-auth/change-password/${user._id}">link</a>.</p>
                 <br>
                 <p>Als u geen verzoek heeft ingediend om uw wachtwoord te resetten, kunt u deze e-mail veilig negeren.</p>
                 <br>
-                <p>Als u vragen heeft of hulp nodig heeft, neem dan gerust contact op met ons ondersteuningsteam op <a href="mailto:tripleharmony.ap@hotmail.com">deze email</a>.</p>
+                <p>Als u vragen heeft of hulp nodig heeft, neem dan gerust contact op met ons ondersteuningsteam op <a href="mailto:tripleharmony.ap@gmail.com">deze email</a>.</p>
                 <br>
                 <p>Met vriendelijke groet,</p>
                 <p>Het Triple Harmony-team</p>`;
-            await transporter.sendMail({
-                from: '"Triple Harmony" <tripleharmony.ap@hotmail.com>',
-                to: email,
-                subject: "Wachtwoord hersteld",
-                html: emailMessage,
-                priority: "high"
-            });
+            // Sending the email
+            await sendMail(email, "Wachtwoord hersteld", emailMessage);
             res.status(200).render('pokemon-auth-message', { title: "Wachtwoord resetten", message: "Een e-mail is verzonden naar uw e-mailadres met uw nieuwe wachtwoord." });
         }
         else {
@@ -194,5 +200,36 @@ router.get('/logout', (req: Request, res: Response) => {
     res.cookie('jwt', '', { maxAge: 1 });
     res.redirect('/pokemon-auth');
 });
+
+router.get('/change-password/:id', async (req: Request, res: Response) => {
+    const id = req.params.id;
+    res.render('change-password', { id });
+});
+
+router.post('/change-password/:id', async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const { oldPassword, newPassword } = req.body;
+    try {
+        const user = await client.db("users").collection("usersAccounts").findOne({ _id: new ObjectId(id) });
+        if (user) {
+            if (oldPassword === newPassword) {
+                res.status(400).render('pokemon-auth-message', { title: "Wachtwoord wijzigen", message: "Het nieuwe wachtwoord mag niet hetzelfde zijn als het oude wachtwoord." });
+            }
+            if (oldPassword !== user.password) {
+                res.status(400).render('pokemon-auth-message', { title: "Wachtwoord wijzigen", message: "Het oude wachtwoord is onjuist. Gelieve ook na te kijken of u de juiste tijdelijk wachtwoord heeft ingevoerd." });
+            }
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+            await client.db("users").collection("usersAccounts").updateOne({ _id: new ObjectId(id) }, { $set: { password: hashedPassword } });
+            res.status(200).render('pokemon-auth-message', { title: "Wachtwoord wijzigen", message: "Uw wachtwoord is succesvol gewijzigd." });
+        }
+        else {
+            res.status(404).render('pokemon-auth-message', { title: "Wachtwoord wijzigen", message: "De gebruiker met het opgegeven ID bestaat niet." });
+        }
+    }
+    catch (_) {
+        res.status(500).render('pokemon-auth-message', { title: "Wachtwoord wijzigen", message: "Er is een fout opgetreden bij het wijzigen van uw wachtwoord. Probeer het later opnieuw." });
+    }
+});
+
 
 export default router;
