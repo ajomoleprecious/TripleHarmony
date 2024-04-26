@@ -69,7 +69,7 @@ async function changeImageAndTitle() {
           });
           if (count <= 0) {
               clearInterval(interval);
-              countdownElement.style.display = 'none'; // Hide countdown element when count reaches 0
+              countdownElement.style.display = 'none'; 
           }
           if (count === 0) {
             hourglassElement.style.display = 'none';
@@ -77,7 +77,7 @@ async function changeImageAndTitle() {
             titleElement.innerText = pokemonName;
             linkElement.style.pointerEvents = 'auto';
         }
-        countdownElement.innerText = count; // Update countdown element with count value
+        countdownElement.innerText = count; 
         count--;
 
       } catch (error) {
@@ -112,8 +112,8 @@ catchElement.addEventListener('click', function(event) {
     hourglassElement.style.animation = 'spin 2s linear infinite';
     rouletteElement.style.animation = 'spin 9s linear infinite';
     count = 8;
-    countdownElement.innerText = count; // Initialize countdown element with initial count value
-    countdownElement.style.display = 'block'; // Show countdown element
+    countdownElement.innerText = count; 
+    countdownElement.style.display = 'block'; 
     changeImageAndTitle();
     hourglassElement.style.display = 'block';
     catchElement.classList.add('clicked');

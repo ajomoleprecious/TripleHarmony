@@ -249,6 +249,10 @@
     .poke-catch article:nth-child(1) p {
         font-size: 2rem;
     }
+
+    .poke-catch article:first-child {
+        margin-top: 0;
+      }
 }
 
 @media (min-width: 300px) and (max-width: 710px) {

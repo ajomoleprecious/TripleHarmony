@@ -877,6 +877,10 @@ nav p {
   width: 100%;
 }
 
+#receive-pokeImg {
+  width: 7rem;
+}
+
 .ingelogd .submenu {
   height: 100%;
   width: 40%;
