@@ -1,9 +1,12 @@
 import { Request, Response, Router } from "express";
 import { verifyUser } from "../middleware/verifyUser";
 import axios from "axios";
+import express from "express";
 
 const router = Router();
 router.use(verifyUser);
+// Serve static files from the 'public' directory
+router.use(express.static('public'));
 
 // Function to fetch a random Pokémon
 async function getRandomPokemon() {

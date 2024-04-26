@@ -2,12 +2,15 @@ import { Request, Response, Router } from "express";
 import { ObjectId } from "mongodb";
 import nodemailer from "nodemailer";
 import { client } from "../index";
+import express from "express";
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/User') as any;
 
 const router = Router();
+// Serve static files from the 'public' directory
+router.use(express.static('public'));
 
 
 // Nodemailer transporter
