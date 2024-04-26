@@ -6,11 +6,12 @@
 
 /* ALGEMEEN */
 
-body, .ingelogd {
+body, body.ingelogd {
   background-color: var(--body-bg);
   width: 100%;
   height: 100dvh;
   font-family: 'Anta', sans-serif;
+  margin: 0;
 }
 
 body * ::-webkit-scrollbar {
@@ -61,8 +62,8 @@ main {
   justify-content: center;
   align-items: center;
   position: fixed;
-  right: 15px;
-  top: 65px;
+  right: .8rem;
+  top: 4.3rem;
   cursor: pointer;
 }
 
@@ -76,6 +77,8 @@ main {
   z-index: 100;
   grid-area: 1/1;
   margin: auto;
+  /* Shake animation every 30 seconds on repeat */
+  animation: shake 5s infinite;
 }
 
 .pokemon_hide img:nth-child(2) {
@@ -86,12 +89,13 @@ main {
 }
 
 .current-pokemon .pokemon-pic {
-  width: 100px;
-  height: 90px;
+  width: 3.8rem;
+  height: 3.6rem;
   animation: infinite 2s ease-in-out;
   animation-name: move;
   animation-duration: 2s;
   margin-bottom: -15px;
+  margin-top: 2rem;
 }
 
 .current-pokemon .pokemon_podioum {
@@ -143,8 +147,8 @@ main {
   width: fit-content;
   height: fit-content;
   position: fixed;
-  left: 20px;
-  top: 110px;
+  left: .8rem;
+  top: 4.3rem;
 }
 
 .help {
@@ -405,23 +409,26 @@ nav p {
 
 /* POKEMON BEKIJKEN */
 
-.pokemon-bekijken-main> .title {
+.pokemon-bekijken-main>.title {
   grid-area: title;
   margin: 0 6rem 0 1rem;
   display: flex;
-  justify-content: space-between;
-  align-items: start;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .1rem;
 }
 
 .pokemon-bekijken-main>.pokemon-list {
   grid-area: pokemon-list;
 }
 
-.pokemon-bekijken-main> .title section{
-  margin-top: 1rem;
+.pokemon-bekijken-main>.title section {
+  align-self: flex-end;
+
 }
 
-.pokemon-bekijken-main .title section form{
+.pokemon-bekijken-main .title section form {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -445,7 +452,7 @@ nav p {
   grid-template-rows: 12dvh 75dvh auto;
 }
 
-.pokemon-bekijken-main .modal-footer a{
+.pokemon-bekijken-main .modal-footer a {
   color: #fff;
 }
 
@@ -483,9 +490,9 @@ nav p {
   text-align: center;
 }
 
-.pokemon-bekijken>main>h1 {
-  font-size: 1.5rem;
-  margin: .5rem auto 0 1.5rem;
+body.pokemon-bekijken h1 {
+  font-size: 2rem;
+  margin: .5rem auto 0 auto;
 }
 
 .pokemon-bekijken>main {
@@ -495,8 +502,17 @@ nav p {
 
 .pokemon-list {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  height: 100%;
+  width: 100%;
   overflow-y: scroll;
+}
+
+.pokemon-list::-webkit-scrollbar {
+  display: none;
 }
 
 .pokemon-list>ul {
@@ -509,6 +525,7 @@ nav p {
   align-items: center;
   align-content: flex-start;
   height: 100%;
+  width: 100%;
 }
 
 .ingelogd .pokemon-list>ul>li {
@@ -578,24 +595,31 @@ nav p {
   align-items: center;
   justify-content: center;
 }
+
 #detail .modal-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-
-#detail table tbody tr:nth-child(1) th{
+#detail table{
+  margin: 0 auto;
+}
+#detail table tbody tr:nth-child(1) th {
   border-radius: 10px 0 0 0;
 }
-#detail table tbody tr:nth-child(3) th{
+
+#detail table tbody tr:nth-child(3) th {
   border-radius: 0 0 0 10px;
 }
-#detail table tbody tr:nth-child(1) td{
+
+#detail table tbody tr:nth-child(1) td {
   border-radius: 0 10px 0 0;
 }
-#detail table tbody tr:nth-child(3) td{
+
+#detail table tbody tr:nth-child(3) td {
   border-radius: 0 0 10px 0;
+  
 }
 
 #detail .modal-body>div {
@@ -616,9 +640,9 @@ nav p {
   text-align: center;
 }
 
-#detail .modal-body section:nth-child(1){
+#detail .modal-body section:nth-child(1) {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 1rem;
@@ -631,9 +655,11 @@ nav p {
 #detail .modal-body section:nth-child(2) {
   width: 100%;
 }
+
 #detailLabel {
   font-size: 1.5rem;
 }
+
 .pokemon-levels ul {
   display: flex;
   height: 100%;
@@ -663,16 +689,24 @@ nav p {
   margin: 0;
 }
 
-#detail .modal-body > section:nth-child(1) img {
+#detail .modal-body>section:nth-child(1) img {
   padding: .7rem;
   border-radius: 10px;
   border: 4px solid var(--black);
   background-color: var(--pokemonToGuess-bg);
   margin: 0 auto 0 auto;
-  width: 50%;
+  width: 45%;
 }
 
-#detailType span{
+#detail .modal-body table td,
+#detail .modal-body table th {
+  vertical-align: middle;
+  text-align: center;
+  min-height: 4rem;
+}
+
+
+#detailType span {
   padding: 0.2rem .4rem;
   border-radius: 10px;
   font-size: 1.2rem;
@@ -680,6 +714,18 @@ nav p {
   letter-spacing: 0.05rem;
   /* outline on text */
   text-shadow: -1px -1px 0 var(--white), 1px -1px 0 var(--white), -1px 1px 0 var(--white), 1px 1px 0 var(--white);
+}
+
+#moreDetails {
+  color: var(--black);
+}
+
+#detailType {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
 }
 
 /* POKEMON AUTH & SUBMENU */
@@ -834,6 +880,10 @@ nav p {
 
 .ingelogd .submenu-button {
   width: 100%;
+}
+
+#receive-pokeImg {
+  width: 7rem;
 }
 
 .ingelogd .submenu {
@@ -1010,6 +1060,24 @@ nav p {
 
 #battleChoice .modal-footer i{
   letter-spacing: 5px;
+}
+
+#pvpstranger .modal-footer,
+#pvpfriend .modal-footer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
+}
+
+#pvpfriend .modal-footer .input-group{
+  cursor: pointer;
+}
+
+#pvpstranger img{
+  width: 3rem;
 }
 
 /* WHO'S THAT POKEMON & RESULT */
