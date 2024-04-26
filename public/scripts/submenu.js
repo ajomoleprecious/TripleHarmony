@@ -1,7 +1,14 @@
-window.onload = function () {
-    let modal = new bootstrap.Modal(document.getElementById('receive-poke'), {
-        keyboard: false,
-        backdrop: 'static'
-    });
-    modal.show();
+async function ontvangPokemon() {
+    await fetch('/pokemon-submenu', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.message){
+            location.href = '/huidige-pokemon';
+        }
+    })
 }

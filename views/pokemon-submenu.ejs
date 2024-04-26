@@ -128,22 +128,36 @@
         </section>
         <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i
                     class="fa-solid fa-question"></i></button></section>
-        <section class="modal fade" id="receive-poke" tabindex="-1" aria-labelledby="recieve-pikachu" aria-hidden="true">
-            <section class="modal-dialog modal-dialog-centered">
-                <section class="modal-content">
-                    <section class="modal-header">
-                        <h1 class="modal-title fs-5">Ontvang je eerste pokemon</h1>
+                    <section class="modal fade" id="receive-poke" tabindex="-1" aria-labelledby="recieve-pikachu"
+                    aria-hidden="true">
+                    <section class="modal-dialog modal-dialog-centered">
+                        <section class="modal-content">
+                            <section class="modal-header d-flex justify-content-center">
+                                <h1 class="modal-title fs-5">Ontvang je eerste pokemon</h1>
+                            </section>
+                            <section class="modal-body d-flex justify-content-center">
+                                <img id="receive-pokeImg" src="<%= pikaUrl %>" alt="pikachu">
+                            </section>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button type="button" data-bs-dismiss="modal" onClick="ontvangPokemon()"
+                                    class="btn btn-primary">Ontvang Pikachu</button>
+                            </div>
+                        </section>
                     </section>
-                    <section class="modal-body d-flex justify-content-center">
-                        <img id="receive-pokeImg" src="<%= pikaUrl %>" alt="pikachu">
-                    </section>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Ontvang Pikachu</button>
-                    </div>
                 </section>
-            </section>
-        </section>
     </main>
+    <script>
+        window.onload = function () {
+            let modal = new bootstrap.Modal(document.getElementById('receive-poke'), {
+                keyboard: false,
+                backdrop: 'static'
+            });
+            const showModal = <%= isEmpty %>; // Embedding isEmpty directly into JavaScript
+            if (showModal) {
+                modal.show();
+            }
+        }
+    </script>
 </body>
 
 </html>
