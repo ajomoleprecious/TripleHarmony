@@ -1115,35 +1115,21 @@ body.pokemon-bekijken h1 {
   margin-top: 1rem;
 }
 
-.pokemonWho {
-  filter: grayscale(1);
-  filter: brightness(0);
-  width: 60%;
-  animation: infinite 1s ease-in-out;
-  animation-name: move;
-  animation-duration: 2s;
-}
+
 
 .silhouette {
   filter: brightness(0);
-  width: 400px;
+  width: 80%;
   animation: infinite 1s ease-in-out;
   animation-name: move;
   animation-duration: 2s;
   -webkit-user-drag: none;
 }
 
-.silhouette-result {
-  filter: brightness(1);
-  width: 320px;
-  animation: infinite 1s ease-in-out;
-  animation-name: move;
-  animation-duration: 2s;
-}
 
-#pokemonName {
-  font-size: 2.5rem;
-  color: var(--avatar-border-color);
+
+#loadingGif {
+  width: 80%;
 }
 
 .who {
@@ -1216,10 +1202,6 @@ body.pokemon-bekijken h1 {
 
 .hidden {
   display: none;
-}
-
-#loadingGif {
-  width: 15%;
 }
 
 /* POKEMON VANGEN */

@@ -60,7 +60,7 @@
         <section class="pokemonToGuess">
             <p id="cardTitle">Wie is deze Pokémon ?</p>
             <div id="loadingGif" class="hidden">
-                <img src="/assets/others/loading-ball.gif" alt="" />
+              <img src="/assets/others/loading-ball.gif" alt="" />
             </div>
             <img class="silhouette" src="<%= image %>" alt="" />
             <section class="input-group-who">
@@ -72,7 +72,7 @@
             <a class="skip" id="skipButton" href="#" onclick="getNewPokemon()"
               ><i class="fa-solid fa-angles-right"></i
             ></a>
-          </section>
+        </section>
 
         <section class="pokemon_hide">
             <img src="/assets/pokemon_logo.png" alt="">
@@ -143,30 +143,37 @@
 
     <script>
         async function getNewPokemon() {
-          const loadingGif = document.getElementById('loadingGif');
-          loadingGif.classList.remove('hidden');
+          const loadingGif = document.getElementById("loadingGif");
+          loadingGif.classList.remove("hidden");
       
-          // Show the loading GIF for 1 second
-          await new Promise(resolve => setTimeout(resolve, 1000));
+          // Hide the previous Pokémon
+          const img = document.querySelector(".silhouette");
+          if (img) {
+            img.classList.add("hidden");
+          }
       
+          // Show the loading GIF for a moment
+          await new Promise((resolve) => setTimeout(resolve, 350));
+      
+          // Hide the loading GIF
+          loadingGif.classList.add("hidden");
+      
+          // Generate the new Pokémon
           const response = await fetch(`/who's-that-pokemon/new-pokemon`);
           const data = await response.json();
       
-          loadingGif.classList.add('hidden');
+          document.getElementById("cardTitle").textContent = `Wie is deze Pokémon?`;
+          document.getElementById("inputWho").value = "";
+          document.querySelector(".result").classList.remove("show");
       
-          document.getElementById('cardTitle').textContent = `Wie is deze Pokémon ?`;
-          document.getElementById('inputWho').value = '';
-          document.querySelector('.result').classList.remove('show');
-      
-          const img = document.querySelector('.silhouette');
-          img.src = data.image;
-          img.alt = data.name;
+          if (img) {
+            img.classList.remove("hidden");
+            img.src = data.image;
+            img.alt = data.name;
+          }
         }
       </script>
 
 </body>
 
 </html>
-
-
-
