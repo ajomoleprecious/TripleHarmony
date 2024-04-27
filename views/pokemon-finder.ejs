@@ -45,7 +45,11 @@
         <ul>
           <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
           <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>
-                <img src="/assets/avatars/ash_ketchum.png" alt="">
+                <% if (avatar) {%>
+                <img src="<%= avatar %>" alt="my-avatar">
+                <% } else { %>
+                <i class="fa-solid fa-question"></i>
+                <% } %>
               </button></a></li>
           <li><a href="/pokemon-auth/logout" class="fa-solid fa-right-from-bracket btn btn-dark"></a>
           </li>
@@ -79,6 +83,29 @@
       </section>
     </section>
   </section>
+  <!-- Modal voor avatar-->
+    <section class="modal fade" id="chooseAvatar" tabindex="-1" aria-labelledby="chooseAvatar" aria-hidden="true">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header">
+            <h1 class="modal-title fs-5" id="chooseAvatarLabel">Kies je nieuwe avatar</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </section>
+          <section class="modal-body">
+            <ul class="avatars">
+              <li onclick="changeAvatar('ash')"><img src="/assets/avatars/ash_ketchum.png" alt="ash"></li>
+              <li onclick="changeAvatar('chloe')"><img src="/assets/avatars/chloe.png" alt="chloe"></li>
+              <li onclick="changeAvatar('dawn')"><img src="/assets/avatars/dawn.png" alt="dawn"></li>
+              <li onclick="changeAvatar('james')"><img src="/assets/avatars/james.png" alt="james"></li>
+              <li onclick="changeAvatar('jessie')"><img src="/assets/avatars/jessie.png" alt="jessie"></li>
+              <li onclick="changeAvatar('may')"><img src="/assets/avatars/may.png" alt="may"></li>
+              <li onclick="changeAvatar('serena')"><img src="/assets/avatars/serena.png" alt="serena"></li>
+              <li onclick="changeAvatar('none')"><img src="/assets/avatars/none.png" alt="none"></li>
+            </ul>
+          </section>
+        </section>
+      </section>
+    </section>
   <!-- Modal voor help-->
   <section class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
     <section class="modal-dialog modal-dialog-centered">
