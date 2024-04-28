@@ -169,6 +169,32 @@ function collision(ball, player) {
     return true;
 }
 
+async function getRandomPokemon() {
+    const randomPokemonName = document.getElementById('randomPokemonName');
+    const randomPokemonImage = document.getElementById('randomPokemonImage');
+    const randomPokemonID = document.getElementById('randomPokemonID');
+    // clear the previous pokemon
+    randomPokemonName.innerText = '';
+    randomPokemonImage.src = '';
+    randomPokemonID.href = '';
+    
+    await fetch('/pokemon-finder/random-pokemon', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            randomPokemonName.innerText = data.pokeNaam;
+            randomPokemonID.href = `/pokemon-battler-vs-pc/${data.pokemonID}`;
+            randomPokemonImage.src = data.pokeURL;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
 let modal = new bootstrap.Modal(document.getElementById('pokemonFinder'), {
     keyboard: false,
     backdrop: 'static'
@@ -179,6 +205,7 @@ function checkCollisions() {
             ball.ball.remove();
             balls.splice(index, 1);
             generateBall();
+            getRandomPokemon();
             modal.show();
         }
     });
@@ -187,7 +214,7 @@ function checkCollisions() {
 // Function to play the sound
 function playSound(sound) {
     // Function to play sound after user interaction
-    var playWithInteraction = function() {
+    var playWithInteraction = function () {
         var promise = sound.play();
         if (promise !== undefined) {
             promise.then(_ => {
@@ -201,7 +228,7 @@ function playSound(sound) {
     };
 
     // Function to handle user interaction events (click or swipe)
-    var handleInteraction = function() {
+    var handleInteraction = function () {
         // Remove the interaction event listeners after the first interaction
         document.removeEventListener('click', handleInteraction);
         document.removeEventListener('touchstart', handleInteraction);

@@ -89,8 +89,8 @@ main {
 }
 
 .current-pokemon .pokemon-pic {
-  width: 3.8rem;
-  height: 3.6rem;
+  width: 5rem;
+  height: 4.5rem;
   animation: infinite 2s ease-in-out;
   animation-name: move;
   animation-duration: 2s;
@@ -1080,6 +1080,12 @@ body.pokemon-bekijken h1 {
   width: 3rem;
 }
 
+body#finder .fa-solid.fa-question,
+body.battler .fa-solid.fa-question{
+  background-color: brown;
+  color: var(--white);
+}
+
 /* WHO'S THAT POKEMON & RESULT */
 
 .pokemonToGuess {
@@ -1401,13 +1407,37 @@ body.pokemon-bekijken h1 {
 
 /* HUIDIGE POKEMON */
 
-.modal-huidige button,
-.modal-huidige img {
-  margin: 0 auto;
+#pokemons h1{
+  text-align: start;
+  font-size: 2rem;
+  margin: 0;
 }
 
-.modal-huidige button:hover {
-  background-color: var(--green);
+#pokemons .modal-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#pokemons .modal-body img{
+  width: 15rem;
+}
+
+#pokemons .modal-footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#pokemons .modal-footer button{
+  font-size: 1rem;
+}
+
+#pokemons .modal-footer button:hover{
+  transform: scale(1.025);
+  transition: 0.5s ease-in-out;
+  background-color: var(--pokemonToGuess-bg);
   color: var(--black);
 }
 
@@ -1552,5 +1582,8 @@ body.pokemon-bekijken h1 {
   border: 8px solid var(--red);
   border-radius: 49%;
   z-index: 20;
-  
+}
+
+body#finder #randomPokemonImage{
+  width: 5rem;
 }

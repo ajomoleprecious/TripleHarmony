@@ -40,7 +40,12 @@ router.get("/", async (req: Request, res: Response) => {
 router.post("/", async (req: Request, res: Response) => {
   // add pikachu to user's pokemon list
   const userID = res.locals.user._id;
-  let pokemonList : any[] = [{ pokemonId : 25 , pokemonName : "pikachu", pokemonLevel : 1, pokemonHP : 35, pokemonAttack : 55, pokemonDefense : 40, pokemonSpeed : 90, pokemonType : "electric", pokemonMoves : ["thundershock", "quick attack", "thunder wave", "thunderbolt"]}];
+  const pikachu = await fetch("https://pokeapi.co/api/v2/pokemon/pikachu");
+  const pikachuData = await pikachu.json();
+  let pokemonList : any[] = [{ pokemonId : 25 , pokemonName : "pikachu", pokemonLevel : 1, pokemonHP : 35, pokemonAttack : 55, 
+  pokemonDefense : 40, pokemonSpeed : 90, pokemonType : "electric", pokemonMoves : ["thundershock", "quick attack", "thunder wave", "thunderbolt"],
+  pokemonImg : pikachuData.sprites.other["official-artwork"].front_default,
+  pokemonGif : pikachuData.sprites.other["showdown"].front_default }];
  
   try{
     await client.db("users").collection("usersPokemons").insertOne({ _id: new ObjectId(userID), pokemons: pokemonList, currentPokemon: 25});

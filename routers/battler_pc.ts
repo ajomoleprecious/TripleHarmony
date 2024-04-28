@@ -15,6 +15,16 @@ router.get("/", (req: Request, res: Response) => {
   res.render("pokemon-battler-vs-pc", { avatar });
 });
 
+router.get("/:pokemonToBattle", async (req: Request, res: Response) => {
+  const avatar = res.locals.currentAvatar;
+  const pokemonToBattle = req.params.pokemonToBattle;
+  try {
+    res.status(200).render("pokemon-battler-vs-pc", { pokemonToBattle, avatar });
+  }
+  catch (error: any) {
+  }
+});
+
 router.post("/change-avatar/:avatar", async (req, res) => {
   res.locals.avatar = req.params.avatar;
   try {
