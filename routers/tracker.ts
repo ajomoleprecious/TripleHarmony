@@ -25,4 +25,25 @@ router.post("/change-avatar/:avatar", async (req, res) => {
         console.error(err);
     }
 });
+
+router.get("/random-pokemon", async (req: Request, res: Response) => {
+    try {
+        let pokeURL;
+        const pokemonID = Math.floor(Math.random() * 1025) + 1;
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonID}`);
+        const pokeData = await response.json();
+        if (await pokeData.sprites.other['showdown'] === null) {
+            pokeURL = await pokeData.sprites.other['official-artwork'].front_default;
+        }
+        else {
+            pokeURL = await pokeData.sprites.other['showdown'].front_default;
+        }
+        const pokeNaam = await pokeData.name;
+        res.status(200).json({ pokeURL, pokemonID, pokeNaam: pokeNaam.charAt(0).toUpperCase() + pokeNaam.slice(1) });
+    }
+    catch (error: any) {
+        res.status(404).json({ error: error.message });
+    }
+});
+
 export default router;

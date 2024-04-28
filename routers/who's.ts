@@ -29,13 +29,16 @@ router.get('/', async (req: Request, res: Response) => {
     const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
     const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
     let randomPokemon = await getRandomPokemon();
-    res.render('who\'s-that-pokemon', { name: randomPokemon.name, image: randomPokemon.sprites.other['official-artwork'].front_default , currentPokemon, pokemonHP, pokemonDefense, avatar});
+    const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${randomPokemon.url.split("/")[6]}.png`;
+    res.render('who\'s-that-pokemon', { name: randomPokemon.name, image: imageUrl, currentPokemon, pokemonHP, pokemonDefense, avatar});
 });
 
 
 router.get('/new-pokemon', async (req: Request, res: Response) => {
     let randomPokemon = await getRandomPokemon();
-    res.json({ name: randomPokemon.name, image: randomPokemon.sprites.other['official-artwork'].front_default });
+    const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${randomPokemon.url.split("/")[6]}.png`;
+
+    res.json({ name: randomPokemon.name, image: imageUrl });
 });
 
 router.post("/change-avatar/:avatar", async (req, res) => {
