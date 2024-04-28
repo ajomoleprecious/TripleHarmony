@@ -12,7 +12,9 @@ import vangenRouter from './routers/vangen';
 import vergelijkenRouter from './routers/vergelijken';
 import whosThatRouter from "./routers/who's";
 import dotenv from "dotenv";
+import { Server } from 'socket.io';
 const mongoose = require('mongoose');
+
 
 // Load environment variables from .env file
 dotenv.config();
@@ -34,6 +36,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 // Parse cookies for this app
 app.use(cookieParser());
+
+const server = require('http').Server(app);
+const io = new Server(server);
+
+
 // Use the routers
 app.use('/pokemon-auth', authRouter);
 app.use('/pokemon-battler-vs-pc', battlerPCRouter);
@@ -74,3 +81,12 @@ client.connect()
   }).catch((err: any) => {
     console.error('Error connecting to MongoDB:', err);
   });
+
+io.on('connection', (socket: any) => {
+  console.log('User connected: ' + socket.id);
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
+
+export { io };

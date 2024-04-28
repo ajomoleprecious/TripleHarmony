@@ -1,13 +1,21 @@
 // Import necessary modules and dependencies
 import { Request, Response, Router } from "express";
 import { verifyUser } from "../middleware/verifyUser";
+import { currentPokemon } from "../middleware/currentPokemon";
+import { currentAvatar } from "../middleware/userAvatar";
+import { client } from "../index";
+import express from "express";
 
 import axios from 'axios';
 
 // Initialize router
 const router = Router();
-// Use the verifyUser middleware
+// Use the middleware
 router.use(verifyUser);
+router.use(currentAvatar);
+router.use(currentPokemon);
+// Serve static files from the 'public' directory
+router.use(express.static('public'));
 
 // Route handler for fetching and rendering Pokémon data
 router.get("/", async (req: Request, res: Response) => {
@@ -17,6 +25,11 @@ router.get("/", async (req: Request, res: Response) => {
     let offset = page * amountOfPokemons;
     let evolution_chain_ids: number[] = [];
     let pokemonIDs: number[] = [];
+    const currentPokemon = res.locals.currentPokemon;
+    const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
+    const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
+    const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
+    const avatar = res.locals.currentAvatar;
 
     try {
         // Fetch evolution chain data from PokeAPI
@@ -38,11 +51,10 @@ router.get("/", async (req: Request, res: Response) => {
         pokemonIDs = pokemonData.map(pokemon => pokemon.id);
 
         // Render the page with fetched data
-        res.render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, pokemonIDs, evolution_chain_ids });
-    } catch (error) {
-        console.error("Error fetching data:", error);
+        res.status(200).render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, pokemonIDs, evolution_chain_ids, currentPokemon, pokemonHP, pokemonDefense, avatar });
+    } catch (_) {
         // Handle error
-        res.status(500).type('text/html').sendFile('../views/error.html', { root: __dirname });
+        res.status(500).render('error', { errorMessage: "Er is een fout opgetreden bij het ophalen van de Pokémon gegevens." });
     }
 });
 
@@ -171,6 +183,17 @@ router.get("/filter", async (req: Request, res: Response) => {
 
         // Render the page with fetched data and filter options
         res.render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, pokemonIDs, evolution_chain_ids, pokemon_name, pokemon_type, sort_by });
+    }
+});
+
+router.post("/change-avatar/:avatar", async (req, res) => {
+    res.locals.avatar = req.params.avatar;
+    try {
+        await client.db("users").collection("usersAvatars").updateOne({ _id: res.locals.user._id }, { $set: { avatar: res.locals.avatar } }, { upsert: true });
+        res.status(200).json({ message: "Avatar is succesvol gewijzigd." });
+    }
+    catch (err) {
+        console.error(err);
     }
 });
 

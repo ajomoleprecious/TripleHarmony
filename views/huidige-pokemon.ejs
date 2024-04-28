@@ -21,7 +21,7 @@
   <header>
     <nav>
       <section class="left-container">
-        <a href="pokemon-submenu"><img src="/assets/pokemon_logo.png" alt="logo"></a>
+        <a href="/pokemon-submenu"><img src="/assets/pokemon_logo.png" alt="logo"></a>
       </section>
       <section id="nav-menus" class="nav-container">
         <ul class="">
@@ -44,7 +44,11 @@
         <ul>
           <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
           <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>
+                <% if (avatar) {%>
+                <img src="<%= avatar %>" alt="my-avatar">
+                <% } else { %>
                 <i class="fa-solid fa-question"></i>
+                <% } %>
               </button></a></li>
           <li><a href="/pokemon-auth/logout" class="fa-solid fa-right-from-bracket btn btn-dark"></a>
           </li>
@@ -177,18 +181,22 @@
     </section>
     <section class="current-pokemon">
       <a href="huidige-pokemon">
-        <img class="pokemon-pic" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="my-pokemon">
+        <% if (currentPokemon.sprites.other['showdown'].front_default) { %>
+        <img class="pokemon-pic" src="<%= currentPokemon.sprites.other['showdown'].front_default %>" alt="<%= currentPokemon.name %>">
+        <% } else { %>
+        <img class="pokemon-pic" src="<%= currentPokemon.sprites.other['official-artwork'].front_default %>" alt="<%= currentPokemon.name %>">
+        <% } %>
       </a>
       <img class="pokemon_podioum" src="assets/podium.png" alt="pokemon-podium">
       <section class="pokemon-stats">
         <section class="pokemon-hp">
           <img id="life" src="assets/red-heart.png" alt="leven">
-          <p>78</p>
+          <p><%= pokemonHP %></p>
         </section>
         |
         <section class="pokemon-shield">
           <img id="shield" src="assets/shield.png" alt="verdediging">
-          <p>78</p>
+          <p><%= pokemonDefense %></p>
         </section>
       </section>
     </section>
@@ -234,13 +242,14 @@
           </section>
           <section class="modal-body">
             <ul class="avatars">
-              <li><img src="assets/avatars/ash_ketchum.png" alt=""></li>
-              <li><img src="assets/avatars/chloe.png" alt=""></li>
-              <li><img src="assets/avatars/dawn.png" alt=""></li>
-              <li><img src="assets/avatars/james.png" alt=""></li>
-              <li><img src="assets/avatars/jessie.png" alt=""></li>
-              <li><img src="assets/avatars/may.png" alt=""></li>
-              <li><img src="assets/avatars/serena.png" alt=""></li>
+              <li onclick="changeAvatar('ash')"><img src="/assets/avatars/ash_ketchum.png" alt="ash"></li>
+              <li onclick="changeAvatar('chloe')"><img src="/assets/avatars/chloe.png" alt="chloe"></li>
+              <li onclick="changeAvatar('dawn')"><img src="/assets/avatars/dawn.png" alt="dawn"></li>
+              <li onclick="changeAvatar('james')"><img src="/assets/avatars/james.png" alt="james"></li>
+              <li onclick="changeAvatar('jessie')"><img src="/assets/avatars/jessie.png" alt="jessie"></li>
+              <li onclick="changeAvatar('may')"><img src="/assets/avatars/may.png" alt="may"></li>
+              <li onclick="changeAvatar('serena')"><img src="/assets/avatars/serena.png" alt="serena"></li>
+              <li onclick="changeAvatar('none')"><img src="/assets/avatars/none.png" alt="none"></li>
             </ul>
           </section>
         </section>
