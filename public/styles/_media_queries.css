@@ -86,10 +86,6 @@
 }
 
 @media (max-width: 768px) {
-    .pokemon-list>ul {
-        justify-content: center;
-    }
-
     .ingelogd .poke-catch article:nth-child(1) p {
         font-size: 2rem;
     }
@@ -434,6 +430,14 @@
         border: none;
         border-left: 7px solid var(--nav-link-border);
 
+    }
+
+    section.pokemon-list ul{
+        gap: 1rem;
+    }
+
+    main.pokemon-bekijken-main section.pokemon-list ul li{
+        width: 100px;
     }
 /*
     .pokemonToGuess #inputWho,
