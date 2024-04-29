@@ -88,12 +88,12 @@
     <form action="/pokemon-vergelijken" role="search" method="get">
       <section class="pv_project">
         <article class="left_pokemon">
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="left-poke-img">
+          <img src="<%= pokeImage %>" alt="left-poke-img">
           <section class="input-group">
             <button class="vergelijken-zoek-btn" type="submit">
               <span class="input-group-text btn btn-warning"><i class="fa-solid fa-magnifying-glass"></i></span>
             </button>
-            <input class="form-control" name="leftQ" type="text" placeholder="zoek pokémon" aria-label="Search" value="">
+            <input class="form-control" name="leftQ" type="text" placeholder="zoek pokémon" aria-label="Search" value="<%= leftQuery %>">
           </section>
           <ul class="pv_stats">
             <li>HP &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 24</li>

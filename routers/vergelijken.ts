@@ -15,13 +15,25 @@ router.use(express.static('public'));
 let pokemonArray: any[] = [];
 
 router.get("/", async (req: Request, res: Response) => {
-    fetchPokemons();
-    const avatar = res.locals.currentAvatar;
-    const currentPokemon = res.locals.currentPokemon;
-    const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
-    const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
-    const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
-    res.render("pokemon-vergelijken", { currentPokemon, pokemonHP, pokemonDefense, avatar });
+    try
+    {
+        let pikachu: any = await fetchPokemonByName("pikachu");
+        const avatar = res.locals.currentAvatar;
+        const currentPokemon = res.locals.currentPokemon;
+        const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
+        const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
+        const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
+        
+            res.render("pokemon-vergelijken", 
+                { 
+                    currentPokemon, pokemonHP, pokemonDefense, avatar, leftQuery: "", pokeImage: pikachu.sprites.other['official-artwork'].front_default 
+                });
+    }
+    catch (error) 
+    {
+        console.error(error);
+        res.render("error", { errorMessage: "Fout bij het ophalen van pokemons" });;
+    }
 });
 
 router.post("/change-avatar/:avatar", async (req, res) => {
@@ -35,7 +47,14 @@ router.post("/change-avatar/:avatar", async (req, res) => {
     }
 });
 
-async function fetchPokemons()
+// Function to fetch Pokémon data by name
+async function fetchPokemonByName(name: string) {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+    const data = await response.json();
+    return data;
+}
+
+/*async function fetchPokemons()
 {
     try 
     {
@@ -57,6 +76,6 @@ async function fetchPokemons()
     {
         console.error('Er is een fout opgetreden bij het ophalen van de Pokémon:', error);
     }
-}
+}*/
 
 export default router;
