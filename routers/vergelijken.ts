@@ -18,6 +18,15 @@ router.get("/", async (req: Request, res: Response) => {
     const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
     const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
     const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
+
+    // get left pokemon from params
+    const leftPokemon = req.query.left_pokemon;
+    // get right pokemon from params
+    const rightPokemon = req.query.right_pokemon;
+
+    // get left pokemon from database
+
+    // get right pokemon from database
     res.render("pokemon-vergelijken", { currentPokemon, pokemonHP, pokemonDefense, avatar });
 });
 

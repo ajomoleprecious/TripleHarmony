@@ -787,12 +787,18 @@ body.pokemon-bekijken h1 {
   width: fit-content;
 }
 
-.left_pokemon,
+.left_pokemon{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .right_pokemon {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .left_pokemon img,
