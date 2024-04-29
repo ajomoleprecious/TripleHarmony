@@ -856,6 +856,7 @@ body.pokemon-bekijken h1 {
 .left_pokemon span,
 .right_pokemon span {
   border: var(--black) 1px solid;
+  height: 2.7rem;
 }
 
 .middle_stats {
