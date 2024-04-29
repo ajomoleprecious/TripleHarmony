@@ -54,7 +54,6 @@ router.post("/change-avatar/:avatar", async (req, res) => {
     }
 });
 
-<<<<<<< HEAD
 // Function to fetch Pokémon data by name
 async function fetchPokemonByName(name: string) {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
@@ -86,6 +85,4 @@ async function fetchPokemonByName(name: string) {
     }
 }*/
 
-=======
->>>>>>> origin
 export default router;
