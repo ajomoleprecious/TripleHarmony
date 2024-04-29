@@ -23,7 +23,14 @@ router.get("/", async (req: Request, res: Response) => {
         const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
         const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
         const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
-        
+         // get left pokemon from params
+        const leftPokemon = req.query.left_pokemon;
+        // get right pokemon from params
+        const rightPokemon = req.query.right_pokemon;
+
+        // get left pokemon from database met fetchPokemonByName functie
+
+        // get right pokemon from database met fetchPokemonByName functie
             res.render("pokemon-vergelijken", 
                 { 
                     currentPokemon, pokemonHP, pokemonDefense, avatar, leftQuery: "", pokeImage: pikachu.sprites.other['official-artwork'].front_default 
@@ -47,6 +54,7 @@ router.post("/change-avatar/:avatar", async (req, res) => {
     }
 });
 
+<<<<<<< HEAD
 // Function to fetch Pokémon data by name
 async function fetchPokemonByName(name: string) {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
@@ -78,4 +86,6 @@ async function fetchPokemonByName(name: string) {
     }
 }*/
 
+=======
+>>>>>>> origin
 export default router;

@@ -25,19 +25,19 @@
       </section>
       <section id="nav-menus" class="nav-container">
         <ul class="">
-          <li><a href="/pokemons-bekijken"><img src="/assets/nav-icons-black/bekijken.png" alt=""></a></a>
+          <li><abbr title="Pokémons&nbsp;bekijken"><a href="/pokemons-bekijken"><img src="/assets/nav-icons-black/bekijken.png" alt=""></a></abbr>
           </li>
-          <li><a href="/pokemon-vergelijken"><img src="/assets/nav-icons-black/vergelijken.png" alt=""></a>
+          <li><abbr title="Pokémons&nbsp;vergelijken"><a href="/pokemon-vergelijken"><img src="/assets/nav-icons-black/vergelijken.png" alt=""></a></abbr>
           </li>
-          <li><a href="/pokemons-vangen"><img src="/assets/nav-icons-black/vangen.png" alt=""></a>
+          <li><abbr title="Pokémons&nbsp;vangen"><a href="/pokemons-vangen"><img src="/assets/nav-icons-black/vangen.png" alt=""></a></abbr>
           </li>
-          <li><a href="/huidige-pokemon"><img src="/assets/nav-icons-black/huidige.png" alt=""></a>
+          <li><abbr title="Huidige&nbsp;pokémon"><a href="/huidige-pokemon"><img src="/assets/nav-icons-black/huidige.png" alt=""></a></abbr>
           </li>
-          <li><a href="/pokemon-battler"><img src="/assets/nav-icons-black/battler.png" alt=""></a>
+          <li><abbr title="Pokémon&nbsp;battler"><a href="/pokemon-battler"><img src="/assets/nav-icons-black/battler.png" alt=""></a></abbr>
           </li>
-          <li><a href="/who's-that-pokemon"><img src="/assets/nav-icons-black/who.png" alt=""></a>
+          <li><abbr title="Wie&nbsp;is&nbsp;deze&nbsp;pokémon?"><a href="/who's-that-pokemon"><img src="/assets/nav-icons-black/who.png" alt=""></a></abbr>
           </li>
-          <li class="active"><a href="/pokemon-finder"><img src="/assets/nav-icons-red/tracker.png" alt=""></a>
+          <li class="active"><abbr title="Pokémons&nbsp;tracker"><a href="/pokemon-finder"><img src="/assets/nav-icons-red/tracker.png" alt=""></a></abbr>
           </li>
         </ul>
       </section>
@@ -66,10 +66,10 @@
     <section class="modal-dialog modal-dialog-centered">
       <section class="modal-content">
         <section class="modal-header">
-          <h5 class="modal-title">Je hebt <span>Charizard</span> gevonden!</h5>
+          <h5 class="modal-title">Je hebt <span id="randomPokemonName"></span> gevonden!</h5>
         </section>
         <section class="modal-body">
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="">
+          <img id="randomPokemonImage" src="" alt="">
         </section>
         <section class="modal-footer">
           <button type="button" class="btn btn-success" data-bs-dismiss="modal">
@@ -78,7 +78,7 @@
               <path fill="white" d="M5.4 20L4 18.6L13.6 9H11v2H9V7h5.825q.4 0 .775.15t.65.425l3 2.975q.675.675 1.65 1.05t2.1.4v2q-1.55 0-2.812-.475T17.95 12.1l-1-1.05l-2.2 2.2L17 15.5l-6.55 3.775l-1-1.725l4.3-2.475l-1.7-1.7zM3 13v-2h5v2zm-2-3V8h5v2zm18.475-2q-.825 0-1.425-.587T17.45 6q0-.825.6-1.412T19.475 4q.825 0 1.425.588T21.5 6q0 .825-.6 1.413T19.475 8M3 7V5h5v2z" />
             </svg>Vluchten
           </button>
-          <a type="button" class="btn btn-danger" href="/pokemon-battler-vs-pc"><img src="/assets/box-gloves.png" alt="">Vechten</a>
+          <a id="randomPokemonID" type="button" class="btn btn-danger" href=""><img src="/assets/box-gloves.png" alt="">Vechten</a>
         </section>
       </section>
     </section>

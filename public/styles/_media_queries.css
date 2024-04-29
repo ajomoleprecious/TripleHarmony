@@ -460,6 +460,10 @@
     #poke-bg button.submenu-button span{
         font-size: 1.5rem;
     }
+
+    body.ingelogd abbr::after {
+        display: none;
+    }
 }
 
 @media (max-height: 900px) {
