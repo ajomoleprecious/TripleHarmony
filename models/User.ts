@@ -29,7 +29,7 @@ const UserSchema = new mongoose.Schema({
 }, { versionKey: false });
 
 // Pre save hook (middleware) to run before saving a new user
-UserSchema.pre('save', async function(next) {
+UserSchema.pre('save', async function(this: any, next: any) {
     // Hash the password with salt rounds
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
@@ -37,12 +37,11 @@ UserSchema.pre('save', async function(next) {
     next();
 });
 
-
 // Get the connection to the users database
 const usersDB = mongoose.connection.useDb('users');
 
 // static method to login the user
-UserSchema.statics.login = async function(username, password) {
+UserSchema.statics.login = async function(username : any, password : any) {
     // Find the user with the username
     const user = await this.findOne({ username });
     // If the user exists, compare the password
@@ -60,7 +59,7 @@ UserSchema.statics.login = async function(username, password) {
 }
 
 // Create the User model using the schema and connection
-const User = usersDB.model('User', UserSchema, 'usersAccounts');
+export const User = usersDB.model('User', UserSchema, 'usersAccounts');
 
 // Export the User model
-module.exports = User;
+//module.exports = User;
