@@ -14,6 +14,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script defer src="/scripts/general.js"></script>
   <script defer src="/scripts/battler.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
 </head>
 
 <body class="ingelogd battler">
@@ -162,10 +163,13 @@
           </section>
           <section class="modal-footer">
             Kopieer de link en stuur deze naar je vriend:
-            <section class="input-group" mb-3>
-              <input type="text" readonly class="form-control" value="<%= roomID %>">
+            <small>Uw link is gekopieerd</small>
+            <section class="input-group" mb-3 id="linkInputgroup">
+              <input type="text" readonly class="form-control" id="linkInput" value="<%= roomID %>">
               <span class="input-group-text"><button><i class="fa-solid fa-copy"></i></button></span>
             </section>
+            <p>Wacht nu dat je vriend ook online komt...</p>
+            <img src="/assets/others/loading.gif" alt="">
             <a href="/pokemon-battler">Terug gaan</a>
           </section>
         </section>
@@ -190,16 +194,6 @@
     </section>
     <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i class="fa-solid fa-question"></i></button></section>
   </main>
-  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js">
-    const socket = io('http://localhost:3000/pokemon-battler');
-
-    socket.on('connection', (socket) => {
-      console.log('Connected to server');
-    });
-  </script>
-  <script>
-
-  </script>
 </body>
 
 </html>

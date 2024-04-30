@@ -47,15 +47,19 @@ registerForm.addEventListener('submit', async (event) => {
         if (data.errors) {
             if (data.errors.email) {
                 registerEmailError.textContent = `• ${data.errors.email}`;
+                registerEmail.style.border = '3px solid red';
             }
             if (data.errors.username) {
                 registerUsernameError.textContent = `• ${data.errors.username}`;
+                registerUsername.style.border = '3px solid red';
             }
             if (data.errors.password) {
                 registerPasswordError.textContent = `• ${data.errors.password}`;
+                registerPassword.style.border = '3px solid red';
             }
             if(registerPassword.value !== registerConfirmPassword.value){
                 registerConfirmPasswordError.textContent = '• Wachtwoorden komen niet overeen';
+                registerConfirmPassword.style.border = '3px solid red';
             }
         }
         if (data.user) {
@@ -70,39 +74,47 @@ registerForm.addEventListener('submit', async (event) => {
 registerEmail.addEventListener('input', () => {
     if (registerEmail.value === '') {
         registerEmailLabel.style.color = 'red';
+        registerEmail.style.border = '3px solid red';
     }
     else {
         registerEmailLabel.style.color = 'black';
         registerEmailError.textContent = '';
+        registerEmail.style.border = 'none';
     }
 });
 
 registerUsername.addEventListener('input', () => {
     if (registerUsername.value === '') {
         registerUsernameLabel.style.color = 'red';
+        registerUsername.style.border = '3px solid red';
     }
     else {
         registerUsernameLabel.style.color = 'black';
         registerUsernameError.textContent = '';
+        registerUsername.style.border = 'none';
     }
 });
 
 registerPassword.addEventListener('input', () => {
     if (registerPassword.value.length < 8) {
         registerPasswordLabel.style.color = 'red';
+        registerPassword.style.border = '3px solid red';
     }
     else {
         registerPasswordLabel.style.color = 'black';
         registerPasswordError.textContent = '';
+        registerPassword.style.border = 'none';
     }
 });
 
 registerConfirmPassword.addEventListener('input', () => {
     if (registerConfirmPassword.value !== registerPassword.value) {
         registerConfirmPasswordError.textContent = '• Wachtwoorden komen niet overeen';
+        registerConfirmPassword.style.border = '3px solid red';
     }
     else {
         registerConfirmPasswordError.textContent = '';
+        registerConfirmPassword.style.border = 'none';
     }
 });
 
@@ -157,10 +169,17 @@ loginForm.addEventListener('submit', async (event) => {
         const data = await response.json();
         if (data.errors) {
             if (data.errors.username) {
-                userNameError.textContent = `• ${data.errors.username}`
+                userNameError.textContent = `• ${data.errors.username}`;
+                // If the username is invalid, focus on the username input
+                userName.focus();
+                userName.style.border = '3px solid red';
+
             }
             if (data.errors.password) {
-                passwordError.textContent = `• ${data.errors.password}`
+                passwordError.textContent = `• ${data.errors.password}`;
+                // If the password is invalid, focus on the password input
+                password.focus();
+                password.style.border = '3px solid red';
             }
         }
         if (data.user) {
@@ -175,18 +194,22 @@ loginForm.addEventListener('submit', async (event) => {
 userName.addEventListener('input', () => {
     if (userName.value === '') {
         userNameLabel.style.color = 'red';
+        userName.style.border = '3px solid red';
     }
     else {
         userNameLabel.style.color = 'black';
+        userName.style.border = 'none';
     }
 });
 
 password.addEventListener('input', () => {
     if (password.value === '' || password.value.length < 8) {
         passwordLabel.style.color = 'red';
+        password.style.border = '3px solid red';
     }
     else {
         passwordLabel.style.color = 'black';
+        password.style.border = 'none';
     }
 });
 
@@ -206,10 +229,11 @@ const resetEmail = document.getElementById('resetEmail');
 const resetEmailLabel = document.querySelector('label[for="resetEmail"]');
 
 resetForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
     if (resetEmail.value === '') {
-        event.preventDefault();
         resetEmailLabel.style.color = 'red';
         resetEmailLabel.textContent = 'E-mailadres is verplicht.';
+        resetEmail.style.border = '3px solid red';
         return;
     }
     else {

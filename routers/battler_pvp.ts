@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import { verifyUser } from "../middleware/verifyUser";
 import { currentAvatar } from "../middleware/userAvatar";
-import { client } from "../index";
+import { client, io } from "../index";
 import express from "express";
 
 const router = Router();
@@ -10,24 +10,11 @@ router.use(currentAvatar);
 // Serve static files from the 'public' directory
 router.use(express.static('public'));
 
-const app = express();
-const server = require("http").createServer(app);
-const io = require("socket.io")(server, {
-  cors: { origin: "*" },
-  serveClient: false,
-  path: "localhost:3000/pokemon-battler/socket.io"
-});
-
-// Socket.io
-io.on("connection", (socket: any) => {
-  console.log("User connected: " + socket.id);
-});
-
 // http://localhost:3000/pokemon-battler
 router.get("/", (req: Request, res: Response) => {
   // get full URL
-  const url = 'http' + '://' + req.get('host') + req.originalUrl;
-  const roomID = req.query.roomID ? `${url}/?roomID=${req.query.roomID}` : `${url}/?roomID=${Math.floor(Math.random() * 1000)}`;
+  const url = 'https' + '://' + req.get('host') + req.originalUrl;
+  const roomID = req.query.roomID ? `${url}?roomID=${req.query.roomID}` : `${url}?roomID=${Math.floor(Math.random() * 1000)}`;
   const avatar = res.locals.currentAvatar;
   res.render("pokemon-battler", { roomID, avatar });
 });
@@ -42,5 +29,7 @@ router.post("/change-avatar/:avatar", async (req, res) => {
       console.error(err);
   }
 });
+
+
 
 export default router;
