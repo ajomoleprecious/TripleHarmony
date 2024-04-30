@@ -24,20 +24,41 @@ router.get("/", async (req: Request, res: Response) => {
         const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
         const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
         const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
-         // get left pokemon from params
-        const leftPokemon = req.query.left_pokemon;
-        // get right pokemon from params
-        const rightPokemon = req.query.right_pokemon;
 
-        // get left pokemon from database met fetchPokemonByName functie
-
-        // get right pokemon from database met fetchPokemonByName functie
-            res.render("pokemon-vergelijken", 
+        if(typeof req.query.leftPokemon === "string" && typeof req.query.rightPokemon === "string") 
+        {
+            if(req.query.leftPokemon === "" || req.query.rightPokemon === "")
+            {
+                res.render("pokemon-vergelijken", 
                 { 
-                    currentPokemon, pokemonHP, pokemonDefense, avatar, leftQuery: "", 
+                    currentPokemon, pokemonHP, pokemonDefense, avatar, leftQuery: "", rightQuery: "",
                     leftPokeImage: pikachu.sprites.other['official-artwork'].front_default, leftHP: pikachu.stats[0].base_stat, leftAttack: pikachu.stats[1].base_stat, leftDefense: pikachu.stats[2].base_stat,
                     rightPokeImage: charmander.sprites.other['official-artwork'].front_default, rightHP: charmander.stats[0].base_stat, rightAttack: charmander.stats[1].base_stat, rightDefense: charmander.stats[2].base_stat,
                 });
+            }
+
+            let leftQuery = req.query.leftPokemon.toLocaleLowerCase();
+            let rightQuery = req.query.rightPokemon.toLocaleLowerCase();
+            let left_pokemon: any = await fetchPokemonByName(leftQuery);
+            let right_pokemon: any = await fetchPokemonByName(rightQuery);
+            res.render("pokemon-vergelijken", 
+                { 
+                    currentPokemon, pokemonHP, pokemonDefense, avatar, leftQuery: left_pokemon, rightQuery: right_pokemon,
+                    leftPokeImage: left_pokemon.sprites.other['official-artwork'].front_default, leftHP: left_pokemon.stats[0].base_stat, leftAttack: left_pokemon.stats[1].base_stat, leftDefense: left_pokemon.stats[2].base_stat,
+                    rightPokeImage: right_pokemon.sprites.other['official-artwork'].front_default, rightHP: right_pokemon.stats[0].base_stat, rightAttack: right_pokemon.stats[1].base_stat, rightDefense: right_pokemon.stats[2].base_stat, 
+                });
+                console.log(leftQuery);
+                console.log(rightQuery);
+        } 
+        else
+        {
+            res.render("pokemon-vergelijken", 
+                { 
+                    currentPokemon, pokemonHP, pokemonDefense, avatar, leftQuery: "", rightQuery: "",
+                    leftPokeImage: pikachu.sprites.other['official-artwork'].front_default, leftHP: pikachu.stats[0].base_stat, leftAttack: pikachu.stats[1].base_stat, leftDefense: pikachu.stats[2].base_stat,
+                    rightPokeImage: charmander.sprites.other['official-artwork'].front_default, rightHP: charmander.stats[0].base_stat, rightAttack: charmander.stats[1].base_stat, rightDefense: charmander.stats[2].base_stat,
+                });
+        }
     }
     catch (error) 
     {

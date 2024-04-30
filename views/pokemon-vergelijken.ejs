@@ -86,7 +86,7 @@
         </section>
       </section>
     </section>
-    <form id="vergelijkenForm" action="/pokemon-vergelijken" method="get">
+    <form id="vergelijkenForm" action="/pokemon-vergelijken" role="search" method="get">
       <section class="pv_project">
         <article class="left_pokemon">
           <img src="<%= leftPokeImage %>" alt="left-poke-img">
@@ -119,15 +119,24 @@
         </article>
         <article class="middle_stats">
           <ul class="comparison">
-            <li><%= leftHP - rightHP %></li>
-            <li><%= leftAttack - rightAttack %></li>
-            <li><%= leftDefense - rightDefense %></li>
+            <!--HP-->
+            <li style="color: <%= (leftHP > rightHP) ? 'blue' : (leftHP < rightHP) ? 'red' : 'black' %>;">
+              <%= leftHP - rightHP %>
+            </li>
+            <!--ATTACK-->
+            <li style="color: <%= (leftAttack > rightAttack) ? 'blue' : (leftAttack < rightAttack) ? 'red' : 'black' %>;">
+              <%= leftAttack - rightAttack %>
+            </li>
+            <!--DEFENSE-->
+            <li style="color: <%= (leftDefense > rightDefense) ? 'blue' : (leftDefense < rightDefense) ? 'red' : 'black' %>;">
+              <%= leftDefense - rightDefense %>
+            </li>
           </ul>
         </article>
         <article class="right_pokemon">
           <img src="<%= rightPokeImage %>" alt="right-poke-img">
           <section class="input-group">
-            <input class="form-control" name="right_pokemon" type="text" placeholder="zoek pokémon" onkeypress="handleKeyPress(event)">
+            <input class="form-control" name="right_pokemon" type="text" placeholder="zoek pokémon" onkeypress="handleKeyPress(event)" value="<%= rightQuery %>">
             <span class="input-group-text btn btn-warning" onclick="submitForm()"><i class="fa-solid fa-magnifying-glass"></i></span>
           </section>
           <ul class="pv_stats">
