@@ -1161,12 +1161,6 @@ body.battler .fa-solid.fa-question {
   overflow: hidden; /* Hide overflow content */
 } 
 
-  max-width: 200vw;
-  /* Set maximum width relative to viewport width */
-  overflow: hidden;
-  /* Hide overflow content */
-}
-
 .pokemonToGuess .result {
   cursor: pointer;
   color: var(--pokemonToGuess-bg);
