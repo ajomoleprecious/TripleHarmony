@@ -211,3 +211,6 @@ project.lock.json
 
 # UWP Projects
 AppPackages/
+
+# dist folder
+dist/
