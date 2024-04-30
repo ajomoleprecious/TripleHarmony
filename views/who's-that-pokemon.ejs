@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl-BE">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,7 @@
     <script defer src="/scripts/general.js"></script>
     <script defer src="/scripts/currentpokemon.js"></script>
 </head>
-
+ 
 <body class="ingelogd">
     <header>
         <nav>
@@ -27,10 +27,10 @@
             </section>
             <section id="nav-menus" class="nav-container">
                 <ul class="">
-                    <li><a href="/pokemons-bekijken"><img src="/assets/nav-icons-black/bekijken.png"
-                                alt=""></a></a></li>
-                    <li><a href="/pokemon-vergelijken"><img src="/assets/nav-icons-black/vergelijken.png"
-                                alt=""></a></li>
+                    <li><a href="/pokemons-bekijken"><img src="/assets/nav-icons-black/bekijken.png" alt=""></a></a>
+                    </li>
+                    <li><a href="/pokemon-vergelijken"><img src="/assets/nav-icons-black/vergelijken.png" alt=""></a>
+                    </li>
                     <li><a href="/pokemons-vangen"><img src="/assets/nav-icons-black/vangen.png" alt=""></a>
                     </li>
                     <li><a href="/huidige-pokemon"><img src="/assets/nav-icons-black/huidige.png" alt=""></a>
@@ -47,33 +47,32 @@
                 <ul>
                     <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>
-                        <i class="fa-solid fa-question"></i>
-                    </button></a></li>
-                    <li><a href="/pokemon-auth/logout"
-                            class="fa-solid fa-right-from-bracket btn btn-dark"></a>
+                                <i class="fa-solid fa-question"></i>
+                            </button></a></li>
+                    <li><a href="/pokemon-auth/logout" class="fa-solid fa-right-from-bracket btn btn-dark"></a>
                     </li>
                 </ul>
             </section>
         </nav>
     </header>
     <main>
+
+        
+        
         <section class="pokemonToGuess">
             <p id="cardTitle">Wie is deze Pokémon ?</p>
-            <div id="loadingGif" class="hidden">
-              <img src="/assets/others/loading-ball.gif" alt="" />
-            </div>
-            <img class="silhouette" src="<%= image %>" alt="" />
+            <p id="startMessage">Wie is deze Pokémon ? <br> <br> Press Enter to start</p>
+            <img class="silhouette" src="<%= image %>" id="hiddenPokemon" alt="" />
             <section class="input-group-who">
-              <span class="input-group-text btn btn-warning who"><i class="fa-solid fa-magnifying-glass"></i></span>
-              <input type="text" placeholder="vul de naam in" id="inputWho" />
+                <span class="input-group-text btn btn-warning who"><i class="fa-solid fa-magnifying-glass"></i></span>
+                <input type="text" placeholder="vul de naam in" id="inputWho" />
             </section>
             <br />
             <a class="result" href="#">Toon resultaat</a>
-            <a class="skip" id="skipButton" href="#" onclick="getNewPokemon()"
-              ><i class="fa-solid fa-angles-right"></i
-            ></a>
+            <a class="skip" id="skipButton" href="#" onclick="getNewPokemon()"><i
+                    class="fa-solid fa-angles-right"></i></a>
         </section>
-
+ 
         <section class="pokemon_hide">
             <img src="/assets/pokemon_logo.png" alt="">
             <img src="/assets/pokeball_opening.gif" alt="">
@@ -97,7 +96,7 @@
                 </section>
             </section>
         </section>
-
+ 
         <!-- Modal voor help-->
         <section class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
             <section class="modal-dialog modal-dialog-centered">
@@ -140,40 +139,46 @@
         <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i
                     class="fa-solid fa-question"></i></button></section>
     </main>
+    <script>
+        const pokemonImg = document.getElementById("hiddenPokemon");
+        const skipButton = document.getElementById("skipButton");
+       
+        skipButton.addEventListener("click", getNewPokemon);
+   
+        function getNewPokemon(event) {
+            event.preventDefault();
+            pokemonImg.style.filter = "brightness(100%)"; // Set brightness to 0 initially
+            pokemonImg.src = "/assets/others/loading-ball.gif";
+            setTimeout(async () => {
+                await fetch("/who's-that-pokemon/new-pokemon")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        pokemonImg.src = data.image;
+                        pokemonImg.alt = data.name;
+                        pokemonImg.style.filter = "brightness(0%)"; // Set brightness to 0 after new image is loaded
+                    });
+                pokemonImg.style.filter = "brightness(0%)"; // Set brightness to 100% before showing the loading Pokeball
+            }, 600);
+        }
+    </script>
 
     <script>
-        async function getNewPokemon() {
-          const loadingGif = document.getElementById("loadingGif");
-          loadingGif.classList.remove("hidden");
-      
-          // Hide the previous Pokémon
-          const img = document.querySelector(".silhouette");
-          if (img) {
-            img.classList.add("hidden");
-          }
-      
-          // Show the loading GIF for a moment
-          await new Promise((resolve) => setTimeout(resolve, 350));
-      
-          // Hide the loading GIF
-          loadingGif.classList.add("hidden");
-      
-          // Generate the new Pokémon
-          const response = await fetch(`/who's-that-pokemon/new-pokemon`);
-          const data = await response.json();
-      
-          document.getElementById("cardTitle").textContent = `Wie is deze Pokémon?`;
-          document.getElementById("inputWho").value = "";
-          document.querySelector(".result").classList.remove("show");
-      
-          if (img) {
-            img.classList.remove("hidden");
-            img.src = data.image;
-            img.alt = data.name;
-          }
+        document.addEventListener('keypress', function(event) {
+        if (event.keyCode === 13) {
+        document.getElementById('startMessage').style.display = 'none';
+        document.getElementById('hiddenPokemon').style.display = 'block';
         }
-      </script>
+        });
 
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('hiddenPokemon').style.display = 'block';
+        });
+    </script>
+   
+ 
+ 
 </body>
-
+ 
 </html>
