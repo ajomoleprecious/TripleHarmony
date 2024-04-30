@@ -12,9 +12,8 @@ import vangenRouter from './routers/vangen';
 import vergelijkenRouter from './routers/vergelijken';
 import whosThatRouter from "./routers/who's";
 import dotenv from "dotenv";
-import { Server } from 'socket.io';
+const socketio = require('socket.io');
 const mongoose = require('mongoose');
-
 
 // Load environment variables from .env file
 dotenv.config();
@@ -38,7 +37,7 @@ app.use(express.static('public'));
 app.use(cookieParser());
 
 const server = require('http').Server(app);
-const io = new Server(server);
+export const io = socketio(server);
 
 
 // Use the routers
@@ -69,24 +68,21 @@ app.use((_, res) => {
 });
 
 // Start the app
-client.connect()
-  .then(() => {
+async function startApp() {
+  await client.connect().then(() => {
     mongoose.connect(uri);
-  })
-  .then(() => {
+  }).then(() => {
     console.log("Connected to MongoDB");
-    app.listen(app.get('port'), async () => {
+    server.listen(app.get('port'), async () => {
       console.log('[server running on: http://localhost:' + app.get('port') + ']');
     });
   }).catch((err: any) => {
     console.error('Error connecting to MongoDB:', err);
   });
+}
+
+startApp();
 
 io.on('connection', (socket: any) => {
   console.log('User connected: ' + socket.id);
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  });
 });
-
-export { io };
