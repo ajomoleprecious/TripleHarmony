@@ -4,9 +4,9 @@
     "description": "",
     "main": "index.ts",
     "scripts": {
-        "start": "npm run build && nodemon index.ts",
-        "build": "tsc",
-        "serve": "npm run build && node dist/index.js"
+        "start": "npm run serve && nodemon index.ts",
+        "build": "npm run serve && node dist/index.js",
+        "serve": "tsc"
     },
     "author": "TripleHarmony",
     "license": "ISC",
