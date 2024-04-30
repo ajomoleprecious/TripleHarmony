@@ -17,8 +17,8 @@ let pokemonArray: any[] = [];
 router.get("/", async (req: Request, res: Response) => {
     try
     {
-        let pikachu: any = await fetchPokemonByName("mewtwo");
-        let charmander: any = await fetchPokemonByName("steelix");
+        let pikachu: any = await fetchPokemonByName("blissey");
+        let charmander: any = await fetchPokemonByName("shuckle");
         const avatar = res.locals.currentAvatar;
         const currentPokemon = res.locals.currentPokemon;
         const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
