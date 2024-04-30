@@ -15,28 +15,29 @@
   <script defer src="/scripts/general.js"></script>
   <script defer src="/scripts/currentpokemon.js"></script>
   <script defer src="/scripts/filter.js"></script>
+  <script defer src="/scripts/huidige.js"></script>
 </head>
 
 <body class="ingelogd pokemon-bekijken">
   <header>
     <nav>
       <section class="left-container">
-        <a href="pokemon-submenu"><img src="/assets/pokemon_logo.png" alt="logo"></a>
+        <a href="/pokemon-submenu"><img src="/assets/pokemon_logo.png" alt="logo"></a>
       </section>
       <section id="nav-menus" class="nav-container">
         <ul class="">
-          <li><a href="/pokemons-bekijken"><img src="/assets/nav-icons-black/bekijken.png" alt=""></a></a>
+          <li><abbr title="Pokémons&nbsp;bekijken"><a href="/pokemons-bekijken"><img src="/assets/nav-icons-black/bekijken.png" alt=""></a></abbr>
           </li>
-          <li><a href="/pokemon-vergelijken"><img src="/assets/nav-icons-black/vergelijken.png" alt=""></a>
+          <li><abbr title="Pokémons&nbsp;vergelijken"><a href="/pokemon-vergelijken"><img src="/assets/nav-icons-black/vergelijken.png" alt=""></a></abbr>
           </li>
-          <li><a href="/pokemons-vangen"><img src="/assets/nav-icons-black/vangen.png" alt=""></a>
+          <li><abbr title="Pokémons&nbsp;vangen"><a href="/pokemons-vangen"><img src="/assets/nav-icons-black/vangen.png" alt=""></a></abbr>
           </li>
-          <li class="active"><a href="./huidige-pokemon"><img src="/assets/nav-icons-red/huidige.png" alt=""></a></li>
-          <li><a href="/pokemon-battler"><img src="/assets/nav-icons-black/battler.png" alt=""></a>
+          <li class="active"><abbr title="Huidige&nbsp;pokémon"><a href="/huidige-pokemon"><img src="/assets/nav-icons-red/huidige.png" alt=""></a></abbr></li>
+          <li><abbr title="Pokémon&nbsp;battler"><a href="/pokemon-battler"><img src="/assets/nav-icons-black/battler.png" alt=""></a></abbr>
           </li>
-          <li><a href="/who's-that-pokemon"><img src="/assets/nav-icons-black/who.png" alt=""></a>
+          <li><abbr title="Wie&nbsp;is&nbsp;deze&nbsp;pokémon?"><a href="/who's-that-pokemon"><img src="/assets/nav-icons-black/who.png" alt=""></a></abbr>
           </li>
-          <li><a href="/pokemon-finder"><img src="/assets/nav-icons-black/tracker.png" alt=""></a>
+          <li><abbr title="Pokémons&nbsp;tracker"><a href="/pokemon-finder"><img src="/assets/nav-icons-black/tracker.png" alt=""></a></abbr>
           </li>
         </ul>
       </section>
@@ -44,7 +45,11 @@
         <ul>
           <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
           <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>
+                <% if (avatar) {%>
+                <img src="<%= avatar %>" alt="my-avatar">
+                <% } else { %>
                 <i class="fa-solid fa-question"></i>
+                <% } %>
               </button></a></li>
           <li><a href="/pokemon-auth/logout" class="fa-solid fa-right-from-bracket btn btn-dark"></a>
           </li>
@@ -110,60 +115,18 @@
     </section>
     <section class="pokemon-list">
       <ul>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif" alt=""></a>
-          <p>pikachu</p>
+        <% for (let i = 0; i < pokemonsList.length; i++) {%>
+        <li data-bs-toggle="modal" data-bs-target="#pokemons" onclick="getPokemon(<%= pokemonsList[i].pokemonId %>)">
+          <a data-bs-toggle="modal" data-bs-target="#pokemons" href="#">
+            <% if (pokemonsList[i].pokemonGif) { %>
+            <img src="<%= pokemonsList[i].pokemonGif %>" alt="<%= pokemonsList[i].pokemonName %>">
+            <% } else { %>
+            <img src="<%= pokemonsList[i].pokemonImg %>" alt="<%= pokemonsList[i].pokemonName %>">
+            <% } %>
+          </a>
+          <p><%= pokemonsList[i].pokemonName.charAt(0).toUpperCase() %><%=  pokemonsList[i].pokemonName.slice(1) %></p>
         </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/26.gif" alt=""></a>
-          <p>raichu</p>
-        </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/27.gif" alt=""></a>
-          <p>sandshrew</p>
-        </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/28.gif" alt=""></a>
-          <p>sandslash</p>
-        </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/29.gif" alt=""></a>
-          <p>nidoran-f</p>
-        </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/30.gif" alt=""></a>
-          <p>nidorina</p>
-        </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/31.gif" alt=""></a>
-          <p>nidoqueen</p>
-        </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/32.gif" alt=""></a>
-          <p>nidoran-m</p>
-        </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/33.gif" alt=""></a>
-          <p>nidorino</p>
-        </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/34.gif" alt=""></a>
-          <p>nidoking</p>
-        </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/35.gif" alt=""></a>
-          <p>clefairy</p>
-        </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/36.gif" alt=""></a>
-          <p>clefable</p>
-        </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/37.gif" alt=""></a>
-          <p>vulpix</p>
-        </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/38.gif" alt=""></a>
-          <p>ninetales</p>
-        </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/39.gif" alt=""></a>
-          <p>jigglypuff</p>
-        </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/40.gif" alt=""></a>
-          <p>wigglytuff</p>
-        </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/41.gif" alt=""></a>
-          <p>zubat</p>
-        </li>
-        <li data-bs-toggle="modal" data-bs-target="#detail"><a data-bs-toggle="modal" data-bs-target="#detail" href="#"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/42.gif" alt=""></a>
-          <p>golbat</p>
-        </li>
+        <% } %>
       </ul>
     </section>
     <section class="list-nav">
@@ -177,18 +140,22 @@
     </section>
     <section class="current-pokemon">
       <a href="huidige-pokemon">
-        <img class="pokemon-pic" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="my-pokemon">
+        <% if (currentPokemon.sprites.other['showdown'].front_default) { %>
+        <img class="pokemon-pic" src="<%= currentPokemon.sprites.other['showdown'].front_default %>" alt="<%= currentPokemon.name %>">
+        <% } else { %>
+        <img class="pokemon-pic" src="<%= currentPokemon.sprites.other['official-artwork'].front_default %>" alt="<%= currentPokemon.name %>">
+        <% } %>
       </a>
       <img class="pokemon_podioum" src="assets/podium.png" alt="pokemon-podium">
       <section class="pokemon-stats">
         <section class="pokemon-hp">
           <img id="life" src="assets/red-heart.png" alt="leven">
-          <p>78</p>
+          <p><%= pokemonHP %></p>
         </section>
         |
         <section class="pokemon-shield">
           <img id="shield" src="assets/shield.png" alt="verdediging">
-          <p>78</p>
+          <p><%= pokemonDefense %></p>
         </section>
       </section>
     </section>
@@ -210,16 +177,20 @@
       </section>
     </section>
     <!-- Modal voor detail -->
-    <section class="modal fade" id="detail" tabindex="-1" aria-labelledby="detailLabel" aria-hidden="true">
+    <section class="modal fade" id="pokemons" tabindex="-1" aria-labelledby="detailLabel" aria-hidden="true">
       <section class="modal-dialog modal-dialog-centered">
         <section class="modal-content">
           <section class="modal-header">
-            <h1 class="modal-title fs-5" id="detailLabel">Pikachu</h1>
+            <h1 class="modal-title fs-5" id="pokemonsLabel"></h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </section>
-          <section class="modal-body modal-huidige">
-            <img class="mb-5" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif" alt="">
-            <button class="btn btn-dark" type="button">Maak je huidige Pokémon</button>
+          <section class="modal-body">
+            <img id="pokemondetailImg" src="" alt="">
+          </section>
+          <section class="modal-footer">
+            <a id="pokemonSetLink" href="#">
+              <button class="btn btn-dark" type="button">Maak <span id="pokemonName"></span> je huidige Pokémon</button>
+            </a>
           </section>
         </section>
       </section>
@@ -234,13 +205,14 @@
           </section>
           <section class="modal-body">
             <ul class="avatars">
-              <li><img src="assets/avatars/ash_ketchum.png" alt=""></li>
-              <li><img src="assets/avatars/chloe.png" alt=""></li>
-              <li><img src="assets/avatars/dawn.png" alt=""></li>
-              <li><img src="assets/avatars/james.png" alt=""></li>
-              <li><img src="assets/avatars/jessie.png" alt=""></li>
-              <li><img src="assets/avatars/may.png" alt=""></li>
-              <li><img src="assets/avatars/serena.png" alt=""></li>
+              <li onclick="changeAvatar('ash')"><img src="/assets/avatars/ash_ketchum.png" alt="ash"></li>
+              <li onclick="changeAvatar('chloe')"><img src="/assets/avatars/chloe.png" alt="chloe"></li>
+              <li onclick="changeAvatar('dawn')"><img src="/assets/avatars/dawn.png" alt="dawn"></li>
+              <li onclick="changeAvatar('james')"><img src="/assets/avatars/james.png" alt="james"></li>
+              <li onclick="changeAvatar('jessie')"><img src="/assets/avatars/jessie.png" alt="jessie"></li>
+              <li onclick="changeAvatar('may')"><img src="/assets/avatars/may.png" alt="may"></li>
+              <li onclick="changeAvatar('serena')"><img src="/assets/avatars/serena.png" alt="serena"></li>
+              <li onclick="changeAvatar('none')"><img src="/assets/avatars/none.png" alt="none"></li>
             </ul>
           </section>
         </section>

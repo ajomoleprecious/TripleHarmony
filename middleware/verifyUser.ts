@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-const User = require('../models/User') as any;
+import { User } from "../models/User";
 const jwt = require('jsonwebtoken');
 
 const maxAge = 1 * 24 * 60 * 60;

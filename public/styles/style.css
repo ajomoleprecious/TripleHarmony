@@ -62,8 +62,8 @@ main {
   justify-content: center;
   align-items: center;
   position: fixed;
-  right: 15px;
-  top: 65px;
+  right: .8rem;
+  top: 4.3rem;
   cursor: pointer;
 }
 
@@ -77,6 +77,8 @@ main {
   z-index: 100;
   grid-area: 1/1;
   margin: auto;
+  /* Shake animation every 30 seconds on repeat */
+  animation: shake 5s infinite;
 }
 
 .pokemon_hide img:nth-child(2) {
@@ -87,12 +89,13 @@ main {
 }
 
 .current-pokemon .pokemon-pic {
-  width: 100px;
-  height: 90px;
+  width: 5rem;
+  height: 4.5rem;
   animation: infinite 2s ease-in-out;
   animation-name: move;
   animation-duration: 2s;
   margin-bottom: -15px;
+  margin-top: 2rem;
 }
 
 .current-pokemon .pokemon_podioum {
@@ -238,8 +241,9 @@ main {
   border: 2px solid var(--avatar-border-color);
   cursor: pointer;
 }
+
 .right-container ul li:nth-child(2) button img,
-.right-container ul li:nth-child(2) button i{
+.right-container ul li:nth-child(2) button i {
   padding: 0;
   border-radius: 100%;
   width: 100%;
@@ -247,7 +251,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
 }
 
 .modal-content {
@@ -292,6 +296,31 @@ nav * {
   background-color: rgb(245, 245, 155);
   border-radius: 20px;
 }
+
+
+abbr {
+  position: relative;
+  text-decoration: none;
+}
+
+abbr::after {
+  content: attr(title);
+  position: absolute;
+  top: 170%;
+  left: -100%;
+  display: none;
+  font-size: 1rem;
+  color: black;
+  background-color: var(--orange);
+  z-index: 10;
+  padding: 0.2rem;
+  border-radius: 10px;
+}
+
+abbr:hover::after {
+  display: block;
+}
+
 
 /* LANdDING PAGE */
 
@@ -487,9 +516,9 @@ nav p {
   text-align: center;
 }
 
-.pokemon-bekijken>main>h1 {
-  font-size: 1.5rem;
-  margin: .5rem auto 0 1.5rem;
+body.pokemon-bekijken h1 {
+  font-size: 2rem;
+  margin: .5rem auto 0 auto;
 }
 
 .pokemon-bekijken>main {
@@ -599,9 +628,11 @@ nav p {
   align-items: center;
   justify-content: center;
 }
-#detail table{
+
+#detail table {
   margin: 0 auto;
 }
+
 #detail table tbody tr:nth-child(1) th {
   border-radius: 10px 0 0 0;
 }
@@ -784,12 +815,18 @@ nav p {
   width: fit-content;
 }
 
-.left_pokemon,
+.left_pokemon{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .right_pokemon {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .left_pokemon img,
@@ -847,6 +884,7 @@ nav p {
 .left_pokemon span,
 .right_pokemon span {
   border: var(--black) 1px solid;
+  height: 2.7rem;
 }
 
 .middle_stats {
@@ -891,14 +929,14 @@ nav p {
   justify-content: space-evenly;
   gap: 1rem;
 }
- 
+
 .ingelogd .submenu article {
   width: 100%;
   opacity: 0;
   animation: slideUp 1s forwards;
   animation-delay: calc(.2s * var(--i));
 }
- 
+
 .submenu-button section {
   display: flex;
   justify-content: space-between;
@@ -907,23 +945,25 @@ nav p {
   background-color: var(--orange);
   border-radius: 20px;
 }
+
 .submenu-button section span {
   font-size: 1.8rem;
   color: var(--black);
 }
- 
-.submenu-button section img{
+
+.submenu-button section img {
   width: fit-content;
   border-radius: 0;
 }
- 
+
 .submenu-button {
   transition: transform 0.3s ease-in-out;
 }
- 
+
 .submenu-button:hover {
   transform: scale(1.1);
 }
+
 /* POKEMON BATTLER */
 
 .battler {
@@ -1036,17 +1076,19 @@ nav p {
   animation-duration: 2s;
 }
 
-#battleChoice .modal-content{
+#battleChoice .modal-content {
   background-color: var(--pokemonToGuess-bg);
   border-radius: 20px;
   border: 4px solid var(--black);
 }
-#battleChoice .modal-title{
+
+#battleChoice .modal-title {
   font-size: 1.5rem;
   text-align: center;
   width: 100%;
 }
-#battleChoice .modal-footer{
+
+#battleChoice .modal-footer {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1055,12 +1097,12 @@ nav p {
   gap: 1rem;
 }
 
-#battleChoice .modal-footer i{
+#battleChoice .modal-footer i {
   letter-spacing: 5px;
 }
 
 #pvpstranger .modal-footer,
-#pvpfriend .modal-footer{
+#pvpfriend .modal-footer {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1069,12 +1111,18 @@ nav p {
   gap: 1rem;
 }
 
-#pvpfriend .modal-footer .input-group{
+#pvpfriend .modal-footer .input-group {
   cursor: pointer;
 }
 
 #pvpstranger img{
   width: 3rem;
+}
+
+body#finder .fa-solid.fa-question,
+body.battler .fa-solid.fa-question {
+  background-color: brown;
+  color: var(--white);
 }
 
 /* WHO'S THAT POKEMON & RESULT */
@@ -1112,6 +1160,12 @@ nav p {
   max-width: 200vw; /* Set maximum width relative to viewport width */
   overflow: hidden; /* Hide overflow content */
 } 
+
+  max-width: 200vw;
+  /* Set maximum width relative to viewport width */
+  overflow: hidden;
+  /* Hide overflow content */
+}
 
 .pokemonToGuess .result {
   cursor: pointer;
@@ -1273,75 +1327,89 @@ nav p {
 
 .roulette-container {
   margin: 0;
-	padding: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   flex-direction: column;
   height: 85vh;
 }
 
 .roulette-box {
-  width: 15.625rem; /* helft van 31.25rem */
-  height: 15.625rem; /* helft van 31.25rem */
+  width: 15.625rem;
+  /* helft van 31.25rem */
+  height: 15.625rem;
+  /* helft van 31.25rem */
   background-color: #ccc;
   border-radius: 50%;
-  border: 0.5rem solid #dde; /* ik heb de dikte van de rand ook verminderd voor verhouding */
+  border: 0.5rem solid #dde;
+  /* ik heb de dikte van de rand ook verminderd voor verhouding */
   position: relative;
   overflow: hidden;
   transition: 1s;
+  margin: 0;
 }
 
 .roulette-box li {
   height: 50%;
-  width: 6.25rem; /* helft van 12.5rem */
+  width: 6.25rem;
+  /* helft van 12.5rem */
   position: absolute;
-  clip-path: polygon(100% 0 , 50% 100% , 0 0 );
+  clip-path: polygon(100% 0, 50% 100%, 0 0);
   transform: translateX(-50%);
   transform-origin: bottom;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.625rem; /* helft van 1.25rem */
+  font-size: 0.625rem;
+  /* helft van 1.25rem */
   font-weight: bold;
   font-family: sans-serif;
   color: #fff;
-  left: 4.21875rem; /* helft van 8.4375rem */
+  left: 4.21875rem;
+  /* helft van 8.4375rem */
 }
 
-.roulette-box .one{
-	background-color: #3f51b5;
-	left: 50%;
+.roulette-box .one {
+  background-color: #3f51b5;
+  left: 50%;
 }
-.roulette-box .two{
-	background-color: #ff9800;
-	transform: rotate(45deg);
+
+.roulette-box .two {
+  background-color: #ff9800;
+  transform: rotate(45deg);
 }
-.roulette-box .three{
-	background-color: #e91e63;
-	transform: rotate(90deg);
+
+.roulette-box .three {
+  background-color: #e91e63;
+  transform: rotate(90deg);
 }
-.roulette-box .four{
-	background-color: #4caf50;
-	transform: rotate(135deg);
+
+.roulette-box .four {
+  background-color: #4caf50;
+  transform: rotate(135deg);
 }
-.roulette-box .five{
-	background-color: #009688;
-	transform: rotate(180deg);
+
+.roulette-box .five {
+  background-color: #009688;
+  transform: rotate(180deg);
 }
-.roulette-box .six{
-	background-color: #795548;
-	transform: rotate(225deg);
+
+.roulette-box .six {
+  background-color: #795548;
+  transform: rotate(225deg);
 }
-.roulette-box .seven{
-	background-color: #9c27b0;
-	transform: rotate(270deg);
+
+.roulette-box .seven {
+  background-color: #9c27b0;
+  transform: rotate(270deg);
 }
-.roulette-box .eight{
-	background-color: #f44336;
-	transform: rotate(315deg);
+
+.roulette-box .eight {
+  background-color: #f44336;
+  transform: rotate(315deg);
 }
 
 .roulette-arrow {
@@ -1359,17 +1427,17 @@ nav p {
 
 .ingelogd .poke-catch-buttons {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 .poke-catch-buttons a {
-  cursor: none; 
+  cursor: none;
 }
 
 .poke-catch-buttons a {
-  cursor: none; 
+  cursor: none;
 }
 
 #catch-button {
@@ -1407,7 +1475,7 @@ nav p {
   position: fixed;
   right: 7rem;
   top: 20rem;
-  z-index: 500;
+  z-index: 10;
 }
 
 .boxing-gloves:hover {
@@ -1417,13 +1485,37 @@ nav p {
 
 /* HUIDIGE POKEMON */
 
-.modal-huidige button,
-.modal-huidige img {
-  margin: 0 auto;
+#pokemons h1 {
+  text-align: start;
+  font-size: 2rem;
+  margin: 0;
 }
 
-.modal-huidige button:hover {
-  background-color: var(--green);
+#pokemons .modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#pokemons .modal-body img {
+  width: 15rem;
+}
+
+#pokemons .modal-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#pokemons .modal-footer button {
+  font-size: 1rem;
+}
+
+#pokemons .modal-footer button:hover {
+  transform: scale(1.025);
+  transition: 0.5s ease-in-out;
+  background-color: var(--pokemonToGuess-bg);
   color: var(--black);
 }
 
@@ -1440,7 +1532,7 @@ nav p {
   padding: 0;
 }
 
-#finder header{
+#finder header {
   grid-area: header;
 }
 
@@ -1484,27 +1576,33 @@ nav p {
   background-size: 100% 100%;
   position: absolute;
 }
-#finder .modal-content{
+
+#finder .modal-content {
   background-color: var(--pokemonToGuess-bg);
 }
-#finder .modal-title{
+
+#chooseAvatar .modal-content {
+  background-color: var(--orange);
+}
+
+#finder .modal-title {
   text-align: center;
   width: 100%;
 }
 
-#finder .modal-footer svg{
+#finder .modal-footer svg {
   transform: scaleX(-1);
   font-size: 8rem;
 }
 
-#finder .modal-body{
+#finder .modal-body {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
 }
 
-#finder .modal-footer{
+#finder .modal-footer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1517,41 +1615,42 @@ nav p {
   height: 80px;
 }
 
-#hulp .modal-footer{
+#hulp .modal-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-#hulp .modal-footer button{
+#hulp .modal-footer button {
   background-color: var(--orange);
   border-color: var(--orange);
   color: var(--black);
 }
 
-#hulp label{
+#hulp label {
   font-size: 1.2rem;
   cursor: pointer;
 }
 
-#hulp input[type="checkbox"]{
+#hulp input[type="checkbox"] {
   background-color: var(--orange);
   border-color: var(--orange);
 }
 
-#hulp input[type="checkbox"]:checked{
+#hulp input[type="checkbox"]:checked {
   background-color: var(--black);
   border-color: var(--black);
 }
 
 
-#finder .modal-footer img{
+#finder .modal-footer img {
   width: 48px;
   height: 48px;
 }
 
 .pokemon-finder #joyDiv {
-  visibility: hidden; /* Hide the joy div by default */
+  visibility: hidden;
+  /* Hide the joy div by default */
   width: 100px;
   height: 100px;
   position: fixed;
@@ -1565,5 +1664,8 @@ nav p {
   border: 8px solid var(--red);
   border-radius: 49%;
   z-index: 20;
-  
+}
+
+body#finder #randomPokemonImage {
+  width: 5rem;
 }

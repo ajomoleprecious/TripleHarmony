@@ -2,162 +2,163 @@
 <html lang="nl-BE">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/pokemonICO.ico" type="image/x-icon">
-    <title>Pokémon Submenu</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles/reset.css">
-    <link rel="stylesheet" href="/styles/style.css">
-    <!--SCRIPTS-->
-    <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script defer src="/scripts/submenu.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="assets/pokemonICO.ico" type="image/x-icon">
+  <title>Pokémon Submenu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles/reset.css">
+  <link rel="stylesheet" href="/styles/style.css">
+  <!--SCRIPTS-->
+  <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script defer src="/scripts/submenu.js"></script>
 </head>
 
 <body id="poke-bg" class="ingelogd">
-    <header>
-        <nav>
-            <section class="left-container">
-                <a href="/pokemon-submenu"><img src="/assets/pokemon_logo.png" alt="logo"></a>
+  <header>
+    <nav>
+      <section class="left-container">
+        <a href="/pokemon-submenu"><img src="/assets/pokemon_logo.png" alt="logo"></a>
+      </section>
+      <section id="nav-menus" class="nav-container">
+      </section>
+      <section class="right-container">
+        <ul>
+          <li></li>
+          <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar">
+              <button>
+                <% if (avatar) {%>
+                <img src="<%= avatar %>" alt="my-avatar">
+                <% } else { %>
+                <i class="fa-solid fa-question"></i>
+                <% } %>
+              </button>
+            </a></li>
+          <li><a href="/pokemon-auth/logout" class="fa-solid fa-right-from-bracket btn btn-dark"></a>
+          </li>
+        </ul>
+      </section>
+    </nav>
+  </header>
+  <main class="pokesubmenu">
+    <section class="submenu">
+      <article class="article" style="--i:1">
+        <a href="/pokemons-bekijken"><button class="submenu-button">
+            <section><span>Pokémons bekijken</span>
+              <img src="/assets/nav-icons-black/bekijken.png" alt="">
             </section>
-            <section id="nav-menus" class="nav-container">
+          </button></a>
+      </article>
+      <article class="article" style="--i:2">
+        <a href="/pokemon-vergelijken"><button class="submenu-button">
+            <section><span>Pokémons vergelijken</span>
+              <img src="/assets/nav-icons-black/vergelijken.png" alt="">
             </section>
-            <section class="right-container">
-                <ul>
-                    <li></li>
-                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>
-                        <i class="fa-solid fa-question"></i>
-                    </button></a></li>
-                    <li><a href="/pokemon-auth/logout" class="fa-solid fa-right-from-bracket btn btn-dark"></a>
-                    </li>
-                </ul>
+          </button></a>
+      </article>
+      <article class="article" style="--i:3">
+        <a href="/pokemons-vangen"><button class="submenu-button">
+            <section><span>Pokémons vangen</span>
+              <img src="/assets/nav-icons-black/vangen.png" alt="">
             </section>
-        </nav>
-    </header>
-    <main class="pokesubmenu">
-        <section class="submenu">
-            <article class="article" style="--i:1">
-                <a href="/pokemons-bekijken"><button class="submenu-button">
-                        <section><span>Pokémons bekijken</span>
-                            <img src="/assets/nav-icons-black/bekijken.png" alt="">
-                        </section>
-                    </button></a>
-            </article>
-            <article class="article" style="--i:2">
-                <a href="/pokemon-vergelijken"><button class="submenu-button">
-                        <section><span>Pokémons vergelijken</span>
-                            <img src="/assets/nav-icons-black/vergelijken.png" alt="">
-                        </section>
-                    </button></a>
-            </article>
-            <article class="article" style="--i:3">
-                <a href="/pokemons-vangen"><button class="submenu-button">
-                        <section><span>Pokémons vangen</span>
-                            <img src="/assets/nav-icons-black/vangen.png" alt="">
-                        </section>
-                    </button></a>
-            </article>
-            <article class="article" style="--i:4">
-                <a href="/huidige-pokemon"><button class="submenu-button">
-                        <section><span>Huidige Pokémon</span>
-                            <img src="/assets/nav-icons-black/huidige.png" alt="">
-                        </section>
-                    </button></a>
-            </article>
-            <article class="article" style="--i:5">
-                <a href="/pokemon-battler"><button class="submenu-button">
-                        <section><span>Pokémon battler</span>
-                            <img src="/assets/nav-icons-black/battler.png" alt="">
-                        </section>
-                    </button></a>
-            </article>
-            <article class="article" style="--i:6">
-                <a href="/who's-that-pokemon"><button class="submenu-button">
-                        <section><span>Wie is deze pokémon?</span>
-                            <img src="/assets/nav-icons-black/who.png" alt="">
-                        </section>
-                    </button></a>
-            </article>
-            <article class="article" style="--i:7">
-                <a href="/pokemon-finder"><button class="submenu-button">
-                        <section><span>Pokémon tracker</span>
-                            <img src="/assets/nav-icons-black/tracker.png" alt="">
-                        </section>
-                    </button></a>
-            </article>
+          </button></a>
+      </article>
+      <article class="article" style="--i:4">
+        <a href="/huidige-pokemon"><button class="submenu-button">
+            <section><span>Huidige Pokémon</span>
+              <img src="/assets/nav-icons-black/huidige.png" alt="">
+            </section>
+          </button></a>
+      </article>
+      <article class="article" style="--i:5">
+        <a href="/pokemon-battler"><button class="submenu-button">
+            <section><span>Pokémon battler</span>
+              <img src="/assets/nav-icons-black/battler.png" alt="">
+            </section>
+          </button></a>
+      </article>
+      <article class="article" style="--i:6">
+        <a href="/who's-that-pokemon"><button class="submenu-button">
+            <section><span>Wie is deze pokémon?</span>
+              <img src="/assets/nav-icons-black/who.png" alt="">
+            </section>
+          </button></a>
+      </article>
+      <article class="article" style="--i:7">
+        <a href="/pokemon-finder"><button class="submenu-button">
+            <section><span>Pokémon tracker</span>
+              <img src="/assets/nav-icons-black/tracker.png" alt="">
+            </section>
+          </button></a>
+      </article>
+    </section>
+    <!-- Modal voor help-->
+    <section class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header">
+            <h1 class="modal-title fs-5" id="hulpLabel">Hulp</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </section>
+          <section class="modal-body">
+            Hier ziet u een lijst met alle navigatiekeuzes die de website te bieden heeft.
+          </section>
         </section>
-        <!-- Modal voor help-->
-        <section class="modal fade" id="hulp" tabindex="-1" aria-labelledby="hulpLabel" aria-hidden="true">
-            <section class="modal-dialog modal-dialog-centered">
-                <section class="modal-content">
-                    <section class="modal-header">
-                        <h1 class="modal-title fs-5" id="hulpLabel">Hulp</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </section>
-                    <section class="modal-body">
-                        Hier ziet u een lijst met alle navigatiekeuzes die de website te bieden heeft.
-                    </section>
-                </section>
-            </section>
+      </section>
+    </section>
+    <!-- Modal voor avatar-->
+    <section class="modal fade" id="chooseAvatar" tabindex="-1" aria-labelledby="chooseAvatar" aria-hidden="true">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header">
+            <h1 class="modal-title fs-5" id="chooseAvatarLabel">Kies je nieuwe avatar</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </section>
+          <section class="modal-body">
+            <ul class="avatars">
+              <li onclick="changeAvatar('ash')"><img src="/assets/avatars/ash_ketchum.png" alt="ash"></li>
+              <li onclick="changeAvatar('chloe')"><img src="/assets/avatars/chloe.png" alt="chloe"></li>
+              <li onclick="changeAvatar('dawn')"><img src="/assets/avatars/dawn.png" alt="dawn"></li>
+              <li onclick="changeAvatar('james')"><img src="/assets/avatars/james.png" alt="james"></li>
+              <li onclick="changeAvatar('jessie')"><img src="/assets/avatars/jessie.png" alt="jessie"></li>
+              <li onclick="changeAvatar('may')"><img src="/assets/avatars/may.png" alt="may"></li>
+              <li onclick="changeAvatar('serena')"><img src="/assets/avatars/serena.png" alt="serena"></li>
+              <li onclick="changeAvatar('none')"><img src="/assets/avatars/none.png" alt="none"></li>
+            </ul>
+          </section>
         </section>
-        <!-- Modal voor avatar-->
-        <section class="modal fade" id="chooseAvatar" tabindex="-1" aria-labelledby="chooseAvatar" aria-hidden="true">
-            <section class="modal-dialog modal-dialog-centered">
-                <section class="modal-content">
-                    <section class="modal-header">
-                        <h1 class="modal-title fs-5" id="chooseAvatarLabel">Kies je nieuwe avatar</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </section>
-                    <section class="modal-body">
-                        <ul class="avatars">
-                            <li><img src="/assets/avatars/ash_ketchum.png" alt=""></li>
-                            <li><img src="/assets/avatars/dawn.png" alt=""></li>
-                            <li><img src="/assets/avatars/chloe.png" alt=""></li>
-                            <li><img src="/assets/avatars/james.png" alt=""></li>
-                            <li><img src="/assets/avatars/jessie.png" alt=""></li>
-                            <li><img src="/assets/avatars/may.png" alt=""></li>
-                            <li><img src="/assets/avatars/serena.png" alt=""></li>
-                        </ul>
-                    </section>
-                </section>
-            </section>
+      </section>
+    </section>
+    <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i class="fa-solid fa-question"></i></button></section>
+    <section class="modal fade" id="receive-poke" tabindex="-1" aria-labelledby="recieve-pikachu" aria-hidden="true">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header d-flex justify-content-center">
+            <h1 class="modal-title fs-5">Ontvang je eerste pokemon</h1>
+          </section>
+          <section class="modal-body d-flex justify-content-center">
+            <img id="receive-pokeImg" src="<%= pikaUrl %>" alt="pikachu">
+          </section>
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="button" data-bs-dismiss="modal" onClick="ontvangPokemon()" class="btn btn-primary">Ontvang Pikachu</button>
+          </div>
         </section>
-        <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i
-                    class="fa-solid fa-question"></i></button></section>
-                    <section class="modal fade" id="receive-poke" tabindex="-1" aria-labelledby="recieve-pikachu"
-                    aria-hidden="true">
-                    <section class="modal-dialog modal-dialog-centered">
-                        <section class="modal-content">
-                            <section class="modal-header d-flex justify-content-center">
-                                <h1 class="modal-title fs-5">Ontvang je eerste pokemon</h1>
-                            </section>
-                            <section class="modal-body d-flex justify-content-center">
-                                <img id="receive-pokeImg" src="<%= pikaUrl %>" alt="pikachu">
-                            </section>
-                            <div class="modal-footer d-flex justify-content-center">
-                                <button type="button" data-bs-dismiss="modal" onClick="ontvangPokemon()"
-                                    class="btn btn-primary">Ontvang Pikachu</button>
-                            </div>
-                        </section>
-                    </section>
-                </section>
-    </main>
-    <script>
-        window.onload = function () {
-            let modal = new bootstrap.Modal(document.getElementById('receive-poke'), {
-                keyboard: false,
-                backdrop: 'static'
-            });
-            const showModal = <%= isEmpty %>; // Embedding isEmpty directly into JavaScript
-            if (showModal) {
-                modal.show();
-            }
-        }
-    </script>
+      </section>
+    </section>
+  </main>
+  <script>
+    window.onload = function() {
+      let modal = new bootstrap.Modal(document.getElementById('receive-poke'), {
+        keyboard: false,
+        backdrop: 'static'
+      });
+      const showModal = <%= isEmpty %>; // Embedding isEmpty directly into JavaScript
+      if (showModal) {
+        modal.show();
+      }
+    }
+  </script>
 </body>
 
 </html>

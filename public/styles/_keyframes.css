@@ -66,6 +66,7 @@
 }
 
 @keyframes scaleIn {
+
     /* scale in from top center to middle center */
     0% {
         transform: scale(0);
@@ -130,8 +131,9 @@
     0% {
         opacity: 0;
         transform: translateY(100%);
-        
+
     }
+
     100% {
         transform: translateY(0);
         opacity: 1;
@@ -139,20 +141,21 @@
 
 }
 
-/* 360* spin */ 
+/* 360* spin */
 
 @keyframes spin {
     0% {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
+
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
+}
 
-  /* vang animatie */
+/* vang animatie */
 
-  @keyframes swing {
+@keyframes swing {
     0% {
         transform: rotate(0deg);
     }
@@ -207,5 +210,32 @@
 
     100% {
         transform: scale(1);
+    }
+}
+
+/* animation for the shake effect with a delay of 30 seconds */
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    10% {
+        transform: translateX(-5px);
+    }
+
+    20% {
+        transform: translateX(5px);
+    }
+
+    30% {
+        transform: translateX(-5px);
+    }
+
+    40% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(0);
     }
 }

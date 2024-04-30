@@ -3,10 +3,9 @@ import { ObjectId } from "mongodb";
 import nodemailer from "nodemailer";
 import { client } from "../index";
 import express from "express";
-
+import { User } from "../models/User";
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const User = require('../models/User') as any;
 
 const router = Router();
 // Serve static files from the 'public' directory
@@ -85,7 +84,6 @@ function handleErrors(error: any): ErrorMessages {
     return errors;
 }
 
-
 // Create JSON web token
 const maxAge = 1 * 24 * 60 * 60; // 1 day
 const createToken = (id: string) => {
@@ -147,7 +145,7 @@ router.post('/login', async (req: Request, res: Response) => {
 router.get('/verify/:id', async (req: Request, res: Response) => {
     const id = req.params.id;
     try {
-        const user = await client.db("users").collection("usersAccounts").findOne({ _id: new ObjectId(id)});
+        const user = await client.db("users").collection("usersAccounts").findOne({ _id: new ObjectId(id) });
         if (user) {
             await client.db("users").collection("usersAccounts").updateOne({ _id: new ObjectId(id) }, { $set: { verified: true } });
             res.status(200).render('pokemon-auth-message', { title: "Account geverifieerd", message: "Uw account is succesvol geverifieerd. U kunt nu inloggen op onze website." });
@@ -233,6 +231,7 @@ router.post('/change-password/:id', async (req: Request, res: Response) => {
         res.status(500).render('pokemon-auth-message', { title: "Wachtwoord wijzigen", message: "Er is een fout opgetreden bij het wijzigen van uw wachtwoord. Probeer het later opnieuw." });
     }
 });
+
 
 
 export default router;
