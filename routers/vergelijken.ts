@@ -18,6 +18,7 @@ router.get("/", async (req: Request, res: Response) => {
     try
     {
         let pikachu: any = await fetchPokemonByName("pikachu");
+        let charmander: any = await fetchPokemonByName("charmander");
         const avatar = res.locals.currentAvatar;
         const currentPokemon = res.locals.currentPokemon;
         const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
@@ -33,7 +34,9 @@ router.get("/", async (req: Request, res: Response) => {
         // get right pokemon from database met fetchPokemonByName functie
             res.render("pokemon-vergelijken", 
                 { 
-                    currentPokemon, pokemonHP, pokemonDefense, avatar, leftQuery: "", pokeImage: pikachu.sprites.other['official-artwork'].front_default 
+                    currentPokemon, pokemonHP, pokemonDefense, avatar, leftQuery: "", 
+                    leftPokeImage: pikachu.sprites.other['official-artwork'].front_default, leftHP: pikachu.stats[0].base_stat, leftAttack: pikachu.stats[1].base_stat, leftDefense: pikachu.stats[2].base_stat,
+                    rightPokeImage: charmander.sprites.other['official-artwork'].front_default, rightHP: charmander.stats[0].base_stat, rightAttack: charmander.stats[1].base_stat, rightDefense: charmander.stats[2].base_stat,
                 });
     }
     catch (error) 
@@ -60,29 +63,5 @@ async function fetchPokemonByName(name: string) {
     const data = await response.json();
     return data;
 }
-
-/*async function fetchPokemons()
-{
-    try 
-    {
-        const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1000');
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        const pokemons = data.results;
-        
-        // Loop door de lijst met Pokémon en voeg ze toe aan de array
-        pokemons.forEach(async (pokemon: any) => {
-            const pokemonData = await fetch(pokemon.url);
-            const pokemonDetails = await pokemonData.json();
-            pokemonArray.push(pokemonDetails);
-        });
-    }
-    catch (error) 
-    {
-        console.error('Er is een fout opgetreden bij het ophalen van de Pokémon:', error);
-    }
-}*/
 
 export default router;
