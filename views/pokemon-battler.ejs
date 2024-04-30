@@ -163,10 +163,13 @@
           </section>
           <section class="modal-footer">
             Kopieer de link en stuur deze naar je vriend:
-            <section class="input-group" mb-3>
-              <input type="text" readonly class="form-control" value="<%= roomID %>">
+            <small>Uw link is gekopieerd</small>
+            <section class="input-group" mb-3 id="linkInputgroup">
+              <input type="text" readonly class="form-control" id="linkInput" value="<%= roomID %>">
               <span class="input-group-text"><button><i class="fa-solid fa-copy"></i></button></span>
             </section>
+            <p>Wacht nu dat je vriend ook online komt...</p>
+            <img src="/assets/others/loading.gif" alt="">
             <a href="/pokemon-battler">Terug gaan</a>
           </section>
         </section>
@@ -191,9 +194,6 @@
     </section>
     <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i class="fa-solid fa-question"></i></button></section>
   </main>
-  <script>
-    const socket = io();
-  </script>
 </body>
 
 </html>

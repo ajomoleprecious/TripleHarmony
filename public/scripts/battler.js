@@ -22,3 +22,21 @@ let choiceModal = new bootstrap.Modal(document.getElementById('battleChoice'), {
 });
 
 choiceModal.show();
+
+const socket = io();
+const linkInputgroup = document.getElementById('linkInputgroup');
+const linkInput = document.getElementById('linkInput');
+const small = document.querySelector('#pvpfriend small');
+const waitP = document.querySelector('#pvpfriend p');
+const waitImg = document.querySelector('#pvpfriend img');
+
+linkInputgroup.addEventListener('click', () => {
+    linkInputgroup.style.border = "3px solid green";
+    linkInputgroup.style.borderRadius = "10px";
+    small.style.display = "block";
+    waitP.style.display = "block";
+    waitImg.style.display = "block";
+    // Copy the link to the clipboard
+    linkInput.select();
+    document.execCommand("copy");
+});

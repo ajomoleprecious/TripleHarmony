@@ -1114,9 +1114,22 @@ body.pokemon-bekijken h1 {
 #pvpfriend .modal-footer .input-group {
   cursor: pointer;
 }
-
+#pvpfriend img,
 #pvpstranger img{
   width: 3rem;
+}
+
+#pvpfriend small{
+  display: none;
+  color: green;
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 0;
+}
+
+#pvpfriend p,
+#pvpfriend img{
+  display: none;
 }
 
 body#finder .fa-solid.fa-question,
