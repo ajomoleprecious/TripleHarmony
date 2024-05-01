@@ -53,7 +53,7 @@ app.use('/pokemon-vergelijken', vergelijkenRouter);
 app.use(`/who's-that-pokemon`, whosThatRouter);
 
 app.get('/', (req, res) => {
-  if(req.cookies.jwt) {
+  if (req.cookies.jwt) {
     res.redirect('/pokemon-submenu');
   } else {
     res.render('index');
@@ -70,18 +70,35 @@ app.use((_, res) => {
   res.status(404).render('404');
 });
 
+// Exit the app
+async function exit() {
+  try {
+    await client.close();
+    console.log('Disconnected from database');
+  } catch (error) {
+    console.error(error);
+  }
+  process.exit(0);
+}
+
 // Start the app
 async function startApp() {
-  await client.connect().then(() => {
-    mongoose.connect(uri);
-  }).then(() => {
-    console.log("Connected to MongoDB");
-    server.listen(app.get('port'), async () => {
-      console.log('[server running on: http://localhost:' + app.get('port') + ']');
+  try {
+    await client.connect().then(() => {
+      mongoose.connect(uri);
+    }).then(() => {
+      console.log("Connected to MongoDB");
+      server.listen(app.get('port'), async () => {
+        console.log('[server running on: http://localhost:' + app.get('port') + ']');
+      });
+    }).catch((err: any) => {
+      console.error('Error connecting to MongoDB:', err);
     });
-  }).catch((err: any) => {
-    console.error('Error connecting to MongoDB:', err);
-  });
+
+    process.on('SIGINT', exit);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 startApp();
