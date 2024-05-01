@@ -25,9 +25,9 @@ router.get("/", async (req: Request, res: Response) => {
         const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
         const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
 
-        if(typeof req.query.leftPokemon === "string" && typeof req.query.rightPokemon === "string") 
+        if(typeof req.query.left_pokemon === "string" && typeof req.query.right_pokemon === "string") 
         {
-            if(req.query.leftPokemon === "" || req.query.rightPokemon === "")
+            if(req.query.left_pokemon === "" || req.query.right_pokemon === "")
             {
                 res.render("pokemon-vergelijken", 
                 { 
@@ -37,18 +37,16 @@ router.get("/", async (req: Request, res: Response) => {
                 });
             }
 
-            let leftQuery = req.query.leftPokemon.toLocaleLowerCase();
-            let rightQuery = req.query.rightPokemon.toLocaleLowerCase();
+            let leftQuery = req.query.left_pokemon.toLocaleLowerCase();
+            let rightQuery = req.query.right_pokemon.toLocaleLowerCase();
             let left_pokemon: any = await fetchPokemonByName(leftQuery);
             let right_pokemon: any = await fetchPokemonByName(rightQuery);
             res.render("pokemon-vergelijken", 
                 { 
-                    currentPokemon, pokemonHP, pokemonDefense, avatar, leftQuery: left_pokemon, rightQuery: right_pokemon,
+                    currentPokemon, pokemonHP, pokemonDefense, avatar, leftQuery: left_pokemon.name, rightQuery: right_pokemon.name,
                     leftPokeImage: left_pokemon.sprites.other['official-artwork'].front_default, leftHP: left_pokemon.stats[0].base_stat, leftAttack: left_pokemon.stats[1].base_stat, leftDefense: left_pokemon.stats[2].base_stat,
                     rightPokeImage: right_pokemon.sprites.other['official-artwork'].front_default, rightHP: right_pokemon.stats[0].base_stat, rightAttack: right_pokemon.stats[1].base_stat, rightDefense: right_pokemon.stats[2].base_stat, 
                 });
-                console.log(leftQuery);
-                console.log(rightQuery);
         } 
         else
         {
