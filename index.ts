@@ -86,19 +86,25 @@ async function startApp() {
 
 startApp();
 
-let playersNumbers = 0;
-// setup io
-io.on('connection', (socket : any) => {
-  console.log('A user connected');
+interface Player {
+  id: string;
+  waiting: boolean;
+}
 
-  // Increment player count and broadcast to all clients
-  playersNumbers++;
-  io.emit('playerCount', playersNumbers);
+let players: Player[] = [];
 
+
+let playersCount: number = 0;
+
+io.on('connection', (socket: any) => {
+  playersCount++;
+  io.emit('updatePlayerCount', playersCount);
+
+  // Handle disconnection
   socket.on('disconnect', () => {
-      console.log('User disconnected');
-      // Decrement player count and broadcast to all clients
-      playersNumbers--;
-      io.emit('playerCount', playersNumbers);
+      playersCount--;
+      io.emit('updatePlayerCount', playersCount);
   });
 });
+
+

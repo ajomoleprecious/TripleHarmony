@@ -23,17 +23,6 @@ let choiceModal = new bootstrap.Modal(document.getElementById('battleChoice'), {
 
 choiceModal.show();
 
-const players = document.getElementById('players');
-let playersNumbers = 0;
-
-const socket = io();
-/* check connection */
-socket.on('playerCount', (count) => {
-    // Update the number of players
-    players.innerHTML = count;
-});
-
-
 const linkInputgroup = document.getElementById('linkInputgroup');
 const linkInput = document.getElementById('linkInput');
 const small = document.querySelector('#pvpfriend small');
@@ -49,4 +38,13 @@ linkInputgroup.addEventListener('click', () => {
     // Copy the link to the clipboard
     linkInput.select();
     document.execCommand("copy");
+});
+
+const players = document.getElementById('players');
+
+const socket = io();
+
+// Update player count when received from the server
+socket.on('updatePlayerCount', (count) => {
+    document.getElementById('players').textContent = count;
 });
