@@ -50,6 +50,4 @@ router.post("/change-avatar/:avatar", async (req, res) => {
         console.error(err);
     }
 });
- 
- 
 export default router;
