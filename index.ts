@@ -70,6 +70,17 @@ app.use((_, res) => {
   res.status(404).render('404');
 });
 
+// Exit the app
+async function exit() {
+  try {
+      await client.close();
+      console.log("Disconnected from database");
+  } catch (error) {
+      console.error(error);
+  }
+  process.exit(0);
+}
+
 // Start the app
 async function startApp() {
   await client.connect().then(() => {
@@ -82,6 +93,8 @@ async function startApp() {
   }).catch((err: any) => {
     console.error('Error connecting to MongoDB:', err);
   });
+
+  process.on('SIGINT', exit);
 }
 
 startApp();
