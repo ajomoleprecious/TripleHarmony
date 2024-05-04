@@ -30,7 +30,7 @@ router.get('/', async (req: Request, res: Response) => {
     const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
     let randomPokemon = await getRandomPokemon();
     const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${randomPokemon.url.split("/")[6]}.png`;
-    res.render('who\'s-that-pokemon', { name: randomPokemon.name, image: imageUrl, currentPokemon, pokemonHP, pokemonDefense, avatar});
+    res.render('whos-that-pokemon', { name: randomPokemon.name, image: imageUrl, currentPokemon, pokemonHP, pokemonDefense, avatar});
 });
  
 router.get('/new-pokemon', async (req: Request, res: Response) => {
@@ -50,6 +50,4 @@ router.post("/change-avatar/:avatar", async (req, res) => {
         console.error(err);
     }
 });
- 
- 
 export default router;
