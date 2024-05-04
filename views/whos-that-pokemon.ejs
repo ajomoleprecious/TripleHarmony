@@ -60,13 +60,18 @@
       <div id="loadingGif" class="hidden">
         <img src="/assets/others/loading-ball.gif" alt="" />
       </div>
-      <img class="silhouette" src="<%= image %>" alt="" />
+      <div class="container">
+        <img class="silhouette" src="<%= image %>" alt="" />
+        <div class="mask"></div>
+      </div>
       <input type="text" placeholder="vul de naam in" id="inputWho" />
       <input type="hidden" id="pokemonName" value="<%= name %>" />
       <br />
       <a class="result" href="#">Toon resultaat</a>
       <a class="skip" id="skipButton" href="#" onclick="getNewPokemon()"><i class="fa-solid fa-angles-right"></i></a>
-      <img class="hint" src="/assets/hint.png" alt="hint" id="hint" />
+      <button>
+        <img class="hint" src="/assets/hint.png" alt="hint" id="hint" />
+      </button>
     </section>
 
     <section class="pokemon_hide">

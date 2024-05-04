@@ -42,6 +42,7 @@ inputWho.addEventListener("input", () => {
 
 result.addEventListener("click", () => {
     inputWho.value = pokemonName.value;
+    document.querySelector(".silhouette").style.filter = "brightness(100%)";
     setTimeout(() => {
         getNewPokemon();
     }, 2000);
