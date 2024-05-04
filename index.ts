@@ -10,7 +10,7 @@ import submenuRouter from './routers/submenu';
 import trackerRouter from './routers/tracker';
 import vangenRouter from './routers/vangen';
 import vergelijkenRouter from './routers/vergelijken';
-import whosThatRouter from "./routers/who's";
+import whosThatRouter from "./routers/whos";
 import dotenv from "dotenv";
 const socketio = require('socket.io');
 const mongoose = require('mongoose');

@@ -665,6 +665,7 @@ body.pokemon-bekijken h1 {
 }
 
 #detail .modal-body h3 {
+  margin-top: 1rem;
   text-align: center;
 }
 
@@ -685,7 +686,9 @@ body.pokemon-bekijken h1 {
 }
 
 #detailLabel {
+  text-align: start;
   font-size: 1.5rem;
+  margin: 0;
 }
 
 .pokemon-levels ul {
@@ -700,7 +703,7 @@ body.pokemon-bekijken h1 {
 }
 
 .pokemon-levels ul li {
-  width: 120px;
+  width: 100%;
   height: 170px;
   display: flex;
   flex-direction: column;
@@ -1158,10 +1161,6 @@ body.battler .fa-solid.fa-question {
 }
 
 .pokemonToGuess {
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   background-color: var(--pokemonToGuess-bg);
   display: flex;
   align-items: center;
@@ -1169,9 +1168,13 @@ body.battler .fa-solid.fa-question {
   flex-direction: column;
   box-shadow: 0 0 15px var(--black);
   border-radius: 20px;
-  padding: 50px;
-  max-width: 200vw; /* Set maximum width relative to viewport width */
+  padding: 30px;
+  max-width: 28rem; /* Set maximum width relative to viewport width */
   overflow: hidden; /* Hide overflow content */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 } 
 
 .pokemonToGuess .result {
@@ -1220,14 +1223,11 @@ body.battler .fa-solid.fa-question {
 }
 
 #inputWho {
-  padding: 10px;
+  padding: .5rem;
   font-size: 16px;
   border: 2px solid var(--avatar-border-color);
   border-radius: 15px;
-  width: 300px;
-  padding-top: 13px;
-  padding: 13px;
-  padding-left: 3rem;
+  width: 19rem;
   text-align: center;
 }
 
@@ -1280,6 +1280,16 @@ body.battler .fa-solid.fa-question {
   display: none;
 }
 
+#hint {
+  position: absolute;
+  top: 45%;
+  right: 5%;
+  width: 3rem;
+  cursor: pointer;
+  background-color: var(--avatar-border-color);
+  border-radius: 100%;
+  padding: .5rem;
+}
 
 
 /* POKEMON VANGEN */
@@ -1370,7 +1380,7 @@ body.battler .fa-solid.fa-question {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.625rem;
+  font-size: 1rem;
   /* helft van 1.25rem */
   font-weight: bold;
   font-family: sans-serif;
