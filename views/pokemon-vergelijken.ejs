@@ -91,7 +91,7 @@
         <article class="left_pokemon">
           <img src="<%= leftPokeImage %>" alt="left-poke-img">
           <section class="input-group">
-            <button type="submit"><span class="input-group-text btn btn-warning" ><i class="fa-solid fa-magnifying-glass"></i></span></button>
+            <span class="input-group-text btn btn-warning" onclick="submitForm()"><i class="fa-solid fa-magnifying-glass"></i></span>
             <input class="form-control" name="left_pokemon" type="text" placeholder="zoek pokémon"  value="<%= leftQuery %>">
           </section>
           <ul class="pv_stats">
@@ -169,7 +169,7 @@
           <img src="<%= rightPokeImage %>" alt="right-poke-img">
           <section class="input-group">
             <input class="form-control" name="right_pokemon" type="text" placeholder="zoek pokémon"  value="<%= rightQuery %>">
-            <button type="submit"><span class="input-group-text btn btn-warning" ><i class="fa-solid fa-magnifying-glass"></i></span></button>
+            <span class="input-group-text btn btn-warning" onclick="submitForm()"><i class="fa-solid fa-magnifying-glass"></i></span>
           </section>
           <ul class="pv_stats">
             <li><%= rightHP %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;HP</li>
