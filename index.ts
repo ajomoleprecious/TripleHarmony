@@ -53,7 +53,7 @@ app.use('/pokemon-vergelijken', vergelijkenRouter);
 app.use(`/who's-that-pokemon`, whosThatRouter);
 
 app.get('/', (req, res) => {
-  if(req.cookies.jwt) {
+  if (req.cookies.jwt) {
     res.redirect('/pokemon-submenu');
   } else {
     res.render('index');
@@ -83,18 +83,22 @@ async function exit() {
 
 // Start the app
 async function startApp() {
-  await client.connect().then(() => {
-    mongoose.connect(uri);
-  }).then(() => {
-    console.log("Connected to MongoDB");
-    server.listen(app.get('port'), async () => {
-      console.log('[server running on: http://localhost:' + app.get('port') + ']');
+  try {
+    await client.connect().then(() => {
+      mongoose.connect(uri);
+    }).then(() => {
+      console.log("Connected to MongoDB");
+      server.listen(app.get('port'), async () => {
+        console.log('[server running on: http://localhost:' + app.get('port') + ']');
+      });
+    }).catch((err: any) => {
+      console.error('Error connecting to MongoDB:', err);
     });
-  }).catch((err: any) => {
-    console.error('Error connecting to MongoDB:', err);
-  });
 
-  process.on('SIGINT', exit);
+    process.on('SIGINT', exit);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 startApp();

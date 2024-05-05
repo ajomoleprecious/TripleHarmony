@@ -86,69 +86,143 @@
         </section>
       </section>
     </section>
-    <form id="vergelijkenForm" action="/pokemon-vergelijken" method="get">
+    <form id="vergelijkenForm" action="/pokemon-vergelijken" role="search" method="get">
       <section class="pv_project">
         <article class="left_pokemon">
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif" alt="">
+          <img src="<%= leftPokeImage %>" alt="left-poke-img">
           <section class="input-group">
-            <span class="input-group-text btn btn-warning" onclick="submitForm()"><i class="fa-solid fa-magnifying-glass"></i></span>
-            <input class="form-control" name="left_pokemon" type="text" placeholder="zoek pokémon" onkeypress="handleKeyPress(event)">
+            <button type="submit"><span class="input-group-text btn btn-warning" ><i class="fa-solid fa-magnifying-glass"></i></span></button>
+            <input class="form-control" name="left_pokemon" type="text" placeholder="zoek pokémon"  value="<%= leftQuery %>">
           </section>
           <ul class="pv_stats">
-            <li>HP &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 24</li>
+            <li>HP &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<%= leftHP %></li>
           </ul>
-          <section class="progress">
-            <section class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 24%">
+          <% let lHPColorbar = leftHP/255*100 %>
+            <%
+              let lHPClassValue = '';
+              if (lHPColorbar <= 33) {
+                  lHPClassValue = 'bg-danger';
+              } else if (lHPColorbar <= 66) {
+                  lHPClassValue = 'bg-warning';
+              } else {
+                  lHPClassValue = 'bg-success';
+              }
+            %>
+          <section class="progress"> 
+            <section class="progress-bar progress-bar-striped progress-bar-animated <%= lHPClassValue %>" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <%= leftHP/255*100 %>%">
             </section>
           </section>
           <ul class="pv_stats">
-            <li>AANVAL&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;76</li>
-
+            <li>AANVAL&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<%= leftAttack %></li>
           </ul>
+          <% let lAttackColorbar = leftAttack/180*100 %>
+            <%
+              let lAttackClassValue = '';
+              if (lAttackColorbar <= 33) {
+                  lAttackClassValue = 'bg-danger';
+              } else if (lAttackColorbar <= 66) {
+                  lAttackClassValue = 'bg-warning';
+              } else {
+                  lAttackClassValue = 'bg-success';
+              }
+            %>
           <section class="progress">
-            <section class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 76%">
+            <section class="progress-bar progress-bar-striped progress-bar-animated <%= lAttackClassValue %>" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <%= leftAttack/180*100 %>%">
             </section>
           </section>
           <ul class="pv_stats">
-            <li>VERDEDIGING&nbsp;&nbsp;|&nbsp;&nbsp;42</li>
+            <li>VERDEDIGING&nbsp;&nbsp;|&nbsp;&nbsp;<%= leftDefense %></li>
           </ul>
+          <% let lDefenseColorbar = leftDefense/230*100 %>
+            <%
+              let lDefenseClassValue = '';
+              if (lDefenseColorbar <= 33) {
+                  lDefenseClassValue = 'bg-danger';
+              } else if (lDefenseColorbar <= 66) {
+                  lDefenseClassValue = 'bg-warning';
+              } else {
+                  lDefenseClassValue = 'bg-success';
+              }
+            %>
           <section class="progress">
-            <section class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 42%">
+            <section class="progress-bar progress-bar-striped progress-bar-animated <%= lDefenseClassValue %>" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <%= leftDefense/230*100 %>%">
             </section>
           </section>
         </article>
         <article class="middle_stats">
           <ul class="comparison">
-            <li>-21</li>
-            <li>+46</li>
-            <li>-38</li>
+            <!--HP-->
+            <li style="color: <%= (leftHP > rightHP) ? 'blue' : (leftHP < rightHP) ? 'red' : 'black' %>;">
+              <%= leftHP - rightHP %>
+            </li>
+            <!--ATTACK-->
+            <li style="color: <%= (leftAttack > rightAttack) ? 'blue' : (leftAttack < rightAttack) ? 'red' : 'black' %>;">
+              <%= leftAttack - rightAttack %>
+            </li>
+            <!--DEFENSE-->
+            <li style="color: <%= (leftDefense > rightDefense) ? 'blue' : (leftDefense < rightDefense) ? 'red' : 'black' %>;">
+              <%= leftDefense - rightDefense %>
+            </li>
           </ul>
         </article>
         <article class="right_pokemon">
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/384.gif" alt="">
+          <img src="<%= rightPokeImage %>" alt="right-poke-img">
           <section class="input-group">
-            <input class="form-control" name="right_pokemon" type="text" placeholder="zoek pokémon" onkeypress="handleKeyPress(event)">
-            <span class="input-group-text btn btn-warning" onclick="submitForm()"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input class="form-control" name="right_pokemon" type="text" placeholder="zoek pokémon"  value="<%= rightQuery %>">
+            <button type="submit"><span class="input-group-text btn btn-warning" ><i class="fa-solid fa-magnifying-glass"></i></span></button>
           </section>
           <ul class="pv_stats">
-            <li>HP&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;45</li>
+            <li><%= rightHP %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;HP</li>
           </ul>
+          <% let rHPColorbar = rightHP/255*100 %>
+            <%
+              let rHPClassValue = '';
+              if (rHPColorbar <= 33) {
+                  rHPClassValue = 'bg-danger';
+              } else if (rHPColorbar <= 66) {
+                  rHPClassValue = 'bg-warning';
+              } else {
+                  rHPClassValue = 'bg-success';
+              }
+            %>
           <section class="progress">
-            <section class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 55%">
+            <section class="progress-bar progress-bar-striped progress-bar-animated <%= rHPClassValue %>" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <%= rightHP/255*100 %>%">
             </section>
           </section>
           <ul class="pv_stats">
-            <li>AANVAL&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;30</li>
+            <li><%= rightAttack %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;AANVAL</li>
           </ul>
+          <% let rAttackColorbar = rightAttack/180*100 %>
+            <%
+              let rAttackClassValue = '';
+              if (rAttackColorbar <= 33) {
+                  rAttackClassValue = 'bg-danger';
+              } else if (rAttackColorbar <= 66) {
+                  rAttackClassValue = 'bg-warning';
+              } else {
+                  rAttackClassValue = 'bg-success';
+              }
+            %>
           <section class="progress">
-            <section class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
+            <section class="progress-bar progress-bar-striped progress-bar-animated <%= rAttackClassValue %>" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <%= rightAttack/180*100 %>%">
             </section>
           </section>
           <ul class="pv_stats">
-            <li>VERDEDIGING&nbsp;&nbsp;|&nbsp;&nbsp;80</li>
+            <li><%= rightDefense %>&nbsp;&nbsp;|&nbsp;&nbsp;VERDEDIGING</li>
           </ul>
+          <% let rDefenseColorbar = rightDefense/230*100 %>
+            <%
+              let rDefenseClassValue = '';
+              if (rDefenseColorbar <= 33) {
+                  rDefenseClassValue = 'bg-danger';
+              } else if (rDefenseColorbar <= 66) {
+                  rDefenseClassValue = 'bg-warning';
+              } else {
+                  rDefenseClassValue = 'bg-success';
+              }
+            %>
           <section class="progress">
-            <section class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 76%">
+            <section class="progress-bar progress-bar-striped progress-bar-animated <%= rDefenseClassValue %>" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <%= rightDefense/230*100 %>%">
             </section>
           </section>
 
