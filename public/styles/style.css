@@ -6,7 +6,8 @@
 
 /* ALGEMEEN */
 
-body, body.ingelogd {
+body,
+body.ingelogd {
   background-color: var(--body-bg);
   width: 100%;
   height: 100dvh;
@@ -337,7 +338,7 @@ nav p {
   font-family: "Anta", sans-serif;
 }
 
-.landing-main > p {
+.landing-main>p {
   border-radius: 20px;
   background-color: var(--pokemonToGuess-bg);
   width: 69%;
@@ -647,7 +648,7 @@ body.pokemon-bekijken h1 {
 
 #detail table tbody tr:nth-child(3) td {
   border-radius: 0 0 10px 0;
-  
+
 }
 
 #detail .modal-body>div {
@@ -665,6 +666,7 @@ body.pokemon-bekijken h1 {
 }
 
 #detail .modal-body h3 {
+  margin-top: 1rem;
   text-align: center;
 }
 
@@ -685,7 +687,9 @@ body.pokemon-bekijken h1 {
 }
 
 #detailLabel {
+  text-align: start;
   font-size: 1.5rem;
+  margin: 0;
 }
 
 .pokemon-levels ul {
@@ -700,7 +704,7 @@ body.pokemon-bekijken h1 {
 }
 
 .pokemon-levels ul li {
-  width: 120px;
+  width: 100%;
   height: 170px;
   display: flex;
   flex-direction: column;
@@ -815,7 +819,7 @@ body.pokemon-bekijken h1 {
   width: fit-content;
 }
 
-.left_pokemon{
+.left_pokemon {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1114,12 +1118,13 @@ body.pokemon-bekijken h1 {
 #pvpfriend .modal-footer .input-group {
   cursor: pointer;
 }
+
 #pvpfriend img,
-#pvpstranger img{
+#pvpstranger img {
   width: 3rem;
 }
 
-#pvpfriend small{
+#pvpfriend small {
   display: none;
   color: green;
   font-size: 1.2rem;
@@ -1128,7 +1133,7 @@ body.pokemon-bekijken h1 {
 }
 
 #pvpfriend p,
-#pvpfriend img{
+#pvpfriend img {
   display: none;
 }
 
@@ -1148,20 +1153,21 @@ body.battler .fa-solid.fa-question {
   background-color: var(--pokemonToGuess-bg);
   padding-bottom: 150%;
   margin-bottom: 20px;
-  margin-top: 30px ;
+  margin-top: 30px;
   display: block;
-  z-index: 1000; /* Set a high z-index value */
-  position: absolute; /* Set the position to absolute */
-  top: 0; /* Position the element at the top of the parent container */
-  left: 0; /* Position the element at the left of the parent container */
-  width: 100%; /* Set the width to 100% to cover the entire parent container */
+  z-index: 1000;
+  /* Set a high z-index value */
+  position: absolute;
+  /* Set the position to absolute */
+  top: 0;
+  /* Position the element at the top of the parent container */
+  left: 0;
+  /* Position the element at the left of the parent container */
+  width: 100%;
+  /* Set the width to 100% to cover the entire parent container */
 }
 
 .pokemonToGuess {
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   background-color: var(--pokemonToGuess-bg);
   display: flex;
   align-items: center;
@@ -1169,10 +1175,16 @@ body.battler .fa-solid.fa-question {
   flex-direction: column;
   box-shadow: 0 0 15px var(--black);
   border-radius: 20px;
-  padding: 50px;
-  max-width: 200vw; /* Set maximum width relative to viewport width */
-  overflow: hidden; /* Hide overflow content */
-} 
+  padding: 30px;
+  max-width: 28rem;
+  /* Set maximum width relative to viewport width */
+  overflow: hidden;
+  /* Hide overflow content */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .pokemonToGuess .result {
   cursor: pointer;
@@ -1191,17 +1203,32 @@ body.battler .fa-solid.fa-question {
   margin-top: 1rem;
 }
 
-
-
-.silhouette {
-  filter: brightness(0);
-  width: 80%;
+.pokemonToGuess .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 15rem;
+  height: 15rem;
   animation: infinite 1s ease-in-out;
   animation-name: move;
   animation-duration: 2s;
   -webkit-user-drag: none;
 }
 
+.silhouette {
+  width: 100%;
+  height: 100%;
+  filter: brightness(0);
+  position: absolute;
+}
+
+.mask {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  clip: rect(0, 0, 15rem, 0);
+}
 
 
 #loadingGif {
@@ -1220,14 +1247,11 @@ body.battler .fa-solid.fa-question {
 }
 
 #inputWho {
-  padding: 10px;
+  padding: .5rem;
   font-size: 16px;
   border: 2px solid var(--avatar-border-color);
   border-radius: 15px;
-  width: 300px;
-  padding-top: 13px;
-  padding: 13px;
-  padding-left: 3rem;
+  width: 19rem;
   text-align: center;
 }
 
@@ -1280,6 +1304,16 @@ body.battler .fa-solid.fa-question {
   display: none;
 }
 
+#hint {
+  position: absolute;
+  top: 45%;
+  right: 5%;
+  width: 3rem;
+  cursor: pointer;
+  background-color: rgba(128, 128, 128, 0.298);
+  border-radius: 100%;
+  padding: .5rem;
+}
 
 
 /* POKEMON VANGEN */
@@ -1370,7 +1404,7 @@ body.battler .fa-solid.fa-question {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.625rem;
+  font-size: 1rem;
   /* helft van 1.25rem */
   font-weight: bold;
   font-family: sans-serif;

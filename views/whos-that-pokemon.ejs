@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl-BE">
- 
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,8 +14,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script defer src="/scripts/general.js"></script>
   <script defer src="/scripts/currentpokemon.js"></script>
+  <script defer src="/scripts/whosthatpokemon.js"></script>
 </head>
- 
+
 <body class="ingelogd">
   <header>
     <nav>
@@ -59,14 +60,18 @@
       <div id="loadingGif" class="hidden">
         <img src="/assets/others/loading-ball.gif" alt="" />
       </div>
-      <img class="silhouette" src="<%= image %>" alt="" />
-      <section class="input-group-who">
-        <span class="input-group-text btn btn-warning who"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <input type="text" placeholder="vul de naam in" id="inputWho" />
-      </section>
+      <div class="container">
+        <img class="silhouette" src="<%= image %>" alt="" />
+        <img class="mask" src="<%= image %>" alt="" />
+      </div>
+      <input type="text" placeholder="vul de naam in" id="inputWho" />
+      <input type="hidden" id="pokemonName" value="<%= name %>" />
       <br />
       <a class="result" href="#">Toon resultaat</a>
       <a class="skip" id="skipButton" href="#" onclick="getNewPokemon()"><i class="fa-solid fa-angles-right"></i></a>
+      <button>
+        <img class="hint" src="/assets/hint.png" alt="hint" id="hint" />
+      </button>
     </section>
 
     <section class="pokemon_hide">
@@ -138,39 +143,6 @@
     <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i class="fa-solid fa-question"></i></button></section>
   </main>
 
-  <script>
-    async function getNewPokemon() {
-      const loadingGif = document.getElementById("loadingGif");
-      loadingGif.classList.remove("hidden");
-
-      // Hide the previous Pokémon
-      const img = document.querySelector(".silhouette");
-      if (img) {
-        img.classList.add("hidden");
-      }
-
-      // Show the loading GIF for a moment
-      await new Promise((resolve) => setTimeout(resolve, 350));
-
-      // Hide the loading GIF
-      loadingGif.classList.add("hidden");
-
-      // Generate the new Pokémon
-      const response = await fetch(`/who's-that-pokemon/new-pokemon`);
-      const data = await response.json();
-
-      document.getElementById("cardTitle").textContent = `Wie is deze Pokémon?`;
-      document.getElementById("inputWho").value = "";
-      document.querySelector(".result").classList.remove("show");
-
-      if (img) {
-        img.classList.remove("hidden");
-        img.src = data.image;
-        img.alt = data.name;
-      }
-    }
-  </script>
-
 </body>
- 
+
 </html>

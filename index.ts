@@ -10,7 +10,7 @@ import submenuRouter from './routers/submenu';
 import trackerRouter from './routers/tracker';
 import vangenRouter from './routers/vangen';
 import vergelijkenRouter from './routers/vergelijken';
-import whosThatRouter from "./routers/who's";
+import whosThatRouter from "./routers/whos";
 import dotenv from "dotenv";
 const socketio = require('socket.io');
 const mongoose = require('mongoose');
@@ -73,10 +73,10 @@ app.use((_, res) => {
 // Exit the app
 async function exit() {
   try {
-    await client.close();
-    console.log('Disconnected from database');
+      await client.close();
+      console.log("Disconnected from database");
   } catch (error) {
-    console.error(error);
+      console.error(error);
   }
   process.exit(0);
 }
@@ -103,10 +103,25 @@ async function startApp() {
 
 startApp();
 
-// setup io
+interface Player {
+  id: string;
+  waiting: boolean;
+}
+
+let players: Player[] = [];
+
+
+let playersCount: number = 0;
+
 io.on('connection', (socket: any) => {
-  console.log('a user connected');
+  playersCount++;
+  io.emit('updatePlayerCount', playersCount);
+
+  // Handle disconnection
   socket.on('disconnect', () => {
-    console.log('user disconnected');
+      playersCount--;
+      io.emit('updatePlayerCount', playersCount);
   });
 });
+
+
