@@ -70,6 +70,7 @@ leftInput.addEventListener('keyup', (e) => {
 
 function displayNames(name) {
     leftInput.value = name;
+    removeElements();
 }
 
 function removeElements() {

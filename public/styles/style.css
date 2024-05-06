@@ -833,8 +833,24 @@ body.pokemon-bekijken h1 {
   align-items: flex-end;
 }
 
+.left-pokemon-list {
+  background-color: white;
+  padding-left: 0.5rem;
+  margin-left: 2.6rem;
+  width: 15.6rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0.7rem;
+  border-bottom-right-radius: 0.7rem;
+}
+
 .list-items {
-  color: #3f51b5;
+  color: black;
+}
+
+.list-items:hover {
+  background-color: rgb(228, 227, 227);
+  width: 100%;
 }
 
 .left_pokemon img,
