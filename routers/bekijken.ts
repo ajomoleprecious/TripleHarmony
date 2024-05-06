@@ -70,6 +70,11 @@ router.get("/filter", async (req: Request, res: Response) => {
     let pokemon_type = req.query.pokemon_type ? req.query.pokemon_type.toString() : '';
     let sort_by = req.query.sort_by ? req.query.sort_by.toString() : 'naam';
     let pokemonData: any[] = [];
+    const currentPokemon = res.locals.currentPokemon;
+    const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
+    const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
+    const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
+    const avatar = res.locals.currentAvatar;
 
     if (pokemon_name !== '') {
         try {
@@ -118,7 +123,7 @@ router.get("/filter", async (req: Request, res: Response) => {
             }
 
             // Render the page with fetched data
-            res.render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, pokemonIDs, evolution_chain_ids });
+            res.render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, pokemonIDs, evolution_chain_ids, currentPokemon, pokemonHP, pokemonDefense, avatar});
         } catch (error: any) {
             if (error.response && error.response.status === 404) {
                 // Render the failed result page with an appropriate message
@@ -182,7 +187,7 @@ router.get("/filter", async (req: Request, res: Response) => {
         pokemonIDs = pokemonData.map(pokemon => pokemon.id);
 
         // Render the page with fetched data and filter options
-        res.render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, pokemonIDs, evolution_chain_ids, pokemon_name, pokemon_type, sort_by });
+        res.render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, pokemonIDs, evolution_chain_ids, pokemon_name, pokemon_type, sort_by, currentPokemon, pokemonHP, pokemonDefense, avatar });
     }
 });
 
