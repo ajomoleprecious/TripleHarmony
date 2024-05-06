@@ -17,8 +17,13 @@ let pokemonArray: any[] = [];
 router.get("/", async (req: Request, res: Response) => {
     try
     {
-        let pikachu: any = await fetchPokemonByName("blissey");
-        let charmander: any = await fetchPokemonByName("shuckle");
+        // Fetch all Pokémon data from PokeAPI
+        pokemonArray = await fetchAllPokemons();
+        let sortedPokemons = sortArray();
+        
+        
+        let pikachu: any = await fetchPokemonByName("pikachu");
+        let charmander: any = await fetchPokemonByName("charmander");
         const avatar = res.locals.currentAvatar;
         const currentPokemon = res.locals.currentPokemon;
         const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
@@ -81,6 +86,24 @@ async function fetchPokemonByName(name: string) {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
     const data = await response.json();
     return data;
+}
+
+async function fetchAllPokemons() {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=2000`);
+    const data = await response.json();
+    return data.results;
+}
+
+function sortArray() {
+    return pokemonArray.sort((a, b) => {
+        if (a.name < b.name) {
+            return -1; 
+        } else if (a.name > b.name) {
+            return 1; 
+        } else {
+            return 0; 
+        }
+    });
 }
 
 export default router;
