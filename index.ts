@@ -88,9 +88,12 @@ async function startApp() {
       mongoose.connect(uri);
     }).then(() => {
       console.log("Connected to MongoDB");
-      server.listen(app.get('port'), async () => {
+      app.listen(app.get('port'), async () => {
         console.log('[server running on: http://localhost:' + app.get('port') + ']');
       });
+      /*server.listen(app.get('port'), async () => {
+        console.log('[server running on: http://localhost:' + app.get('port') + ']');
+      });*/
     }).catch((err: any) => {
       console.error('Error connecting to MongoDB:', err);
     });
