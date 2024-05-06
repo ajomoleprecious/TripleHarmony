@@ -833,6 +833,10 @@ body.pokemon-bekijken h1 {
   align-items: flex-end;
 }
 
+.list-items {
+  color: #3f51b5;
+}
+
 .left_pokemon img,
 .right_pokemon img {
   margin: 2rem 0 2rem 0;
