@@ -15,7 +15,7 @@ router.use(express.static('public'));
  
 // Function to fetch a random Pokémon
 async function getRandomPokemon() {
-    const response = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=10000");
+    const response = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=386");
     const pokemonList = response.data.results;
     const randomIndex = Math.floor(Math.random() * pokemonList.length);
     const randomPokemon = pokemonList[randomIndex];
