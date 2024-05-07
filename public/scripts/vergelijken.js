@@ -43,10 +43,15 @@ async function test() {
 
 test();
 
+///////////////// lists
+let leftList = document.getElementsByClassName("left-pokemon-list")[0];
+let rightList = document.getElementsByClassName("right-pokemon-list")[0];
+
+///////////////// left
 let count = 0;
 
 leftInput.addEventListener('keyup', (e) => {
-    removeElements();
+    removeElements(leftList);
     count = 0; // Reset count on each keyup
     for (let i of sortedPokemonNames) {
         if (i.toLowerCase().startsWith(leftInput.value.toLowerCase()) && leftInput.value !== "") {
@@ -57,24 +62,51 @@ leftInput.addEventListener('keyup', (e) => {
             listItem.classList.add('list-items');
             listItem.style.cursor = 'pointer';
             listItem.addEventListener("click", function () {
-                displayNames(i);
+                displayNames(leftInput, i, leftList);
             });
             let word = `<b>${i.substr(0, leftInput.value.length)}</b>`;
             word += i.substr(leftInput.value.length);
             listItem.innerHTML = word;
-            document.getElementsByClassName("left-pokemon-list")[0].appendChild(listItem);
+            leftList.appendChild(listItem);
             count++; // Increment count
         }
     }
 });
 
-function displayNames(name) {
-    leftInput.value = name;
-    removeElements();
+/////////////////// right
+let countR = 0;
+
+rightInput.addEventListener('keyup', (e) => {
+    removeElements(rightList);
+    countR = 0; // Reset count on each keyup
+    for (let i of sortedPokemonNames) {
+        if (i.toLowerCase().startsWith(rightInput.value.toLowerCase()) && rightInput.value !== "") {
+            if (countR >= 3) {
+                break; // Exit loop if count reaches 3
+            }
+            let listItem = document.createElement('li');
+            listItem.classList.add('list-items');
+            listItem.style.cursor = 'pointer';
+            listItem.addEventListener("click", function () {
+                displayNames(rightInput, i, rightList);
+            });
+            let word = `<b>${i.substr(0, rightInput.value.length)}</b>`;
+            word += i.substr(rightInput.value.length);
+            listItem.innerHTML = word;
+            rightList.appendChild(listItem);
+            countR++; // Increment count
+        }
+    }
+});
+
+/////////////////// functions
+function displayNames(input, name, list) {
+    input.value = name;
+    removeElements(list);
 }
 
-function removeElements() {
-    let items = document.querySelectorAll('.list-items');
+function removeElements(list) {
+    let items = list.querySelectorAll('.list-items');
     items.forEach((item) => {
         item.remove();
     });

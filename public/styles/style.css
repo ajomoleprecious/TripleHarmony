@@ -835,13 +835,15 @@ body.pokemon-bekijken h1 {
 
 .left-pokemon-list {
   background-color: white;
-  padding-left: 0.5rem;
+  padding-left: 0;
   margin-left: 2.6rem;
   width: 15.6rem;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
   border-bottom-left-radius: 0.7rem;
-  border-bottom-right-radius: 0.7rem;
+  border-bottom-right-radius: 0.7rem; 
+}
+
+.right-pokemon-list {
+  background-color: white;
 }
 
 .list-items {
@@ -850,7 +852,11 @@ body.pokemon-bekijken h1 {
 
 .list-items:hover {
   background-color: rgb(228, 227, 227);
-  width: 100%;
+}
+
+.list-items:nth-child(3) {
+  border-bottom-left-radius: 0.7rem;
+  border-bottom-right-radius: 0.7rem;
 }
 
 .left_pokemon img,
