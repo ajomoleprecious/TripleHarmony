@@ -5,7 +5,7 @@
     "main": "index.ts",
     "scripts": {
         "start": "npm run build && nodemon index.ts",
-        "build": "tsc"
+        "build": "tsc && ts-node index.ts"
     },
     "author": "TripleHarmony",
     "license": "ISC",
