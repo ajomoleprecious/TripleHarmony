@@ -7,7 +7,7 @@ const maxAge = 1 * 24 * 60 * 60;
 export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
     const token = req.cookies.jwt;
     if (token) {
-        jwt.verify(token, 'Precious_Aziz_Mohammed', async (err : any, decodedToken : any) => {
+        jwt.verify(token, process.env.SECRET_KEY , async (err : any, decodedToken : any) => {
             if (err) {
                 res.locals.user = null;
                 res.redirect('/pokemon-auth');
@@ -18,7 +18,7 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
                 const now = Math.floor(Date.now() / 1000);
                 if (decodedToken.exp - now < 1800) {
                     // Refresh token
-                    const newToken = jwt.sign({ id: decodedToken.id }, 'Precious_Aziz_Mohammed', { expiresIn: maxAge });
+                    const newToken = jwt.sign({ id: decodedToken.id }, process.env.SECRET_KEY , { expiresIn: maxAge });
                     res.cookie('jwt', newToken, { httpOnly: true, maxAge: maxAge * 1000 });
                 }
                 next();
