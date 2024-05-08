@@ -7,6 +7,8 @@ import { client } from "../index";
 import express from "express";
 
 import axios from 'axios';
+import { get } from "http";
+import { ObjectId } from "mongodb";
 
 // Initialize router
 const router = Router();
@@ -20,40 +22,44 @@ router.use(express.static('public'));
 // Route handler for fetching and rendering Pokémon data
 router.get("/", async (req: Request, res: Response) => {
     // Extract query parameters or set defaults
-    let page = req.query.page ? Number(req.query.page) : 0;
-    let amountOfPokemons = req.query.amountOfPokemons ? Number(req.query.amountOfPokemons) : 10;
-    let offset = page * amountOfPokemons;
-    let evolution_chain_ids: number[] = [];
-    let pokemonIDs: number[] = [];
-    const currentPokemon = res.locals.currentPokemon;
-    const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
-    const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
-    const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
-    const avatar = res.locals.currentAvatar;
+    const page = req.query.page ? parseInt(req.query.page as string) : 0;
+    const amount = req.query.amount ? parseInt(req.query.amount as string) : 10;
 
     try {
-        // Fetch evolution chain data from PokeAPI
-        const pokemonsChainResponse = await axios.get(`https://pokeapi.co/api/v2/evolution-chain?offset=${offset}&limit=${amountOfPokemons}`);
-        const pokemonsChain = pokemonsChainResponse.data;
+        // Get current pokemon and user's avatar
+        const currentPokemon = res.locals.currentPokemon;
+        const user = await getUserData(res.locals.user._id);
+        const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
+        const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
+        const avatar = res.locals.currentAvatar;
 
-        // Create an array of promises to fetch Pokémon data concurrently
-        const pokemonPromises = pokemonsChain.results.map(async (item: any) => {
-            let id: number = item.url.split('/')[6];
-            evolution_chain_ids.push(id);
-            let lastPokemon = await getLastPokemonFromChain(id);
-            return fetchPokemonByName(lastPokemon);
-        });
+        // Fetch Pokémons evolution chains
+        const { evolutionChainIds, hasNextPage, hasPreviousPage } = await fetchEvolutionChains(page, amount);
 
-        // Wait for all Pokémon data to be fetched concurrently
-        const pokemonData = await Promise.all(pokemonPromises);
-
-        // Extract Pokémon IDs
-        pokemonIDs = pokemonData.map(pokemon => pokemon.id);
+        // Fetch Pokémons by evolution chains
+        const evolutionChainPokemons = await fetchPokemonsByEvolutionChains(evolutionChainIds);
 
         // Render the page with fetched data
-        res.status(200).render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, pokemonIDs, evolution_chain_ids, currentPokemon, pokemonHP, pokemonDefense, avatar });
-    } catch (_) {
-        // Handle error
+        res.status(200).render('pokemons-bekijken', {
+            pageNumber: page + 1,
+            evolutionChainIds,
+            evolutionChainPokemons,
+            hasNextPage,
+            hasPreviousPage,
+            currentPokemon,
+            pokemonHP,
+            pokemonDefense,
+            avatar,
+        });
+        if (hasPreviousPage) {
+            prefetchPreviousPageData(page - 1, amount);
+        }
+        // Prefetch next page data in the background
+        if (hasNextPage) {
+            prefetchNextPageData(page + 1, amount);
+        }
+    } catch (error) {
+        console.error(error);
         res.status(500).render('error', { errorMessage: "Er is een fout opgetreden bij het ophalen van de Pokémon gegevens." });
     }
 });
@@ -70,6 +76,11 @@ router.get("/filter", async (req: Request, res: Response) => {
     let pokemon_type = req.query.pokemon_type ? req.query.pokemon_type.toString() : '';
     let sort_by = req.query.sort_by ? req.query.sort_by.toString() : 'naam';
     let pokemonData: any[] = [];
+    const currentPokemon = res.locals.currentPokemon;
+    const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
+    const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
+    const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
+    const avatar = res.locals.currentAvatar;
 
     if (pokemon_name !== '') {
         try {
@@ -118,7 +129,7 @@ router.get("/filter", async (req: Request, res: Response) => {
             }
 
             // Render the page with fetched data
-            res.render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, pokemonIDs, evolution_chain_ids });
+            res.render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, pokemonIDs, evolution_chain_ids, currentPokemon, pokemonHP, pokemonDefense, avatar });
         } catch (error: any) {
             if (error.response && error.response.status === 404) {
                 // Render the failed result page with an appropriate message
@@ -182,7 +193,7 @@ router.get("/filter", async (req: Request, res: Response) => {
         pokemonIDs = pokemonData.map(pokemon => pokemon.id);
 
         // Render the page with fetched data and filter options
-        res.render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, pokemonIDs, evolution_chain_ids, pokemon_name, pokemon_type, sort_by });
+        res.render('pokemons-bekijken', { pageNumber: page + 1, pokemonData, pokemonIDs, evolution_chain_ids, pokemon_name, pokemon_type, sort_by, currentPokemon, pokemonHP, pokemonDefense, avatar });
     }
 });
 
@@ -197,31 +208,64 @@ router.post("/change-avatar/:avatar", async (req, res) => {
     }
 });
 
+
+
+// Helper functions
+async function getUserData(userId: string) {
+    return await client.db('users').collection('usersPokemons').findOne({ _id: new ObjectId(userId) });
+}
+
+async function fetchEvolutionChains(page: number, amount: number) {
+    const response = await axios.get(`https://pokeapi.co/api/v2/evolution-chain/?limit=${amount}&offset=${page * amount}`);
+    const evolutionChainIds: number[] = response.data.results.map((chain: any) => chain.url.split('/')[6]);
+    const hasNextPage = !!response.data.next;
+    const hasPreviousPage = !!response.data.previous;
+    return { evolutionChainIds, hasNextPage, hasPreviousPage };
+}
+
+async function fetchPokemonsByEvolutionChains(evolutionChainIds: number[]) {
+    const pokemons: any[] = [];
+    for (const id of evolutionChainIds) {
+        const response = await axios.get(`https://pokeapi.co/api/v2/evolution-chain/${id}`);
+        let chain = response.data.chain;
+        while (chain.evolves_to.length > 0) {
+            chain = chain.evolves_to[0];
+        }
+        await fetchPokemonByName(chain.species.name).then((pokemon: any) => {
+            pokemons.push(pokemon);
+        }).catch((_) => {
+            console.error(`${chain.species.name} kon niet gevonden worden`);
+        });
+    }
+    return pokemons;
+}
+
+async function prefetchNextPageData(page: number, amount: number) {
+    try {
+        const { evolutionChainIds } = await fetchEvolutionChains(page, amount);
+        await fetchPokemonsByEvolutionChains(evolutionChainIds);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function prefetchPreviousPageData(page: number, amount: number) {
+    try {
+        const { evolutionChainIds } = await fetchEvolutionChains(page, amount);
+        await fetchPokemonsByEvolutionChains(evolutionChainIds);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 // Function to fetch the last Pokémon from an evolution chain
 async function getLastPokemonFromChain(id: number): Promise<string> {
-    const evolutionChain: any = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${id}`)
-        .then(response => response.json());
-    const pokemonNames: string[] = [];
-    let result: string = '';
-
-    // Extract Pokemon names from the evolution chain data
-    function extractNames(chain: any) {
-        pokemonNames.push(chain.species.name);
-        if (chain.evolves_to.length > 0) {
-            chain.evolves_to.forEach((evolution: any) => {
-                extractNames(evolution);
-            });
-        }
+    const response = axios.get(`https://pokeapi.co/api/v2/evolution-chain/${id}`);
+    let chain = (await response).data.chain;
+    while (chain.evolves_to.length > 0) {
+        chain = chain.evolves_to[0];
     }
-    extractNames(evolutionChain.chain);
-
-    // Get the last Pokémon name from the array
-    for (let i = 0; i < pokemonNames.length; i++) {
-        if (i === pokemonNames.length - 1) {
-            result = pokemonNames[i];
-        }
-    }
-    return result;
+    return chain.species.name;
 }
 
 // Function to fetch Pokémon data by name

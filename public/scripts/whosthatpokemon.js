@@ -32,25 +32,26 @@ async function getNewPokemon() {
 
 hint.addEventListener("click", () => {
     if (hintCount >= localStorage.getItem("pokemonName").length) {
-        // Reset the clip to show the entire image
-        mask.style.clip = `rect(0px, auto, 15rem, 0px)`;
-        inputWho.value = localStorage.getItem("pokemonName");
-        setTimeout(() => {
-            getNewPokemon();
-        }, 2000);
-        return;
+      // Reset the clip to show the entire image
+      mask.style.clip = `rect(0px, auto, 15rem, 0px)`;
+      inputWho.value = localStorage.getItem("pokemonName");
+      setTimeout(() => {
+        getNewPokemon();
+      }, 2000);
+      return;
     }
-
+  
+    const pokemonName = localStorage.getItem("pokemonName"); // cache the value
     const silhouetteWidth = document.querySelector(".silhouette").width;
-    mask.style.clip = `rect(0px, ${(silhouetteWidth / localStorage.getItem("pokemonName").length * hintCount)}px, 15rem, 0px)`;
-    inputWho.value += localStorage.getItem("pokemonName").charAt(hintCount - 1);
+    mask.style.clip = `rect(0px, ${(silhouetteWidth / pokemonName.length * hintCount)}px, 15rem, 0px)`;
+    inputWho.value = pokemonName.substring(0, hintCount); // use substring here
     hintCount++;
-});
+  });
 
 
 
 inputWho.addEventListener("input", () => {
-    if (inputWho.value === localStorage.getItem("pokemonName")) {
+    if (inputWho.value.toLowerCase() === localStorage.getItem("pokemonName").toLowerCase()) {
         result.innerText = "Correct!";
         document.querySelector(".silhouette").style.filter = "brightness(100%)";
         setTimeout(() => {
@@ -78,7 +79,7 @@ if (window.innerWidth <= 710) {
     });
 } else {
     document.addEventListener('keypress', function (event) {
-        if (event.keyCode === 13) {
+        if (event.key === "Enter") {
             document.getElementById('startMessage').style.display = 'none';
         }
     });

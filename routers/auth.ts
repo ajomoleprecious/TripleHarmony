@@ -87,7 +87,7 @@ function handleErrors(error: any): ErrorMessages {
 // Create JSON web token
 const maxAge = 1 * 24 * 60 * 60; // 1 day
 const createToken = (id: string) => {
-    return jwt.sign({ id }, 'Precious_Aziz_Mohammed', { expiresIn: maxAge });
+    return jwt.sign({ id }, process.env.SECRET_KEY , { expiresIn: maxAge });
 }
 
 router.get('/', async (req: Request, res: Response) => {

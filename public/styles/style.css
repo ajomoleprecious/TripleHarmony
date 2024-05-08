@@ -616,6 +616,19 @@ body.pokemon-bekijken h1 {
   justify-content: end;
 }
 
+.list-nav b{
+  font-size: 1.2rem;
+  padding: .3rem .9rem;
+  border-radius: 100%;
+  background-color: var(--orange);
+}
+
+.list-nav button:disabled {
+  background-color: grey;
+  color: var(--white);
+  cursor: not-allowed;
+}
+
 #detail .modal-body {
   display: flex;
   flex-direction: column;
@@ -976,7 +989,7 @@ body.pokemon-bekijken h1 {
   width: 100%;
   opacity: 0;
   animation: slideUp 1s forwards;
-  animation-delay: calc(.2s * var(--i));
+  animation-delay: calc(.1s * var(--i));
 }
 
 .submenu-button section {

@@ -73,12 +73,13 @@ app.use((_, res) => {
 // Exit the app
 async function exit() {
   try {
-      await client.close();
-      console.log("Disconnected from database");
+    await client.close();
+    console.log("Disconnected from database");
+    process.exit(0);
   } catch (error) {
-      console.error(error);
+    console.error(error);
   }
-  process.exit(0);
+
 }
 
 // Start the app
@@ -119,9 +120,30 @@ io.on('connection', (socket: any) => {
 
   // Handle disconnection
   socket.on('disconnect', () => {
-      playersCount--;
-      io.emit('updatePlayerCount', playersCount);
+    playersCount--;
+    io.emit('updatePlayerCount', playersCount);
   });
 });
 
+/*io.on('connection', (socket: any) => {
+  socket.on('playerReady', (id: string) => {
+    const player = players.find(player => player.id === id);
+    if (player) {
+      player.waiting = true;
+    } else {
+      players.push({ id, waiting: true });
+    }
 
+    const readyPlayers = players.filter(player => player.waiting);
+    if (readyPlayers.length === 2) {
+      readyPlayers.forEach(player => {
+        io.to(player.id).emit('startGame');
+      });
+      players = players.filter(player => !player.waiting);
+    }
+  });
+
+  socket.on('playerMove', (id: string, move: string) => {
+    socket.to(id).emit('opponentMove', move);
+  });
+});*/
