@@ -17,10 +17,6 @@ let pokemonArray: any[] = [];
 router.get("/", async (req: Request, res: Response) => {
     try
     {
-        // Fetch all Pokémon data from PokeAPI
-
-        
-        
         let pikachu: any = await fetchPokemonByName("pikachu");
         let charmander: any = await fetchPokemonByName("charmander");
         const avatar = res.locals.currentAvatar;
