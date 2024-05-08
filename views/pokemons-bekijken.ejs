@@ -110,11 +110,10 @@
       <section>
         <form method="get" id="getAmountOfPokemons">
           Toon:
-          <select class="form-select" id="amountOfPokemons" name="amountOfPokemons" aria-label="Amount of pokemons">
+          <select class="form-select" id="amountOfPokemons" name="amount" aria-label="Amount of pokemons">
             <option value="10">10</option>
             <option value="20">20</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
+            <option value="30">30</option>
           </select>
           <input type="hidden" name="page" value="0">
         </form>
@@ -123,24 +122,32 @@
 
     <section class="pokemon-list">
       <ul>
-        <% for (let i = 0; i < pokemonData.length; i++) { %>
-        <li data-bs-toggle="modal" data-bs-target="#detail" onclick="showDetails(<%= evolution_chain_ids[i] %>,<%= pokemonIDs[i] %>)">
+        <% for (let i = 0; i < evolutionChainPokemons.length; i++) { %>
+        <li data-bs-toggle="modal" data-bs-target="#detail" onclick="showDetails(<%= evolutionChainIds[i] %>, <%= evolutionChainPokemons[i].id %>)">
           <a data-bs-toggle="modal" data-bs-target="#detail" href="#">
-            <% if (pokemonData[i].sprites.other['showdown'].front_default) { %>
-            <img src="<%= pokemonData[i].sprites.other['showdown'].front_default %>" alt="<%= pokemonData[i].name %>">
+            <% if (evolutionChainPokemons[i].sprites.other['showdown'].front_default) { %>
+            <img src="<%= evolutionChainPokemons[i].sprites.other['showdown'].front_default %>" alt="<%= evolutionChainPokemons[i].name %>">
             <% } else { %>
-            <img src="<%= pokemonData[i].sprites.other['official-artwork'].front_default %>" alt="<%= pokemonData[i].name %>">
+            <img src="<%= evolutionChainPokemons[i].sprites.other['official-artwork'].front_default %>" alt="<%= evolutionChainPokemons[i].name %>">
             <% } %>
           </a>
-          <p><%= pokemonData[i].name.charAt(0).toUpperCase() %><%=  pokemonData[i].name.slice(1) %></p>
+          <p><%= evolutionChainPokemons[i].name.charAt(0).toUpperCase() + evolutionChainPokemons[i].name.slice(1) %></p>
         </li>
         <% } %>
       </ul>
     </section>
     <section class="list-nav">
+      <% if (hasPreviousPage) { %>
       <button id="previous"><i class="fa-solid fa-angles-left"></i>Vorige</button>
+      <% } else { %>
+      <button id="previous" disabled><i class="fa-solid fa-angles-left"></i>Vorige</button>
+      <% } %>
       <b><%= pageNumber %></b>
+      <% if (hasNextPage) { %>
       <button id="next">Volgende<i class="fa-solid fa-angles-right"></i></button>
+      <% } else { %>
+      <button id="next" disabled>Volgende<i class="fa-solid fa-angles-right"></i></button>
+      <% } %>
     </section>
     <section class="pokemon_hide">
       <img src="/assets/pokemon_logo.png" alt="">
