@@ -1436,7 +1436,7 @@ body.battler .fa-solid.fa-question {
   /* helft van 31.25rem */
   background-color: #ccc;
   border-radius: 50%;
-  border: 0.5rem solid #dde;
+  border: 0.5rem solid #fcba03;
   /* ik heb de dikte van de rand ook verminderd voor verhouding */
   position: relative;
   overflow: hidden;
@@ -1466,48 +1466,49 @@ body.battler .fa-solid.fa-question {
 }
 
 .roulette-box .one {
-  background-color: #3f51b5;
+  background-color: #fcba03;
   left: 50%;
 }
 
 .roulette-box .two {
-  background-color: #ff9800;
+  background-color: #af2215;
   transform: rotate(45deg);
 }
 
 .roulette-box .three {
-  background-color: #e91e63;
+  background-color: #fcba03;
   transform: rotate(90deg);
 }
 
 .roulette-box .four {
-  background-color: #4caf50;
+  background-color: #af2215;
   transform: rotate(135deg);
 }
 
 .roulette-box .five {
-  background-color: #009688;
+  background-color: #fcba03;
   transform: rotate(180deg);
 }
 
 .roulette-box .six {
-  background-color: #795548;
+  background-color: #af2215;
   transform: rotate(225deg);
 }
 
 .roulette-box .seven {
-  background-color: #9c27b0;
+  background-color: #fcba03;
   transform: rotate(270deg);
 }
 
 .roulette-box .eight {
-  background-color: #f44336;
+  background-color: #af2215;
   transform: rotate(315deg);
 }
 
 .roulette-arrow {
   font-size: 2rem;
   margin-top: -4rem;
+  color: black;
 }
 
 #hourglass {
