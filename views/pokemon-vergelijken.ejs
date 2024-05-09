@@ -98,7 +98,7 @@
 
           </ul>
           <ul class="pv_stats">
-            <li>HP &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<%= leftHP %></li>
+            <li>HP &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<%= leftHP %>/255</li>
           </ul>
           <% let lHPColorbar = leftHP/255*100 %>
             <%
@@ -116,9 +116,9 @@
             </section>
           </section>
           <ul class="pv_stats">
-            <li>AANVAL&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<%= leftAttack %></li>
+            <li>AANVAL&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<%= leftAttack %>/190</li>
           </ul>
-          <% let lAttackColorbar = leftAttack/180*100 %>
+          <% let lAttackColorbar = leftAttack/190*100 %>
             <%
               let lAttackClassValue = '';
               if (lAttackColorbar <= 33) {
@@ -130,11 +130,11 @@
               }
             %>
           <section class="progress">
-            <section class="progress-bar progress-bar-striped progress-bar-animated <%= lAttackClassValue %>" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <%= leftAttack/180*100 %>%">
+            <section class="progress-bar progress-bar-striped progress-bar-animated <%= lAttackClassValue %>" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <%= leftAttack/190*100 %>%">
             </section>
           </section>
           <ul class="pv_stats">
-            <li>VERDEDIGING&nbsp;&nbsp;|&nbsp;&nbsp;<%= leftDefense %></li>
+            <li>VERDEDIGING&nbsp;&nbsp;|&nbsp;&nbsp;<%= leftDefense %>/230</li>
           </ul>
           <% let lDefenseColorbar = leftDefense/230*100 %>
             <%
@@ -155,15 +155,15 @@
         <article class="middle_stats">
           <ul class="comparison">
             <!--HP-->
-            <li style="color: <%= (leftHP > rightHP) ? 'blue' : (leftHP < rightHP) ? 'red' : 'black' %>;">
+            <li style="color: <%= (leftHP > rightHP) ? 'limegreen' : (leftHP < rightHP) ? 'Crimson' : 'Goldenrod' %>;">
               <%= leftHP - rightHP %>
             </li>
             <!--ATTACK-->
-            <li style="color: <%= (leftAttack > rightAttack) ? 'blue' : (leftAttack < rightAttack) ? 'red' : 'black' %>;">
+            <li style="color: <%= (leftAttack > rightAttack) ? 'limegreen' : (leftAttack < rightAttack) ? 'Crimson' : 'Goldenrod' %>;">
               <%= leftAttack - rightAttack %>
             </li>
             <!--DEFENSE-->
-            <li style="color: <%= (leftDefense > rightDefense) ? 'blue' : (leftDefense < rightDefense) ? 'red' : 'black' %>;">
+            <li style="color: <%= (leftDefense > rightDefense) ? 'limegreen' : (leftDefense < rightDefense) ? 'Crimson' : 'Goldenrod' %>;">
               <%= leftDefense - rightDefense %>
             </li>
           </ul>
@@ -178,7 +178,7 @@
 
           </ul>
           <ul class="pv_stats">
-            <li><%= rightHP %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;HP</li>
+            <li><%= rightHP %>/255&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;HP</li>
           </ul>
           <% let rHPColorbar = rightHP/255*100 %>
             <%
@@ -196,9 +196,9 @@
             </section>
           </section>
           <ul class="pv_stats">
-            <li><%= rightAttack %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;AANVAL</li>
+            <li><%= rightAttack %>/190&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;AANVAL</li>
           </ul>
-          <% let rAttackColorbar = rightAttack/180*100 %>
+          <% let rAttackColorbar = rightAttack/190*100 %>
             <%
               let rAttackClassValue = '';
               if (rAttackColorbar <= 33) {
@@ -210,11 +210,11 @@
               }
             %>
           <section class="progress">
-            <section class="progress-bar progress-bar-striped progress-bar-animated <%= rAttackClassValue %>" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <%= rightAttack/180*100 %>%">
+            <section class="progress-bar progress-bar-striped progress-bar-animated <%= rAttackClassValue %>" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <%= rightAttack/190*100 %>%">
             </section>
           </section>
           <ul class="pv_stats">
-            <li><%= rightDefense %>&nbsp;&nbsp;|&nbsp;&nbsp;VERDEDIGING</li>
+            <li><%= rightDefense %>/230&nbsp;&nbsp;|&nbsp;&nbsp;VERDEDIGING</li>
           </ul>
           <% let rDefenseColorbar = rightDefense/230*100 %>
             <%
