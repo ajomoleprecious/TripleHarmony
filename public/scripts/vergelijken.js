@@ -35,13 +35,12 @@ function sortArray(pokemonArray) {
 let pokemonArray = [];
 let sortedPokemonNames = [];
 
-async function test() {
+async function main() {
     pokemonArray = await fetchAllPokemons();
     sortedPokemonNames = sortArray(pokemonArray);
-    console.log(sortedPokemonNames[10]); // or any other index you want
 }
 
-test();
+main();
 
 ///////////////// lists
 let leftList = document.getElementsByClassName("left-pokemon-list")[0];
