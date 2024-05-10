@@ -62,7 +62,7 @@ let detailWeight = document.getElementById("detailWeight");
 let detailLength = document.getElementById("detailLength");
 let detailType = document.getElementById("detailType");
 let detailName = document.getElementById("detailName");
-let detailbox =  document.getElementById('detailbox');
+let detailbox = document.getElementById('detailbox');
 const moreDetails = document.getElementById("moreDetails");
 
 async function DetailOfPokemon(name) {
@@ -109,30 +109,46 @@ async function fetchEvolutionChain(id) {
 
 // Function to create HTML list from evolution chain data
 async function createPokemonList(id) {
-    const evolutionChain = await fetchEvolutionChain(id);
+    let evolutionChain = await fetchEvolutionChain(id);
     const pokemonNames = [];
-
-    // Extract Pokemon names from the evolution chain data
-    function extractNames(chain) {
-        pokemonNames.push(chain.species.name);
-        if (chain.evolves_to.length > 0) {
-            chain.evolves_to.forEach((evolution) => {
-                extractNames(evolution);
-            });
-        }
-    }
-    extractNames(evolutionChain.chain);
-
     const ul = document.getElementById('evolutionChain');
     ul.innerHTML = '';
+
+    // Extract Pokemon names from the evolution chain data
+    if (Array.isArray(evolutionChain.chain.evolves_to) && evolutionChain.chain.evolves_to.length > 0) {
+        // Include the initial species (shieldon) in the list of Pokémon names
+        pokemonNames.push(evolutionChain.chain.species.name);
+
+        let currentChain = evolutionChain.chain.evolves_to;
+
+        while (currentChain.length > 0) {
+            await Promise.all(currentChain.map(async (evolution) => {
+                const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${evolution.species.url.split('/')[6]}`);
+                const data = await response.json();
+                pokemonNames.push(data.varieties[0].pokemon.name);
+                return data;
+            }));
+
+            // Update currentChain for the next iteration
+            currentChain = currentChain.reduce((acc, val) => acc.concat(val.evolves_to), []);
+        }
+    }
+    else {
+        await fetch(`https://pokeapi.co/api/v2/pokemon-species/${evolutionChain.chain.species.url.split('/')[6]}`)
+            .then(response => response.json())
+            .then(data => {
+                pokemonNames.push(data.varieties[0].pokemon.name);
+            });
+    }
+
 
     // Array to store all fetch promises
     const fetchPromises = pokemonNames.map(async (name) => {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
         const data = await response.json();
+
         return { name, data };
     });
-
     // Wait for all fetch requests to resolve
     const pokemonDataList = await Promise.all(fetchPromises);
 

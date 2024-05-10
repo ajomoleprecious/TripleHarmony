@@ -217,7 +217,7 @@ async function getUserData(userId: string) {
 
 async function fetchEvolutionChains(page: number, amount: number) {
     const response = await axios.get(`https://pokeapi.co/api/v2/evolution-chain/?limit=${amount}&offset=${page * amount}`);
-    const evolutionChainIds: number[] = response.data.results.map((chain: any) => chain.url.split('/')[6]);
+    const evolutionChainIds: number[] = response.data.results.map((item: any) => item.url.split('/')[6]);
     const hasNextPage = !!response.data.next;
     const hasPreviousPage = !!response.data.previous;
     return { evolutionChainIds, hasNextPage, hasPreviousPage };
@@ -225,20 +225,36 @@ async function fetchEvolutionChains(page: number, amount: number) {
 
 async function fetchPokemonsByEvolutionChains(evolutionChainIds: number[]) {
     const pokemons: any[] = [];
-    for (const id of evolutionChainIds) {
+    const chainIDs = evolutionChainIds;
+    for (const id of chainIDs) {
         const response = await axios.get(`https://pokeapi.co/api/v2/evolution-chain/${id}`);
         let chain = response.data.chain;
+        // Traverse the evolution chain until the last evolution is reached
         while (chain.evolves_to.length > 0) {
             chain = chain.evolves_to[0];
         }
-        await fetchPokemonByName(chain.species.name).then((pokemon: any) => {
-            pokemons.push(pokemon);
-        }).catch((_) => {
-            console.error(`${chain.species.name} kon niet gevonden worden`);
-        });
+        // Fetch the last evolution of the chain
+         let pokemonName = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${chain.species.url.split('/')[6]}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                return data.varieties[0].pokemon.name;
+            })
+            .catch(error => console.error(error));
+
+        // Push the last evolution to the array
+        const pokemon = await fetchPokemonByName(pokemonName);
+        pokemons.push(pokemon);
     }
     return pokemons;
 }
+
+
 
 async function prefetchNextPageData(page: number, amount: number) {
     try {
