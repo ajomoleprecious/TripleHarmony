@@ -18,10 +18,15 @@ export const currentAvatar = async (req: Request, res: Response, next: NextFunct
             "james": "/assets/avatars/james.png",
             "jessie": "/assets/avatars/jessie.png",
             "may": "/assets/avatars/may.png",
-            "serena": "/assets/avatars/serena.png",
-            "none": "/assets/avatars/none.png"
+            "serena": "/assets/avatars/serena.png"
         };
-        res.locals.currentAvatar = avatarList[avatar];
+
+        if (avatar == "none") {
+            res.locals.currentAvatar = null;
+        }
+        else {
+            res.locals.currentAvatar = avatarList[avatar];
+        }
     }
     next();
 }
