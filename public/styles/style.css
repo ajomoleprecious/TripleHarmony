@@ -1188,8 +1188,8 @@ body.pokemon-bekijken h1 {
   display: none;
 }
 
-body#finder .fa-solid.fa-question,
-body.battler .fa-solid.fa-question {
+body#finder section>button .fa-solid.fa-question,
+body.battler section>button .fa-solid.fa-question {
   background-color: brown;
   color: var(--white);
 }

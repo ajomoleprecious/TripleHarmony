@@ -69,8 +69,8 @@ async function DetailOfPokemon(name) {
     await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
         .then(response => response.json())
         .then(data => {
-            detailWeight.innerHTML = `${data.weight}<sub> kg</sub>`;
-            detailLength.innerHTML = `${data.height}<sub> m</sub>`;
+            detailWeight.innerHTML = `${data.weight / 10}<sub> kg</sub>`;
+            detailLength.innerHTML = `${data.height / 10}<sub> m</sub>`;
             // Mapping types to colored spans
             const typeSpans = data.types.map(type => `<span style="background-color: ${typeColors[type.type.name]}">${type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}</span>`);
             detailType.innerHTML = typeSpans.join(' ');
@@ -86,8 +86,8 @@ async function showDetails(evolutionId, pokemonId) {
     await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
         .then(response => response.json())
         .then(data => {
-            detailWeight.innerHTML = `${data.weight}<sub> kg</sub>`;
-            detailLength.innerHTML = `${data.height}<sub> m</sub>`;
+            detailWeight.innerHTML = `${data.weight / 10}<sub> kg</sub>`;
+            detailLength.innerHTML = `${data.height / 10}<sub> m</sub>`;
             // Mapping types to colored spans
             const typeSpans = data.types.map(type => `<span style="background-color: ${typeColors[type.type.name]}">${type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}</span>`);
             detailType.innerHTML = typeSpans.join(' ');
