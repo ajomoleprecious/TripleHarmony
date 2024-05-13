@@ -1367,6 +1367,16 @@ body.battler section>button .fa-solid.fa-question {
   padding: .5rem;
 }
 
+.pokemonToGuess #timer{
+  position: absolute;
+  top: 46%;
+  left: 5%;
+  padding: .3rem .7rem;
+  background-color: rgba(128, 128, 128, 0.298);
+  border-radius: 100%;
+  font-size: 1.5rem;
+}
+
 
 /* POKEMON VANGEN */
 

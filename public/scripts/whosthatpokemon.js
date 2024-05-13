@@ -1,9 +1,11 @@
-
 const inputWho = document.getElementById("inputWho");
 const hint = document.getElementById("hint");
 const result = document.querySelector(".result");
 const mask = document.querySelector(".mask");
+const skip = document.querySelector(".skip");
+
 let hintCount = 1;
+let countdownTimer;
 
 async function getNewPokemon() {
     document.querySelector(".silhouette").src = "/assets/others/loading-ball.gif";
@@ -26,9 +28,16 @@ async function getNewPokemon() {
         localStorage.setItem("pokemonName", data.name);
         result.innerText = "Toon resultaat";
     }, 500);
-};
-
-
+    
+    clearInterval(countdownTimer);
+    timer.textContent = "15";
+    countdownTimer = setInterval(() => {
+        timer.textContent = parseInt(timer.textContent) - 1;
+        if(parseInt(timer.textContent) === 0) {
+            getNewPokemon();
+        }
+    }, 1000);
+}
 
 hint.addEventListener("click", () => {
     if (hintCount >= localStorage.getItem("pokemonName").length) {
@@ -48,10 +57,9 @@ hint.addEventListener("click", () => {
     hintCount++;
   });
 
-
-
 inputWho.addEventListener("input", () => {
     if (inputWho.value.toLowerCase() === localStorage.getItem("pokemonName").toLowerCase()) {
+        console.log("Je hebt twee punten gewonnen!");
         result.innerText = "Correct!";
         document.querySelector(".silhouette").style.filter = "brightness(100%)";
         setTimeout(() => {
@@ -61,10 +69,27 @@ inputWho.addEventListener("input", () => {
 });
 
 result.addEventListener("click", () => {
+    // Hide the hint and skip buttons
+    hint.style.display = 'none';
+    skip.style.display = 'none';
+
     inputWho.value = localStorage.getItem("pokemonName");
     document.querySelector(".silhouette").style.filter = "brightness(100%)";
+    clearInterval(countdownTimer);
+    timer.textContent = "15";  // Reset the timer display
     setTimeout(() => {
-        getNewPokemon();
+      getNewPokemon();
+      // Start a new timer
+      countdownTimer = setInterval(() => {
+          timer.textContent = parseInt(timer.textContent) - 1;
+          if(parseInt(timer.textContent) === 0) {
+              getNewPokemon();
+          }
+      }, 1000);
+      
+      // Show the hint and skip buttons again after 2 seconds
+      hint.style.display = 'inline-block';
+      skip.style.display = 'inline-block'; 
     }, 2000);
 });
 
@@ -89,4 +114,7 @@ window.onload = () => {
     const name = document.getElementById("pokemonName").value;
     localStorage.setItem("pokemonName", name);
     name.innerText = "";
+    getNewPokemon();
 };
+
+const timer = document.getElementById('timer');
