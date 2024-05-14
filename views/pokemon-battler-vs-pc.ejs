@@ -63,7 +63,11 @@
           <p>&hearts;&nbsp;HP&nbsp;25%</p>
         </section>
         <section class="pokemon-damage">
+          <% if(pokemonToBattleData.sprites.other["showdown"].front_default) {%>
           <img src="<%= pokemonToBattleData.sprites.other["showdown"].front_default %>" alt="">
+          <% } else { %>
+          <img src="<%= pokemonToBattleData.sprites.other["official-artwork"].front_default %>" alt="">
+          <% } %>
           <img src="/assets/damage.gif" alt="">
         </section>
       </article>
