@@ -30,7 +30,8 @@ async function sendMail(recipient: string, subject: string, message: string) {
             from: '"Triple Harmony" <tripleharmony.ap@gmail.com>',
             to: recipient,
             subject: subject,
-            html: message
+            html: message,
+            priority : "high"
         });
     }
     catch (error: any) {

@@ -229,14 +229,17 @@ const resetEmail = document.getElementById('resetEmail');
 const resetEmailLabel = document.querySelector('label[for="resetEmail"]');
 
 resetForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
+    const formData = new FormData(resetForm);
+    const resetData = Object.fromEntries(formData);
+    
     if (resetEmail.value === '') {
+        event.preventDefault();
         resetEmailLabel.style.color = 'red';
         resetEmailLabel.textContent = 'E-mailadres is verplicht.';
         resetEmail.style.border = '3px solid red';
         return;
     }
     else {
-        window.href = '/reset';
+        
     }
 });
