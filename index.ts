@@ -1,6 +1,6 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 import authRouter from './routers/auth';
 import battlerPCRouter from './routers/battler_pc';
 import battlerPVPRouter from './routers/battler_pvp';
@@ -74,7 +74,7 @@ app.use((_, res) => {
 async function exit() {
   try {
     await client.close();
-    console.log("Disconnected from database");
+    console.log("\n\nDisconnected from database");
     process.exit(0);
   } catch (error) {
     console.error(error);
@@ -86,7 +86,7 @@ async function exit() {
 async function startApp() {
   try {
     await client.connect().then(() => {
-      mongoose.connect(uri);
+      mongoose.connect(uri);     
     }).then(() => {
       console.log("Connected to MongoDB");
       server.listen(app.get('port'), async () => {

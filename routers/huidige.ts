@@ -16,11 +16,12 @@ router.use(express.static('public'));
 router.get('/', async (req: Request, res: Response) => {
     const currentPokemon = res.locals.currentPokemon;
     const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
-    const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
-    const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
     const pokemonsList = user?.pokemons;
     const avatar = res.locals.currentAvatar;
-    res.render('huidige-pokemon', {currentPokemon, pokemonHP, pokemonDefense, avatar, pokemonsList});
+    const hasPreviousPage = false;
+    const hasNextPage = false;
+    const pageNumber = 1;
+    res.render('huidige-pokemon', {currentPokemon, avatar, pokemonsList, hasPreviousPage, hasNextPage, pageNumber});
 });
 
 router.get("/get-pokemon/:id", async (req, res) => {

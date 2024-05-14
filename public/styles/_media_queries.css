@@ -401,7 +401,7 @@
     }
 
     .ingelogd .pokemon-bekijken-main {
-        grid-template-rows: 10dvh 73dvh auto;
+        grid-template-rows: 13dvh 70dvh auto;
     }
 
     #detailLabel {

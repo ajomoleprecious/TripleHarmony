@@ -15,51 +15,44 @@ router.use(express.static('public'));
 let pokemonArray: any[] = [];
 
 router.get("/", async (req: Request, res: Response) => {
-    try
-    {
+    try {
         let pikachu: any = await fetchPokemonByName("pikachu");
         let charmander: any = await fetchPokemonByName("charmander");
         const avatar = res.locals.currentAvatar;
         const currentPokemon = res.locals.currentPokemon;
         const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
-        const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
-        const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
 
-        if(typeof req.query.left_pokemon === "string" && typeof req.query.right_pokemon === "string") 
-        {
-            if(req.query.left_pokemon === "" || req.query.right_pokemon === "")
-            {
-                res.render("pokemon-vergelijken", 
-                { 
-                    currentPokemon, pokemonHP, pokemonDefense, avatar, leftQuery: "", rightQuery: "",
-                    leftPokeImage: pikachu.sprites.other['official-artwork'].front_default, leftHP: pikachu.stats[0].base_stat, leftAttack: pikachu.stats[1].base_stat, leftDefense: pikachu.stats[2].base_stat,
-                    rightPokeImage: charmander.sprites.other['official-artwork'].front_default, rightHP: charmander.stats[0].base_stat, rightAttack: charmander.stats[1].base_stat, rightDefense: charmander.stats[2].base_stat,
-                });
+        if (typeof req.query.left_pokemon === "string" && typeof req.query.right_pokemon === "string") {
+            if (req.query.left_pokemon === "" || req.query.right_pokemon === "") {
+                res.render("pokemon-vergelijken",
+                    {
+                        currentPokemon, avatar, leftQuery: "", rightQuery: "",
+                        leftPokeImage: pikachu.sprites.other['official-artwork'].front_default, leftHP: pikachu.stats[0].base_stat, leftAttack: pikachu.stats[1].base_stat, leftDefense: pikachu.stats[2].base_stat,
+                        rightPokeImage: charmander.sprites.other['official-artwork'].front_default, rightHP: charmander.stats[0].base_stat, rightAttack: charmander.stats[1].base_stat, rightDefense: charmander.stats[2].base_stat,
+                    });
             }
 
             let leftQuery = req.query.left_pokemon.toLocaleLowerCase();
             let rightQuery = req.query.right_pokemon.toLocaleLowerCase();
             let left_pokemon: any = await fetchPokemonByName(leftQuery);
             let right_pokemon: any = await fetchPokemonByName(rightQuery);
-            res.render("pokemon-vergelijken", 
-                { 
-                    currentPokemon, pokemonHP, pokemonDefense, avatar, leftQuery: left_pokemon.name, rightQuery: right_pokemon.name,
+            res.render("pokemon-vergelijken",
+                {
+                    currentPokemon, avatar, leftQuery: left_pokemon.name, rightQuery: right_pokemon.name,
                     leftPokeImage: left_pokemon.sprites.other['official-artwork'].front_default, leftHP: left_pokemon.stats[0].base_stat, leftAttack: left_pokemon.stats[1].base_stat, leftDefense: left_pokemon.stats[2].base_stat,
-                    rightPokeImage: right_pokemon.sprites.other['official-artwork'].front_default, rightHP: right_pokemon.stats[0].base_stat, rightAttack: right_pokemon.stats[1].base_stat, rightDefense: right_pokemon.stats[2].base_stat, 
+                    rightPokeImage: right_pokemon.sprites.other['official-artwork'].front_default, rightHP: right_pokemon.stats[0].base_stat, rightAttack: right_pokemon.stats[1].base_stat, rightDefense: right_pokemon.stats[2].base_stat,
                 });
-        } 
-        else
-        {
-            res.render("pokemon-vergelijken", 
-                { 
-                    currentPokemon, pokemonHP, pokemonDefense, avatar, leftQuery: "", rightQuery: "",
+        }
+        else {
+            res.render("pokemon-vergelijken",
+                {
+                    currentPokemon, avatar, leftQuery: "", rightQuery: "",
                     leftPokeImage: pikachu.sprites.other['official-artwork'].front_default, leftHP: pikachu.stats[0].base_stat, leftAttack: pikachu.stats[1].base_stat, leftDefense: pikachu.stats[2].base_stat,
                     rightPokeImage: charmander.sprites.other['official-artwork'].front_default, rightHP: charmander.stats[0].base_stat, rightAttack: charmander.stats[1].base_stat, rightDefense: charmander.stats[2].base_stat,
                 });
         }
     }
-    catch (error) 
-    {
+    catch (error) {
         console.error(error);
         res.render("error", { errorMessage: "Fout bij het ophalen van pokemons" });;
     }

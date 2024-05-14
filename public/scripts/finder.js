@@ -1,5 +1,5 @@
-const NUM_BUSHES_PC = 2000
-const NUM_BUSHES_MOBILE = 400
+const NUM_BUSHES_PC = 3000
+const NUM_BUSHES_MOBILE = 1000
 const NUM_BALLS = 5
 
 const hideHelp = document.getElementById('hideHelp');
@@ -189,6 +189,7 @@ async function getRandomPokemon() {
             randomPokemonName.innerText = data.pokeNaam;
             randomPokemonID.href = `/pokemon-battler-vs-pc/${data.pokemonID}`;
             randomPokemonImage.src = data.pokeURL;
+            modal.show();
         })
         .catch(error => {
             console.error('Error:', error);
@@ -206,7 +207,6 @@ function checkCollisions() {
             balls.splice(index, 1);
             generateBall();
             getRandomPokemon();
-            modal.show();
         }
     });
 }

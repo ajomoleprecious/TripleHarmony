@@ -26,11 +26,9 @@ router.get('/', async (req: Request, res: Response) => {
     const avatar = res.locals.currentAvatar;
     const currentPokemon = res.locals.currentPokemon;
     const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
-    const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
-    const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
     let randomPokemon = await getRandomPokemon();
     const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${randomPokemon.url.split("/")[6]}.png`;
-    res.render('whos-that-pokemon', { name: randomPokemon.name, image: imageUrl, currentPokemon, pokemonHP, pokemonDefense, avatar});
+    res.render('whos-that-pokemon', { name: randomPokemon.name, image: imageUrl, currentPokemon, avatar});
 });
  
 router.get('/new-pokemon', async (req: Request, res: Response) => {
