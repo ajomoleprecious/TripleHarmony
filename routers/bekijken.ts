@@ -28,9 +28,7 @@ router.get("/", async (req: Request, res: Response) => {
     try {
         // Get current pokemon and user's avatar
         const currentPokemon = res.locals.currentPokemon;
-        const user = await getUserData(res.locals.user._id);
-        const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
-        const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
+        const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
         const avatar = res.locals.currentAvatar;
 
         // Fetch Pokémons evolution chains
@@ -47,8 +45,6 @@ router.get("/", async (req: Request, res: Response) => {
             hasNextPage,
             hasPreviousPage,
             currentPokemon,
-            pokemonHP,
-            pokemonDefense,
             avatar,
         });
         if (hasPreviousPage) {
@@ -66,16 +62,14 @@ router.get("/", async (req: Request, res: Response) => {
 
 // Route handler for filtering and fetching Pokémon data
 router.get("/filter", async (req: Request, res: Response) => {
-     // Extract query parameters or set defaults
-     const page = req.query.page ? parseInt(req.query.page as string) : 0;
-     const amount = req.query.amount ? parseInt(req.query.amount as string) : 10;
+    // Extract query parameters or set defaults
+    const page = req.query.page ? parseInt(req.query.page as string) : 0;
+    const amount = req.query.amount ? parseInt(req.query.amount as string) : 10;
 
-     try {
+    try {
         // Get current pokemon and user's avatar
         const currentPokemon = res.locals.currentPokemon;
-        const user = await getUserData(res.locals.user._id);
-        const pokemonHP = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonHP;
-        const pokemonDefense = user?.pokemons.find((pokemon: any) => pokemon.pokemonId === currentPokemon.id)?.pokemonDefense;
+        const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
         const avatar = res.locals.currentAvatar;
 
         res.render('pokemons-bekijken', {
@@ -85,12 +79,10 @@ router.get("/filter", async (req: Request, res: Response) => {
             hasNextPage: false,
             hasPreviousPage: false,
             currentPokemon,
-            pokemonHP,
-            pokemonDefense,
             avatar,
         });
-     }
-     catch (error) {
+    }
+    catch (error) {
         console.error(error);
         res.status(500).render('error', { errorMessage: "Er is een fout opgetreden bij het ophalen van de Pokémon gegevens." });
     }
@@ -133,7 +125,7 @@ async function fetchPokemonsByEvolutionChains(evolutionChainIds: number[]) {
             chain = chain.evolves_to[0];
         }
         // Fetch the last evolution of the chain
-         let pokemonName = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${chain.species.url.split('/')[6]}`, {
+        let pokemonName = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${chain.species.url.split('/')[6]}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

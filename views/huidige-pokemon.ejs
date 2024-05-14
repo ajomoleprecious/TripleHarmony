@@ -106,8 +106,7 @@
           <select class="form-select" id="amountOfPokemons" name="amountOfPokemons" aria-label="Amount of pokemons">
             <option value="10">10</option>
             <option value="20">20</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
+            <option value="30">30</option>
           </select>
           <input type="hidden" name="page" value="0">
         </form>
@@ -130,9 +129,17 @@
       </ul>
     </section>
     <section class="list-nav">
-      <button><i class="fa-solid fa-angles-left"></i>Vorige</button>
-      <b>1</b>
-      <button>Volgende<i class="fa-solid fa-angles-right"></i></button>
+      <% if (hasPreviousPage) { %>
+      <button id="previous"><i class="fa-solid fa-angles-left"></i>Vorige</button>
+      <% } else { %>
+      <button id="previous" disabled><i class="fa-solid fa-angles-left"></i>Vorige</button>
+      <% } %>
+      <b><%= pageNumber %></b>
+      <% if (hasNextPage) { %>
+      <button id="next">Volgende<i class="fa-solid fa-angles-right"></i></button>
+      <% } else { %>
+      <button id="next" disabled>Volgende<i class="fa-solid fa-angles-right"></i></button>
+      <% } %>
     </section>
     <section class="pokemon_hide">
       <img src="assets/pokemon_logo.png" alt="">
@@ -140,22 +147,22 @@
     </section>
     <section class="current-pokemon">
       <a href="huidige-pokemon">
-        <% if (currentPokemon.sprites.other['showdown'].front_default) { %>
-        <img class="pokemon-pic" src="<%= currentPokemon.sprites.other['showdown'].front_default %>" alt="<%= currentPokemon.name %>">
+        <% if (currentPokemon.pokemonGif) { %>
+        <img class="pokemon-pic" src="<%= currentPokemon.pokemonGif %>" alt="<%= currentPokemon.pokemonName %>">
         <% } else { %>
-        <img class="pokemon-pic" src="<%= currentPokemon.sprites.other['official-artwork'].front_default %>" alt="<%= currentPokemon.name %>">
+        <img class="pokemon-pic" src="<%= currentPokemon.pokemonImg %>" alt="<%= currentPokemon.pokemonName %>">
         <% } %>
       </a>
       <img class="pokemon_podioum" src="assets/podium.png" alt="pokemon-podium">
       <section class="pokemon-stats">
         <section class="pokemon-hp">
           <img id="life" src="assets/red-heart.png" alt="leven">
-          <p><%= pokemonHP %></p>
+          <p><%= currentPokemon.pokemonHP %></p>
         </section>
         |
         <section class="pokemon-shield">
           <img id="shield" src="assets/shield.png" alt="verdediging">
-          <p><%= pokemonDefense %></p>
+          <p><%= currentPokemon.pokemonDefense %></p>
         </section>
       </section>
     </section>

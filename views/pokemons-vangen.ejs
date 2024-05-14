@@ -63,22 +63,22 @@
     </section>
     <section class="current-pokemon">
       <a href="huidige-pokemon">
-        <% if (currentPokemon.sprites.other['showdown'].front_default) { %>
-        <img class="pokemon-pic" src="<%= currentPokemon.sprites.other['showdown'].front_default %>" alt="<%= currentPokemon.name %>">
+        <% if (currentPokemon.pokemonGif) { %>
+        <img class="pokemon-pic" src="<%= currentPokemon.pokemonGif %>" alt="<%= currentPokemon.pokemonName %>">
         <% } else { %>
-        <img class="pokemon-pic" src="<%= currentPokemon.sprites.other['official-artwork'].front_default %>" alt="<%= currentPokemon.name %>">
+        <img class="pokemon-pic" src="<%= currentPokemon.pokemonImg %>" alt="<%= currentPokemon.pokemonName %>">
         <% } %>
       </a>
       <img class="pokemon_podioum" src="assets/podium.png" alt="pokemon-podium">
       <section class="pokemon-stats">
         <section class="pokemon-hp">
           <img id="life" src="assets/red-heart.png" alt="leven">
-          <p><%= pokemonHP %></p>
+          <p><%= currentPokemon.pokemonHP %></p>
         </section>
         |
         <section class="pokemon-shield">
           <img id="shield" src="assets/shield.png" alt="verdediging">
-          <p><%= pokemonDefense %></p>
+          <p><%= currentPokemon.pokemonDefense %></p>
         </section>
       </section>
     </section>
