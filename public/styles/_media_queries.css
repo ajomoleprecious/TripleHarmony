@@ -344,7 +344,7 @@
     }
 
     .ingelogd .battlefield article:nth-child(2) {
-        justify-content: center;
+        justify-content: end;
     }
 
     .ingelogd {
