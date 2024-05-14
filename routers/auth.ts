@@ -15,11 +15,11 @@ router.use(express.static('public'));
 // Nodemailer transporter
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
+    port: 587,
+    secure: false,
     auth: {
         user: "tripleharmony.ap@gmail.com",
-        pass: "ylgp voca gsuo mbot"
+        pass: "daph rlhq lzix gnxp"
     }
 });
 
@@ -165,7 +165,9 @@ router.post('/reset', async (req: Request, res: Response) => {
     try {
         // find user by email
         const user = await client.db("users").collection("usersAccounts").findOne({ email });
-        await client.db("users").collection("usersAccounts").updateOne({ email }, { $set: { password: "wachtwoord123" } });
+        // generate random password
+        const password = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        await client.db("users").collection("usersAccounts").updateOne({ email }, { $set: { password: password } });
         if (user) {
             // Constructing the email message
             const emailMessage = `
@@ -175,7 +177,7 @@ router.post('/reset', async (req: Request, res: Response) => {
                 <br>
                 <p>U heeft een verzoek ingediend om uw wachtwoord te resetten.</p>
                 <br>
-                <p> Uw tijdelijke wachtwoord is: <b style="color: red;">wachtwoord123</b></p>
+                <p> Uw tijdelijke wachtwoord is: <b style="color: red;">${password}</b></p>
                 <br>
                 <p>Wij raden u aan om uw wachtwoord zo snel mogelijk te wijzigen met deze <a href="https://tripleharmony.azurewebsites.net/pokemon-auth/change-password/${user._id}">link</a>.</p>
                 <br>
@@ -187,7 +189,7 @@ router.post('/reset', async (req: Request, res: Response) => {
                 <p>Het Triple Harmony-team</p>`;
             // Sending the email
             await sendMail(email, "Wachtwoord hersteld", emailMessage);
-            res.status(200).render('pokemon-auth-message', { title: "Wachtwoord resetten", message: "Een e-mail is verzonden naar uw e-mailadres met uw nieuwe wachtwoord." });
+            res.status(200).render('pokemon-auth-message', { title: "Wachtwoord resetten", message: "Een e-mail is verzonden naar uw e-mailadres met uw nieuwe tijdelijke wachtwoord." });
         }
         else {
             res.status(404).render('pokemon-auth-message', { title: "Wachtwoord resetten", message: "Er is geen gebruiker met het opgegeven e-mailadres." });
