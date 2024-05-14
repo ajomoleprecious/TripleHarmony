@@ -45,7 +45,9 @@ router.post("/", async (req: Request, res: Response) => {
   let pokemonList : any[] = [{ pokemonId : 25 , pokemonName : "pikachu", pokemonLevel : 1, pokemonHP : 35, pokemonAttack : 55, 
   pokemonDefense : 40, pokemonSpeed : 90, pokemonType : "electric", pokemonMoves : ["thundershock", "quick attack", "thunder wave", "thunderbolt"],
   pokemonImg : pikachuData.sprites.other["official-artwork"].front_default,
-  pokemonGif : pikachuData.sprites.other["showdown"].front_default }];
+  pokemonGif : pikachuData.sprites.other["showdown"].front_default,
+  pokemonBackImg : pikachuData.sprites.back_default,
+  pokemonBackGif : pikachuData.sprites.other["showdown"].back_default }];
  
   try{
     await client.db("users").collection("usersPokemons").insertOne({ _id: new ObjectId(userID), pokemons: pokemonList, currentPokemon: 25});
