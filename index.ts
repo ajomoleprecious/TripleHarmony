@@ -109,17 +109,21 @@ interface Player {
   waiting: boolean;
 }
 
-let players: Player[] = [];
+let players: any[] = [];
 
 
 let playersCount: number = 0;
 
 io.on('connection', (socket: any) => {
+  players.push(socket.id);
+  console.log(players);
   playersCount++;
   io.emit('updatePlayerCount', playersCount);
 
   // Handle disconnection
   socket.on('disconnect', () => {
+    players.splice(players.indexOf(socket.id), 1);
+    console.log(players);
     playersCount--;
     io.emit('updatePlayerCount', playersCount);
   });
