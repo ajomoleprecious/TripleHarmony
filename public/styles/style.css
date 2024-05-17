@@ -1048,7 +1048,7 @@ body.pokemon-bekijken h1 {
 }
 
 .battlefield img {
-  width: 100%;
+  width: 10rem;
   /*height: 10rem;*/
   /*image-rendering: pixelated;
   image-rendering: crisp-edges;*/ /*Werkt niet*/
@@ -1584,7 +1584,6 @@ body.battler section>button .fa-solid.fa-question {
   width: 5rem;
   height: 5rem;
   border-radius: 10rem;
-  border: 5px var(--pokeBall-color) solid;
   cursor: none;
 }
 
