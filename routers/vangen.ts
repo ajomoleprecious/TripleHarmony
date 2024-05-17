@@ -16,7 +16,9 @@ router.get("/", async (req: Request, res: Response) => {
     const avatar = res.locals.currentAvatar;
     const currentPokemon = res.locals.currentPokemon;
     const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
-    res.render("pokemons-vangen", { currentPokemon, avatar});
+    if (!user) return res.status(404).send("User not found");
+    const userPokeArray = user.pokemons;
+    res.render("pokemons-vangen", { currentPokemon, avatar, userPokeArray });
 });
 
 router.post("/change-avatar/:avatar", async (req, res) => {
