@@ -6,13 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="/assets/pokemonICO.ico" type="image/x-icon">
   <title>Pokémon vangen</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="styles/reset.css">
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/_media_queries.css">
   <!--SCRIPTS-->
   <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
   <script defer src="/scripts/general.js"></script>
   <script defer src="/scripts/currentpokemon.js"></script>
   <script defer src="/scripts/vangen.js"></script>
@@ -26,16 +29,23 @@
       </section>
       <section id="nav-menus" class="nav-container">
         <ul class="">
-          <li><abbr title="Pokémons&nbsp;bekijken"><a href="/pokemons-bekijken"><img src="/assets/nav-icons-black/bekijken.png" alt=""></a></abbr></li>
-          <li><abbr title="Pokémons&nbsp;vergelijken"><a href="/pokemon-vergelijken"><img src="/assets/nav-icons-black/vergelijken.png" alt=""></a></abbr></li>
-          <li class="active"><abbr title="Pokémons&nbsp;vangen"><a href="/pokemons-vangen"><img src="/assets/nav-icons-red/vangen.png" alt=""></a></abbr></li>
-          <li><abbr title="Huidige&nbsp;pokémon"><a href="/huidige-pokemon"><img src="/assets/nav-icons-black/huidige.png" alt=""></a></abbr>
+          <li><abbr title="Pokémons&nbsp;bekijken"><a href="/pokemons-bekijken"><img
+                  src="/assets/nav-icons-black/bekijken.png" alt=""></a></abbr></li>
+          <li><abbr title="Pokémons&nbsp;vergelijken"><a href="/pokemon-vergelijken"><img
+                  src="/assets/nav-icons-black/vergelijken.png" alt=""></a></abbr></li>
+          <li class="active"><abbr title="Pokémons&nbsp;vangen"><a href="/pokemons-vangen"><img
+                  src="/assets/nav-icons-red/vangen.png" alt=""></a></abbr></li>
+          <li><abbr title="Huidige&nbsp;pokémon"><a href="/huidige-pokemon"><img
+                  src="/assets/nav-icons-black/huidige.png" alt=""></a></abbr>
           </li>
-          <li><abbr title="Pokémon&nbsp;battler"><a href="/pokemon-battler"><img src="/assets/nav-icons-black/battler.png" alt=""></a></abbr>
+          <li><abbr title="Pokémon&nbsp;battler"><a href="/pokemon-battler"><img
+                  src="/assets/nav-icons-black/battler.png" alt=""></a></abbr>
           </li>
-          <li><abbr title="Wie&nbsp;is&nbsp;deze&nbsp;pokémon?"><a href="/who's-that-pokemon"><img src="/assets/nav-icons-black/who.png" alt=""></a></abbr>
+          <li><abbr title="Wie&nbsp;is&nbsp;deze&nbsp;pokémon?"><a href="/who's-that-pokemon"><img
+                  src="/assets/nav-icons-black/who.png" alt=""></a></abbr>
           </li>
-          <li><abbr title="Pokémons&nbsp;tracker"><a href="/pokemon-finder"><img src="/assets/nav-icons-black/tracker.png" alt=""></a></abbr>
+          <li><abbr title="Pokémons&nbsp;tracker"><a href="/pokemon-finder"><img
+                  src="/assets/nav-icons-black/tracker.png" alt=""></a></abbr>
           </li>
         </ul>
       </section>
@@ -44,10 +54,10 @@
           <li class="hamMenu"><button class="btn btn-dark"><i class="fa-solid fa-bars"></i></button></li>
           <li><a href="#" data-bs-toggle="modal" data-bs-target="#chooseAvatar"><button>
                 <% if (avatar) {%>
-                <img src="<%= avatar %>" alt="my-avatar">
-                <% } else { %>
-                <i class="fa-solid fa-question"></i>
-                <% } %>
+                  <img src="<%= avatar %>" alt="my-avatar">
+                  <% } else { %>
+                    <i class="fa-solid fa-question"></i>
+                    <% } %>
               </button></a></li>
           <li><a href="/pokemon-auth/logout" class="fa-solid fa-right-from-bracket btn btn-dark"></a>
           </li>
@@ -64,21 +74,25 @@
     <section class="current-pokemon">
       <a href="huidige-pokemon">
         <% if (currentPokemon.pokemonGif) { %>
-        <img class="pokemon-pic" src="<%= currentPokemon.pokemonGif %>" alt="<%= currentPokemon.pokemonName %>">
-        <% } else { %>
-        <img class="pokemon-pic" src="<%= currentPokemon.pokemonImg %>" alt="<%= currentPokemon.pokemonName %>">
-        <% } %>
+          <img class="pokemon-pic" src="<%= currentPokemon.pokemonGif %>" alt="<%= currentPokemon.pokemonName %>">
+          <% } else { %>
+            <img class="pokemon-pic" src="<%= currentPokemon.pokemonImg %>" alt="<%= currentPokemon.pokemonName %>">
+            <% } %>
       </a>
       <img class="pokemon_podioum" src="assets/podium.png" alt="pokemon-podium">
       <section class="pokemon-stats">
         <section class="pokemon-hp">
           <img id="life" src="assets/red-heart.png" alt="leven">
-          <p><%= currentPokemon.pokemonHP %></p>
+          <p>
+            <%= currentPokemon.pokemonHP %>
+          </p>
         </section>
         |
         <section class="pokemon-shield">
           <img id="shield" src="assets/shield.png" alt="verdediging">
-          <p><%= currentPokemon.pokemonDefense %></p>
+          <p>
+            <%= currentPokemon.pokemonDefense %>
+          </p>
         </section>
       </section>
     </section>
@@ -101,14 +115,18 @@
           <!--zandloper-->
           <img id="hourglass" src="" alt="">
           <p id="countdown"></p>
-          <p id="poke-title"></p>
+            <p id="poke-title">
+
+            </p>
         </div>
         <!-- arrow verdwijnt vanaf 800px -->
-        <a class="poke-catch-container" href="/pokemon-battler-vs-pc"><img class="poke-catch-img hover-animation" src="/assets/pokemon.png" alt="te-vangen"></a>
+        <a class="poke-catch-container" href=""><img class="poke-catch-img hover-animation"
+            src="/assets/pokemon.png" alt="te-vangen"></a>
       </article>
       <article class="poke-catch-buttons">
-        <button id="catch-button" type="submit"><img src="/assets/scoop-net.png" alt="net"></button>
-        <a data-bs-target="#loslaten" data-bs-toggle="modal" href="#"><img class="poke-catch-ball" src="/assets/pokemon_logo.png">
+        <button onclick="" id="catch-button" type="submit"><img src="/assets/scoop-net.png" alt="net"></button>
+        <a data-bs-target="#loslaten" data-bs-toggle="modal" href="#">
+          <img class="poke-catch-ball" src="/assets/pokemon_logo.png">
         </a>
       </article>
     </section>
@@ -172,8 +190,143 @@
         </section>
       </section>
     </section>
-    <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i class="fa-solid fa-question"></i></button></section>
+    <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i
+          class="fa-solid fa-question"></i></button></section>
   </main>
+  <script>
+
+
+///////////////////////////////////////////////////////////////////////////////
+//-----------------------WILLEKEURIGE AFBEELDINGEN--------------------------//
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function generateRandomPokemonDataUrl() {
+    const randomPokemonId = getRandomInt(1, 101);
+    return `https://pokeapi.co/api/v2/pokemon/${randomPokemonId}`;
+}
+
+const imageElements = document.getElementsByClassName('poke-catch-img');
+const titleElement = document.getElementById('poke-title');
+const countdownElement = document.getElementById('countdown');
+const hourglassElement = document.getElementById('hourglass');
+const rouletteElement = document.getElementsByClassName('roulette-box')[0];
+const catchElement = document.getElementById('catch-button');
+let count = 8;
+const linkElement = document.getElementsByClassName('poke-catch-container')[0];
+
+// Functie om elke seconde een nieuwe willekeurige afbeelding en titel weer te geven
+async function changeImageAndTitle() {
+    const interval = setInterval(async () => {
+        const pokemonDataUrl = generateRandomPokemonDataUrl();
+        try {
+            const response = await fetch(pokemonDataUrl);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const pokemonData = await response.json();
+            const imageUrl = pokemonData.sprites.other['official-artwork'].front_default;
+            const pokemonName = pokemonData.name;
+            Array.from(imageElements).forEach((element) => {
+                element.src = imageUrl;
+            });
+            if (count <= 0) {
+                clearInterval(interval);
+                countdownElement.style.display = 'none';
+            }
+            if (count === 0) {
+                hourglassElement.style.display = 'none';
+                rouletteElement.style.animation = 'none';
+                titleElement.innerText = pokemonName;
+                linkElement.style.pointerEvents = 'auto';
+                
+                let pokemonsArray = <%- JSON.stringify(userPokeArray) %>;
+                for (let i = 0; i < pokemonsArray.length; i++) {
+                    if (pokemonsArray[i].pokemonName === pokemonName) {
+                        console.log('pokemon already in array');
+                        // Als de naam overeenkomt, maak de rand van de poke-catch-ball groen
+                        document.querySelector('.poke-catch-ball').style.border = '5px solid limegreen';
+                    }
+                    else {
+                      console.log('pokemon not in array');
+                      // Zo niet, maak de rand van de poke-catch-ball rood
+                      document.querySelector('.poke-catch-ball').style.border = '5px solid red';
+                      linkElement.href = `/pokemon-battler-vs-pc/${pokemonName}`;
+                    }
+                }
+            }
+            countdownElement.innerText = count;
+            count--;
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }, 1000);
+}
+
+catchElement.addEventListener('mouseover', function () {
+    if (catchElement.classList.contains('clicked')) {
+        catchElement.style.animation = 'swing 1s infinite';
+    }
+    else {
+        catchElement.style.animation = 'swing 1s infinite';
+    }
+});
+
+catchElement.addEventListener('mouseout', function () {
+    catchElement.style.animation = 'none';
+});
+
+
+
+catchElement.addEventListener('click', function (event) {
+    event.preventDefault();
+    linkElement.style.pointerEvents = 'none';
+    catchElement.style.animation = 'catch 1s';
+    titleElement.innerText = '';
+    hourglassElement.src = '../assets/hourglass.gif';
+    hourglassElement.alt = 'Hourglass Image';
+    hourglassElement.style.animation = 'spin 2s linear infinite';
+    rouletteElement.style.animation = 'spin 9s linear infinite';
+    count = 8;
+    countdownElement.innerText = count;
+    countdownElement.style.display = 'block';
+    changeImageAndTitle();
+    hourglassElement.style.display = 'block';
+    catchElement.classList.add('clicked');
+});
+    //const pokemonTocheck = require('./vangen.js');
+    //import { pokemonTocheck } from '/scripts/vangen.js';
+    //console.log(pokemonTocheck);
+    //const titleElement = document.getElementById('poke-title');
+    
+    // Wacht tot de pagina geladen is
+    /*document.addEventListener('DOMContentLoaded', function () {
+      
+      // Functie om de titel na 8 seconden in te stellen
+      /*setTimeout(function() {
+        
+        /*; // Veronderstel dat dit de array is met de Pokémon-namen
+  
+        // Loop door de gebruikers-Pokémon-array
+        for (let pokemon of userPokeArray) {
+          // Controleer of de naam overeenkomt met de titel
+          if (pokemon.pokemonName === titleElement.innerText) {
+            // Als de naam overeenkomt, maak de rand van de poke-catch-ball groen
+            console.log("groen");
+            document.querySelector('.poke-catch-ball').style.border = '5px solid limegreen';
+          } else {
+            // Zo niet, maak de rand van de poke-catch-ball rood
+            document.querySelector('.poke-catch-ball').style.border = '5px solid red';
+            console.log("rood");
+          }
+        }
+      }, 8000); // 8000 milliseconden (8 seconden) 
+    });*/
+  </script>
+
 </body>
 
 </html>
