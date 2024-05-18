@@ -187,7 +187,7 @@ async function getRandomPokemon() {
         .then(response => response.json())
         .then(data => {
             randomPokemonName.innerText = data.pokeNaam;
-            randomPokemonID.href = `/pokemon-battler-vs-pc/${data.pokemonID}`;
+            randomPokemonID.href = `/pokemon-battler-vs-pc/${data.pokeNaam.toLowerCase()}`;
             randomPokemonImage.src = data.pokeURL;
             modal.show();
         })
