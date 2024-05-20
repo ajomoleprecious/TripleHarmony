@@ -527,7 +527,7 @@ body.pokemon-bekijken h1 {
   height: 100%;
 }
 
-.pokemon-list {
+/*.pokemon-list {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -536,23 +536,24 @@ body.pokemon-bekijken h1 {
   height: 100%;
   width: 100%;
   overflow-y: scroll;
-}
-
-.pokemon-list::-webkit-scrollbar {
-  display: none;
-}
+}*/
 
 .pokemon-list>ul {
   margin: 0;
   padding: 1rem;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
   gap: 1.5rem;
   justify-content: center;
   align-items: center;
   align-content: flex-start;
   height: 100%;
   width: 100%;
+  overflow-y: scroll;
+}
+.pokemon-list>ul::-webkit-scrollbar {
+  display: none;
 }
 
 .ingelogd .pokemon-list>ul>li {
