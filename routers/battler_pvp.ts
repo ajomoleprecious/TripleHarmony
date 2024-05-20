@@ -13,11 +13,12 @@ router.use(express.static('public'));
 // http://localhost:3000/pokemon-battler
 router.get("/", (req: Request, res: Response) => {
   // get full URL
-  const url = 'https' + '://' + req.get('host') + req.originalUrl;
-  const roomID = req.query.roomID ? `${url}?roomID=${req.query.roomID}` : `${url}?roomID=${Math.floor(Math.random() * 1000)}`;
+  const url = req.get('host') + req.originalUrl;
+  const roomID = req.query.roomID ? `${url}?roomID=${req.query.roomID}` : `${url}?roomID=${Math.floor(Math.random() * 2 + 1)}`;
   const avatar = res.locals.currentAvatar;
   res.render("pokemon-battler", { roomID, avatar });
 });
+
 
 router.post("/change-avatar/:avatar", async (req, res) => {
   res.locals.avatar = req.params.avatar;

@@ -19,7 +19,7 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
                 if (decodedToken.exp - now < 1800) {
                     // Refresh token
                     const newToken = jwt.sign({ id: decodedToken.id }, process.env.SECRET_KEY , { expiresIn: maxAge });
-                    res.cookie('jwt', newToken, { httpOnly: true, maxAge: maxAge * 1000 });
+                    res.cookie('jwt', newToken, { httpOnly: true, maxAge: maxAge * 1000, secure: true });
                 }
                 next();
             }

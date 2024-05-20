@@ -127,7 +127,7 @@ router.post('/register', async (req: Request, res: Response) => {
     }
 });
 
-
+// ( /pokemon-auth/login )
 router.post('/login', async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
