@@ -65,7 +65,7 @@
         <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
       </section>
       <select class="form-select form-select-lg mb-3" name="pokemon_type" aria-label="Large select example">
-        <option selected>Pokémon type</option>
+        <option value="none" selected>Kies een type</option>
         <hr class="dropdown-sectionider">
         <option value="normal">Normaal</option>
         <option value="fighting">Vechten</option>
@@ -84,13 +84,13 @@
         <option value="dragon">Draak</option>
         <option value="dark">Donker</option>
         <option value="fairy">Fee</option>
+        <option value="grass">Gras</option>
       </select>
       <section class="form-floating mb-3">
         <select class="form-select form-select-sm" name="sort_by" id="floatingSelect" aria-label="Floating label select example">
           <option value="name" selected>Naam (alfabetisch)</option>
-          <option value="pokemon_nr">Pokémon nummer</option>
           <option value="weight">Gewicht</option>
-          <option value="length">Lengte</option>
+          <option value="height">Lengte</option>
         </select>
         <label for="floatingSelect">Sorteer op:</label>
       </section>
@@ -119,7 +119,7 @@
     <section class="pokemon-list">
       <ul>
         <% for (let i = 0; i < evolutionChainPokemons.length; i++) { %>
-        <li data-bs-toggle="modal" data-bs-target="#detail" onclick="showDetails(<%= evolutionChainIds[i] %>, <%= evolutionChainPokemons[i].id %>)">
+        <li data-bs-toggle="modal" data-bs-target="#detail" onclick="showDetails(<%= evolutionChainPokemons[i].id %>)">
           <a data-bs-toggle="modal" data-bs-target="#detail" href="#">
             <% if (evolutionChainPokemons[i].sprites.other['showdown'].front_default) { %>
             <img src="<%= evolutionChainPokemons[i].sprites.other['showdown'].front_default %>" alt="<%= evolutionChainPokemons[i].name %>">

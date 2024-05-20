@@ -80,7 +80,7 @@ async function DetailOfPokemon(name) {
         });
 }
 
-async function showDetails(evolutionId, pokemonId) {
+async function showDetails(pokemonId) {
 
 
     await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
@@ -95,7 +95,14 @@ async function showDetails(evolutionId, pokemonId) {
             moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${data.name}`;
             detailImg.src = data.sprites.other['official-artwork'].front_default;
         });
-    // Call the function to fetch and display the evolution chain
+    // Get the evolution chain ID from the URL
+    let evolutionId;
+    await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`)
+    .then(response => response.json())
+    .then(data => {
+        evolutionId = data.evolution_chain.url.toString().split('/')[6];
+    });
+
     await createPokemonList(evolutionId);
 }
 
