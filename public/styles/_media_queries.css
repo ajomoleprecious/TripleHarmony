@@ -213,7 +213,7 @@
 @media (max-width: 475px) {
     aside.active {
         position: fixed;
-        top: 200px;
+        top: 180px;
     }
 
     .aanvallen li {
@@ -343,8 +343,8 @@
         width: 7rem;
     }
 
-    .ingelogd .battlefield article:nth-child(2) {
-        justify-content: end;
+    .ingelogd .battlefield article:nth-child(3) {
+        justify-content: start;
     }
 
     .ingelogd {

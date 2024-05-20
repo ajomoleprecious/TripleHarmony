@@ -1056,9 +1056,10 @@ body.pokemon-bekijken h1 {
 }
 
 .battlefield article {
-  width: 50%;
+  width: 60%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .battlefield article:nth-child(2) {
@@ -1066,6 +1067,7 @@ body.pokemon-bekijken h1 {
   align-items: center;
   justify-content: end;
   gap: 1rem;
+  width: 40%;
 }
 
 .pokemon-damage {
@@ -1092,12 +1094,13 @@ body.pokemon-bekijken h1 {
   align-items: center;
   gap: 1rem;
   justify-content: center;
+  width: 40%;
 }
 
 .battlefield .progress,
 .progress-bar {
   height: 30px;
-  width: 25%;
+  width: 50%;
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -1133,7 +1136,7 @@ body.pokemon-bekijken h1 {
   border: var(--black) 1px solid;
   border-radius: 2rem;
   text-align: center;
-  padding: .5rem 1rem;
+  padding: .5rem .2rem;
   width: 40%;
   background-color: var(--orange);
   box-shadow: var(--black) 2px 2px 4px;
