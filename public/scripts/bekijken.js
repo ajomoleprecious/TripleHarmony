@@ -22,19 +22,24 @@ const typeColors = {
     fairy: "var(--fairy)"
 };
 
-// get the value from local storage
-if (localStorage.getItem('amountOfPokemons')) {
-    amountOfpokemons.value = localStorage.getItem('amountOfPokemons');
+// check if amountOfPokemons exist
+if (amountOfpokemons === null) {
 }
 else {
-    amountOfpokemons.value = 10;
+    // get the value from local storage
+    if (localStorage.getItem('amountOfPokemons')) {
+        amountOfpokemons.value = localStorage.getItem('amountOfPokemons');
+    }
+    else {
+        amountOfpokemons.value = 10;
+    }
+    // on change
+    amountOfpokemons.addEventListener('change', function () {
+        // store the value in local storage
+        localStorage.setItem('amountOfPokemons', amountOfpokemons.value);
+        listForm.submit();
+    });
 }
-// on change
-amountOfpokemons.addEventListener('change', function () {
-    // store the value in local storage
-    localStorage.setItem('amountOfPokemons', amountOfpokemons.value);
-    listForm.submit();
-});
 
 
 let previousButton = document.getElementById('previous');
@@ -98,10 +103,10 @@ async function showDetails(pokemonId) {
     // Get the evolution chain ID from the URL
     let evolutionId;
     await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`)
-    .then(response => response.json())
-    .then(data => {
-        evolutionId = data.evolution_chain.url.toString().split('/')[6];
-    });
+        .then(response => response.json())
+        .then(data => {
+            evolutionId = data.evolution_chain.url.toString().split('/')[6];
+        });
 
     await createPokemonList(evolutionId);
 }
@@ -176,6 +181,8 @@ window.onload = function () {
     // Get the current page number from the URL
     const urlParams = new URLSearchParams(window.location.search);
     const currentPage = parseInt(urlParams.get('page')) || 0;
-    listForm.querySelector('input[name="page"]').value = currentPage;
+    if (amountOfpokemons !== null) {
+        listForm.querySelector('input[name="page"]').value = currentPage;
+    }
     localStorage.setItem('page', currentPage);
 }

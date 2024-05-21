@@ -21,6 +21,7 @@ router.use(express.static('public'));
 
 // Route handler for fetching and rendering Pokémon data
 router.get("/", async (req: Request, res: Response) => {
+    let isFilter = false;
     // Extract query parameters or set defaults
     const page = req.query.page ? parseInt(req.query.page as string) : 0;
     const amount = req.query.amount ? parseInt(req.query.amount as string) : 10;
@@ -59,6 +60,7 @@ router.get("/", async (req: Request, res: Response) => {
             hasPreviousPage,
             currentPokemon,
             avatar,
+            isFilter
         });
 
     } catch (error) {
@@ -69,6 +71,7 @@ router.get("/", async (req: Request, res: Response) => {
 
 // Route handler for filtering and fetching Pokémon data
 router.get("/filter", async (req: Request, res: Response) => {
+    let isFilter = true;
     // Extract query parameters or set defaults
     const page = req.query.page ? parseInt(req.query.page as string) : 0;
     //const amount = req.query.amount ? parseInt(req.query.amount as string) : 10;
@@ -89,6 +92,7 @@ router.get("/filter", async (req: Request, res: Response) => {
                 hasPreviousPage: false,
                 currentPokemon,
                 avatar,
+                isFilter
             });
             return;
         }
@@ -122,6 +126,7 @@ router.get("/filter", async (req: Request, res: Response) => {
             hasPreviousPage: false,
             currentPokemon,
             avatar,
+            isFilter
         });
     }
     catch (error) {
