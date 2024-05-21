@@ -81,14 +81,29 @@ async function exit() {
   }
 
 }
-
+export const pokemonsMaxEvolution : any[] = [];
 // Start the app
 async function startApp() {
   try {
     await client.connect().then(() => {
       mongoose.connect(uri);     
-    }).then(() => {
+    }).then(async () => {
       console.log("Connected to MongoDB");
+      // load data from db
+      await client.db("users").collection("PokemonsMaxStages").find().toArray().then((data) => {
+        pokemonsMaxEvolution.push(...data);
+      });
+      // find duplicates in data list data by field id and log them
+      /*let duplicates = data.reduce((acc: any, current: any) => {
+        if (acc[current.id]) {
+          acc[current.id]++;
+        } else {
+          acc[current.id] = 1;
+        }
+        return acc;
+      }, {});
+      console.log(duplicates);*/
+
       server.listen(app.get('port'), async () => {
         console.log('[server running on: http://localhost:' + app.get('port') + ']');
       });

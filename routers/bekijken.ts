@@ -3,7 +3,7 @@ import { Request, Response, Router } from "express";
 import { verifyUser } from "../middleware/verifyUser";
 import { currentPokemon } from "../middleware/currentPokemon";
 import { currentAvatar } from "../middleware/userAvatar";
-import { client } from "../index";
+import { client, pokemonsMaxEvolution } from "../index";
 import express from "express";
 
 import axios from 'axios';
@@ -28,32 +28,39 @@ router.get("/", async (req: Request, res: Response) => {
     try {
         // Get current pokemon and user's avatar
         const currentPokemon = res.locals.currentPokemon;
-        const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
         const avatar = res.locals.currentAvatar;
 
-        // Fetch Pokémons evolution chains
-        const { evolutionChainIds, hasNextPage, hasPreviousPage } = await fetchEvolutionChains(page, amount);
+        // Log the relevant portion of pokemonsMaxEvolution based on page and amount
+        const start = page * amount;
+        const end = start + amount;
+        const paginatedPokemons = pokemonsMaxEvolution.slice(start, end);
+        const evolutionChainIds: number[] = [];
+        for (let i = start; i < end; i++) {
+            evolutionChainIds.push(i + 1);
+        }
+        // set hasPrevious to true if paginatedPokemons has previous data
+        const hasPreviousPage = start > 0;
+        // set hasNext to true if paginatedPokemons has next data
+        const hasNextPage = end < pokemonsMaxEvolution.length;
 
+        // Add periodically to update 
+        // Fetch Pokémons evolution chains
+        //const { evolutionChainIds, hasNextPage, hasPreviousPage } = await fetchEvolutionChains(page, amount);
         // Fetch Pokémons by evolution chains
-        const evolutionChainPokemons = await fetchPokemonsByEvolutionChains(evolutionChainIds);
+        //const evolutionChainPokemons = await fetchPokemonsByEvolutionChains(evolutionChainIds);
+        //await client.db('users').collection('PokemonsMaxStages').insertMany(evolutionChainPokemons);
 
         // Render the page with fetched data
         res.status(200).render('pokemons-bekijken', {
             pageNumber: page + 1,
             evolutionChainIds,
-            evolutionChainPokemons,
+            evolutionChainPokemons: paginatedPokemons,
             hasNextPage,
             hasPreviousPage,
             currentPokemon,
             avatar,
         });
-        if (hasPreviousPage) {
-            prefetchPreviousPageData(page - 1, amount);
-        }
-        // Prefetch next page data in the background
-        if (hasNextPage) {
-            prefetchNextPageData(page + 1, amount);
-        }
+
     } catch (error) {
         console.error(error);
         res.status(500).render('error', { errorMessage: "Er is een fout opgetreden bij het ophalen van de Pokémon gegevens." });
@@ -64,18 +71,53 @@ router.get("/", async (req: Request, res: Response) => {
 router.get("/filter", async (req: Request, res: Response) => {
     // Extract query parameters or set defaults
     const page = req.query.page ? parseInt(req.query.page as string) : 0;
-    const amount = req.query.amount ? parseInt(req.query.amount as string) : 10;
-
+    //const amount = req.query.amount ? parseInt(req.query.amount as string) : 10;
+    const pokemonType = req.query.pokemon_type ? req.query.pokemon_type as string : "";
+    const sortBy = req.query.sort_by ? req.query.sort_by as string : "";
+    const pokemonName = req.query.pokemon_name ? req.query.pokemon_name as string : "";
     try {
         // Get current pokemon and user's avatar
         const currentPokemon = res.locals.currentPokemon;
-        const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
         const avatar = res.locals.currentAvatar;
+        // Get pokemon by name
+        if (pokemonName !== "") {
+            const pokemon = await fetchPokemonByName(pokemonName);
+            res.render('pokemons-bekijken', {
+                pageNumber: page + 1,
+                evolutionChainPokemons: [pokemon],
+                hasNextPage: false,
+                hasPreviousPage: false,
+                currentPokemon,
+                avatar,
+            });
+            return;
+        }
+        const filteredPokemons: any[] = [];
+        // Filter pokemonsMaxEvolution by type
+        if (pokemonType !== "none") {
+            for (let i = 0; i < pokemonsMaxEvolution.length; i++) {
+                pokemonsMaxEvolution[i].types.forEach((type: any) => {
+                    if (type.type.name === pokemonType) {
+                        filteredPokemons.push(pokemonsMaxEvolution[i]);
+                    }
+                });
+            }
+        }
+        else {
+            filteredPokemons.push(...pokemonsMaxEvolution);
+        }
+        // Sort filteredPokemons by sortBy
+        if (sortBy === "name") {
+            filteredPokemons.sort((a, b) => a.name.localeCompare(b.name));
+        } else if (sortBy === "height") {
+            filteredPokemons.sort((a, b) => a.height - b.height);
+        } else if (sortBy === "weight") {
+            filteredPokemons.sort((a, b) => a.weight - b.weight);
+        }
 
         res.render('pokemons-bekijken', {
             pageNumber: page + 1,
-            evolutionChainIds: [],
-            evolutionChainPokemons: [],
+            evolutionChainPokemons: filteredPokemons,
             hasNextPage: false,
             hasPreviousPage: false,
             currentPokemon,
@@ -99,22 +141,16 @@ router.post("/change-avatar/:avatar", async (req, res) => {
     }
 });
 
-
-
-// Helper functions
-async function getUserData(userId: string) {
-    return await client.db('users').collection('usersPokemons').findOne({ _id: new ObjectId(userId) });
-}
-
-async function fetchEvolutionChains(page: number, amount: number) {
+// Helper functions for fetching Pokémon evolution chains and Pokémons by evolution chains
+/*async function fetchEvolutionChains(page: number, amount: number) {
     const response = await axios.get(`https://pokeapi.co/api/v2/evolution-chain/?limit=${amount}&offset=${page * amount}`);
     const evolutionChainIds: number[] = response.data.results.map((item: any) => item.url.split('/')[6]);
     const hasNextPage = !!response.data.next;
     const hasPreviousPage = !!response.data.previous;
     return { evolutionChainIds, hasNextPage, hasPreviousPage };
-}
+}*/
 
-async function fetchPokemonsByEvolutionChains(evolutionChainIds: number[]) {
+/*async function fetchPokemonsByEvolutionChains(evolutionChainIds: number[]) {
     const pokemons: any[] = [];
     const chainIDs = evolutionChainIds;
     for (const id of chainIDs) {
@@ -143,11 +179,11 @@ async function fetchPokemonsByEvolutionChains(evolutionChainIds: number[]) {
         pokemons.push(pokemon);
     }
     return pokemons;
-}
+}*/
 
 
 
-async function prefetchNextPageData(page: number, amount: number) {
+/*async function prefetchNextPageData(page: number, amount: number) {
     try {
         const { evolutionChainIds } = await fetchEvolutionChains(page, amount);
         await fetchPokemonsByEvolutionChains(evolutionChainIds);
@@ -163,18 +199,9 @@ async function prefetchPreviousPageData(page: number, amount: number) {
     } catch (error) {
         console.error(error);
     }
-}
+}*/
 
 // Function to fetch the last Pokémon from an evolution chain
-async function getLastPokemonFromChain(id: number): Promise<string> {
-    const response = axios.get(`https://pokeapi.co/api/v2/evolution-chain/${id}`);
-    let chain = (await response).data.chain;
-    while (chain.evolves_to.length > 0) {
-        chain = chain.evolves_to[0];
-    }
-    return chain.species.name;
-}
-
 // Function to fetch Pokémon data by name
 async function fetchPokemonByName(name: string) {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
