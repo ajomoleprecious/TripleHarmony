@@ -891,8 +891,6 @@ body.pokemon-bekijken h1 {
 
 .left_pokemon img,
 .right_pokemon img {
-  margin: 2rem 0 2rem 0;
-  width: 300px;
   height: 250px;
 }
 
@@ -973,6 +971,11 @@ body.pokemon-bekijken h1 {
 
 .progress {
   width: 100%;
+}
+
+#test1{
+  width: 30px;
+  height: auto;
 }
 
 /* POKEMON SUBMENU */
