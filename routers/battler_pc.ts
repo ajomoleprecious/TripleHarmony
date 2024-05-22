@@ -20,25 +20,27 @@ router.get("/", (req: Request, res: Response) => {
 
 router.get("/:pokemonToBattle", async (req: Request, res: Response) => {
   const avatar = res.locals.currentAvatar;
-  const pokemonToBattle = req.params.pokemonToBattle;
-  const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonToBattle}`);
-  const pokemonToBattleData = pokemonResponse.data;
   const currentPokemon = res.locals.currentPokemon;
   try {
+    const pokemonToBattle = req.params.pokemonToBattle;
+    const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonToBattle}`);
+    const pokemonToBattleData = pokemonResponse.data;
     res.status(200).render("pokemon-battler-vs-pc", { pokemonToBattleData, currentPokemon, avatar });
   }
-  catch (error: any) {
+  catch{
+    res.status(404).render("error", {errorMessage : "Er was een error opgetreden bij het ophalen van een pokemon gegevens."});
   }
+  
 });
 
 router.post("/change-avatar/:avatar", async (req, res) => {
   res.locals.avatar = req.params.avatar;
   try {
-      await client.db("users").collection("usersAvatars").updateOne({ _id: res.locals.user._id }, { $set: { avatar: res.locals.avatar } }, { upsert: true });
-      res.status(200).json({ message: "Avatar is succesvol gewijzigd." });
+    await client.db("users").collection("usersAvatars").updateOne({ _id: res.locals.user._id }, { $set: { avatar: res.locals.avatar } }, { upsert: true });
+    res.status(200).json({ message: "Avatar is succesvol gewijzigd." });
   }
   catch (err) {
-      console.error(err);
+    console.error(err);
   }
 });
 
