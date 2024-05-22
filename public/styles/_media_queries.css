@@ -352,6 +352,25 @@
         width: 90vw;
         margin-top: 1rem;
     }
+
+    .ingelogd #vergelijken-HP-icon{
+        width: 20px;
+        height: auto;
+        margin: auto;
+      }
+      
+      .ingelogd #vergelijken-aanval-icon{
+        width: 25px;
+        height: auto;
+        margin: auto;
+      }
+      
+      .ingelogd #vergelijken-defence-icon{
+        width: 20px;
+        height: auto;
+        margin: auto;
+      }
+      
 /*
     .pokemonToGuess {
         height: 80vh;
