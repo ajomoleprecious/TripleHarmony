@@ -973,7 +973,17 @@ body.pokemon-bekijken h1 {
   width: 100%;
 }
 
-#test1{
+#vergelijken-HP-icon{
+  width: 25px;
+  height: auto;
+}
+
+#vergelijken-aanval-icon{
+  width: 35px;
+  height: auto;
+}
+
+#vergelijken-defence-icon{
   width: 30px;
   height: auto;
 }
