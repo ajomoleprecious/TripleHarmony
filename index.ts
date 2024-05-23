@@ -28,7 +28,7 @@ app.set('view engine', 'ejs');
 // Set the port for the app
 app.set('port', process.env.PORT || 3000);
 // Parse JSON bodies for this app
-app.use(express.json());
+app.use(express.json({ limit: '1mb' }));
 // Parse URL-encoded bodies for this app
 app.use(express.urlencoded({ extended: true }));
 // Serve static files from the 'public' directory
