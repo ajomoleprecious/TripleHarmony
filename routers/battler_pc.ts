@@ -23,9 +23,17 @@ router.get("/:pokemonToBattle", async (req: Request, res: Response) => {
   const currentPokemon = res.locals.currentPokemon;
   try {
     const pokemonToBattle = req.params.pokemonToBattle;
-    const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonToBattle}`);
-    const pokemonToBattleData = pokemonResponse.data;
-    res.status(200).render("pokemon-battler-vs-pc", { pokemonToBattleData, currentPokemon, avatar });
+    const pokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonToBattle}`);
+    const pokemonData = await pokemonResponse.json();
+    const pokemonToBattleData = pokemonData;
+    let pokemonImg;
+    if(pokemonToBattleData.sprites.other["showdown"].front_default){
+      pokemonImg = pokemonToBattleData.sprites.other["showdown"].front_default;
+    }
+    else{
+      pokemonImg = pokemonToBattleData.sprites.other["official-artwork"].front_default;
+    }
+    res.status(200).render("pokemon-battler-vs-pc", { pokemonToBattleData, pokemonImg, currentPokemon, avatar });
   }
   catch{
     res.status(404).render("error", {errorMessage : "Er was een error opgetreden bij het ophalen van een pokemon gegevens."});
