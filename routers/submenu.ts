@@ -50,7 +50,7 @@ router.post("/", async (req: Request, res: Response) => {
   pokemonBackGif : pikachuData.sprites.other["showdown"].back_default }];
  
   try{
-    await client.db("users").collection("usersPokemons").insertOne({ _id: new ObjectId(userID), pokemons: pokemonList, currentPokemon: 25});
+    await client.db("users").collection("usersPokemons").insertOne({ _id: userID, pokemons: pokemonList, currentPokemon: 25 });
     res.locals.pokemonID = 25;
     res.status(200).json({ message: "Pikachu is toegevoegd aan je lijst van pokemons." });
   }

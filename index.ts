@@ -90,9 +90,9 @@ async function startApp() {
     }).then(async () => {
       console.log("Connected to MongoDB");
       // load data from db
-      await client.db("users").collection("PokemonsMaxStages").find().toArray().then((data) => {
+      /*await client.db("users").collection("PokemonsMaxStages").find().toArray().then((data) => {
         pokemonsMaxEvolution.push(...data);
-      });
+      });*/
       // find duplicates in data list data by field id and log them
       /*let duplicates = data.reduce((acc: any, current: any) => {
         if (acc[current.id]) {
