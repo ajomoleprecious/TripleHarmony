@@ -24,7 +24,7 @@ router.get("/", async (req: Request, res: Response) => {
     let isFilter = false;
     // Extract query parameters or set defaults
     const page = req.query.page ? parseInt(req.query.page as string) : 0;
-    const amount = req.query.amount ? parseInt(req.query.amount as string) : 10;
+    const amount = req.query.amount ? parseInt(req.query.amount as string) : 30;
 
     try {
         // Get current pokemon and user's avatar
@@ -35,10 +35,10 @@ router.get("/", async (req: Request, res: Response) => {
         const start = page * amount;
         const end = start + amount;
         const paginatedPokemons = pokemonsMaxEvolution.slice(start, end);
-        const evolutionChainIds: number[] = [];
-        for (let i = start; i < end; i++) {
+        //const evolutionChainIds: number[] = [];
+        /*for (let i = start; i < end; i++) {
             evolutionChainIds.push(i + 1);
-        }
+        }*/
         // set hasPrevious to true if paginatedPokemons has previous data
         const hasPreviousPage = start > 0;
         // set hasNext to true if paginatedPokemons has next data
@@ -49,13 +49,22 @@ router.get("/", async (req: Request, res: Response) => {
         //const { evolutionChainIds, hasNextPage, hasPreviousPage } = await fetchEvolutionChains(page, amount);
         // Fetch Pokémons by evolution chains
         //const evolutionChainPokemons = await fetchPokemonsByEvolutionChains(evolutionChainIds);
-        //await client.db('users').collection('PokemonsMaxStages').insertMany(evolutionChainPokemons);
+        /*const dataToInsert = evolutionChainPokemons.map((pokemon: any) => {
+            return {
+                id : pokemon.id,
+                name: pokemon.name,
+                type: pokemon.types,
+                weight: pokemon.weight,
+                height: pokemon.height,
+                sprites : pokemon.sprites
+            }
+        });
+        await client.db('users').collection('PokemonsMaxStages').insertMany(dataToInsert);*/
 
         // Render the page with fetched data
         res.status(200).render('pokemons-bekijken', {
             pageNumber: page + 1,
-            evolutionChainIds,
-            evolutionChainPokemons: paginatedPokemons,
+            evolutionChainPokemons : paginatedPokemons,
             hasNextPage,
             hasPreviousPage,
             currentPokemon,
@@ -147,15 +156,15 @@ router.post("/change-avatar/:avatar", async (req, res) => {
 });
 
 // Helper functions for fetching Pokémon evolution chains and Pokémons by evolution chains
-/*async function fetchEvolutionChains(page: number, amount: number) {
+async function fetchEvolutionChains(page: number, amount: number) {
     const response = await axios.get(`https://pokeapi.co/api/v2/evolution-chain/?limit=${amount}&offset=${page * amount}`);
     const evolutionChainIds: number[] = response.data.results.map((item: any) => item.url.split('/')[6]);
     const hasNextPage = !!response.data.next;
     const hasPreviousPage = !!response.data.previous;
     return { evolutionChainIds, hasNextPage, hasPreviousPage };
-}*/
+}
 
-/*async function fetchPokemonsByEvolutionChains(evolutionChainIds: number[]) {
+async function fetchPokemonsByEvolutionChains(evolutionChainIds: number[]) {
     const pokemons: any[] = [];
     const chainIDs = evolutionChainIds;
     for (const id of chainIDs) {
@@ -184,7 +193,7 @@ router.post("/change-avatar/:avatar", async (req, res) => {
         pokemons.push(pokemon);
     }
     return pokemons;
-}*/
+}
 
 
 

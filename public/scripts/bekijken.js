@@ -86,7 +86,12 @@ async function DetailOfPokemon(name) {
 }
 
 async function showDetails(pokemonId) {
-
+    // reset the detailbox
+    detailWeight.innerHTML = "";
+    detailLength.innerHTML = "";
+    detailType.innerHTML = "";
+    detailName.innerText = "";
+    detailImg.src = "";
 
     await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
         .then(response => response.json())
