@@ -85,32 +85,21 @@ export const pokemonsMaxEvolution : any[] = [];
 // Start the app
 async function startApp() {
   try {
+    server.listen(app.get('port'), async () => {
+      console.log('[server running on: http://localhost:' + app.get('port') + ']');
+    });
     await client.connect().then(() => {
       mongoose.connect(uri);     
     }).then(async () => {
-      server.listen(app.get('port'), async () => {
-        console.log('[server running on: http://localhost:' + app.get('port') + ']');
-      });
       console.log("Connected to MongoDB");
       // load data from db
       await client.db("users").collection("PokemonsMaxStages").find().toArray().then((data) => {
         pokemonsMaxEvolution.push(...data);
       });
       console.log("Pokemons Max levels loaded from db");
-      // find duplicates in data list data by field id and log them
-      /*let duplicates = data.reduce((acc: any, current: any) => {
-        if (acc[current.id]) {
-          acc[current.id]++;
-        } else {
-          acc[current.id] = 1;
-        }
-        return acc;
-      }, {});
-      console.log(duplicates);*/
     }).catch((err: any) => {
       console.error('Error connecting to MongoDB:', err);
     });
-
     process.on('SIGINT', exit);
   } catch (error) {
     console.error(error);
