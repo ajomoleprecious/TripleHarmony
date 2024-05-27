@@ -20,4 +20,4 @@
 
 git checkout -b "branch naam"
 
-- Schakelen naar een 
+- Schakelen naar een bestaande branch
