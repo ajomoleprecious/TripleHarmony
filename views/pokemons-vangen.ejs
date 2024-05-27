@@ -72,7 +72,7 @@
       <img src="/assets/pokeball_opening.gif" alt="">
     </section>
     <section class="current-pokemon">
-      <a href="huidige-pokemon">
+      <a href="/huidige-pokemon">
         <% if (currentPokemon.pokemonGif) { %>
           <img class="pokemon-pic" src="<%= currentPokemon.pokemonGif %>" alt="<%= currentPokemon.pokemonName %>">
           <% } else { %>
@@ -252,7 +252,7 @@ async function changeImageAndTitle() {
                 
                 let pokemonsArray = <%- JSON.stringify(userPokeArray) %>;
                 for (let i = 0; i < pokemonsArray.length; i++) {
-                    if (pokemonsArray[i].pokemonName === "pikachu") {
+                    if (pokemonsArray[i].pokemonName === pokemonName) {
                         console.log('pokemon already in array');
                         // Als de naam overeenkomt, maak de rand van de poke-catch-ball groen
                         document.querySelector('.poke-catch-ball').style.border = '5px solid limegreen';
