@@ -21,6 +21,7 @@ router.get("/", (req: Request, res: Response) => {
 router.get("/:pokemonToBattle", async (req: Request, res: Response) => {
   const avatar = res.locals.currentAvatar;
   const currentPokemon = res.locals.currentPokemon;
+  res.locals.pokemonToBattle = req.params.pokemonToBattle;
   try {
     const pokemonToBattle = req.params.pokemonToBattle;
     const pokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonToBattle}`);
