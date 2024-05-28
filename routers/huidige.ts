@@ -32,6 +32,8 @@ router.get("/get-pokemon/:id", async (req, res) => {
 });
 
 
+
+
 router.post("/change-avatar/:avatar", async (req, res) => {
     res.locals.avatar = req.params.avatar;
     try {

@@ -109,7 +109,7 @@ router.get("/filter", async (req: Request, res: Response) => {
         // Filter pokemonsMaxEvolution by type
         if (pokemonType !== "none") {
             for (let i = 0; i < pokemonsMaxEvolution.length; i++) {
-                pokemonsMaxEvolution[i].types.forEach((type: any) => {
+                pokemonsMaxEvolution[i].type.forEach((type: any) => {
                     if (type.type.name === pokemonType) {
                         filteredPokemons.push(pokemonsMaxEvolution[i]);
                     }

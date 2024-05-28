@@ -38,6 +38,33 @@ router.get('/new-pokemon', async (req: Request, res: Response) => {
     res.json({ name: randomPokemon.name, image: imageUrl });
 });
 
+router.post("/award/:type/:points", async (req, res) => {
+    const type = req.params.type;
+    const points = parseInt(req.params.points);
+    const pokemonId = parseInt(req.body.currentPokemon);
+  
+    if (type === "aanval") {
+      if (points > 0) {
+        await client.db("users").collection("usersPokemons").updateMany(
+          { _id: res.locals.user._id, pokemons: { $elemMatch: { pokemonId } } },
+          { $inc: { "pokemons.$.pokemonAttack": points } }
+        );
+        res.status(200).json({ message: "Aanval is succesvol gewijzigd." });
+      }
+      return;
+    }
+    if (type === "defense") {
+      if (points > 0) {
+        await client.db("users").collection("usersPokemons").updateMany(
+          { _id: res.locals.user._id, pokemons: { $elemMatch: { pokemonId } } },
+          { $inc: { "pokemons.$.pokemonDefense": points } }
+        );
+        res.status(200).json({ message: "Defense is succesvol gewijzigd." });
+      }
+      return;
+    }
+  });
+
 router.post("/change-avatar/:avatar", async (req, res) => {
     res.locals.avatar = req.params.avatar;
     try {
