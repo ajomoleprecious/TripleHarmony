@@ -58,9 +58,9 @@
       <article>
       </article>
       <article>
-        <section class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-          <section class="progress-bar progress-bar-striped progress-bar-animated bg-danger overflow-visible text-dark" style="width: 25%"></section>
-          <p>&hearts;&nbsp;HP&nbsp;25%</p>
+        <section class="progress" role="progressbar" aria-label="Animated striped example" aria-valuemin="0" aria-valuemax="100">
+          <section class="progress-bar progress-bar-striped progress-bar-animated bg-danger overflow-visible text-dark" style="width: 100%"></section>
+          <p>&hearts;&nbsp;HP&nbsp;<%= pokemonToBattleData.stats[0].base_stat %></p>
         </section>
         <section class="pokemon-damage">
           <img src="<%= pokemonImg %>" alt="">
@@ -71,11 +71,12 @@
         <section>
           <img src="<%= currentPokemon.pokemonBackGif %>" alt="">
         </section>
-        <section class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-          <section class="progress-bar progress-bar-striped progress-bar-animated bg-primary overflow-visible text-dark" style="width: 75%">
+        <section class="progress" role="progressbar" aria-label="Animated striped example" aria-valuemin="0" aria-valuemax="100">
+          <section class="progress-bar progress-bar-striped progress-bar-animated bg-primary overflow-visible text-dark" style="width: 100%;">
           </section>
-          <p>&hearts;&nbsp;HP&nbsp;75%</p>
+          <p>&hearts;&nbsp;HP&nbsp;<%= currentPokemon.pokemonHP %></p>
         </section>
+        
       </article>
       <article>
         <ul class="aanvallen">

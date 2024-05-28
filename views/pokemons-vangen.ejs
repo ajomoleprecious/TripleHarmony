@@ -124,7 +124,7 @@
             src="/assets/pokemon.png" alt="te-vangen"></a>
       </article>
       <article class="poke-catch-buttons">
-        <button onclick="" id="catch-button" type="submit"><img src="/assets/scoop-net.png" alt="net"></button>
+        <button onclick="" id="catch-button" type="button"><img src="/assets/scoop-net.png" alt="net"></button>
         <a href="#">
           <img class="poke-catch-ball" src="/assets/pokemon_logo.png"> <!--Loslaten-->
         </a>
@@ -164,6 +164,34 @@
             <section class="d-grid gap-2 mb-2">
               <button class="btn btn-success" type="submit">Ja</button>
               <button data-bs-dismiss="modal" class="btn btn-danger" type="button">Nee</button>
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>
+  </form>
+  <!--Modal vangen-->
+  <form action="/pokemons-vangen/vangen" method="post">
+    <section class="modal fade" id="vangen" tabindex="-1" aria-labelledby="vangenLabel" aria-hidden="true">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header">
+            <h1 class="modal-title fs-5" id="vangenLabel">Vang de pokemon!</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </section>
+          <section class="modal-body bg-dark">
+            <section class="d-grid gap-2 mb-2">
+              <section>
+                <section>
+                  <p id="poke-name" style="color: white;"></p>
+                  <ul>
+                    <li><img src="/assets/red-heart.png" width="50px" alt="HP"></li>
+                    <li></li>
+                  </ul>
+                </section>
+                <img src="" id="poke-img-modal" alt="">
+              </section>
+              <button class="btn btn-light" type="submit">Vang!</button>
             </section>
           </section>
         </section>
@@ -222,8 +250,11 @@ const linkElement = document.getElementsByClassName('poke-catch-container')[0];
 const releaseModal = new bootstrap.Modal(document.getElementById('loslaten'), {
         keyboard: false
     });
+const catchModal = new bootstrap.Modal(document.getElementById('vangen'), {keyboard: false});
+const pokeImgModal = document.getElementById('poke-img-modal');
 const pokeBallElement = document.getElementsByClassName('poke-catch-ball')[0];
 const sendPokeNameElement = document.getElementById('sendPokeName');
+const pokeNameModal = document.getElementById('poke-name');
 
 // Functie om elke seconde een nieuwe willekeurige afbeelding en titel weer te geven
 async function changeImageAndTitle() {
@@ -248,11 +279,18 @@ async function changeImageAndTitle() {
                 hourglassElement.style.display = 'none';
                 rouletteElement.style.animation = 'none';
                 titleElement.innerText = pokemonName;
-                linkElement.style.pointerEvents = 'auto';
+                pokeNameModal.innerText = pokemonName;
+                pokeImgModal.src = imageUrl;
                 
                 let pokemonsArray = <%- JSON.stringify(userPokeArray) %>;
-                for (let i = 0; i < pokemonsArray.length; i++) {
-                    if (pokemonsArray[i].pokemonName === pokemonName) {
+                let pikachulessArray = [];
+                pokemonsArray.filter(function (pokemon) {
+                    if (pokemon.pokemonName !== 'Pikachu') {
+                        pikachulessArray.push(pokemon);
+                    }
+                })
+                for (let i = 0; i < pikachulessArray.length; i++) {
+                    if (pikachulessArray[i].pokemonName === pokemonName) {
                         console.log('pokemon already in array');
                         // Als de naam overeenkomt, maak de rand van de poke-catch-ball groen
                         document.querySelector('.poke-catch-ball').style.border = '5px solid limegreen';
@@ -266,7 +304,9 @@ async function changeImageAndTitle() {
                       console.log('pokemon not in array');
                       // Zo niet, maak de rand van de poke-catch-ball rood
                       document.querySelector('.poke-catch-ball').style.border = '5px solid red';
-                      linkElement.href = `/pokemon-battler-vs-pc/${pokemonName}`;
+                      pokeBallElement.addEventListener('click', function() {
+                        catchModal.show();
+                      });
                     }
                 }
             }
@@ -310,34 +350,6 @@ catchElement.addEventListener('click', function (event) {
     hourglassElement.style.display = 'block';
     catchElement.classList.add('clicked');
 });
-    //const pokemonTocheck = require('./vangen.js');
-    //import { pokemonTocheck } from '/scripts/vangen.js';
-    //console.log(pokemonTocheck);
-    //const titleElement = document.getElementById('poke-title');
-    
-    // Wacht tot de pagina geladen is
-    /*document.addEventListener('DOMContentLoaded', function () {
-      
-      // Functie om de titel na 8 seconden in te stellen
-      /*setTimeout(function() {
-        
-        /*; // Veronderstel dat dit de array is met de Pokémon-namen
-  
-        // Loop door de gebruikers-Pokémon-array
-        for (let pokemon of userPokeArray) {
-          // Controleer of de naam overeenkomt met de titel
-          if (pokemon.pokemonName === titleElement.innerText) {
-            // Als de naam overeenkomt, maak de rand van de poke-catch-ball groen
-            console.log("groen");
-            document.querySelector('.poke-catch-ball').style.border = '5px solid limegreen';
-          } else {
-            // Zo niet, maak de rand van de poke-catch-ball rood
-            document.querySelector('.poke-catch-ball').style.border = '5px solid red';
-            console.log("rood");
-          }
-        }
-      }, 8000); // 8000 milliseconden (8 seconden) 
-    });*/
   </script>
 
 </body>
