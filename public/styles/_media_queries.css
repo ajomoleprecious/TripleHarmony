@@ -509,3 +509,36 @@
         margin: 0;
     }
 }
+
+@media (max-height: 520px) {
+    .pokemonToGuess .container {
+        width: 10rem;
+        height: 10rem;
+      }
+
+      #cardTitle {
+        font-size: 20px;
+      }
+
+      #inputWho {
+        font-size: 12px;
+      }
+
+      .pokemonToGuess .result {
+        font-size: 20px;
+      }
+
+      #hint {
+        top: 40%;
+      }
+
+      .pokemonToGuess .fa-angles-right {
+        /*! font-size: 2rem; */
+      }
+
+      .pokemonToGuess #timer {
+        top: 41%;
+      }
+
+
+}
