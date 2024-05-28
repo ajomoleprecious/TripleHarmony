@@ -93,7 +93,7 @@ async function startApp() {
     }).then(async () => {
       console.log("Connected to MongoDB");
       // load data from db
-      /*await client.db("users").collection("PokemonsMaxStages").find().toArray().then((data) => {
+      await client.db("users").collection("PokemonsMaxStages").find().toArray().then((data) => {
         pokemonsMaxEvolution.push(...data);
       });
       console.log("Pokemons Max levels loaded from db");
@@ -107,7 +107,7 @@ async function startApp() {
 }
 
 startApp();
-
+/*
 interface Player {
   id: string;
   waiting: boolean;

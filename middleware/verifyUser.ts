@@ -14,6 +14,7 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
             } else {
                 let user = await User.findById(decodedToken.id);
                 if (user) {
+                    delete user.password;
                     res.locals.user = user;
 
                     // Create a new token
