@@ -64,9 +64,9 @@ inputWho.addEventListener("input", async () => {
         const choice = Math.floor(Math.random() * 3 + 1);
         if (hintCount === 1) { // if hint was not used
             if (choice === 1) {
-                await fetch("/who's-that-pokemon/award/attack/3");
+                await fetch("/who's-that-pokemon/award/attack/2");
             } else {
-                await fetch("/who's-that-pokemon/award/defense/3");
+                await fetch("/who's-that-pokemon/award/defense/2");
             }
         }
         else{
