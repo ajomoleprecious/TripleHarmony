@@ -337,13 +337,12 @@
               btnTryAgain.style.display = 'none';
             }
 
-
             let pokemonsArray = <%- JSON.stringify(userPokeArray) %>;
             // Initialiseer een leeg array om de pokemons zonder Pikachu op te slaan
             let pikachulessArray = pokemonsArray.filter(function (pokemon) {
               return pokemon.pokemonName !== 'Pikachu';
             });
-            
+
             for (let i = 0; i < pikachulessArray.length; i++) {
               if (pikachulessArray[i].pokemonName === pokemonName) {
                 console.log('pokemon already in array');
