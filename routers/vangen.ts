@@ -66,7 +66,7 @@ router.post("/vangen", async (req: Request, res: Response) => {
             pokemonBackGif: coughtPoke.sprites.other["showdown"].back_default
         };
         await client.db("users").collection("usersPokemons").updateOne({ _id: res.locals.user._id }, { $push: { pokemons: addPoke } }, { upsert: true });
-        console.log("Pokémon toegevoegd aan lijst van gebruiker.");
+
         res.redirect("/pokemons-vangen");
     }
     catch (error) {
