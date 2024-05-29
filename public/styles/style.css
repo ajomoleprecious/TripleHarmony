@@ -1461,6 +1461,25 @@ body.battler section>button .fa-solid.fa-question {
   font-size: 1.5rem;
 }
 
+.full-HP-modal {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-HP-damage {
+  display: flex;
+}
+
+.vang-container-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#poke-img-modal {
+  width: 15rem;
+}
+
 /* VANGEN ROULETTE */
 
 .roulette-container {

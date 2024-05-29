@@ -35,16 +35,14 @@ router.post("/loslaten", async (req: Request, res: Response) => {
             return res.status(404).send("Geen Pokémon gevonden om te verwijderen.");
         }
 
-        for(let pokemon of userPokeArray)
-            {
-                if(pokemon.pokemonName === sendPokeName)
-                {
-                    console.log(pokemon.pokemonName);
-                    const newPokemonsArray = userPokeArray.filter((poke: any) => poke.pokemonName !== sendPokeName);
-                    await client.db('users').collection('usersPokemons').updateOne({ _id: res.locals.user._id }, { $set: { pokemons: newPokemonsArray }});
-                    break;
-                }
+        for (let pokemon of userPokeArray) {
+            if (pokemon.pokemonName === sendPokeName) {
+                console.log(pokemon.pokemonName);
+                const newPokemonsArray = userPokeArray.filter((poke: any) => poke.pokemonName !== sendPokeName);
+                await client.db('users').collection('usersPokemons').updateOne({ _id: res.locals.user._id }, { $set: { pokemons: newPokemonsArray } });
+                break;
             }
+        }
 
         // Redirect naar "/pokemons-vangen" na het verwijderen
         res.redirect("/pokemons-vangen");
@@ -52,6 +50,28 @@ router.post("/loslaten", async (req: Request, res: Response) => {
         console.error("Fout bij verwijderen van Pokémon:", err);
         // Behandel de fout zoals nodig, bijvoorbeeld:
         res.status(500).send("Er is een fout opgetreden bij het verwijderen van de Pokémon.");
+    }
+});
+
+router.post("/vangen", async (req: Request, res: Response) => {
+    try {
+        let killedPoke: string = req.body.killedPoke;
+        let coughtPoke: any = await fetchPokemonByName(killedPoke);
+        let addPoke: any = {
+            pokemonId: coughtPoke.id, pokemonName: coughtPoke.name, pokemonLevel: 1, pokemonHP: coughtPoke.stats[0].base_stat, pokemonAttack: coughtPoke.stats[1].base_stat,
+            pokemonDefense: coughtPoke.stats[2].base_stat, pokemonSpeed: coughtPoke.stats[5].base_stat, pokemonType: coughtPoke.types, pokemonMoves: coughtPoke.moves.splice(0, 4).map((move: any) => move.move.name),
+            pokemonImg: coughtPoke.sprites.other["official-artwork"].front_default,
+            pokemonGif: coughtPoke.sprites.other["showdown"].front_default,
+            pokemonBackImg: coughtPoke.sprites.back_default,
+            pokemonBackGif: coughtPoke.sprites.other["showdown"].back_default
+        };
+        await client.db("users").collection("usersPokemons").updateOne({ _id: res.locals.user._id }, { $push: { pokemons: addPoke } }, { upsert: true });
+        console.log("Pokémon toegevoegd aan lijst van gebruiker.");
+        res.redirect("/pokemons-vangen");
+    }
+    catch (error) {
+        console.error(error);
+        res.render("error", { errorMessage: "Fout bij het toevoegen van pokemon." });
     }
 });
 
@@ -66,5 +86,10 @@ router.post("/change-avatar/:avatar", async (req, res) => {
     }
 });
 
+async function fetchPokemonByName(name: string) {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+    const data = await response.json();
+    return data;
+}
 
 export default router;

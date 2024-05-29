@@ -22,8 +22,6 @@
 </head>
 
 <body class="ingelogd">
-    <img class="boxing-gloves" src="/assets/box-gloves.png" alt="">
-
   <header>
     <nav>
       <section class="left-container">
@@ -116,14 +114,15 @@
           <!--zandloper-->
           <img id="hourglass" src="" alt="">
           <p id="countdown"></p>
-            <p id="poke-title">
+          <p id="poke-title">
 
-            </p>
+          </p>
         </div>
         <!-- arrow verdwijnt vanaf 800px -->
-        <a class="poke-catch-container" href=""><img class="poke-catch-img hover-animation"
-            src="/assets/pokemon.png" alt="te-vangen"></a>
+        <a class="poke-catch-container" href=""><img class="poke-catch-img hover-animation" src="/assets/pokemon.png"
+            alt="te-vangen"></a>
       </article>
+      <img class="boxing-gloves" src="/assets/box-gloves.png" alt="">
       <article class="poke-catch-buttons">
         <button onclick="" id="catch-button" type="button"><img src="/assets/scoop-net.png" alt="net"></button>
         <a href="#">
@@ -141,64 +140,63 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </section>
           <section class="modal-body">
-            Op deze pagina krijgt u een willekeurige Pokémon te zien door op de Pokébal te drukken. <br>
-            Als de rand van de pokébal <span style="color: green; font-weight:bolder;">groen</span> is, kunt
-            u deze pokemon vangen. <br>
+            Op deze pagina krijgt u een willekeurige Pokémon te zien door op het vangnet te drukken. Na het drukken wordt er een Pokémon gegenereerd en moet u 8 seconden wachten. <br>
+            Als de rand van de pokébal <span style="color: green; font-weight:bolder;">groen</span> is, betekent dit dat u de Pokémon niet kunt vangen en een keuze moet maken om deze vrij te laten of een andere proberen te vangen door weer op de vangnet te drukken. <br>
             Als de rand van de Pokébal <span style="color: red; font-weight:bolder;">rood</span> is,
-            betekent dit dat u de Pokémon niet kunt vangen en een keuze moet maken om deze vrij te laten of
-            niet. <br>
+            betekent dit dat u de Pokémon kunt proberen te vangen. U krijgt 3 pogingen. Als u de Pokémon niet vangt binnen deze pogingen, sluit het venster. <br>
           </section>
         </section>
       </section>
     </section>
     <!-- Modal voor keuze-->
-  <form action="/pokemons-vangen/loslaten" method="post">
-    <input type="hidden" id="sendPokeName" name="sendPokeName" value="">
-    <section class="modal fade" id="loslaten" tabindex="-1" aria-labelledby="loslatenLabel" aria-hidden="true">
-      <section class="modal-dialog modal-dialog-centered">
-        <section class="modal-content">
-          <section class="modal-header">
-            <h1 class="modal-title fs-5" id="loslatenLabel">Wil je die loslaten?</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </section>
-          <section class="modal-body bg-dark">
-            <section class="d-grid gap-2 mb-2">
-              <button class="btn btn-success" type="submit">Ja</button>
-              <button data-bs-dismiss="modal" class="btn btn-danger" type="button">Nee</button>
+    <form action="/pokemons-vangen/loslaten" method="post">
+      <input type="hidden" id="sendPokeName" name="sendPokeName" value="">
+      <section class="modal fade" id="loslaten" tabindex="-1" aria-labelledby="loslatenLabel" aria-hidden="true">
+        <section class="modal-dialog modal-dialog-centered">
+          <section class="modal-content">
+            <section class="modal-header">
+              <h1 class="modal-title fs-5" id="loslatenLabel">Wil je die loslaten?</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </section>
-          </section>
-        </section>
-      </section>
-    </section>
-  </form>
-  <!--Modal vangen-->
-  <form action="/pokemons-vangen/vangen" method="post">
-    <section class="modal fade" id="vangen" tabindex="-1" aria-labelledby="vangenLabel" aria-hidden="true">
-      <section class="modal-dialog modal-dialog-centered">
-        <section class="modal-content">
-          <section class="modal-header">
-            <h1 class="modal-title fs-5" id="vangenLabel">Vang de pokemon!</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </section>
-          <section class="modal-body bg-dark">
-            <section class="d-grid gap-2 mb-2">
-              <section>
-                <section>
-                  <p id="poke-name" style="color: white;"></p>
-                  <ul>
-                    <li><img src="/assets/red-heart.png" width="50px" alt="HP"></li>
-                    <li></li>
-                  </ul>
-                </section>
-                <img src="" id="poke-img-modal" alt="">
+            <section class="modal-body bg-dark">
+              <section class="d-grid gap-2 mb-2">
+                <button class="btn btn-success" type="submit">Ja</button>
+                <button data-bs-dismiss="modal" class="btn btn-danger" type="button">Nee</button>
               </section>
-              <button class="btn btn-light" type="submit">Vang!</button>
             </section>
           </section>
         </section>
       </section>
-    </section>
-  </form>
+    </form>
+    <!--Modal vangen-->
+    <form action="/pokemons-vangen/vangen" method="post">
+      <section class="modal fade" id="vangen" tabindex="-1" aria-labelledby="vangenLabel" aria-hidden="true">
+        <section class="modal-dialog modal-dialog-centered">
+          <section class="modal-content">
+            <section class="modal-header">
+              <h1 class="modal-title fs-5" id="vangenLabel">Vang de pokemon!</h1>
+            </section>
+            <section class="modal-body bg-dark">
+              <section class="d-grid gap-2 mb-2">
+                <section>
+                  <section class="full-HP-modal">
+                    <input type="hidden" id="killedPoke" name="killedPoke">
+                    <p id="poke-name" style="color: white;"></p>
+                    <ul class="modal-HP-damage">
+                      <li><img src="/assets/red-heart.png" width="50px" alt="HP"></li>
+                      <li style="color: white;"><span id="HPModalNumber"></span>/<span id="randomDamage"></span></li>
+                    </ul>
+                  </section>
+                  <div class="vang-container-img"><img src="" id="poke-img-modal" alt=""></div>
+                </section>
+                <button class="btn btn-light" id="catch-btn-toDB" type="submit">Vang!</button>
+                <a class="btn btn-light" id="catch-btn-tryAgain">Probeer nog eens!</a>
+              </section>
+            </section>
+          </section>
+        </section>
+      </section>
+    </form>
     <!-- Modal voor avatar-->
     <section class="modal fade" id="chooseAvatar" tabindex="-1" aria-labelledby="chooseAvatar" aria-hidden="true">
       <section class="modal-dialog modal-dialog-centered">
@@ -228,129 +226,182 @@
   <script>
 
 
-///////////////////////////////////////////////////////////////////////////////
-//-----------------------WILLEKEURIGE AFBEELDINGEN--------------------------//
+    ///////////////////////////////////////////////////////////////////////////////
+    //-----------------------WILLEKEURIGE AFBEELDINGEN--------------------------//
 
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
 
-function generateRandomPokemonDataUrl() {
-    const randomPokemonId = getRandomInt(1, 101);
-    return `https://pokeapi.co/api/v2/pokemon/${randomPokemonId}`;
-}
+    function generateRandomPokemonDataUrl() {
+      const randomPokemonId = getRandomInt(1, 101);
+      return `https://pokeapi.co/api/v2/pokemon/${randomPokemonId}`;
+    }
 
-const imageElements = document.getElementsByClassName('poke-catch-img');
-const titleElement = document.getElementById('poke-title');
-const countdownElement = document.getElementById('countdown');
-const hourglassElement = document.getElementById('hourglass');
-const rouletteElement = document.getElementsByClassName('roulette-box')[0];
-const catchElement = document.getElementById('catch-button');
-let count = 8;
-const linkElement = document.getElementsByClassName('poke-catch-container')[0];
-const releaseModal = new bootstrap.Modal(document.getElementById('loslaten'), {
-        keyboard: false
+    const imageElements = document.getElementsByClassName('poke-catch-img');
+    const titleElement = document.getElementById('poke-title');
+    const countdownElement = document.getElementById('countdown');
+    const hourglassElement = document.getElementById('hourglass');
+    const rouletteElement = document.getElementsByClassName('roulette-box')[0];
+    const catchElement = document.getElementById('catch-button');
+    let count = 8;
+    const linkElement = document.getElementsByClassName('poke-catch-container')[0];
+    const releaseModal = new bootstrap.Modal(document.getElementById('loslaten'), {
+      keyboard: false
     });
-const catchModal = new bootstrap.Modal(document.getElementById('vangen'), {keyboard: false});
-const pokeImgModal = document.getElementById('poke-img-modal');
-const pokeBallElement = document.getElementsByClassName('poke-catch-ball')[0];
-const sendPokeNameElement = document.getElementById('sendPokeName');
-const pokeNameModal = document.getElementById('poke-name');
+    const catchModal = new bootstrap.Modal(document.getElementById('vangen'), { keyboard: false, backdrop: 'static' });
+    const pokeImgModal = document.getElementById('poke-img-modal');
+    const pokeBallElement = document.getElementsByClassName('poke-catch-ball')[0];
+    const sendPokeNameElement = document.getElementById('sendPokeName');
+    const pokeNameModal = document.getElementById('poke-name');
+    const HPModalNumber = document.getElementById('HPModalNumber');
+    const randomDamageElement = document.getElementById('randomDamage');
+    const btnSendToDB = document.getElementById('catch-btn-toDB');
+    const btnTryAgain = document.getElementById('catch-btn-tryAgain');
+    const killedPokeElement = document.getElementById('killedPoke');
 
-// Functie om elke seconde een nieuwe willekeurige afbeelding en titel weer te geven
-async function changeImageAndTitle() {
-    const interval = setInterval(async () => {
+
+    function generateRandomNumber() {
+      // Genereren van een willekeurig getal tussen 1 en 255
+      let randomNumber = Math.floor(Math.random() * 100) + 1;
+      return randomNumber;
+    }
+
+
+
+    // Functie om elke seconde een nieuwe willekeurige afbeelding en titel weer te geven
+    async function changeImageAndTitle() {
+      const interval = setInterval(async () => {
         const pokemonDataUrl = generateRandomPokemonDataUrl();
         try {
-            const response = await fetch(pokemonDataUrl);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const pokemonData = await response.json();
-            const imageUrl = pokemonData.sprites.other['official-artwork'].front_default;
-            const pokemonName = pokemonData.name;
-            Array.from(imageElements).forEach((element) => {
-                element.src = imageUrl;
+          const response = await fetch(pokemonDataUrl);
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          const pokemonData = await response.json();
+          const imageUrl = pokemonData.sprites.other['official-artwork'].front_default;
+          const pokemonName = pokemonData.name;
+          const HPModal = pokemonData.stats[0].base_stat;
+          Array.from(imageElements).forEach((element) => {
+            element.src = imageUrl;
+          });
+          if (count <= 0) {
+            clearInterval(interval);
+            countdownElement.style.display = 'none';
+          }
+          if (count === 0) {
+            hourglassElement.style.display = 'none';
+            rouletteElement.style.animation = 'none';
+            titleElement.innerText = pokemonName;
+            pokeNameModal.innerText = pokemonName;
+            killedPokeElement.value = pokeNameModal.innerText;
+            pokeImgModal.src = imageUrl;
+            HPModalNumber.innerText = HPModal;
+
+            /// Toon het willekeurige getal in het element
+            let counter = 0;
+            let randomNumber = generateRandomNumber();
+            randomDamageElement.textContent = randomNumber;
+
+            btnTryAgain.addEventListener('click', function () {
+              counter++;
+              randomNumber = generateRandomNumber();
+              randomDamageElement.textContent = randomNumber;
+
+              // Controleer direct na elke klik of counter gelijk is aan 3
+              if (counter === 3) {
+                catchModal.hide();
+                window.location.reload();
+              }
+
+              // Update de display logica na elke klik
+              if (HPModal > randomNumber) {
+                btnSendToDB.style.display = 'none';
+                btnTryAgain.style.display = 'block';
+              } else {
+                btnSendToDB.style.display = 'block';
+                btnTryAgain.style.display = 'none';
+              }
             });
-            if (count <= 0) {
-                clearInterval(interval);
-                countdownElement.style.display = 'none';
+
+            // Controleer initiële logica bij laden van de modal
+            if (HPModal > randomNumber) {
+              btnSendToDB.style.display = 'none';
+              btnTryAgain.style.display = 'block';
+            } else {
+              btnSendToDB.style.display = 'block';
+              btnTryAgain.style.display = 'none';
             }
-            if (count === 0) {
-                hourglassElement.style.display = 'none';
-                rouletteElement.style.animation = 'none';
-                titleElement.innerText = pokemonName;
-                pokeNameModal.innerText = pokemonName;
-                pokeImgModal.src = imageUrl;
-                
-                let pokemonsArray = <%- JSON.stringify(userPokeArray) %>;
-                let pikachulessArray = [];
-                pokemonsArray.filter(function (pokemon) {
-                    if (pokemon.pokemonName !== 'Pikachu') {
-                        pikachulessArray.push(pokemon);
-                    }
-                })
-                for (let i = 0; i < pikachulessArray.length; i++) {
-                    if (pikachulessArray[i].pokemonName === pokemonName) {
-                        console.log('pokemon already in array');
-                        // Als de naam overeenkomt, maak de rand van de poke-catch-ball groen
-                        document.querySelector('.poke-catch-ball').style.border = '5px solid limegreen';
-                        pokeBallElement.addEventListener('click', function () {
-                          releaseModal.show();
-                        });
-                        sendPokeNameElement.value = pokemonName;
-                        console.log(sendPokeNameElement.value);
-                    }
-                    else {
-                      console.log('pokemon not in array');
-                      // Zo niet, maak de rand van de poke-catch-ball rood
-                      document.querySelector('.poke-catch-ball').style.border = '5px solid red';
-                      pokeBallElement.addEventListener('click', function() {
-                        catchModal.show();
-                      });
-                    }
-                }
+
+
+            let pokemonsArray = <%- JSON.stringify(userPokeArray) %>;
+            let pikachulessArray = [];
+            pokemonsArray.filter(function (pokemon) {
+              if (pokemon.pokemonName !== 'Pikachu') {
+                pikachulessArray.push(pokemon);
+              }
+            })
+            for (let i = 0; i < pikachulessArray.length; i++) {
+              if (pikachulessArray[i].pokemonName === pokemonName) {
+                console.log('pokemon already in array');
+                // Als de naam overeenkomt, maak de rand van de poke-catch-ball groen
+                document.querySelector('.poke-catch-ball').style.border = '5px solid limegreen';
+                pokeBallElement.addEventListener('click', function () {
+                  releaseModal.show();
+                });
+                sendPokeNameElement.value = pokemonName;
+                console.log(sendPokeNameElement.value);
+              }
+              else {
+                console.log('pokemon not in array');
+                // Zo niet, maak de rand van de poke-catch-ball rood
+                document.querySelector('.poke-catch-ball').style.border = '5px solid red';
+                pokeBallElement.addEventListener('click', function () {
+                  catchModal.show();
+                });
+              }
             }
-            countdownElement.innerText = count;
-            count--;
+          }
+          countdownElement.innerText = count;
+          count--;
 
         } catch (error) {
-            console.error('Error fetching data:', error);
+          console.error('Error fetching data:', error);
         }
-    }, 1000);
-}
-
-catchElement.addEventListener('mouseover', function () {
-    if (catchElement.classList.contains('clicked')) {
-        catchElement.style.animation = 'swing 1s infinite';
+      }, 1000);
     }
-    else {
+
+    catchElement.addEventListener('mouseover', function () {
+      if (catchElement.classList.contains('clicked')) {
         catchElement.style.animation = 'swing 1s infinite';
-    }
-});
+      }
+      else {
+        catchElement.style.animation = 'swing 1s infinite';
+      }
+    });
 
-catchElement.addEventListener('mouseout', function () {
-    catchElement.style.animation = 'none';
-});
+    catchElement.addEventListener('mouseout', function () {
+      catchElement.style.animation = 'none';
+    });
 
 
 
-catchElement.addEventListener('click', function (event) {
-    event.preventDefault();
-    linkElement.style.pointerEvents = 'none';
-    catchElement.style.animation = 'catch 1s';
-    titleElement.innerText = '';
-    hourglassElement.src = '../assets/hourglass.gif';
-    hourglassElement.alt = 'Hourglass Image';
-    hourglassElement.style.animation = 'spin 2s linear infinite';
-    rouletteElement.style.animation = 'spin 9s linear infinite';
-    count = 8;
-    countdownElement.innerText = count;
-    countdownElement.style.display = 'block';
-    changeImageAndTitle();
-    hourglassElement.style.display = 'block';
-    catchElement.classList.add('clicked');
-});
+    catchElement.addEventListener('click', function (event) {
+      event.preventDefault();
+      linkElement.style.pointerEvents = 'none';
+      catchElement.style.animation = 'catch 1s';
+      titleElement.innerText = '';
+      hourglassElement.src = '../assets/hourglass.gif';
+      hourglassElement.alt = 'Hourglass Image';
+      hourglassElement.style.animation = 'spin 2s linear infinite';
+      rouletteElement.style.animation = 'spin 9s linear infinite';
+      count = 8;
+      countdownElement.innerText = count;
+      countdownElement.style.display = 'block';
+      changeImageAndTitle();
+      hourglassElement.style.display = 'block';
+      catchElement.classList.add('clicked');
+    });
   </script>
 
 </body>
