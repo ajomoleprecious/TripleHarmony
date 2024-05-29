@@ -186,7 +186,7 @@
                   <p id="poke-name" style="color: white;"></p>
                   <ul>
                     <li><img src="/assets/red-heart.png" width="50px" alt="HP"></li>
-                    <li></li>
+                    <li><span id="HPModalNumber" style="color: white;"></span></li>
                   </ul>
                 </section>
                 <img src="" id="poke-img-modal" alt="">
@@ -255,6 +255,7 @@ const pokeImgModal = document.getElementById('poke-img-modal');
 const pokeBallElement = document.getElementsByClassName('poke-catch-ball')[0];
 const sendPokeNameElement = document.getElementById('sendPokeName');
 const pokeNameModal = document.getElementById('poke-name');
+const HPModalNumber = document.getElementById('HPModalNumber');
 
 // Functie om elke seconde een nieuwe willekeurige afbeelding en titel weer te geven
 async function changeImageAndTitle() {
@@ -268,6 +269,7 @@ async function changeImageAndTitle() {
             const pokemonData = await response.json();
             const imageUrl = pokemonData.sprites.other['official-artwork'].front_default;
             const pokemonName = pokemonData.name;
+            const HPModal = pokemonData.stats[0].base_stat;
             Array.from(imageElements).forEach((element) => {
                 element.src = imageUrl;
             });
@@ -281,6 +283,7 @@ async function changeImageAndTitle() {
                 titleElement.innerText = pokemonName;
                 pokeNameModal.innerText = pokemonName;
                 pokeImgModal.src = imageUrl;
+                HPModalNumber.innerText = HPModal;
                 
                 let pokemonsArray = <%- JSON.stringify(userPokeArray) %>;
                 let pikachulessArray = [];
