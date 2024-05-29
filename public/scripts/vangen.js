@@ -24,9 +24,11 @@ function checkScreenSize() {
         document.addEventListener("mousemove", TrackCursor);
     }
     else {
-        glove.style.pointerEvents = "auto";
+        glove.style.display = "none";
     }
 }
 
 checkScreenSize();
-window.addEventListener("resize", checkScreenSize);
+window.addEventListener("resize", (function () {
+    window.location.reload();
+}));

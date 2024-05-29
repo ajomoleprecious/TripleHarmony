@@ -59,7 +59,7 @@
   </header>
   <aside>
     <button type="button" class="btn-close filter-close" aria-label="Close"></button>
-    <form action="/huidige/filter" method="get" id="pokemon-filter-form">
+    <form action="./filter" method="get" id="pokemon-filter-form">
       <h2>Filter de pokémons</h2>
       <section class="input-group mb-3">
         <input type="text" class="form-control" name="pokemon_name" placeholder="Zoek op naam">
@@ -68,7 +68,6 @@
       <select class="form-select form-select-lg mb-3" name="pokemon_type" aria-label="Large select example">
         <option value="none" selected>Pokémon type</option>
         <hr class="dropdown-sectionider">
-        <option value="all">Alle types</option>
         <option value="normal">Normaal</option>
         <option value="fighting">Vechten</option>
         <option value="flying">Vliegend</option>
@@ -105,17 +104,6 @@
     <section><i class="fa-solid fa-filter"></i></section>
     <section class="title">
       <h1>Jouw Pokémons</h1>
-      <section>
-        <form method="get" id="getAmountOfPokemons">
-          Toon:
-          <select class="form-select" id="amountOfPokemons" name="amountOfPokemons" aria-label="Amount of pokemons">
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-          </select>
-          <input type="hidden" name="page" value="0">
-        </form>
-      </section>
     </section>
     <section class="pokemon-list">
       <ul>

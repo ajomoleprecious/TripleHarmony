@@ -31,7 +31,7 @@ async function sendMail(recipient: string, subject: string, message: string) {
             to: recipient,
             subject: subject,
             html: message,
-            priority : "high"
+            priority: "high"
         });
     }
     catch (error: any) {
@@ -88,7 +88,7 @@ function handleErrors(error: any): ErrorMessages {
 // Create JSON web token
 const maxAge = 1 * 24 * 60 * 60; // 1 day
 const createToken = (id: string) => {
-    return jwt.sign({ id }, process.env.SECRET_KEY , { expiresIn: maxAge });
+    return jwt.sign({ id }, process.env.SECRET_KEY, { expiresIn: maxAge });
 }
 
 router.get('/', async (req: Request, res: Response) => {
@@ -233,6 +233,10 @@ router.post('/change-password/:id', async (req: Request, res: Response) => {
     catch (_) {
         res.status(500).render('pokemon-auth-message', { title: "Wachtwoord wijzigen", message: "Er is een fout opgetreden bij het wijzigen van uw wachtwoord. Probeer het later opnieuw." });
     }
+});
+
+router.get("/register-success", (req: Request, res: Response) => {
+    res.render("register-success");
 });
 
 

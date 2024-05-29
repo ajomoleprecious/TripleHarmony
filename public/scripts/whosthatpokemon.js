@@ -28,12 +28,12 @@ async function getNewPokemon() {
         localStorage.setItem("pokemonName", data.name);
         result.innerText = "Toon resultaat";
     }, 500);
-    
+
     clearInterval(countdownTimer);
     timer.textContent = "15";
     countdownTimer = setInterval(() => {
         timer.textContent = parseInt(timer.textContent) - 1;
-        if(parseInt(timer.textContent) === 0) {
+        if (parseInt(timer.textContent) === 0) {
             getNewPokemon();
         }
     }, 1000);
@@ -41,26 +41,41 @@ async function getNewPokemon() {
 
 hint.addEventListener("click", () => {
     if (hintCount >= localStorage.getItem("pokemonName").length) {
-      // Reset the clip to show the entire image
-      mask.style.clip = `rect(0px, auto, 15rem, 0px)`;
-      inputWho.value = localStorage.getItem("pokemonName");
-      setTimeout(() => {
-        getNewPokemon();
-      }, 2000);
-      return;
+        // Reset the clip to show the entire image
+        mask.style.clip = `rect(0px, auto, 15rem, 0px)`;
+        inputWho.value = localStorage.getItem("pokemonName");
+        setTimeout(() => {
+            getNewPokemon();
+        }, 2000);
+        return;
     }
-  
+
     const pokemonName = localStorage.getItem("pokemonName"); // cache the value
     const silhouetteWidth = document.querySelector(".silhouette").width;
     mask.style.clip = `rect(0px, ${(silhouetteWidth / pokemonName.length * hintCount)}px, 15rem, 0px)`;
     inputWho.value = pokemonName.substring(0, hintCount); // use substring here
     hintCount++;
-  });
+});
 
-inputWho.addEventListener("input", () => {
+inputWho.addEventListener("input", async () => {
     if (inputWho.value.toLowerCase() === localStorage.getItem("pokemonName").toLowerCase()) {
         console.log("Je hebt twee punten gewonnen!");
         result.innerText = "Correct!";
+        const choice = Math.floor(Math.random() * 3 + 1);
+        if (hintCount === 1) { // if hint was not used
+            if (choice === 1) {
+                await fetch("/who's-that-pokemon/award/attack/3");
+            } else {
+                await fetch("/who's-that-pokemon/award/defense/3");
+            }
+        }
+        else{
+            if (choice === 1) { // if hint was used
+                await fetch("/who's-that-pokemon/award/attack/1");
+            } else {
+                await fetch("/who's-that-pokemon/award/defense/1");
+            }
+        }
         document.querySelector(".silhouette").style.filter = "brightness(100%)";
         setTimeout(() => {
             getNewPokemon();
@@ -78,18 +93,18 @@ result.addEventListener("click", () => {
     clearInterval(countdownTimer);
     timer.textContent = "15";  // Reset the timer display
     setTimeout(() => {
-      getNewPokemon();
-      // Start a new timer
-      countdownTimer = setInterval(() => {
-          timer.textContent = parseInt(timer.textContent) - 1;
-          if(parseInt(timer.textContent) === 0) {
-              getNewPokemon();
-          }
-      }, 1000);
-      
-      // Show the hint and skip buttons again after 2 seconds
-      hint.style.display = 'inline-block';
-      skip.style.display = 'inline-block'; 
+        getNewPokemon();
+        // Start a new timer
+        countdownTimer = setInterval(() => {
+            timer.textContent = parseInt(timer.textContent) - 1;
+            if (parseInt(timer.textContent) === 0) {
+                getNewPokemon();
+            }
+        }, 1000);
+
+        // Show the hint and skip buttons again after 2 seconds
+        hint.style.display = 'inline-block';
+        skip.style.display = 'inline-block';
     }, 2000);
 });
 

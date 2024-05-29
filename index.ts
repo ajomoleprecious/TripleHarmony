@@ -60,10 +60,6 @@ app.get('/', (req, res) => {
   }
 });
 
-app.get("/register-success", (req, res) => {
-  res.render("register-success");
-});
-
 /* Als route niet bestaat */
 app.use((_, res) => {
   res.type('text/html');
