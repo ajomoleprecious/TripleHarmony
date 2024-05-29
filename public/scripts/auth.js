@@ -63,7 +63,7 @@ registerForm.addEventListener('submit', async (event) => {
             }
         }
         if (data.user) {
-            window.location.href = '/register-success';
+            window.location.href = '/pokemon-auth/register-success';
         }
     
     } catch (error) {

@@ -438,7 +438,7 @@ nav p {
 
 .pokemon-bekijken-main>.title {
   grid-area: title;
-  margin: 0 6rem 0 1rem;
+  margin: 0 6rem 0 6rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1613,7 +1613,7 @@ body.battler section>button .fa-solid.fa-question {
   position: fixed;
   right: 7rem;
   top: 20rem;
-  z-index: 10;
+  z-index: 10000;
 }
 
 .boxing-gloves:hover {
