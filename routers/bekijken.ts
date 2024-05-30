@@ -93,7 +93,7 @@ router.get("/filter", async (req: Request, res: Response) => {
         const avatar = res.locals.currentAvatar;
         // Get pokemon by name
         if (pokemonName !== "") {
-            const pokemon = await fetchPokemonByName(pokemonName);
+            const pokemon = await fetchPokemonByName(pokemonName.toString().toLowerCase());
             res.render('pokemons-bekijken', {
                 pageNumber: page + 1,
                 evolutionChainPokemons: [pokemon],

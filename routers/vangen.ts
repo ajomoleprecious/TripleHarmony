@@ -25,8 +25,7 @@ router.get("/", async (req: Request, res: Response) => {
 });
 
 router.post("/loslaten", async (req: Request, res: Response) => {
-    let sendPokeName: string | undefined = req.body.sendPokeName; // Haal de naam van de te verwijderen Pokémon op uit het request body   
-    console.log(sendPokeName);
+    let sendPokeName: string = req.body.sendPokeName; // Haal de naam van de te verwijderen Pokémon op uit het request body   
     try {
         // Haal de gebruiker op
         const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
@@ -36,9 +35,8 @@ router.post("/loslaten", async (req: Request, res: Response) => {
         }
 
         for (let pokemon of userPokeArray) {
-            if (pokemon.pokemonName === sendPokeName) {
-                console.log(pokemon.pokemonName);
-                const newPokemonsArray = userPokeArray.filter((poke: any) => poke.pokemonName !== sendPokeName);
+            if (pokemon.pokemonName.toString().toLowerCase() === sendPokeName.toString().toLowerCase()) {
+                const newPokemonsArray = userPokeArray.filter((poke: any) => poke.pokemonName.toString().toLowerCase() !== sendPokeName.toString().toLowerCase());
                 await client.db('users').collection('usersPokemons').updateOne({ _id: res.locals.user._id }, { $set: { pokemons: newPokemonsArray } });
                 break;
             }
@@ -49,23 +47,36 @@ router.post("/loslaten", async (req: Request, res: Response) => {
     } catch (err) {
         console.error("Fout bij verwijderen van Pokémon:", err);
         // Behandel de fout zoals nodig, bijvoorbeeld:
-        res.status(500).send("Er is een fout opgetreden bij het verwijderen van de Pokémon.");
+        res.status(500).render('error', { message: "Fout bij verwijderen van Pokémon" });
     }
 });
 
 router.post("/vangen", async (req: Request, res: Response) => {
     try {
-        let killedPoke: string = req.body.killedPoke;
-        let coughtPoke: any = await fetchPokemonByName(killedPoke);
-        let addPoke: any = {
-            pokemonId: coughtPoke.id, pokemonName: coughtPoke.name, pokemonLevel: 1, pokemonHP: coughtPoke.stats[0].base_stat, pokemonAttack: coughtPoke.stats[1].base_stat,
-            pokemonDefense: coughtPoke.stats[2].base_stat, pokemonSpeed: coughtPoke.stats[5].base_stat, pokemonType: coughtPoke.types, pokemonMoves: coughtPoke.moves.splice(0, 4).map((move: any) => move.move.name),
+        const killedPoke: string = req.body.killedPoke;
+        const coughtPoke: any = await fetchPokemonByName(killedPoke);
+        
+        const addPoke = {
+            pokemonId: coughtPoke.id,
+            pokemonName: coughtPoke.name,
+            pokemonLevel: 1,
+            pokemonHP: coughtPoke.stats[0].base_stat,
+            pokemonAttack: coughtPoke.stats[1].base_stat,
+            pokemonDefense: coughtPoke.stats[2].base_stat,
+            pokemonSpeed: coughtPoke.stats[5].base_stat,
+            pokemonType: coughtPoke.types,
+            pokemonMoves: coughtPoke.moves.splice(0, 4).map((move: any) => move.move.name),
             pokemonImg: coughtPoke.sprites.other["official-artwork"].front_default,
             pokemonGif: coughtPoke.sprites.other["showdown"].front_default,
             pokemonBackImg: coughtPoke.sprites.back_default,
             pokemonBackGif: coughtPoke.sprites.other["showdown"].back_default
         };
-        await client.db("users").collection("usersPokemons").updateOne({ _id: res.locals.user._id }, { $push: { pokemons: addPoke } }, { upsert: true });
+        
+        await client.db("users").collection("usersPokemons").updateOne(
+            { _id: res.locals.user._id },
+            { $addToSet: { pokemons: { ...addPoke } } },
+            { upsert: true }
+        );
         
         res.redirect("/pokemons-vangen");
     }

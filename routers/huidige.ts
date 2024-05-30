@@ -38,13 +38,13 @@ router.get("/filter", async (req: Request, res: Response) => {
     const pokemonName = req.query.pokemon_name ? req.query.pokemon_name as string : "";
 
     if (pokemonName !== "") {
-        const filteredPokemons = pokemonsList.filter((pokemon: any) => pokemon.pokemonName === pokemonName);
+        const filteredPokemons = pokemonsList.filter((pokemon: any) => pokemon.pokemonName.toString().toLowerCase() === pokemonName.toString().toLowerCase());
         res.render('huidige-pokemon', { currentPokemon, avatar, pokemonsList: filteredPokemons, hasPreviousPage, hasNextPage, pageNumber });
         return;
     }
 
     if (pokemonType !== "none") {
-        const filteredPokemons = pokemonsList.filter((pokemon: any) => pokemon.pokemonType.some((type: any) => type.type.name === pokemonType));
+        const filteredPokemons = pokemonsList.filter((pokemon: any) => pokemon.pokemonType.some((type: any) => type.type.name.toString().toLowerCase() === pokemonType.toString().toLowerCase()));
 
         res.render('huidige-pokemon', { currentPokemon, avatar, pokemonsList: filteredPokemons, hasPreviousPage, hasNextPage, pageNumber });
         return;

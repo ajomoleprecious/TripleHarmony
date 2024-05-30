@@ -90,8 +90,8 @@ main {
 }
 
 .current-pokemon .pokemon-pic {
-  width: 5rem;
-  height: 4.5rem;
+  width: 100%;
+  height: 100%;
   animation: infinite 2s ease-in-out;
   animation-name: move;
   animation-duration: 2s;
