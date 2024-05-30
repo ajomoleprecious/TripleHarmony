@@ -155,12 +155,7 @@
     <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i class="fa-solid fa-question"></i></button></section>
   </main>
   <script>
-    let waitingModal = new bootstrap.Modal(document.getElementById('pvpfriend'), {
-      keyboard: false,
-      backdrop: 'static'
-    });
-
-    waitingModal.show();
+    let waitingModal=new bootstrap.Modal(document.getElementById("pvpfriend"),{keyboard:!1,backdrop:"static"});waitingModal.show();
   </script>
 </body>
 

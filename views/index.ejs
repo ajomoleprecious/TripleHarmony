@@ -97,41 +97,7 @@
           class="fa-solid fa-question"></i></button></section>
   </main>
   <script>
-    let body = document.querySelector("body");
-    let projects = document.querySelectorAll(".projects ul li");
-    let projectsContainer = document.querySelector(".projects");
-    function showBg() {
-      let body = document.querySelector("body");
-      let projects = document.querySelectorAll(".projects ul li");
-      let projectsContainer = document.querySelector(".projects");
-
-      projects.forEach((project, index) => {
-        project.addEventListener("mouseover", () => {
-          body.style.backgroundImage = `url('assets/landing-page-bgs/bg_${getImageName(index)}.jpg')`;
-          body.style.backgroundSize = "cover";
-          body.style.backgroundPosition = "center";
-          body.style.backgroundRepeat = "no-repeat";
-          body.style.width = "100%";
-          body.style.height = "100vh";
-        });
-
-        project.addEventListener("mouseout", () => {
-          body.style.backgroundImage = "none";
-        });
-      });
-
-      function getImageName(index) {
-        let projectNames = ["pokemon", "fifa", "fortnite", "lotr", "lego", "magic"];
-        return projectNames[index];
-      }
-    }
-    function checkScreenSize() {
-      if (window.innerWidth >= 1400) {
-        showBg();
-      }
-    }
-    window.onload = checkScreenSize;
-    window.addEventListener("resize", checkScreenSize);
+    let body=document.querySelector("body"),projects=document.querySelectorAll(".projects ul li"),projectsContainer=document.querySelector(".projects");function showBg(){let e=document.querySelector("body"),o=document.querySelectorAll(".projects ul li");document.querySelector(".projects"),o.forEach((o,t)=>{o.addEventListener("mouseover",()=>{var o;e.style.backgroundImage=`url('assets/landing-page-bgs/bg_${o=t,["pokemon","fifa","fortnite","lotr","lego","magic"][o]}.jpg')`,e.style.backgroundSize="cover",e.style.backgroundPosition="center",e.style.backgroundRepeat="no-repeat",e.style.width="100%",e.style.height="100vh"}),o.addEventListener("mouseout",()=>{e.style.backgroundImage="none"})})}function checkScreenSize(){window.innerWidth>=1400&&showBg()}window.onload=checkScreenSize,window.addEventListener("resize",checkScreenSize);
   </script>
 </body>
 
