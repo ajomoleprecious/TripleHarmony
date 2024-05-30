@@ -33,12 +33,14 @@ router.post("/loslaten", async (req: Request, res: Response) => {
         if (!user || !user.pokemons || user.pokemons.length === 0) {
             return res.status(404).send("Geen Pokémon gevonden om te verwijderen.");
         }
-
-        for (let pokemon of userPokeArray) {
-            if (pokemon.pokemonName.toString().toLowerCase() === sendPokeName.toString().toLowerCase()) {
-                const newPokemonsArray = userPokeArray.filter((poke: any) => poke.pokemonName.toString().toLowerCase() !== sendPokeName.toString().toLowerCase());
-                await client.db('users').collection('usersPokemons').updateOne({ _id: res.locals.user._id }, { $set: { pokemons: newPokemonsArray } });
-                break;
+        
+        if(userPokeArray.length !== 1) {
+            for (let pokemon of userPokeArray) {
+                if (pokemon.pokemonName.toString().toLowerCase() === sendPokeName.toString().toLowerCase()) {
+                    const newPokemonsArray = userPokeArray.filter((poke: any) => poke.pokemonName.toString().toLowerCase() !== sendPokeName.toString().toLowerCase());
+                    await client.db('users').collection('usersPokemons').updateOne({ _id: res.locals.user._id }, { $set: { pokemons: newPokemonsArray } });
+                    break;
+                }
             }
         }
 
