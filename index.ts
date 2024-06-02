@@ -77,7 +77,7 @@ async function exit() {
   }
 
 }
-export const pokemonsMaxEvolution : any[] = [];
+export const pokemonsMaxEvolution: any[] = [];
 // Start the app
 async function startApp() {
   try {
@@ -85,7 +85,7 @@ async function startApp() {
       console.log('[server running on: http://localhost:' + app.get('port') + ']');
     });
     await client.connect().then(() => {
-      mongoose.connect(uri);     
+      mongoose.connect(uri);
     }).then(async () => {
       console.log("Connected to MongoDB");
       // load data from db
@@ -103,51 +103,63 @@ async function startApp() {
 }
 
 startApp();
-/*
-interface Player {
-  id: string;
-  waiting: boolean;
-}
-
-let players: any[] = [];
-
 
 let playersCount: number = 0;
+let roomPlayerCounts: { [roomId: string]: number } = {};
 
 io.on('connection', (socket: any) => {
-  players.push(socket.id);
-  console.log(players);
   playersCount++;
   io.emit('updatePlayerCount', playersCount);
 
+  console.log(`New client connected: ${socket.id}`);
+  console.log(`Total players: ${playersCount}`);
+
+  // Handle join room
+  socket.on('joinRoom', (roomId: string) => {
+    socket.join(roomId);
+    if (!roomPlayerCounts[roomId]) {
+      roomPlayerCounts[roomId] = 0;
+    }
+    roomPlayerCounts[roomId]++;
+    io.to(roomId).emit('updateRoomPlayerCount', roomPlayerCounts[roomId]);
+
+    console.log(`User joined room: ${roomId}`);
+    console.log(`Total players in room ${roomId}: ${roomPlayerCounts[roomId]}`);
+  });
+
+  // Handle leave room
+  socket.on('leaveRoom', (roomId: string) => {
+    socket.leave(roomId);
+    if (roomPlayerCounts[roomId]) {
+      roomPlayerCounts[roomId]--;
+      if (roomPlayerCounts[roomId] === 0) {
+        delete roomPlayerCounts[roomId];
+      } else {
+        io.to(roomId).emit('updateRoomPlayerCount', roomPlayerCounts[roomId]);
+      }
+    }
+
+    console.log(`User left room: ${roomId}`);
+    console.log(`Total players in room ${roomId}: ${roomPlayerCounts[roomId] || 0}`);
+  });
+
   // Handle disconnection
   socket.on('disconnect', () => {
-    players.splice(players.indexOf(socket.id), 1);
-    console.log(players);
     playersCount--;
     io.emit('updatePlayerCount', playersCount);
+
+    for (const roomId in socket.rooms) {
+      if (socket.rooms.hasOwnProperty(roomId) && roomPlayerCounts[roomId]) {
+        roomPlayerCounts[roomId]--;
+        if (roomPlayerCounts[roomId] === 0) {
+          delete roomPlayerCounts[roomId];
+        } else {
+          io.to(roomId).emit('updateRoomPlayerCount', roomPlayerCounts[roomId]);
+        }
+      }
+    }
+
+    console.log(`Client disconnected: ${socket.id}`);
+    console.log(`Total players: ${playersCount}`);
   });
 });
-
-/*io.on('connection', (socket: any) => {
-  socket.on('playerReady', (id: string) => {
-    const player = players.find(player => player.id === id);
-    if (player) {
-      player.waiting = true;
-    } else {
-      players.push({ id, waiting: true });
-    }
-
-    const readyPlayers = players.filter(player => player.waiting);
-    if (readyPlayers.length === 2) {
-      readyPlayers.forEach(player => {
-        io.to(player.id).emit('startGame');
-      });
-      players = players.filter(player => !player.waiting);
-    }
-  });
-
-  socket.on('playerMove', (id: string, move: string) => {
-    socket.to(id).emit('opponentMove', move);
-  });
-});*/

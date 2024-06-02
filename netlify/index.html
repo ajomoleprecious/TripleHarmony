@@ -1,54 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oude Pagina</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-</head>
-
-<body style="width: 100%; height: 100dvh; background-color: #212121; margin: 0;">
-    <section
-        style="display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: 'Roboto', sans-serif; text-align: center; color: white; width: fit-content; height: 100dvh; margin: auto;">
-        <p style="font-size: 1.3rem; margin: 1rem;">Dit is nu onze oude webpagina wegens een gelimiteerd
-            mogelijk op de hosting service Netlify. <br>Gelieve te surfen
-            naar de nieuwe webpagina: <a id="Webpagina" style="color: limegreen;" href="https://tripleharmony.azurewebsites.net/">Nieuwe
-                webpagina</a>
-        </p>
-        <img style="border-radius: 30px; width: 320px;" src="pikachu_bye.gif" alt="">
-        <p style="font-size: 1.3rem; margin: 1rem;">Bedankt voor uw begrip!</p>
-    </section>
-    <section class="modal fade" id="loading" tabindex="-1">
-        <section class="modal-dialog modal-dialog-centered" role="document"
-            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-            <section class="modal-content bg-dark" style="color: #fff;">
-                <section class="modal-header">
-                    <h5 class="modal-title">Webpagina is aan het laden</h5>
-                </section>
-                <section class="modal-body"
-                    style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;">
-                    <img src="loading.gif" style="width: 50px;" alt="">
-                    <p>Even geduld alstublieft terwijl de nieuwe pagina aan het laden is.</p>
-                </section>
-            </section>
-        </section>
-    </section>
-
-    <script>
-        const webpagina = document.getElementById("Webpagina");
-        let modal = new bootstrap.Modal(document.getElementById('loading'), {
-            keyboard: false,
-            backdrop: 'static'
-        });
-        webpagina.addEventListener('click', () => {
-            modal.show();
-        });
-    </script>
-</body>
-
-</html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Oude Pagina</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script></head><body style="width:100%;height:100dvh;background-color:#212121;margin:0"><section style="display:flex;flex-direction:column;justify-content:center;align-items:center;font-family:Roboto,sans-serif;text-align:center;color:#fff;width:fit-content;height:100dvh;margin:auto"><p style="font-size:1.3rem;margin:1rem">Dit is nu onze oude webpagina wegens een gelimiteerd mogelijk op de hosting service Netlify.<br>Gelieve te surfen naar de nieuwe webpagina:<a id="Webpagina" style="color:#32cd32" href="https://tripleharmony.azurewebsites.net/">Nieuwe webpagina</a></p><img style="border-radius:30px;width:320px" src="pikachu_bye.gif" alt=""><p style="font-size:1.3rem;margin:1rem">Bedankt voor uw begrip!</p></section><section class="modal fade" id="loading" tabindex="-1"><section class="modal-dialog modal-dialog-centered" role="document" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true"><section class="modal-content bg-dark" style="color:#fff"><section class="modal-header"><h5 class="modal-title">Webpagina is aan het laden</h5></section><section class="modal-body" style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1rem"><img src="loading.gif" style="width:50px" alt=""><p>Even geduld alstublieft terwijl de nieuwe pagina aan het laden is.</p></section></section></section></section><script>const webpagina = document.getElementById("Webpagina");
+    let modal = new bootstrap.Modal(document.getElementById('loading'), {
+        keyboard: false,
+        backdrop: 'static'
+    });
+    webpagina.addEventListener('click', () => {
+        modal.show();
+    });</script></body></html>

@@ -14,9 +14,10 @@ router.use(express.static('public'));
 router.get("/", (req: Request, res: Response) => {
   // get full URL
   const url = req.get('host') + req.originalUrl;
-  const roomID = req.query.roomID ? `${url}?roomID=${req.query.roomID}` : `${url}?roomID=${Math.floor(Math.random() * 2 + 1)}`;
+  const roomID = req.query.roomID ? req.query.roomID : '';
+  const fullURL = roomID ? `${url}?roomID=${roomID}` : `${url}`;
   const avatar = res.locals.currentAvatar;
-  res.render("pokemon-battler", { roomID, avatar });
+  res.render("pokemon-battler", { fullURL, avatar });
 });
 
 
