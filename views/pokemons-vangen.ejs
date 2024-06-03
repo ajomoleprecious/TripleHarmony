@@ -72,16 +72,17 @@
       <section class="pokemon-stats">
         <section class="pokemon-hp">
           <img id="life" src="assets/red-heart.png" alt="leven">
-          <p>
-            <%= currentPokemon.pokemonHP %>
-          </p>
+          <p><%= currentPokemon.pokemonHP %></p>
+        </section>
+        |
+        <section class="pokemon-shield">
+          <img id="shield" src="assets/sword.png" alt="verdediging">
+          <p><%= currentPokemon.pokemonAttack %></p>
         </section>
         |
         <section class="pokemon-shield">
           <img id="shield" src="assets/shield.png" alt="verdediging">
-          <p>
-            <%= currentPokemon.pokemonDefense %>
-          </p>
+          <p><%= currentPokemon.pokemonDefense %></p>
         </section>
       </section>
     </section>
