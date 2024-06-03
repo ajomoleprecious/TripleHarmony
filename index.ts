@@ -1,4 +1,6 @@
 import express from 'express';
+
+import { Request, Response, NextFunction } from "express";
 import cookieParser from 'cookie-parser';
 import { MongoClient, ObjectId } from 'mongodb';
 import authRouter from './routers/auth';
@@ -66,6 +68,7 @@ app.use((_, res) => {
   res.status(404).render('404');
 });
 
+
 // Exit the app
 async function exit() {
   try {
@@ -105,7 +108,7 @@ async function startApp() {
 startApp();
 
 let playersCount: number = 0;
-let roomPlayerCounts: { [roomId: string]: number } = {};
+let roomPlayers: { [roomId: string]: Set<string> } = {};
 
 io.on('connection', (socket: any) => {
   playersCount++;
@@ -116,31 +119,45 @@ io.on('connection', (socket: any) => {
 
   // Handle join room
   socket.on('joinRoom', (roomId: string) => {
-    socket.join(roomId);
-    if (!roomPlayerCounts[roomId]) {
-      roomPlayerCounts[roomId] = 0;
+    if (roomPlayers[roomId] && roomPlayers[roomId].size === 2) {
+      // room is full
+      io.to(socket.id).emit('roomFull');
+      return;
     }
-    roomPlayerCounts[roomId]++;
-    io.to(roomId).emit('updateRoomPlayerCount', roomPlayerCounts[roomId]);
+    socket.join(roomId);
+    if (!roomPlayers[roomId]) {
+      roomPlayers[roomId] = new Set();
+    }
+    roomPlayers[roomId].add(socket.id);
+    io.to(roomId).emit('updateRoomPlayerCount', roomPlayers[roomId].size);
 
     console.log(`User joined room: ${roomId}`);
-    console.log(`Total players in room ${roomId}: ${roomPlayerCounts[roomId]}`);
+    console.log(`Total players in room ${roomId}: ${roomPlayers[roomId].size}`);
+    console.log(`Player IDs in room ${roomId}: ${Array.from(roomPlayers[roomId]).join(', ')}`);
+
+    if (roomPlayers[roomId].size === 2) {
+      io.to(roomId).emit('startGame');
+      console.log(`Game started in room: ${roomId}`);
+    }
   });
 
   // Handle leave room
   socket.on('leaveRoom', (roomId: string) => {
     socket.leave(roomId);
-    if (roomPlayerCounts[roomId]) {
-      roomPlayerCounts[roomId]--;
-      if (roomPlayerCounts[roomId] === 0) {
-        delete roomPlayerCounts[roomId];
+    if (roomPlayers[roomId]) {
+      roomPlayers[roomId].delete(socket.id);
+      if (roomPlayers[roomId].size === 0) {
+        delete roomPlayers[roomId];
       } else {
-        io.to(roomId).emit('updateRoomPlayerCount', roomPlayerCounts[roomId]);
+        io.to(roomId).emit('updateRoomPlayerCount', roomPlayers[roomId].size);
       }
     }
 
     console.log(`User left room: ${roomId}`);
-    console.log(`Total players in room ${roomId}: ${roomPlayerCounts[roomId] || 0}`);
+    console.log(`Total players in room ${roomId}: ${roomPlayers[roomId] ? roomPlayers[roomId].size : 0}`);
+    if (roomPlayers[roomId]) {
+      console.log(`Player IDs in room ${roomId}: ${Array.from(roomPlayers[roomId]).join(', ')}`);
+    }
   });
 
   // Handle disconnection
@@ -149,12 +166,16 @@ io.on('connection', (socket: any) => {
     io.emit('updatePlayerCount', playersCount);
 
     for (const roomId in socket.rooms) {
-      if (socket.rooms.hasOwnProperty(roomId) && roomPlayerCounts[roomId]) {
-        roomPlayerCounts[roomId]--;
-        if (roomPlayerCounts[roomId] === 0) {
-          delete roomPlayerCounts[roomId];
+      if (socket.rooms.hasOwnProperty(roomId) && roomPlayers[roomId]) {
+        roomPlayers[roomId].delete(socket.id);
+        if (roomPlayers[roomId].size === 0) {
+          delete roomPlayers[roomId];
         } else {
-          io.to(roomId).emit('updateRoomPlayerCount', roomPlayerCounts[roomId]);
+          io.to(roomId).emit('updateRoomPlayerCount', roomPlayers[roomId].size);
+        }
+        console.log(`Total players in room ${roomId}: ${roomPlayers[roomId] ? roomPlayers[roomId].size : 0}`);
+        if (roomPlayers[roomId]) {
+          console.log(`Player IDs in room ${roomId}: ${Array.from(roomPlayers[roomId]).join(', ')}`);
         }
       }
     }
@@ -163,3 +184,5 @@ io.on('connection', (socket: any) => {
     console.log(`Total players: ${playersCount}`);
   });
 });
+
+

@@ -1,3 +1,4 @@
+
 let pokemonTofight = document.querySelector(".battlefield article:nth-child(2) img"),
     fightButtons = document.querySelectorAll(".aanvallen li"),
     punchAnim = document.querySelector(".pokemon-damage img:nth-child(2)");
@@ -45,20 +46,52 @@ socket.on("updateRoomPlayerCount", (roomPlayerCount) => {
     document.getElementById("roomPlayers").textContent = roomPlayerCount;
 });
 
+// Handle the roomFull event
+socket.on('roomFull', () => {
+    alert("Deze ruimte is vol, U wordt zo dadelijk herleid naar de startpagina.");
+    setTimeout(() => {
+        window.location.href = "/pokemon-battler/";
+    }, 5000);
+});
+
+// Handle the startGame event
+socket.on('startGame', () => {
+    alert("Het spel gaat beginnen!");
+    // Here you can add logic to initialize and start the game
+    startGame();
+});
+
+// Function to start the game
+function startGame() {
+    // Implement game start logic here
+    console.log("Game started");
+    // For example, initialize game board, players, etc.
+}
+
 // Check for roomID in the URL and join room
 const urlParams = new URL(window.location.href).searchParams;
 const roomID = urlParams.get("roomID");
 
 if (roomID) {
-    // If roomID parameter exists in the URL, join that room
-    // Join a specific room
+    // If roomID parameter exists in the URL, join that room, Join a specific room
     socket.emit('joinRoom', roomID);
 } else {
     // Otherwise, generate a new room link
     socket.on("connect", () => {
+        // Function to generate a random sequence of 5 letters
+        function generateRoomID() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            let result = '';
+            for (let i = 0; i < 5; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+
+        const roomID = generateRoomID();
         const linkInput = document.getElementById("linkInput");
-        linkInput.value = `${window.location.origin}/pokemon-battler/?roomID=${socket.id}`;
-        socket.emit('joinRoom', socket.id);
+        linkInput.value = `${window.location.origin}/pokemon-battler/?roomID=${roomID}`;
+        socket.emit('joinRoom', roomID);
     });
 }
 
@@ -67,5 +100,8 @@ window.addEventListener("beforeunload", () => {
     if (roomID) {
         socket.emit('leaveRoom', roomID);
     }
-    socket.disconnect();
+    else {
+        socket.emit('disconnect');
+    }
 });
+
