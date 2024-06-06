@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { client } from "../index";
 import axios from "axios";
 
-
+export let userPokemon :any;
 export const currentPokemon = async (req: Request, res: Response, next: NextFunction) => {
     let pokemonID = res.locals.pokemonID || null;
 
@@ -17,6 +17,7 @@ export const currentPokemon = async (req: Request, res: Response, next: NextFunc
             const pokemons = pokemonResponse?.pokemons; // pokemons is an array of objects
             const currentPokemon = pokemons.find((pokemon: any) => pokemon.pokemonId === pokemonID);
             res.locals.currentPokemon = currentPokemon;
+            userPokemon = currentPokemon;
         } catch (error) {
             return next({ status: 500, message: 'Error fetching current Pokemon' });
         }

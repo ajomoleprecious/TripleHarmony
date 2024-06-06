@@ -1,6 +1,5 @@
 import express from 'express';
-
-import { Request, Response, NextFunction } from "express";
+import { userPokemon } from './middleware/currentPokemon';
 import cookieParser from 'cookie-parser';
 import { MongoClient, ObjectId } from 'mongodb';
 import authRouter from './routers/auth';
@@ -135,9 +134,10 @@ io.on('connection', (socket: any) => {
     console.log(`Total players in room ${roomId}: ${roomPlayers[roomId].size}`);
     console.log(`Player IDs in room ${roomId}: ${Array.from(roomPlayers[roomId]).join(', ')}`);
 
-    if (roomPlayers[roomId].size === 2) {
+    if (roomPlayers[roomId].size <= 2) {
       io.to(roomId).emit('startGame');
       console.log(`Game started in room: ${roomId}`);
+      console.log(`User ${socket.id} has pokemon ${userPokemon.pokemonName}`)
     }
   });
 

@@ -1,12 +1,14 @@
 import { Request, Response, Router } from "express";
 import { verifyUser } from "../middleware/verifyUser";
 import { currentAvatar } from "../middleware/userAvatar";
+import { currentPokemon } from "../middleware/currentPokemon";
 import { client, io } from "../index";
 import express from "express";
 
 const router = Router();
 router.use(verifyUser);
 router.use(currentAvatar);
+router.use(currentPokemon);
 // Serve static files from the 'public' directory
 router.use(express.static('public'));
 
