@@ -108,6 +108,7 @@ startApp();
 
 let playersCount: number = 0;
 let roomPlayers: { [roomId: string]: Set<string> } = {};
+let playersPokemon: { [playerId: string]: any } = {};
 
 io.on('connection', (socket: any) => {
   playersCount++;
@@ -119,7 +120,7 @@ io.on('connection', (socket: any) => {
   // Handle join room
   socket.on('joinRoom', (roomId: string) => {
     if (roomPlayers[roomId] && roomPlayers[roomId].size === 2) {
-      // room is full
+      // Room is full
       io.to(socket.id).emit('roomFull');
       return;
     }
@@ -134,10 +135,24 @@ io.on('connection', (socket: any) => {
     console.log(`Total players in room ${roomId}: ${roomPlayers[roomId].size}`);
     console.log(`Player IDs in room ${roomId}: ${Array.from(roomPlayers[roomId]).join(', ')}`);
 
-    if (roomPlayers[roomId].size <= 2) {
+    // Store the player's Pokémon
+    playersPokemon[socket.id] = userPokemon;
+
+    if (roomPlayers[roomId].size === 2) {
+      // Both players have joined, start the game
+      const [player1, player2] = Array.from(roomPlayers[roomId]);
+
+      // Notify both players to start the game
       io.to(roomId).emit('startGame');
+
+      // Send Pokémon data to both players
+      io.to(player1).emit('setPlayer1', playersPokemon[player1]);
+      io.to(player1).emit('setPlayer2', playersPokemon[player2]);
+
+      io.to(player2).emit('setPlayer1', playersPokemon[player2]);
+      io.to(player2).emit('setPlayer2', playersPokemon[player1]);
+
       console.log(`Game started in room: ${roomId}`);
-      console.log(`User ${socket.id} has pokemon ${userPokemon.pokemonName}`)
     }
   });
 
@@ -179,10 +194,10 @@ io.on('connection', (socket: any) => {
         }
       }
     }
-
     console.log(`Client disconnected: ${socket.id}`);
     console.log(`Total players: ${playersCount}`);
   });
 });
+
 
 

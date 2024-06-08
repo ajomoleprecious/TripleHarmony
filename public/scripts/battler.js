@@ -1,4 +1,3 @@
-
 let pokemonTofight = document.querySelector(".battlefield article:nth-child(2) img"),
     fightButtons = document.querySelectorAll(".aanvallen li"),
     punchAnim = document.querySelector(".pokemon-damage img:nth-child(2)");
@@ -15,8 +14,20 @@ fightButtons.forEach((e) => {
             }, 1500);
     });
 });
-let choiceModal = new bootstrap.Modal(document.getElementById("battleChoice"), { keyboard: !1, backdrop: "static" });
-choiceModal.show();
+
+const player1 = document.getElementById("player1");
+const player2 = document.getElementById("player2");
+const attacks = document.querySelectorAll('ul.aanvallen li');
+
+player1.style.display = "none";
+player2.style.display = "none";
+attacks.forEach((attack) => {
+    attack.style.display = "none";
+});
+
+const choiceModal = new bootstrap.Modal(document.getElementById("battleChoice"), { keyboard: !1, backdrop: "static" });
+const pvpFriendModal = new bootstrap.Modal(document.getElementById("pvpfriend"), { keyboard: !1, backdrop: "static" });
+
 const linkInputgroup = document.getElementById("linkInputgroup"),
     linkInput = document.getElementById("linkInput"),
     small = document.querySelector("#pvpfriend small"),
@@ -48,39 +59,58 @@ socket.on("updateRoomPlayerCount", (roomPlayerCount) => {
 
 // Handle the roomFull event
 socket.on('roomFull', () => {
-    alert("Deze ruimte is vol, U wordt zo dadelijk herleid naar de startpagina.");
-    setTimeout(() => {
-        window.location.href = "/pokemon-battler/";
-    }, 5000);
+    alert("This room is full, you will be redirected to the home page.");
+    window.location.href = "/pokemon-battler/";
 });
 
 // Handle the startGame event
 socket.on('startGame', () => {
-    alert("Het spel gaat beginnen!");
-    // Here you can add logic to initialize and start the game
-    startGame();
+    console.log("The game is starting!");
+    player1.style.display = "block";
+    player2.style.display = "block";
+    attacks.forEach((attack) => {
+        attack.style.display = "block";
+    });
+    choiceModal.hide();
+    pvpFriendModal.hide();
 });
 
-// Function to start the game
-function startGame() {
-    // Implement game start logic here
-    console.log("Game started");
-    // For example, initialize game board, players, etc.
-}
+// Set Pokémon for both players when the game starts
+socket.on('setPlayer1', (pokemon) => {
+    if (pokemon.pokemonBackGif == null) {
+        player1.src = pokemon.pokemonBackImg;
+    }
+    else {
+        player1.src = pokemon.pokemonBackGif;
+    }
+    attacks.forEach((attack, index) => {
+        attack.textContent = pokemon.pokemonMoves[index];
+    });
+});
+
+socket.on('setPlayer2', (pokemon) => {
+    if (pokemon.pokemonGif == null) {
+        player2.src = pokemon.pokemonImg;
+    }
+    else {
+        player2.src = pokemon.pokemonGif;
+    }
+});
 
 // Check for roomID in the URL and join room
 const urlParams = new URL(window.location.href).searchParams;
 const roomID = urlParams.get("roomID");
 
 if (roomID) {
-    // If roomID parameter exists in the URL, join that room, Join a specific room
+    // If roomID parameter exists in the URL, join that room
     socket.emit('joinRoom', roomID);
 } else {
+    choiceModal.show();
+
     // Otherwise, generate a new room link
     socket.on("connect", () => {
-        // Function to generate a random sequence of 5 letters
         function generateRoomID() {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
             let result = '';
             for (let i = 0; i < 5; i++) {
                 result += characters.charAt(Math.floor(Math.random() * characters.length));
@@ -99,8 +129,7 @@ if (roomID) {
 window.addEventListener("beforeunload", () => {
     if (roomID) {
         socket.emit('leaveRoom', roomID);
-    }
-    else {
+    } else {
         socket.emit('disconnect');
     }
 });
