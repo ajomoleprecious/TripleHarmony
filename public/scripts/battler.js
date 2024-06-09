@@ -93,6 +93,7 @@ socket.on('setPlayer1', (pokemon) => {
     attacks.forEach((attack, index) => {
         attack.textContent = pokemon.pokemonMoves[index];
     });
+    document.querySelector("#player1Pogress p").textContent += pokemon.pokemonHP;
 });
 
 socket.on('setPlayer2', (pokemon) => {
@@ -102,6 +103,7 @@ socket.on('setPlayer2', (pokemon) => {
     else {
         player2.src = pokemon.pokemonGif;
     }
+    document.querySelector("#player2Pogress p").textContent += pokemon.pokemonHP;
 });
 
 socket.on('playerDisconnected', () => {
