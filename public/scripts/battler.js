@@ -105,7 +105,7 @@ socket.on('setPlayer2', (pokemon) => {
 });
 
 socket.on('playerDisconnected', () => {
-    alert("U of de ander speler heeft de verbinding verbroken");
+    alert("U of de ander speler heeft de verbinding verbroken, je wordt nu teruggeleid naar de homepagina");
     window.location.href = "/pokemon-battler/";
 });
 
@@ -138,7 +138,6 @@ if (roomID) {
 }
 // if pvpStrangerModal is shown
 pvpStrangerModal._element.addEventListener("shown.bs.modal", () => {
-    console.log("pvpStrangerModal is shown");
     socket.emit('joinRandomPvP');
 });
 

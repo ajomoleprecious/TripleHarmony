@@ -118,6 +118,9 @@ io.on('connection', (socket: any) => {
   console.log(`New client connected: ${socket.id}`);
   console.log(`Total players: ${playersCount}`);
 
+  // Store the player's Pokémon
+  playersPokemon[socket.id] = userPokemon;
+
   // Handle join room
   socket.on('joinRoom', (roomId: string) => {
     if (roomPlayers[roomId] && roomPlayers[roomId].size === 2) {
@@ -135,9 +138,6 @@ io.on('connection', (socket: any) => {
     console.log(`User joined room: ${roomId}`);
     console.log(`Total players in room ${roomId}: ${roomPlayers[roomId].size}`);
     console.log(`Player IDs in room ${roomId}: ${Array.from(roomPlayers[roomId]).join(', ')}`);
-
-    // Store the player's Pokémon
-    playersPokemon[socket.id] = userPokemon;
 
     if (roomPlayers[roomId].size === 2) {
       // Both players have joined, start the game
@@ -160,12 +160,18 @@ io.on('connection', (socket: any) => {
   socket.on('joinRandomPvP', () => {
     playersWaiting[socket.id] = true;
     console.log(`Players waiting for PvP: ${Object.keys(playersWaiting).join(', ')}`);
-    if (Object.keys(playersWaiting).length === 2) {
-      // Both players have joined, start the game
-      const [player1, player2] = Object.keys(playersWaiting).filter(playerId => playersWaiting[playerId]);
+
+    // Check if we have enough players to start a game
+    const waitingPlayers = Object.keys(playersWaiting).filter(playerId => playersWaiting[playerId]);
+    if (waitingPlayers.length >= 2) {
+      const [player1, player2] = waitingPlayers.slice(0, 2);
+      console.log(`Matchmaking players: ${player1} and ${player2}`);
+
+      // Remove matched players from the waiting list
       delete playersWaiting[player1];
       delete playersWaiting[player2];
 
+      // Create a new room ID
       function generateRoomID() {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
         let result = '';
@@ -176,10 +182,24 @@ io.on('connection', (socket: any) => {
       }
 
       const roomId = generateRoomID();
-      // join both players on roomID
-      socket.join(roomId);
-      io.to(player1).emit('joinRoom', roomId);
-      io.to(player2).emit('joinRoom', roomId);
+      // Add both players to the room
+      roomPlayers[roomId] = new Set([player1, player2]);
+      io.sockets.sockets.get(player1)?.join(roomId);
+      io.sockets.sockets.get(player2)?.join(roomId);
+
+
+
+      // Notify both players to start the game
+      io.to(roomId).emit('startGame');
+
+      // Send Pokémon data to both players
+      io.to(player1).emit('setPlayer1', playersPokemon[player1]);
+      io.to(player1).emit('setPlayer2', playersPokemon[player2]);
+
+      io.to(player2).emit('setPlayer1', playersPokemon[player2]);
+      io.to(player2).emit('setPlayer2', playersPokemon[player1]);
+
+      console.log(`Game started in room: ${roomId}`);
     }
   });
 
