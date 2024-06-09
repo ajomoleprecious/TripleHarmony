@@ -27,21 +27,27 @@ attacks.forEach((attack) => {
 
 const choiceModal = new bootstrap.Modal(document.getElementById("battleChoice"), { keyboard: !1, backdrop: "static" });
 const pvpFriendModal = new bootstrap.Modal(document.getElementById("pvpfriend"), { keyboard: !1, backdrop: "static" });
+const pvpStrangerModal = new bootstrap.Modal(document.getElementById("pvpstranger"), { keyboard: !1, backdrop: "static" });
 
 const linkInputgroup = document.getElementById("linkInputgroup"),
     linkInput = document.getElementById("linkInput"),
     small = document.querySelector("#pvpfriend small"),
     waitP = document.querySelector("#pvpfriend p"),
-    waitImg = document.querySelector("#pvpfriend img");
+    joinRoomBtn = document.getElementById("joinroom");
 linkInputgroup.addEventListener("click", () => {
     (linkInputgroup.style.border = "3px solid green"),
         (linkInputgroup.style.borderRadius = "10px"),
         (small.style.display = "block"),
         (waitP.style.display = "block"),
-        (waitImg.style.display = "block"),
-        linkInput.select();
+        (joinRoomBtn.style.display = "block");
+    linkInput.select();
     navigator.clipboard.writeText(linkInput.value);
     document.execCommand("copy");
+    // share the link
+    navigator.share({
+        title: "Pokemon Battler - PvP with me",
+        url: linkInput.value,
+    });
 });
 const players = document.getElementById("players");
 // Establish socket connection
@@ -59,7 +65,7 @@ socket.on("updateRoomPlayerCount", (roomPlayerCount) => {
 
 // Handle the roomFull event
 socket.on('roomFull', () => {
-    alert("This room is full, you will be redirected to the home page.");
+    alert("Deze kamer is al vol met spelers");
     window.location.href = "/pokemon-battler/";
 });
 
@@ -73,6 +79,7 @@ socket.on('startGame', () => {
     });
     choiceModal.hide();
     pvpFriendModal.hide();
+    pvpStrangerModal.hide();
 });
 
 // Set Pokémon for both players when the game starts
@@ -95,6 +102,11 @@ socket.on('setPlayer2', (pokemon) => {
     else {
         player2.src = pokemon.pokemonGif;
     }
+});
+
+socket.on('playerDisconnected', () => {
+    alert("U of de ander speler heeft de verbinding verbroken");
+    window.location.href = "/pokemon-battler/";
 });
 
 // Check for roomID in the URL and join room
@@ -121,16 +133,13 @@ if (roomID) {
         const roomID = generateRoomID();
         const linkInput = document.getElementById("linkInput");
         linkInput.value = `${window.location.origin}/pokemon-battler/?roomID=${roomID}`;
-        socket.emit('joinRoom', roomID);
+        joinRoomBtn.href = linkInput.value;
     });
 }
-
-// Window event on page leave
-window.addEventListener("beforeunload", () => {
-    if (roomID) {
-        socket.emit('leaveRoom', roomID);
-    } else {
-        socket.emit('disconnect');
-    }
+// if pvpStrangerModal is shown
+pvpStrangerModal._element.addEventListener("shown.bs.modal", () => {
+    console.log("pvpStrangerModal is shown");
+    socket.emit('joinRandomPvP');
 });
+
 

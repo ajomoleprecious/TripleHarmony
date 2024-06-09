@@ -84,7 +84,7 @@ export const pokemonsMaxEvolution: any[] = [];
 async function startApp() {
   try {
     server.listen(app.get('port'), async () => {
-      console.log('[server running on: http://localhost:' + app.get('port') + ']');
+      console.log('[server running on: http://localhost:' + server.address().port + ']');
     });
     await client.connect().then(() => {
       mongoose.connect(uri);
@@ -109,6 +109,7 @@ startApp();
 let playersCount: number = 0;
 let roomPlayers: { [roomId: string]: Set<string> } = {};
 let playersPokemon: { [playerId: string]: any } = {};
+let playersWaiting: { [playerId: string]: boolean } = {};
 
 io.on('connection', (socket: any) => {
   playersCount++;
@@ -156,48 +157,61 @@ io.on('connection', (socket: any) => {
     }
   });
 
-  // Handle leave room
-  socket.on('leaveRoom', (roomId: string) => {
-    socket.leave(roomId);
-    if (roomPlayers[roomId]) {
-      roomPlayers[roomId].delete(socket.id);
-      if (roomPlayers[roomId].size === 0) {
-        delete roomPlayers[roomId];
-      } else {
-        io.to(roomId).emit('updateRoomPlayerCount', roomPlayers[roomId].size);
-      }
-    }
+  socket.on('joinRandomPvP', () => {
+    playersWaiting[socket.id] = true;
+    console.log(`Players waiting for PvP: ${Object.keys(playersWaiting).join(', ')}`);
+    if (Object.keys(playersWaiting).length === 2) {
+      // Both players have joined, start the game
+      const [player1, player2] = Object.keys(playersWaiting).filter(playerId => playersWaiting[playerId]);
+      delete playersWaiting[player1];
+      delete playersWaiting[player2];
 
-    console.log(`User left room: ${roomId}`);
-    console.log(`Total players in room ${roomId}: ${roomPlayers[roomId] ? roomPlayers[roomId].size : 0}`);
-    if (roomPlayers[roomId]) {
-      console.log(`Player IDs in room ${roomId}: ${Array.from(roomPlayers[roomId]).join(', ')}`);
+      function generateRoomID() {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
+        let result = '';
+        for (let i = 0; i < 5; i++) {
+          result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return result;
+      }
+
+      const roomId = generateRoomID();
+      // join both players on roomID
+      socket.join(roomId);
+      io.to(player1).emit('joinRoom', roomId);
+      io.to(player2).emit('joinRoom', roomId);
     }
   });
 
   // Handle disconnection
   socket.on('disconnect', () => {
-    playersCount--;
-    io.emit('updatePlayerCount', playersCount);
-
-    for (const roomId in socket.rooms) {
-      if (socket.rooms.hasOwnProperty(roomId) && roomPlayers[roomId]) {
+    for (const roomId in roomPlayers) {
+      if (roomPlayers[roomId].has(socket.id)) {
         roomPlayers[roomId].delete(socket.id);
         if (roomPlayers[roomId].size === 0) {
           delete roomPlayers[roomId];
-        } else {
+        }
+        else if (roomPlayers[roomId].size === 1) {
+          // Only one player left, delete the room
+          delete roomPlayers[roomId];
+          io.to(roomId).emit('playerDisconnected');
+        }
+        else {
           io.to(roomId).emit('updateRoomPlayerCount', roomPlayers[roomId].size);
         }
-        console.log(`Total players in room ${roomId}: ${roomPlayers[roomId] ? roomPlayers[roomId].size : 0}`);
+        console.log(`User left room: ${roomId}`);
+        console.log(`Total players in room ${roomId}: ${roomPlayers[roomId]?.size || 0}`);
         if (roomPlayers[roomId]) {
           console.log(`Player IDs in room ${roomId}: ${Array.from(roomPlayers[roomId]).join(', ')}`);
+        } else {
+          console.log(`No players in room ${roomId}`);
         }
+
       }
     }
+    playersCount--;
+    io.emit('updatePlayerCount', playersCount);
     console.log(`Client disconnected: ${socket.id}`);
     console.log(`Total players: ${playersCount}`);
   });
 });
-
-
-
