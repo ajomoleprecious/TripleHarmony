@@ -8,11 +8,11 @@ fightButtons.forEach((e) => {
         currentPlayer = currentPlayer === 1 ? 2 : 1;
         if (currentPlayer === 1) {
             console.log("Player 1's turn");
-            socket.emit('attackPlayer1');
+            //socket.emit('attackPlayer1');
         }
         else {
             console.log("Player 2's turn");
-            socket.emit('attackPlayer2');
+            //socket.emit('attackPlayer2');
         }
         (punchAnim.style.display = "block"),
             (pokemonTofight.style.animation = "damage .5s"),

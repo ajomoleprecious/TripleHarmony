@@ -142,11 +142,10 @@ io.on('connection', (socket: any) => {
     console.log(`Player IDs in room ${roomId}: ${Array.from(roomPlayers[roomId]).join(', ')}`);
 
     if (roomPlayers[roomId].size === 2) {
-      // Both players have joined, start the game
       const [player1, player2] = Array.from(roomPlayers[roomId]);
 
       // Notify both players to start the game
-      io.to(roomId).emit('startGame');
+      io.to(roomId).emit('startGame', player1, player2); // Pass the player IDs
 
       // Send Pokémon data to both players
       io.to(player1).emit('setPlayer1', playersPokemon[player1]);
@@ -158,7 +157,7 @@ io.on('connection', (socket: any) => {
       console.log(`Game started in room: ${roomId}`);
     }
   });
-  const players : any = [];
+  const players: any = [];
   // Handle join random PvP
   socket.on('joinRandomPvP', () => {
     playersWaiting[socket.id] = true;
@@ -191,21 +190,38 @@ io.on('connection', (socket: any) => {
       io.sockets.sockets.get(player1)?.join(roomId);
       io.sockets.sockets.get(player2)?.join(roomId);
 
+      if (roomPlayers[roomId].size === 2) {
+        const [player1, player2] = Array.from(roomPlayers[roomId]);
 
+        // Notify both players to start the game
+        io.to(roomId).emit('startGame', player1, player2); // Pass the player IDs
 
-      // Notify both players to start the game
-      io.to(roomId).emit('startGame');
+        // Send Pokémon data to both players
+        io.to(player1).emit('setPlayer1', playersPokemon[player1]);
+        io.to(player1).emit('setPlayer2', playersPokemon[player2]);
 
-      // Send Pokémon data to both players
-      io.to(player1).emit('setPlayer1', playersPokemon[player1]);
-      io.to(player1).emit('setPlayer2', playersPokemon[player2]);
+        io.to(player2).emit('setPlayer1', playersPokemon[player2]);
+        io.to(player2).emit('setPlayer2', playersPokemon[player1]);
 
-      io.to(player2).emit('setPlayer1', playersPokemon[player2]);
-      io.to(player2).emit('setPlayer2', playersPokemon[player1]);
+        console.log(`Game started in room: ${roomId}`);
 
-      console.log(`Game started in room: ${roomId}`);
+        let turn = 1; // Track whose turn it is
 
-      
+        socket.on('attack', (roomId: string, playerId: string, attack: number) => {
+          if (turn === 1 && playerId === player1) {
+            // Player 1's turn
+            io.to(player2).emit('attackReceived', attack);
+            turn = 2; // Switch to Player 2
+          } else if (turn === 2 && playerId === player2) {
+            // Player 2's turn
+            io.to(player1).emit('attackReceived', attack);
+            turn = 1; // Switch to Player 1
+          }
+          // Notify clients to update the turn
+          io.to(roomId).emit('updateTurn', turn);
+        });
+
+      }
     }
   });
 
@@ -214,7 +230,7 @@ io.on('connection', (socket: any) => {
     io.to(roomId).emit('attack', player, attack);
   });*/
 
-  socket.on('attackPlayer1', () => {
+  /*socket.on('attackPlayer1', () => {
     const [player1, player2] = Array.from(players);
     io.to(player1).emit('attackPlayer1');
     io.to(player2).emit('attackPlayer2');
@@ -224,7 +240,9 @@ io.on('connection', (socket: any) => {
     const [player1, player2] = Array.from(players);
     io.to(player2).emit('attackPlayer1');
     io.to(player1).emit('attackPlayer2');
-  });
+  });*/
+
+
 
   // Handle disconnection
   socket.on('disconnect', () => {
