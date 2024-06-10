@@ -5,9 +5,16 @@ let pokemonTofight = document.querySelector(".battlefield article:nth-child(2) i
 let currentPlayer = 1;
 fightButtons.forEach((e) => {
     e.addEventListener("click", () => {
-        socket.emit('attack', currentPlayer);
         currentPlayer = currentPlayer === 1 ? 2 : 1;
-        /*(punchAnim.style.display = "block"),
+        if (currentPlayer === 1) {
+            console.log("Player 1's turn");
+            socket.emit('attackPlayer1');
+        }
+        else {
+            console.log("Player 2's turn");
+            socket.emit('attackPlayer2');
+        }
+        (punchAnim.style.display = "block"),
             (pokemonTofight.style.animation = "damage .5s"),
             (pokemonTofight.style.animationdelay = "1s"),
             setTimeout(() => {
@@ -15,7 +22,7 @@ fightButtons.forEach((e) => {
             }, 1e3),
             setTimeout(() => {
                 pokemonTofight.style.animation = "none";
-            }, 1500);*/
+            }, 1500);
     });
 });
 
@@ -25,9 +32,6 @@ const attacks = document.querySelectorAll('ul.aanvallen li');
 
 player1.style.display = "none";
 player2.style.display = "none";
-attacks.forEach((attack) => {
-    attack.style.display = "none";
-});
 
 const choiceModal = new bootstrap.Modal(document.getElementById("battleChoice"), { keyboard: !1, backdrop: "static" });
 const pvpFriendModal = new bootstrap.Modal(document.getElementById("pvpfriend"), { keyboard: !1, backdrop: "static" });
@@ -78,9 +82,6 @@ socket.on('startGame', () => {
     console.log("The game is starting!");
     player1.style.display = "block";
     player2.style.display = "block";
-    attacks.forEach((attack) => {
-        attack.style.display = "block";
-    });
     choiceModal.hide();
     pvpFriendModal.hide();
     pvpStrangerModal.hide();

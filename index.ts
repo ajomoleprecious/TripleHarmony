@@ -213,16 +213,17 @@ io.on('connection', (socket: any) => {
   /*socket.on('attack', (roomId: string, player: number, attack: number) => {
     io.to(roomId).emit('attack', player, attack);
   });*/
-  socket.on('attack', (currentPlayer : number) => {
+
+  socket.on('attackPlayer1', () => {
     const [player1, player2] = Array.from(players);
-    if (currentPlayer === 1) {
-      io.to(player1).emit('attackPlayer1');
-      io.to(player2).emit('attackPlayer2');
-    }
-    else {
-      io.to(player2).emit('attackPlayer1');
-      io.to(player1).emit('attackPlayer2');
-    }
+    io.to(player1).emit('attackPlayer1');
+    io.to(player2).emit('attackPlayer2');
+  });
+
+  socket.on('attackPlayer2', () => {
+    const [player1, player2] = Array.from(players);
+    io.to(player2).emit('attackPlayer1');
+    io.to(player1).emit('attackPlayer2');
   });
 
   // Handle disconnection
