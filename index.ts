@@ -128,6 +128,8 @@ io.on('connection', (socket: any) => {
       io.to(socket.id).emit('roomFull');
       return;
     }
+    // Store the player's Pokémon
+    playersPokemon[socket.id] = userPokemon;
     socket.join(roomId);
     if (!roomPlayers[roomId]) {
       roomPlayers[roomId] = new Set();
@@ -156,7 +158,8 @@ io.on('connection', (socket: any) => {
       console.log(`Game started in room: ${roomId}`);
     }
   });
-
+  const players : any = [];
+  // Handle join random PvP
   socket.on('joinRandomPvP', () => {
     playersWaiting[socket.id] = true;
     console.log(`Players waiting for PvP: ${Object.keys(playersWaiting).join(', ')}`);
@@ -166,7 +169,8 @@ io.on('connection', (socket: any) => {
     if (waitingPlayers.length >= 2) {
       const [player1, player2] = waitingPlayers.slice(0, 2);
       console.log(`Matchmaking players: ${player1} and ${player2}`);
-
+      players[0] = player1;
+      players[1] = player2;
       // Remove matched players from the waiting list
       delete playersWaiting[player1];
       delete playersWaiting[player2];
@@ -200,6 +204,24 @@ io.on('connection', (socket: any) => {
       io.to(player2).emit('setPlayer2', playersPokemon[player1]);
 
       console.log(`Game started in room: ${roomId}`);
+
+      
+    }
+  });
+
+  // Handle player attack
+  /*socket.on('attack', (roomId: string, player: number, attack: number) => {
+    io.to(roomId).emit('attack', player, attack);
+  });*/
+  socket.on('attack', (currentPlayer : number) => {
+    const [player1, player2] = Array.from(players);
+    if (currentPlayer === 1) {
+      io.to(player1).emit('attackPlayer1');
+      io.to(player2).emit('attackPlayer2');
+    }
+    else {
+      io.to(player2).emit('attackPlayer1');
+      io.to(player1).emit('attackPlayer2');
     }
   });
 

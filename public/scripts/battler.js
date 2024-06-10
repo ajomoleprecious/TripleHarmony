@@ -1,9 +1,13 @@
 let pokemonTofight = document.querySelector(".battlefield article:nth-child(2) img"),
     fightButtons = document.querySelectorAll(".aanvallen li"),
     punchAnim = document.querySelector(".pokemon-damage img:nth-child(2)");
+
+let currentPlayer = 1;
 fightButtons.forEach((e) => {
     e.addEventListener("click", () => {
-        (punchAnim.style.display = "block"),
+        socket.emit('attack', currentPlayer);
+        currentPlayer = currentPlayer === 1 ? 2 : 1;
+        /*(punchAnim.style.display = "block"),
             (pokemonTofight.style.animation = "damage .5s"),
             (pokemonTofight.style.animationdelay = "1s"),
             setTimeout(() => {
@@ -11,7 +15,7 @@ fightButtons.forEach((e) => {
             }, 1e3),
             setTimeout(() => {
                 pokemonTofight.style.animation = "none";
-            }, 1500);
+            }, 1500);*/
     });
 });
 
@@ -106,8 +110,32 @@ socket.on('setPlayer2', (pokemon) => {
     document.querySelector("#player2Pogress p").textContent += pokemon.pokemonHP;
 });
 
+socket.on('attackPlayer2', () => {
+    (punchAnim.style.display = "block"),
+        (player2.style.animation = "damage .5s"),
+        (player2.style.animationdelay = "1s"),
+        setTimeout(() => {
+            punchAnim.style.display = "none";
+        }, 1e3),
+        setTimeout(() => {
+            player2.style.animation = "none";
+        }, 1500);
+});
+
+socket.on('attackPlayer1', () => {
+    (punchAnim.style.display = "block"),
+        (player1.style.animation = "damage .5s"),
+        (player1.style.animationdelay = "1s"),
+        setTimeout(() => {
+            punchAnim.style.display = "none";
+        }, 1e3),
+        setTimeout(() => {
+            player1.style.animation = "none";
+        }, 1500);
+});
+
 socket.on('playerDisconnected', () => {
-    alert("U of de ander speler heeft de verbinding verbroken, je wordt nu teruggeleid naar de homepagina");
+    alert("De verbinding is verbroken door u of uw tegenstander. 😞");
     window.location.href = "/pokemon-battler/";
 });
 
