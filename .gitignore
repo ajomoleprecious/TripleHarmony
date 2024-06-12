@@ -216,4 +216,4 @@ AppPackages/
 dist/
 
 # Remove env files
-#.env
+.env
