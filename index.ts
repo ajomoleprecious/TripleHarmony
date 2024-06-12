@@ -205,6 +205,8 @@ io.on('connection', (socket: any) => {
 
         console.log(`Game started in room: ${roomId}`);
 
+        io.to(roomId).emit('readyToStart');
+        
         let turn = 1; // Track whose turn it is
 
         socket.on('attack', (roomId: string, playerId: string, attack: number) => {

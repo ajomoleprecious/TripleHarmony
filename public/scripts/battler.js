@@ -2,18 +2,8 @@ let pokemonTofight = document.querySelector(".battlefield article:nth-child(2) i
     fightButtons = document.querySelectorAll(".aanvallen li"),
     punchAnim = document.querySelector(".pokemon-damage img:nth-child(2)");
 
-let currentPlayer = 1;
 fightButtons.forEach((e) => {
     e.addEventListener("click", () => {
-        currentPlayer = currentPlayer === 1 ? 2 : 1;
-        if (currentPlayer === 1) {
-            console.log("Player 1's turn");
-            //socket.emit('attackPlayer1');
-        }
-        else {
-            console.log("Player 2's turn");
-            //socket.emit('attackPlayer2');
-        }
         (punchAnim.style.display = "block"),
             (pokemonTofight.style.animation = "damage .5s"),
             (pokemonTofight.style.animationdelay = "1s"),
@@ -57,7 +47,6 @@ linkInputgroup.addEventListener("click", () => {
         url: linkInput.value,
     });
 });
-const players = document.getElementById("players");
 // Establish socket connection
 const socket = io();
 
@@ -77,8 +66,11 @@ socket.on('roomFull', () => {
     window.location.href = "/pokemon-battler/";
 });
 
+const players = [];
 // Handle the startGame event
-socket.on('startGame', () => {
+socket.on('startGame', (socket1, socket2) => {
+    players[player1] = socket1;
+    players[player2] = socket2;
     console.log("The game is starting!");
     player1.style.display = "block";
     player2.style.display = "block";
@@ -133,6 +125,17 @@ socket.on('attackPlayer1', () => {
         setTimeout(() => {
             player1.style.animation = "none";
         }, 1500);
+});
+
+socket.on('readyToStart', () => {
+    if (socket.id === players[player1]) {
+       fightButtons.forEach((e) => {
+              // grey out the buttons and disable them with pointer events
+                e.style.backgroundColor = "grey";
+                e.disabled = true;
+                e.style.pointerEvents = "none";
+         }); 
+    }
 });
 
 socket.on('playerDisconnected', () => {
