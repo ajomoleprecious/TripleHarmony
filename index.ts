@@ -124,39 +124,47 @@ io.on('connection', (socket: any) => {
   playersPokemon[socket.id] = userPokemon;
 
   // Handle join room
-  socket.on('joinRoom', (roomId: string) => {
-    if (roomPlayers[roomId] && roomPlayers[roomId].size === 2) {
+  socket.on('joinRoom', (roomID: any) => {
+    if (roomPlayers[roomID] && roomPlayers[roomID].size === 2) {
       // Room is full
       io.to(socket.id).emit('roomFull');
       return;
     }
     
-    socket.join(roomId);
-    if (!roomPlayers[roomId]) {
-      roomPlayers[roomId] = new Set();
+    //socket.join(roomId);
+    if (!roomPlayers[roomID]) {
+      roomPlayers[roomID] = new Set();
     }
-    roomPlayers[roomId].add(socket.id);
-    io.sockets.sockets.get(socket.id)?.join(roomId);
-    console.log(`User joined room: ${roomId}`);
-    console.log(`Total players in room ${roomId}: ${roomPlayers[roomId].size}`);
-    console.log(`Player IDs in room ${roomId}: ${Array.from(roomPlayers[roomId]).join(', ')}`);
+    roomPlayers[roomID].add(socket.id);
+    
+    //console.log(`User joined room: ${roomId}`);
+    //console.log(`Total players in room ${roomId}: ${roomPlayers[roomId].size}`);
+    //console.log(`Player IDs in room ${roomId}: ${Array.from(roomPlayers[roomId]).join(', ')}`);
 
-    if (roomPlayers[roomId].size === 2) {
-      const [player1, player2] = Array.from(roomPlayers[roomId]);
-
+    if (roomPlayers[roomID].size === 2) {
+      const [player1, player2] = Array.from(roomPlayers[roomID]);
+      io.sockets.sockets.get(player1)?.join(roomID);
+      io.sockets.sockets.get(player2)?.join(roomID);
+      
+      // Add these lines to assign player1 and player2 to the players array
+      players[0] = player1;
+      players[1] = player2;
+    
       // Notify both players to start the game
-      io.to(roomId).emit('startGame', player1, player2); // Pass the player IDs
-      currentPlayer = player2;
-      io.to(roomId).emit('currentPlayer', currentPlayer);
-
+      io.to(roomID).emit('startGame', player1, player2); // Pass the player IDs
+    
+      // Initialize the currentPlayer to player1 to start the game
+      currentPlayer = player1;
+      io.to(roomID).emit('currentPlayer', currentPlayer);
+    
       // Send Pokémon data to both players
       io.to(player1).emit('setPlayer1', playersPokemon[player1]);
       io.to(player1).emit('setPlayer2', playersPokemon[player2]);
-
+    
       io.to(player2).emit('setPlayer1', playersPokemon[player2]);
       io.to(player2).emit('setPlayer2', playersPokemon[player1]);
-
-      console.log(`Game started in room: ${roomId}`);
+    
+      console.log(`Game started in room: ${roomID}`);
     }
   });
 
@@ -214,7 +222,6 @@ io.on('connection', (socket: any) => {
   });
 
   socket.on('attackPlayer1', () => {
-    console.log('attackPlayer1');
     currentPlayer = players[1]; // Update the currentPlayer to the opponent
     io.to(players[0]).emit('currentPlayer', currentPlayer); // Notify player1 about the current player
     io.to(players[1]).emit('currentPlayer', currentPlayer); // Notify player2 about the current player
@@ -224,7 +231,6 @@ io.on('connection', (socket: any) => {
   });
 
   socket.on('attackPlayer2', () => {
-    console.log('attackPlayer2');
     currentPlayer = players[0]; // Update the currentPlayer to the opponent
     io.to(players[1]).emit('currentPlayer', currentPlayer); // Notify player2 about the current player
     io.to(players[0]).emit('currentPlayer', currentPlayer); // Notify player1 about the current player

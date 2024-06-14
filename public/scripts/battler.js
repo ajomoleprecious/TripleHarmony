@@ -99,6 +99,7 @@ socket.on('setPlayer2', (pokemon) => {
 });
 
 socket.on('currentPlayer', (player) => {
+    console.log("Current player is", player);
     if (socket.id === player) {
         fightButtons.forEach((e) => {
             e.style.backgroundColor = "var(--orange)";

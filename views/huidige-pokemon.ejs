@@ -61,10 +61,12 @@
     <button type="button" class="btn-close filter-close" aria-label="Close"></button>
     <form action="./filter" method="get" id="pokemon-filter-form">
       <h2>Filter de pokémons</h2>
-      <section class="input-group mb-3">
-        <input type="text" class="form-control" name="pokemon_name" placeholder="Zoek op naam">
+      <section class="input-group">
+        <input type="text" id='pokemonSearch' class="form-control" name="pokemon_name" placeholder="Zoek op naam">
         <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
       </section>
+      <ul class="left-pokemon-list">
+      </ul>
       <select class="form-select form-select-lg mb-3" name="pokemon_type" aria-label="Large select example">
         <option value="none" selected>Pokémon type</option>
         <hr class="dropdown-sectionider">
