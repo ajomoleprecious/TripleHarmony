@@ -55,11 +55,6 @@ socket.on("updatePlayerCount", (playerCount) => {
     document.getElementById("players").textContent = playerCount;
 });
 
-// Handle the updateRoomPlayerCount event
-socket.on("updateRoomPlayerCount", (roomPlayerCount) => {
-    document.getElementById("roomPlayers").textContent = roomPlayerCount;
-});
-
 // Handle the roomFull event
 socket.on('roomFull', () => {
     alert("Deze kamer is al vol met spelers");
@@ -69,8 +64,8 @@ socket.on('roomFull', () => {
 const players = [];
 // Handle the startGame event
 socket.on('startGame', (socket1, socket2) => {
-    players[player1] = socket1;
-    players[player2] = socket2;
+    players[player1] = socket1; // Assuming players[0] is player1
+    players[player2] = socket2; // Assuming players[1] is player2
     console.log("The game is starting!");
     player1.style.display = "block";
     player2.style.display = "block";
@@ -103,28 +98,36 @@ socket.on('setPlayer2', (pokemon) => {
     document.querySelector("#player2Pogress p").textContent += pokemon.pokemonHP;
 });
 
-socket.on('attackPlayer2', () => {
-    (punchAnim.style.display = "block"),
-        (player2.style.animation = "damage .5s"),
-        (player2.style.animationdelay = "1s"),
-        setTimeout(() => {
-            punchAnim.style.display = "none";
-        }, 1e3),
-        setTimeout(() => {
-            player2.style.animation = "none";
-        }, 1500);
-});
-
-socket.on('attackPlayer1', () => {
-    (punchAnim.style.display = "block"),
-        (player1.style.animation = "damage .5s"),
-        (player1.style.animationdelay = "1s"),
-        setTimeout(() => {
-            punchAnim.style.display = "none";
-        }, 1e3),
-        setTimeout(() => {
-            player1.style.animation = "none";
-        }, 1500);
+socket.on('currentPlayer', (player) => {
+    if (socket.id === player) {
+        fightButtons.forEach((e) => {
+            e.style.backgroundColor = "var(--orange)";
+            e.disabled = false;
+            e.style.pointerEvents = "auto";
+        });
+    } else {
+        fightButtons.forEach((e) => {
+            e.style.backgroundColor = "grey";
+            e.disabled = true;
+            e.style.pointerEvents = "none";
+        });
+    }
+    if (players[player1] === player) {
+        fightButtons.forEach((e) => {
+            e.addEventListener("click", () => {
+                socket.emit('attackPlayer2');
+            });
+        });
+        return;
+    }
+    else {
+        fightButtons.forEach((e) => {
+            e.addEventListener("click", () => {
+                socket.emit('attackPlayer1');
+            });
+        });
+        return;
+    }
 });
 
 socket.on('readyToStart', () => {
@@ -174,5 +177,3 @@ if (roomID) {
 pvpStrangerModal._element.addEventListener("shown.bs.modal", () => {
     socket.emit('joinRandomPvP');
 });
-
-

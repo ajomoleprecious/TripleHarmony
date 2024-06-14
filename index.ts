@@ -110,6 +110,8 @@ let playersCount: number = 0;
 let roomPlayers: { [roomId: string]: Set<string> } = {};
 let playersPokemon: { [playerId: string]: any } = {};
 let playersWaiting: { [playerId: string]: boolean } = {};
+let currentPlayer: any = '';
+const players: any = [];
 
 io.on('connection', (socket: any) => {
   playersCount++;
@@ -128,15 +130,13 @@ io.on('connection', (socket: any) => {
       io.to(socket.id).emit('roomFull');
       return;
     }
-    // Store the player's Pokémon
-    playersPokemon[socket.id] = userPokemon;
+    
     socket.join(roomId);
     if (!roomPlayers[roomId]) {
       roomPlayers[roomId] = new Set();
     }
     roomPlayers[roomId].add(socket.id);
-    io.to(roomId).emit('updateRoomPlayerCount', roomPlayers[roomId].size);
-
+    io.sockets.sockets.get(socket.id)?.join(roomId);
     console.log(`User joined room: ${roomId}`);
     console.log(`Total players in room ${roomId}: ${roomPlayers[roomId].size}`);
     console.log(`Player IDs in room ${roomId}: ${Array.from(roomPlayers[roomId]).join(', ')}`);
@@ -146,6 +146,8 @@ io.on('connection', (socket: any) => {
 
       // Notify both players to start the game
       io.to(roomId).emit('startGame', player1, player2); // Pass the player IDs
+      currentPlayer = player2;
+      io.to(roomId).emit('currentPlayer', currentPlayer);
 
       // Send Pokémon data to both players
       io.to(player1).emit('setPlayer1', playersPokemon[player1]);
@@ -157,7 +159,7 @@ io.on('connection', (socket: any) => {
       console.log(`Game started in room: ${roomId}`);
     }
   });
-  const players: any = [];
+
   // Handle join random PvP
   socket.on('joinRandomPvP', () => {
     playersWaiting[socket.id] = true;
@@ -195,6 +197,8 @@ io.on('connection', (socket: any) => {
 
         // Notify both players to start the game
         io.to(roomId).emit('startGame', player1, player2); // Pass the player IDs
+        currentPlayer = player1;
+        io.to(roomId).emit('currentPlayer', currentPlayer);
 
         // Send Pokémon data to both players
         io.to(player1).emit('setPlayer1', playersPokemon[player1]);
@@ -205,45 +209,29 @@ io.on('connection', (socket: any) => {
 
         console.log(`Game started in room: ${roomId}`);
 
-        io.to(roomId).emit('readyToStart');
-        
-        let turn = 1; // Track whose turn it is
-
-        socket.on('attack', (roomId: string, playerId: string, attack: number) => {
-          if (turn === 1 && playerId === player1) {
-            // Player 1's turn
-            io.to(player2).emit('attackReceived', attack);
-            turn = 2; // Switch to Player 2
-          } else if (turn === 2 && playerId === player2) {
-            // Player 2's turn
-            io.to(player1).emit('attackReceived', attack);
-            turn = 1; // Switch to Player 1
-          }
-          // Notify clients to update the turn
-          io.to(roomId).emit('updateTurn', turn);
-        });
-
       }
     }
   });
 
-  // Handle player attack
-  /*socket.on('attack', (roomId: string, player: number, attack: number) => {
-    io.to(roomId).emit('attack', player, attack);
-  });*/
-
-  /*socket.on('attackPlayer1', () => {
-    const [player1, player2] = Array.from(players);
-    io.to(player1).emit('attackPlayer1');
-    io.to(player2).emit('attackPlayer2');
+  socket.on('attackPlayer1', () => {
+    console.log('attackPlayer1');
+    currentPlayer = players[1]; // Update the currentPlayer to the opponent
+    io.to(players[0]).emit('currentPlayer', currentPlayer); // Notify player1 about the current player
+    io.to(players[1]).emit('currentPlayer', currentPlayer); // Notify player2 about the current player
+    //io.to(player1).emit('attackPlayer1');
+    //io.to(player2).emit('attackPlayer2');
+    
   });
 
   socket.on('attackPlayer2', () => {
-    const [player1, player2] = Array.from(players);
-    io.to(player2).emit('attackPlayer1');
-    io.to(player1).emit('attackPlayer2');
-  });*/
+    console.log('attackPlayer2');
+    currentPlayer = players[0]; // Update the currentPlayer to the opponent
+    io.to(players[1]).emit('currentPlayer', currentPlayer); // Notify player2 about the current player
+    io.to(players[0]).emit('currentPlayer', currentPlayer); // Notify player1 about the current player
+    //io.to(player2).emit('attackPlayer1');
+    //io.to(player1).emit('attackPlayer2');
 
+  });
 
 
   // Handle disconnection
