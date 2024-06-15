@@ -2,7 +2,7 @@ let pokemonTofight = document.querySelector(".battlefield article:nth-child(2) i
     fightButtons = document.querySelectorAll(".aanvallen li"),
     punchAnim = document.querySelector(".pokemon-damage img:nth-child(2)");
 
-fightButtons.forEach((e) => {
+/*fightButtons.forEach((e) => {
     e.addEventListener("click", () => {
         (punchAnim.style.display = "block"),
             (pokemonTofight.style.animation = "damage .5s"),
@@ -14,7 +14,7 @@ fightButtons.forEach((e) => {
                 pokemonTofight.style.animation = "none";
             }, 1500);
     });
-});
+});*/
 
 const player1 = document.getElementById("player1");
 const player2 = document.getElementById("player2");
@@ -66,7 +66,6 @@ const players = [];
 socket.on('startGame', (socket1, socket2) => {
     players[player1] = socket1; // Assuming players[0] is player1
     players[player2] = socket2; // Assuming players[1] is player2
-    console.log("The game is starting!");
     player1.style.display = "block";
     player2.style.display = "block";
     choiceModal.hide();
@@ -85,7 +84,7 @@ socket.on('setPlayer1', (pokemon) => {
     attacks.forEach((attack, index) => {
         attack.textContent = pokemon.pokemonMoves[index];
     });
-    document.querySelector("#player1Pogress p").textContent += pokemon.pokemonHP;
+    document.querySelector("#player1Progress p").textContent += pokemon.pokemonHP;
 });
 
 socket.on('setPlayer2', (pokemon) => {
@@ -95,11 +94,11 @@ socket.on('setPlayer2', (pokemon) => {
     else {
         player2.src = pokemon.pokemonGif;
     }
-    document.querySelector("#player2Pogress p").textContent += pokemon.pokemonHP;
+    document.querySelector("#player2Progress p").textContent += pokemon.pokemonHP;
 });
-
+let currentPlayer;
 socket.on('currentPlayer', (player) => {
-    console.log("Current player is", player);
+    currentPlayer = player;
     if (socket.id === player) {
         fightButtons.forEach((e) => {
             e.style.backgroundColor = "var(--orange)";
@@ -133,14 +132,23 @@ socket.on('currentPlayer', (player) => {
 
 socket.on('readyToStart', () => {
     if (socket.id === players[player1]) {
-       fightButtons.forEach((e) => {
-              // grey out the buttons and disable them with pointer events
-                e.style.backgroundColor = "grey";
-                e.disabled = true;
-                e.style.pointerEvents = "none";
-         }); 
+        fightButtons.forEach((e) => {
+            // grey out the buttons and disable them with pointer events
+            e.style.backgroundColor = "grey";
+            e.disabled = true;
+            e.style.pointerEvents = "none";
+        });
     }
 });
+
+socket.on('attackOnPlayer1', () => {
+
+});
+
+socket.on('attackOnPlayer2', () => {
+
+});
+
 
 socket.on('playerDisconnected', () => {
     alert("De verbinding is verbroken door u of uw tegenstander. 😞");

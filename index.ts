@@ -225,18 +225,16 @@ io.on('connection', (socket: any) => {
     currentPlayer = players[1]; // Update the currentPlayer to the opponent
     io.to(players[0]).emit('currentPlayer', currentPlayer); // Notify player1 about the current player
     io.to(players[1]).emit('currentPlayer', currentPlayer); // Notify player2 about the current player
-    //io.to(player1).emit('attackPlayer1');
-    //io.to(player2).emit('attackPlayer2');
-    
+    io.to(players[0]).emit('attackOnPlayer1');
+    io.to(players[1]).emit('attackOnPlayer2');
   });
 
   socket.on('attackPlayer2', () => {
     currentPlayer = players[0]; // Update the currentPlayer to the opponent
     io.to(players[1]).emit('currentPlayer', currentPlayer); // Notify player2 about the current player
     io.to(players[0]).emit('currentPlayer', currentPlayer); // Notify player1 about the current player
-    //io.to(player2).emit('attackPlayer1');
-    //io.to(player1).emit('attackPlayer2');
-
+    io.to(players[1]).emit('attackOnPlayer1');
+    io.to(players[0]).emit('attackOnPlayer2');
   });
 
 
