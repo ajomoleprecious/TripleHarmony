@@ -130,13 +130,13 @@ io.on('connection', (socket: any) => {
       io.to(socket.id).emit('roomFull');
       return;
     }
-    
+
     //socket.join(roomId);
     if (!roomPlayers[roomID]) {
       roomPlayers[roomID] = new Set();
     }
     roomPlayers[roomID].add(socket.id);
-    
+
     //console.log(`User joined room: ${roomId}`);
     //console.log(`Total players in room ${roomId}: ${roomPlayers[roomId].size}`);
     //console.log(`Player IDs in room ${roomId}: ${Array.from(roomPlayers[roomId]).join(', ')}`);
@@ -145,25 +145,25 @@ io.on('connection', (socket: any) => {
       const [player1, player2] = Array.from(roomPlayers[roomID]);
       io.sockets.sockets.get(player1)?.join(roomID);
       io.sockets.sockets.get(player2)?.join(roomID);
-      
+
       // Add these lines to assign player1 and player2 to the players array
       players[0] = player1;
       players[1] = player2;
-    
+
       // Notify both players to start the game
       io.to(roomID).emit('startGame', player1, player2); // Pass the player IDs
-    
+
       // Initialize the currentPlayer to player1 to start the game
       currentPlayer = player1;
       io.to(roomID).emit('currentPlayer', currentPlayer);
-    
+
       // Send Pokémon data to both players
       io.to(player1).emit('setPlayer1', playersPokemon[player1]);
       io.to(player1).emit('setPlayer2', playersPokemon[player2]);
-    
+
       io.to(player2).emit('setPlayer1', playersPokemon[player2]);
       io.to(player2).emit('setPlayer2', playersPokemon[player1]);
-    
+
       console.log(`Game started in room: ${roomID}`);
     }
   });
@@ -221,20 +221,38 @@ io.on('connection', (socket: any) => {
     }
   });
 
+  // Define a cooldown period to prevent rapid firing of events
+  const attackCooldown = 1000; // 1 second cooldown
+  let lastAttackTime = 0;
+
   socket.on('attackPlayer1', () => {
-    currentPlayer = players[1]; // Update the currentPlayer to the opponent
-    io.to(players[0]).emit('currentPlayer', currentPlayer); // Notify player1 about the current player
-    io.to(players[1]).emit('currentPlayer', currentPlayer); // Notify player2 about the current player
+    if (Date.now() - lastAttackTime < attackCooldown) return;
+    lastAttackTime = Date.now();
+
+    // Notify Player 2 about the attack
+    io.to(players[1]).emit('attackOnPlayer1');
+    // Notify Player 1 about their own attack
     io.to(players[0]).emit('attackOnPlayer1');
-    io.to(players[1]).emit('attackOnPlayer2');
+    // Update currentPlayer to Player 2
+    currentPlayer = players[1];
+    // Notify both players about the updated currentPlayer
+    io.to(players[0]).emit('currentPlayer', currentPlayer);
+    io.to(players[1]).emit('currentPlayer', currentPlayer);
   });
 
   socket.on('attackPlayer2', () => {
-    currentPlayer = players[0]; // Update the currentPlayer to the opponent
-    io.to(players[1]).emit('currentPlayer', currentPlayer); // Notify player2 about the current player
-    io.to(players[0]).emit('currentPlayer', currentPlayer); // Notify player1 about the current player
-    io.to(players[1]).emit('attackOnPlayer1');
+    if (Date.now() - lastAttackTime < attackCooldown) return;
+    lastAttackTime = Date.now();
+
+    // Notify Player 1 about the attack
     io.to(players[0]).emit('attackOnPlayer2');
+    // Notify Player 2 about their own attack
+    io.to(players[1]).emit('attackOnPlayer2');
+    // Update currentPlayer to Player 1
+    currentPlayer = players[0];
+    // Notify both players about the updated currentPlayer
+    io.to(players[1]).emit('currentPlayer', currentPlayer);
+    io.to(players[0]).emit('currentPlayer', currentPlayer);
   });
 
 

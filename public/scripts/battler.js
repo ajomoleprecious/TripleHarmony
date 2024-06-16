@@ -99,6 +99,7 @@ socket.on('setPlayer2', (pokemon) => {
 let currentPlayer;
 socket.on('currentPlayer', (player) => {
     currentPlayer = player;
+    console.log("Switching to player: "+ currentPlayer);
     if (socket.id === player) {
         fightButtons.forEach((e) => {
             e.style.backgroundColor = "var(--orange)";
@@ -126,9 +127,42 @@ socket.on('currentPlayer', (player) => {
                 socket.emit('attackPlayer1');
             });
         });
-        return;
     }
+
+    socket.on('attackOnPlayer1', () => {
+            // Show damage animation on player 2's screen (top right)
+            if (currentPlayer === players[player1]) {
+                punchAnim.style.display = "block";
+                pokemonTofight.style.animation = "damage .5s";
+                pokemonTofight.style.animationdelay = "1s";
+                setTimeout(() => {
+                    punchAnim.style.display = "none";
+                }, 1000);
+                setTimeout(() => {
+                    pokemonTofight.style.animation = "none";
+                }, 1500);
+            }
+            // Show damage animation on player 1's screen (bottom left)
+            else {
+                punchAnim.style.display = "block";
+                player1.style.animation = "damage .5s";
+                player1.style.animationdelay = "1s";
+                setTimeout(() => {
+                    punchAnim.style.display = "none";
+                }, 1000);
+                setTimeout(() => {
+                    player1.style.animation = "none";
+                }, 1500);
+            }
+        });
+    
+    socket.on('attackOnPlayer2', () => {
+        // 
+    });
 });
+
+
+
 
 socket.on('readyToStart', () => {
     if (socket.id === players[player1]) {
@@ -141,14 +175,30 @@ socket.on('readyToStart', () => {
     }
 });
 
-socket.on('attackOnPlayer1', () => {
 
+
+
+/*socket.on('attackOnPlayer1', () => {
+    // Show damage animation on player 1's screen (bottom left)
+    if (currentPlayer === players[player1]) {
+        alert("Attack on player 1");
+    }
+    // Show damage animation on player 2's screen (top right)
+    else {
+        alert("Attack on player 2");
+    }
 });
 
 socket.on('attackOnPlayer2', () => {
-
-});
-
+    // Show damage animation on player 2's screen (top right)
+    if (currentPlayer === players[player2]) {
+        alert("Attack on player 2");
+    }
+    // Show damage animation on player 1's screen (bottom left)
+    else {
+        alert("Attack on player 1");
+    }
+});*/
 
 socket.on('playerDisconnected', () => {
     alert("De verbinding is verbroken door u of uw tegenstander. 😞");
