@@ -221,40 +221,31 @@ io.on('connection', (socket: any) => {
     }
   });
 
-  // Define a cooldown period to prevent rapid firing of events
-  const attackCooldown = 1000; // 1 second cooldown
-  let lastAttackTime = 0;
+  // Helper function to notify players
+  function notifyPlayers(attackerIndex: any, defenderIndex: any, currentPlayer: any) {
+    io.to(players[attackerIndex]).emit('currentPlayer', currentPlayer);
+    io.to(players[defenderIndex]).emit('currentPlayer', currentPlayer);
 
-  socket.on('attackPlayer1', () => {
-    if (Date.now() - lastAttackTime < attackCooldown) return;
-    lastAttackTime = Date.now();
+    // Notify the defender of the attack
+    io.to(players[defenderIndex]).emit(`attackFromPlayer${attackerIndex + 1}`);
 
-    // Notify Player 2 about the attack
-    io.to(players[1]).emit('attackOnPlayer1');
-    // Notify Player 1 about their own attack
-    io.to(players[0]).emit('attackOnPlayer1');
-    // Update currentPlayer to Player 2
+    // Notify the attacker of the attack being sent
+    io.to(players[attackerIndex]).emit(`receiveAttackFromPlayer${defenderIndex + 1}`);
+  }
+
+  // Handle attack from Player 1 to Player 2
+  socket.on('attackPlayer2FromPlayer1', () => {
+    // Player 2 becomes the current player
     currentPlayer = players[1];
-    // Notify both players about the updated currentPlayer
-    io.to(players[0]).emit('currentPlayer', currentPlayer);
-    io.to(players[1]).emit('currentPlayer', currentPlayer);
+    notifyPlayers(0, 1, currentPlayer);
   });
 
-  socket.on('attackPlayer2', () => {
-    if (Date.now() - lastAttackTime < attackCooldown) return;
-    lastAttackTime = Date.now();
-
-    // Notify Player 1 about the attack
-    io.to(players[0]).emit('attackOnPlayer2');
-    // Notify Player 2 about their own attack
-    io.to(players[1]).emit('attackOnPlayer2');
-    // Update currentPlayer to Player 1
+  // Handle attack from Player 2 to Player 1
+  socket.on('attackPlayer1FromPlayer2', () => {
+    // Player 1 becomes the current player
     currentPlayer = players[0];
-    // Notify both players about the updated currentPlayer
-    io.to(players[1]).emit('currentPlayer', currentPlayer);
-    io.to(players[0]).emit('currentPlayer', currentPlayer);
+    notifyPlayers(1, 0, currentPlayer);
   });
-
 
   // Handle disconnection
   socket.on('disconnect', () => {

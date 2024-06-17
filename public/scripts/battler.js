@@ -1,71 +1,60 @@
-let pokemonTofight = document.querySelector(".battlefield article:nth-child(2) img"),
+let pokemonToFight = document.querySelector(".battlefield article:nth-child(2) img"),
     fightButtons = document.querySelectorAll(".aanvallen li"),
     punchAnim = document.querySelector(".pokemon-damage img:nth-child(2)");
-
-/*fightButtons.forEach((e) => {
-    e.addEventListener("click", () => {
-        (punchAnim.style.display = "block"),
-            (pokemonTofight.style.animation = "damage .5s"),
-            (pokemonTofight.style.animationdelay = "1s"),
-            setTimeout(() => {
-                punchAnim.style.display = "none";
-            }, 1e3),
-            setTimeout(() => {
-                pokemonTofight.style.animation = "none";
-            }, 1500);
-    });
-});*/
 
 const player1 = document.getElementById("player1");
 const player2 = document.getElementById("player2");
 const attacks = document.querySelectorAll('ul.aanvallen li');
 
-player1.style.display = "none";
-player2.style.display = "none";
 
-const choiceModal = new bootstrap.Modal(document.getElementById("battleChoice"), { keyboard: !1, backdrop: "static" });
-const pvpFriendModal = new bootstrap.Modal(document.getElementById("pvpfriend"), { keyboard: !1, backdrop: "static" });
-const pvpStrangerModal = new bootstrap.Modal(document.getElementById("pvpstranger"), { keyboard: !1, backdrop: "static" });
+// Modal setup for battle choices
+const choiceModal = new bootstrap.Modal(document.getElementById("battleChoice"), { keyboard: false, backdrop: "static" });
+const pvpFriendModal = new bootstrap.Modal(document.getElementById("pvpfriend"), { keyboard: false, backdrop: "static" });
+const pvpStrangerModal = new bootstrap.Modal(document.getElementById("pvpstranger"), { keyboard: false, backdrop: "static" });
 
-const linkInputgroup = document.getElementById("linkInputgroup"),
+const linkInputGroup = document.getElementById("linkInputgroup"),
     linkInput = document.getElementById("linkInput"),
     small = document.querySelector("#pvpfriend small"),
     waitP = document.querySelector("#pvpfriend p"),
     joinRoomBtn = document.getElementById("joinroom");
-linkInputgroup.addEventListener("click", () => {
-    (linkInputgroup.style.border = "3px solid green"),
-        (linkInputgroup.style.borderRadius = "10px"),
-        (small.style.display = "block"),
-        (waitP.style.display = "block"),
-        (joinRoomBtn.style.display = "block");
+
+// Handle link input group click
+linkInputGroup.addEventListener("click", () => {
+    linkInputGroup.style.border = "3px solid green";
+    linkInputGroup.style.borderRadius = "10px";
+    small.style.display = "block";
+    waitP.style.display = "block";
+    joinRoomBtn.style.display = "block";
     linkInput.select();
     navigator.clipboard.writeText(linkInput.value);
     document.execCommand("copy");
-    // share the link
+    // Share the link
     navigator.share({
         title: "Pokemon Battler - PvP with me",
         url: linkInput.value,
     });
 });
+
 // Establish socket connection
 const socket = io();
 
-// Handle the updatePlayerCount event
+let players = [];
+
+// Handle player count update
 socket.on("updatePlayerCount", (playerCount) => {
     document.getElementById("players").textContent = playerCount;
 });
 
-// Handle the roomFull event
+// Handle room full event
 socket.on('roomFull', () => {
     alert("Deze kamer is al vol met spelers");
     window.location.href = "/pokemon-battler/";
 });
 
-const players = [];
-// Handle the startGame event
+// Handle start game event and set players
 socket.on('startGame', (socket1, socket2) => {
-    players[player1] = socket1; // Assuming players[0] is player1
-    players[player2] = socket2; // Assuming players[1] is player2
+    players[0] = socket1; // Assuming player1
+    players[1] = socket2; // Assuming player2
     player1.style.display = "block";
     player2.style.display = "block";
     choiceModal.hide();
@@ -73,166 +62,169 @@ socket.on('startGame', (socket1, socket2) => {
     pvpStrangerModal.hide();
 });
 
-// Set Pokémon for both players when the game starts
+// Handle setting Player 1's Pokémon
 socket.on('setPlayer1', (pokemon) => {
-    if (pokemon.pokemonBackGif == null) {
-        player1.src = pokemon.pokemonBackImg;
-    }
-    else {
-        player1.src = pokemon.pokemonBackGif;
-    }
+    player1.src = pokemon.pokemonBackGif || pokemon.pokemonBackImg;
     attacks.forEach((attack, index) => {
         attack.textContent = pokemon.pokemonMoves[index];
     });
     document.querySelector("#player1Progress p").textContent += pokemon.pokemonHP;
 });
 
+// Handle setting Player 2's Pokémon
 socket.on('setPlayer2', (pokemon) => {
-    if (pokemon.pokemonGif == null) {
-        player2.src = pokemon.pokemonImg;
-    }
-    else {
-        player2.src = pokemon.pokemonGif;
-    }
+    player2.src = pokemon.pokemonGif || pokemon.pokemonImg;
     document.querySelector("#player2Progress p").textContent += pokemon.pokemonHP;
 });
+
 let currentPlayer;
+
+// Function to enable or disable attack buttons based on current player
+function updateAttackButtons() {
+    fightButtons.forEach((button) => {
+        if (socket.id === currentPlayer) {
+            button.style.backgroundColor = "var(--orange)";
+            button.disabled = false;
+            button.style.pointerEvents = "auto";
+        } else {
+            button.style.backgroundColor = "grey";
+            button.disabled = true;
+            button.style.pointerEvents = "none";
+        }
+    });
+}
+
+// Update current player and bind attack button events
 socket.on('currentPlayer', (player) => {
     currentPlayer = player;
-    console.log("Switching to player: "+ currentPlayer);
-    if (socket.id === player) {
-        fightButtons.forEach((e) => {
-            e.style.backgroundColor = "var(--orange)";
-            e.disabled = false;
-            e.style.pointerEvents = "auto";
-        });
-    } else {
-        fightButtons.forEach((e) => {
-            e.style.backgroundColor = "grey";
-            e.disabled = true;
-            e.style.pointerEvents = "none";
-        });
-    }
-    if (players[player1] === player) {
-        fightButtons.forEach((e) => {
-            e.addEventListener("click", () => {
-                socket.emit('attackPlayer2');
-            });
-        });
-        return;
-    }
-    else {
-        fightButtons.forEach((e) => {
-            e.addEventListener("click", () => {
-                socket.emit('attackPlayer1');
-            });
-        });
-    }
+    console.log("Switching to player: " + currentPlayer);
+    updateAttackButtons();
+});
 
-    socket.on('attackOnPlayer1', () => {
-            // Show damage animation on player 2's screen (top right)
-            if (currentPlayer === players[player1]) {
-                punchAnim.style.display = "block";
-                pokemonTofight.style.animation = "damage .5s";
-                pokemonTofight.style.animationdelay = "1s";
-                setTimeout(() => {
-                    punchAnim.style.display = "none";
-                }, 1000);
-                setTimeout(() => {
-                    pokemonTofight.style.animation = "none";
-                }, 1500);
-            }
-            // Show damage animation on player 1's screen (bottom left)
-            else {
-                punchAnim.style.display = "block";
-                player1.style.animation = "damage .5s";
-                player1.style.animationdelay = "1s";
-                setTimeout(() => {
-                    punchAnim.style.display = "none";
-                }, 1000);
-                setTimeout(() => {
-                    player1.style.animation = "none";
-                }, 1500);
-            }
-        });
-    
-    socket.on('attackOnPlayer2', () => {
-        // 
+// Handle attacks from Player 1 to Player 2
+socket.on('attackFromPlayer1', () => {
+    // Make the punch animation visible
+    punchAnim.style.display = "block";
+
+    // Apply the damage animation to player 2
+    player1.style.animation = "damage 0.5s";
+    player1.style.animationDelay = "0s";  // Apply immediately without delay
+
+    // Remove punch animation after 1 second
+    setTimeout(() => {
+        punchAnim.style.display = "none";
+    }, 1000);
+
+    // Reset player 2 animation after 0.5 seconds
+    setTimeout(() => {
+        player1.style.animation = "none";
+    }, 500);
+});
+
+// Handle attacks from Player 2 to Player 1
+socket.on('attackFromPlayer2', () => {
+    // Make the punch animation visible
+    punchAnim.style.display = "block";
+
+    // Apply the damage animation to player 1
+    player1.style.animation = "damage 0.5s";
+    player1.style.animationDelay = "0s";  // Apply immediately without delay
+
+    // Remove punch animation after 1 second
+    setTimeout(() => {
+        punchAnim.style.display = "none";
+    }, 1000);
+
+    // Reset player 1 animation after 0.5 seconds
+    setTimeout(() => {
+        player1.style.animation = "none";
+    }, 500);
+});
+
+// Handle receiving damage from Player 1
+socket.on('receiveAttackFromPlayer1', () => {
+    // Display the punch animation
+    punchAnim.style.display = "block";
+
+    // Apply the damage animation to Player 2
+    player2.style.animation = "damage 0.5s";
+    player2.style.animationDelay = "0s";  // Start the animation immediately
+
+    // Hide the punch animation after 1 second
+    setTimeout(() => {
+        punchAnim.style.display = "none";
+    }, 1000);
+
+    // Reset Player 2 animation after 0.5 seconds
+    setTimeout(() => {
+        player2.style.animation = "none";
+    }, 500);
+});
+
+// Handle receiving damage from Player 2
+socket.on('receiveAttackFromPlayer2', () => {
+    // Display the punch animation
+    punchAnim.style.display = "block";
+
+    // Apply the damage animation to Player 1
+    player2.style.animation = "damage 0.5s";
+    player2.style.animationDelay = "0s";  // Start the animation immediately
+
+    // Hide the punch animation after 1 second
+    setTimeout(() => {
+        punchAnim.style.display = "none";
+    }, 1000);
+
+    // Reset Player 1 animation after 0.5 seconds
+    setTimeout(() => {
+        player2.style.animation = "none";
+    }, 500);
+});
+
+
+// Update fight buttons' event listeners based on current player
+attacks.forEach((attack) => {
+    attack.addEventListener("click", () => {
+        if (socket.id === players[0]) {
+            socket.emit('attackPlayer2FromPlayer1');
+        } else if (socket.id === players[1]) {
+            socket.emit('attackPlayer1FromPlayer2');
+        }
     });
 });
 
-
-
-
-socket.on('readyToStart', () => {
-    if (socket.id === players[player1]) {
-        fightButtons.forEach((e) => {
-            // grey out the buttons and disable them with pointer events
-            e.style.backgroundColor = "grey";
-            e.disabled = true;
-            e.style.pointerEvents = "none";
-        });
-    }
-});
-
-
-
-
-/*socket.on('attackOnPlayer1', () => {
-    // Show damage animation on player 1's screen (bottom left)
-    if (currentPlayer === players[player1]) {
-        alert("Attack on player 1");
-    }
-    // Show damage animation on player 2's screen (top right)
-    else {
-        alert("Attack on player 2");
-    }
-});
-
-socket.on('attackOnPlayer2', () => {
-    // Show damage animation on player 2's screen (top right)
-    if (currentPlayer === players[player2]) {
-        alert("Attack on player 2");
-    }
-    // Show damage animation on player 1's screen (bottom left)
-    else {
-        alert("Attack on player 1");
-    }
-});*/
-
+// Handle player disconnection
 socket.on('playerDisconnected', () => {
     alert("De verbinding is verbroken door u of uw tegenstander. 😞");
     window.location.href = "/pokemon-battler/";
 });
 
-// Check for roomID in the URL and join room
+// Check URL for roomID and join room if exists
 const urlParams = new URL(window.location.href).searchParams;
 const roomID = urlParams.get("roomID");
 
 if (roomID) {
-    // If roomID parameter exists in the URL, join that room
     socket.emit('joinRoom', roomID);
 } else {
     choiceModal.show();
-
-    // Otherwise, generate a new room link
     socket.on("connect", () => {
-        function generateRoomID() {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
-            let result = '';
-            for (let i = 0; i < 5; i++) {
-                result += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
-            return result;
-        }
-
         const roomID = generateRoomID();
-        const linkInput = document.getElementById("linkInput");
         linkInput.value = `${window.location.origin}/pokemon-battler/?roomID=${roomID}`;
         joinRoomBtn.href = linkInput.value;
     });
 }
-// if pvpStrangerModal is shown
+
+// If stranger modal is shown, join a random PvP room
 pvpStrangerModal._element.addEventListener("shown.bs.modal", () => {
     socket.emit('joinRandomPvP');
 });
+
+// Function to generate room ID
+function generateRoomID() {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
+    let result = '';
+    for (let i = 0; i < 5; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+}
