@@ -117,7 +117,13 @@
             <img src="<%= pokemonsList[i].pokemonImg %>" alt="<%= pokemonsList[i].pokemonName %>">
             <% } %>
           </a>
-          <p><%= pokemonsList[i].pokemonName.charAt(0).toUpperCase() %><%=  pokemonsList[i].pokemonName.slice(1) %></p>
+          <p>
+            <% if (pokemonsList[i].nickname) { %>
+              <%= pokemonsList[i].nickname.charAt(0).toUpperCase() + pokemonsList[i].nickname.slice(1) %>
+            <% } else { %>
+              <%= pokemonsList[i].pokemonName.charAt(0).toUpperCase() + pokemonsList[i].pokemonName.slice(1) %>
+            <% } %>
+          </p>
         </li>
         <% } %>
       </ul>
@@ -182,25 +188,29 @@
         </section>
       </section>
     </section>
-    <!-- Modal voor detail -->
-    <section class="modal fade" id="pokemons" tabindex="-1" aria-labelledby="detailLabel" aria-hidden="true">
-      <section class="modal-dialog modal-dialog-centered">
-        <section class="modal-content">
-          <section class="modal-header">
-            <h1 class="modal-title fs-5" id="pokemonsLabel"></h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </section>
-          <section class="modal-body">
-            <img id="pokemondetailImg" src="" alt="">
-          </section>
-          <section class="modal-footer">
-            <a id="pokemonSetLink" href="#">
-              <button class="btn btn-dark" type="button">Maak <span id="pokemonName"></span> je huidige Pokémon</button>
-            </a>
-          </section>
-        </section>
+<!-- Modal voor detail -->
+<section class="modal fade" id="pokemons" tabindex="-1" aria-labelledby="detailLabel" aria-hidden="true">
+  <section class="modal-dialog modal-dialog-centered">
+    <section class="modal-content">
+      <section class="modal-header">
+        <h1 class="modal-title fs-5" id="pokemonsLabel"></h1>
+        <div style="margin: auto;">
+          <input style="text-align: center;" type="text" class="form-control" id="pokemonNickname" maxlength="13" placeholder="Enter nickname">
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </section>
+      <section class="modal-body">
+        <img id="pokemondetailImg" src="" alt="">
+      </section>
+      <section class="modal-footer">
+        <button class="btn btn-dark" type="button" id="saveNicknameBtn">Save Nickname</button>
+        <a id="pokemonSetLink" href="#">
+          <button class="btn btn-dark" type="button">Maak <span id="pokemonName"></span> je huidige Pokémon</button>
+        </a>
       </section>
     </section>
+  </section>
+</section>
     <!-- Modal voor avatar-->
     <section class="modal fade" id="chooseAvatar" tabindex="-1" aria-labelledby="chooseAvatar" aria-hidden="true">
       <section class="modal-dialog modal-dialog-centered">
@@ -227,5 +237,56 @@
     <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i class="fa-solid fa-question"></i></button></section>
   </main>
 </body>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const saveNicknameBtn = document.getElementById('saveNicknameBtn');
+    const pokemonNicknameInput = document.getElementById('pokemonNickname');
+
+    // Function to fetch the current Pokémon details and fill the modal
+    window.getPokemon = function (pokemonId) {
+      fetch(`/huidige-pokemon/get-pokemon/${pokemonId}`)
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('pokemonsLabel').innerText = data.pokemonName;
+          document.getElementById('pokemondetailImg').src = data.pokemonImg;
+          document.getElementById('pokemonName').innerText = data.pokemonName;
+          pokemonNicknameInput.value = data.nickname || ''; 
+          document.getElementById('pokemonSetLink').href = `/huidige-pokemon/set-current/${pokemonId}`;
+          saveNicknameBtn.setAttribute('data-pokemon-id', pokemonId); 
+        })
+        .catch(error => console.error('Error fetching Pokémon details:', error));
+    }
+
+    // Function to save the nickname
+    saveNicknameBtn.addEventListener('click', function () {
+      const pokemonId = saveNicknameBtn.getAttribute('data-pokemon-id'); 
+      const nickname = pokemonNicknameInput.value.trim();
+
+      if (nickname.length > 13) {
+        alert('Nickname cannot be longer than 13 characters.');
+        return;
+      }
+
+      fetch(`/huidige-pokemon/save-nickname/${pokemonId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nickname })
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('Nickname saved successfully.');
+            location.reload();
+          } else {
+            alert('Failed to save nickname.');
+          }
+        })
+        .catch(error => console.error('Error saving nickname:', error));
+    });
+  });
+</script>
 
 </html>

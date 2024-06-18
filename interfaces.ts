@@ -4,8 +4,11 @@ export interface RootObject {
 }
 
 export interface Pokemon {
+    pokemonId: number;
+    pokemonName: any;
     name: string;
     image: string;
+    nickname?: string;
 }
 
 export interface User{
