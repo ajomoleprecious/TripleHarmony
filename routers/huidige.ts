@@ -2,6 +2,7 @@ import { Request, Response, Router } from "express";
 import { verifyUser } from "../middleware/verifyUser";
 import { currentPokemon } from "../middleware/currentPokemon";
 import { currentAvatar } from "../middleware/userAvatar";
+import {Pokemon} from "../interfaces";
 import express from "express";
 import { client } from "../index";
 
@@ -89,6 +90,30 @@ router.get("/get-pokemon/:id", async (req, res) => {
     res.status(200).json(currentPokemon);
 });
 
+router.post("/save-nickname/:id", async (req: Request, res: Response) => {
+    const pokemonId = parseInt(req.params.id);
+    const { nickname } = req.body;
+    
+    try {
+      const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
+      if (!user) return res.status(404).send({ success: false, message: "User not found" });
+  
+      const pokemon = user.pokemons.find((poke: Pokemon) => poke.pokemonId === pokemonId);
+      if (pokemon) {
+        pokemon.nickname = nickname;
+        await client.db('users').collection('usersPokemons').updateOne(
+          { _id: res.locals.user._id },
+          { $set: { pokemons: user.pokemons } }
+        );
+        res.status(200).send({ success: true, message: "Nickname saved successfully" });
+      } else {
+        res.status(404).send({ success: false, message: "Pokémon not found" });
+      }
+    } catch (err) {
+      console.error(err);
+      res.status(500).send({ success: false, message: "Error saving nickname" });
+    }
+  });
 
 router.post("/change-avatar/:avatar", async (req, res) => {
     res.locals.avatar = req.params.avatar;

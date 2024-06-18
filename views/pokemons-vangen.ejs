@@ -248,8 +248,8 @@
       <div class="modal-body">
         <form id="nicknameForm">
           <div class="mb-3">
-            <label for="pokemonNickname" class="form-label">Enter a nickname for your Pokémon:</label>
-            <input type="text" class="form-control" id="pokemonNickname" placeholder="Nickname">
+            <label for="pokemonNickname" class="form-label">Geef jou Pokémon een nickname:</label>
+            <input type="text" class="form-control" id="pokemonNickname" maxlength="13" placeholder="Nickname">
           </div>
         </form>
       </div>
@@ -488,7 +488,14 @@ caughtModalCloseBtn.addEventListener('click', function() {
 });
 
 nicknameSubmitBtn.addEventListener('click', async function() {
-  const nickname = pokemonNicknameInput.value.trim() || pokeNameModal.innerText;
+  const nickname = pokemonNicknameInput.value.trim();
+
+  if (nickname.length > 13) {
+    alert("Nickname mag niet langer zijn dan 13 characters.");
+    return;
+  }
+
+  const finalNickname = nickname || pokeNameModal.innerText;
 
   // Logic to save the nickname to the database
   const response = await fetch('/pokemons-vangen/nickname', {
@@ -498,7 +505,7 @@ nicknameSubmitBtn.addEventListener('click', async function() {
     },
     body: JSON.stringify({
       pokemonName: pokeNameModal.innerText,
-      nickname: nickname
+      nickname: finalNickname
     })
   });
 
