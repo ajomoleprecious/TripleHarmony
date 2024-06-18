@@ -218,6 +218,25 @@
     </section>
     <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i class="fa-solid fa-question"></i></button></section>
   </main>
+
+  <!-- Modal for Pokémon Caught -->
+<section class="modal fade" id="caughtModal" tabindex="-1" aria-labelledby="caughtModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h5 class="modal-title" id="caughtModalLabel">Success!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </header>
+      <div class="modal-body">
+        Goed gedaan! Je hebt de pokemon gevangen!
+      </div>
+      <footer class="modal-footer">
+        <button type="button" class="btn btn-primary" id="caughtModalCloseBtn">Close</button>
+      </footer>
+    </div>
+  </div>
+</section>
+
   <script>
     ///////////////////////////////////////////////////////////////////////////////
     //-----------------------WILLEKEURIGE AFBEELDINGEN--------------------------//
@@ -403,6 +422,40 @@
       hourglassElement.style.display = 'block';
       catchElement.classList.add('clicked');
     });
+
+    const caughtModal = new bootstrap.Modal(document.getElementById('caughtModal'), {
+  keyboard: false
+});
+
+const caughtModalCloseBtn = document.getElementById('caughtModalCloseBtn');
+
+btnSendToDB.addEventListener('click', async function(event) {
+  event.preventDefault();
+
+  // Logica van pokemon te vangen en te sturen naar database
+  const response = await fetch('/pokemons-vangen/vangen', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      killedPoke: killedPokeElement.value
+    })
+  });
+
+  if (response.ok) {
+    // popup voor als pokemon gevangen is
+    caughtModal.show();
+  } else {
+    console.error('Failed to catch the Pokémon');
+  }
+});
+
+caughtModalCloseBtn.addEventListener('click', function() {
+  // ga naar huidige pokemon als die gevangen is
+  window.location.href = '/huidige-pokemon';
+});
+
   </script>
 
 </body>
