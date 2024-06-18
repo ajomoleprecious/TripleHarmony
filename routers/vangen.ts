@@ -71,7 +71,8 @@ router.post("/vangen", async (req: Request, res: Response) => {
             pokemonImg: coughtPoke.sprites.other["official-artwork"].front_default,
             pokemonGif: coughtPoke.sprites.other["showdown"].front_default,
             pokemonBackImg: coughtPoke.sprites.back_default,
-            pokemonBackGif: coughtPoke.sprites.other["showdown"].back_default
+            pokemonBackGif: coughtPoke.sprites.other["showdown"].back_default,
+            caughtAt: new Date()
         };
         
         await client.db("users").collection("usersPokemons").updateOne(

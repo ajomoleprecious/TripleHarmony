@@ -22,15 +22,15 @@ const typeColors = {
     steel: "var(--steel)",
     fairy: "var(--fairy)"
 };
-null === amountOfpokemons || (localStorage.getItem("amountOfPokemons") ? amountOfpokemons.value = localStorage.getItem("amountOfPokemons") : amountOfpokemons.value = 10, amountOfpokemons.addEventListener("change", function() {
+null === amountOfpokemons || (localStorage.getItem("amountOfPokemons") ? amountOfpokemons.value = localStorage.getItem("amountOfPokemons") : amountOfpokemons.value = 10, amountOfpokemons.addEventListener("change", function () {
     localStorage.setItem("amountOfPokemons", amountOfpokemons.value), listForm.submit()
 }));
 let previousButton = document.getElementById("previous"),
     nextButton = document.getElementById("next");
-previousButton.addEventListener("click", function() {
+previousButton.addEventListener("click", function () {
     let e = parseInt(localStorage.getItem("page"));
     e > 0 && (listForm.querySelector('input[name="page"]').value = e - 1, localStorage.setItem("page", e - 1), listForm.submit())
-}), nextButton.addEventListener("click", function() {
+}), nextButton.addEventListener("click", function () {
     let e = parseInt(localStorage.getItem("page"));
     listForm.querySelector('input[name="page"]').value = e + 1, localStorage.setItem("page", e + 1), listForm.submit()
 });
@@ -39,20 +39,36 @@ let detailImg = document.getElementById("detailImg"),
     detailLength = document.getElementById("detailLength"),
     detailType = document.getElementById("detailType"),
     detailName = document.getElementById("detailName"),
+    detailHP = document.getElementById("detailHP"),
+    detailAttack = document.getElementById("detailAttack"),
+    detailDefense = document.getElementById("detailDefense"),
+    detailCaughtAt = document.getElementById("detailCaughtAt"),
     detailbox = document.getElementById("detailbox");
 const moreDetails = document.getElementById("moreDetails");
 async function DetailOfPokemon(e) {
     await fetch(`https://pokeapi.co/api/v2/pokemon/${e}`).then(e => e.json()).then(e => {
-        detailWeight.innerHTML = `${e.weight/10}<sub> kg</sub>`, detailLength.innerHTML = `${e.height/10}<sub> m</sub>`;
-        let t = e.types.map(e => `<span style="background-color: ${typeColors[e.type.name]}">${e.type.name.charAt(0).toUpperCase()+e.type.name.slice(1)}</span>`);
-        detailType.innerHTML = t.join(" "), detailName.innerText = `${e.name.charAt(0).toUpperCase()+e.name.slice(1)}`, moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${e.name}`, detailImg.src = e.sprites.other["official-artwork"].front_default
+        detailWeight.innerHTML = `${e.weight / 10}<sub> kg</sub>`;
+        detailLength.innerHTML = `${e.height / 10}<sub> m</sub>`;
+        let t = e.types.map(e => `<span style="background-color: ${typeColors[e.type.name]}">${e.type.name.charAt(0).toUpperCase() + e.type.name.slice(1)}</span>`);
+        detailType.innerHTML = t.join(" "), 
+        detailName.innerText = `${e.name.charAt(0).toUpperCase() + e.name.slice(1)}`, 
+        moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${e.name}`, 
+        detailImg.src = e.sprites.other["official-artwork"].front_default,
+        detailHP.innerText = e.stats[0].base_stat,
+        detailAttack.innerHTML = e.stats[1].base_stat, 
+        detailDefense.innerHTML = e.stats[2].base_stat
     })
 }
 async function showDetails(e) {
     detailWeight.innerHTML = "", detailLength.innerHTML = "", detailType.innerHTML = "", detailName.innerText = "", detailImg.src = "", await fetch(`https://pokeapi.co/api/v2/pokemon/${e}`).then(e => e.json()).then(e => {
-        detailWeight.innerHTML = `${e.weight/10}<sub> kg</sub>`, detailLength.innerHTML = `${e.height/10}<sub> m</sub>`;
-        let t = e.types.map(e => `<span style="background-color: ${typeColors[e.type.name]}">${e.type.name.charAt(0).toUpperCase()+e.type.name.slice(1)}</span>`);
-        detailType.innerHTML = t.join(" "), detailName.innerText = `${e.name.charAt(0).toUpperCase()+e.name.slice(1)}`, moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${e.name}`, detailImg.src = e.sprites.other["official-artwork"].front_default
+        detailWeight.innerHTML = `${e.weight / 10}<sub> kg</sub>`, detailLength.innerHTML = `${e.height / 10}<sub> m</sub>`;
+        let t = e.types.map(e => `<span style="background-color: ${typeColors[e.type.name]}">${e.type.name.charAt(0).toUpperCase() + e.type.name.slice(1)}</span>`);
+        detailType.innerHTML = t.join(" "), detailName.innerText = `${e.name.charAt(0).toUpperCase() + e.name.slice(1)}`, moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${e.name}`, detailImg.src = e.sprites.other["official-artwork"].front_default,
+        detailHP.innerText = e.stats[0].base_stat, detailAttack.innerHTML = e.stats[1].base_stat, detailDefense.innerHTML = e.stats[2].base_stat;
+
+        fetch(`/getCaughtDate/${e.id}`).then(e => e.json()).then(e => {
+            console.log('e', e)
+        })
     });
     let t;
     await fetch(`https://pokeapi.co/api/v2/pokemon-species/${e}`).then(e => e.json()).then(e => {
@@ -80,13 +96,13 @@ async function createPokemonList(e) {
         a.push(e.varieties[0].pokemon.name)
     });
     let o = a.map(async e => {
-            let t = await fetch(`https://pokeapi.co/api/v2/pokemon/${e}`),
-                a = await t.json();
-            return {
-                name: e,
-                data: a
-            }
-        }),
+        let t = await fetch(`https://pokeapi.co/api/v2/pokemon/${e}`),
+            a = await t.json();
+        return {
+            name: e,
+            data: a
+        }
+    }),
         s = await Promise.all(o);
     s.forEach(({
         name: e,
@@ -94,12 +110,12 @@ async function createPokemonList(e) {
     }) => {
         let a = document.createElement("li");
         a.onclick = () => DetailOfPokemon(e), a.innerHTML = `
-            <img src="${t.sprites.other.showdown.front_default||t.sprites.other["official-artwork"].front_default}" alt="${t.name}">
-            <p>${t.name.charAt(0).toUpperCase()+t.name.slice(1)}</p>
+            <img src="${t.sprites.other.showdown.front_default || t.sprites.other["official-artwork"].front_default}" alt="${t.name}">
+            <p>${t.name.charAt(0).toUpperCase() + t.name.slice(1)}</p>
         `, n.appendChild(a)
     })
 }
-window.onload = function() {
+window.onload = function () {
     let e = new URLSearchParams(window.location.search),
         t = parseInt(e.get("page")) || 0;
     null !== amountOfpokemons && (listForm.querySelector('input[name="page"]').value = t), localStorage.setItem("page", t)
@@ -119,16 +135,16 @@ async function main() {
 }
 main();
 let leftList = document.getElementsByClassName("left-pokemon-list")[0],
-count = 0;
+    count = 0;
 pokemonSearch.addEventListener("keyup", e => {
     for (let t of (removeElements(leftList), count = 0, sortedPokemonNames))
         if (t.toLowerCase().startsWith(pokemonSearch.value.toLowerCase()) && "" !== pokemonSearch.value) {
             if (count >= 3) break;
             let n = document.createElement("li");
-            n.classList.add("list-items"), n.style.cursor = "pointer", n.addEventListener("click", function() {
+            n.classList.add("list-items"), n.style.cursor = "pointer", n.addEventListener("click", function () {
                 displayNames(pokemonSearch, t, leftList)
             });
-            let o = `<b>${t.substr(0,pokemonSearch.value.length)}</b>`;
+            let o = `<b>${t.substr(0, pokemonSearch.value.length)}</b>`;
             o += t.substr(pokemonSearch.value.length), n.innerHTML = o, leftList.appendChild(n), count++
         }
 });

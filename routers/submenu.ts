@@ -44,7 +44,9 @@ router.post("/", async (req: Request, res: Response) => {
     pokemonImg: pikachuData.sprites.other["official-artwork"].front_default,
     pokemonGif: pikachuData.sprites.other["showdown"].front_default,
     pokemonBackImg: pikachuData.sprites.back_default,
-    pokemonBackGif: pikachuData.sprites.other["showdown"].back_default
+    pokemonBackGif: pikachuData.sprites.other["showdown"].back_default,
+    nickname: "",
+    caughtAt: new Date()
   }];
 
   try {

@@ -169,8 +169,8 @@
           <p><%= currentPokemon.pokemonHP %></p>
         </section>
         |
-        <section class="pokemon-shield">
-          <img id="shield" src="assets/sword.png" alt="aanval">
+        <section class="pokemon-attack">
+          <img id="attack" src="assets/sword.png" alt="attack">
           <p><%= currentPokemon.pokemonAttack %></p>
         </section>
         |
@@ -220,6 +220,22 @@
                     <th scope="row">Pokémon Type</th>
                     <td id="detailType"></td>
                   </tr>
+                  <tr>
+                    <th scope="row">Leven</th>
+                    <td id="detailHP"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Aanval</th>
+                    <td id="detailAttack"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Verdediging</th>
+                    <td id="detailDefense"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Vang datum</th>
+                    <td id="detailCaughtAt"></td>
+                  </tr>
                 </tbody>
               </table>
             </section>
@@ -231,7 +247,7 @@
             </section>
           </section>
           <section class="modal-footer">
-            <p>Meer details zien? Bekijk ze hier: <a id="moreDetails" href="#">link</a></p>
+            <p>Meer details zien? Bekijk ze <a target="_blank" id="moreDetails" href="#">hier</a></p>
           </section>
         </section>
       </section>
