@@ -117,7 +117,13 @@
             <img src="<%= pokemonsList[i].pokemonImg %>" alt="<%= pokemonsList[i].pokemonName %>">
             <% } %>
           </a>
-          <p><%= pokemonsList[i].pokemonName.charAt(0).toUpperCase() %><%=  pokemonsList[i].pokemonName.slice(1) %></p>
+          <p>
+            <% if (pokemonsList[i].nickname) { %>
+              <%= pokemonsList[i].nickname.charAt(0).toUpperCase() + pokemonsList[i].nickname.slice(1) %>
+            <% } else { %>
+              <%= pokemonsList[i].pokemonName.charAt(0).toUpperCase() + pokemonsList[i].pokemonName.slice(1) %>
+            <% } %>
+          </p>
         </li>
         <% } %>
       </ul>
