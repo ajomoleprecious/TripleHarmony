@@ -3,6 +3,7 @@ import { verifyUser } from "../middleware/verifyUser";
 import { currentPokemon } from "../middleware/currentPokemon";
 import { currentAvatar } from "../middleware/userAvatar";
 import { client } from "../index";
+import {Pokemon} from "../interfaces";
 import express from "express";
 
 const router = Router();
@@ -96,6 +97,29 @@ router.post("/change-avatar/:avatar", async (req, res) => {
     }
     catch (err) {
         console.error(err);
+    }
+});
+
+router.post("/nickname", async (req: Request, res: Response) => {
+    const { pokemonName, nickname } = req.body;
+    try {
+        const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
+        if (!user) return res.status(404).send("User not found");
+
+        const pokemon = user.pokemons.find((poke: Pokemon) => poke.pokemonName === pokemonName);
+        if (pokemon) {
+            pokemon.nickname = nickname;
+            await client.db('users').collection('usersPokemons').updateOne(
+                { _id: res.locals.user._id },
+                { $set: { pokemons: user.pokemons } }
+            );
+            res.status(200).send("Nickname saved successfully");
+        } else {
+            res.status(404).send("Pokémon not found");
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error saving nickname");
     }
 });
 

@@ -237,6 +237,29 @@
   </div>
 </section>
 
+<!-- Modal for Nicknaming the Pokémon -->
+<section class="modal fade" id="nicknameModal" tabindex="-1" aria-labelledby="nicknameModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h5 class="modal-title" id="nicknameModalLabel">Nickname Your Pokémon</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </header>
+      <div class="modal-body">
+        <form id="nicknameForm">
+          <div class="mb-3">
+            <label for="pokemonNickname" class="form-label">Enter a nickname for your Pokémon:</label>
+            <input type="text" class="form-control" id="pokemonNickname" placeholder="Nickname">
+          </div>
+        </form>
+      </div>
+      <footer class="modal-footer">
+        <button type="button" class="btn btn-primary" id="nicknameSubmitBtn">Submit</button>
+      </footer>
+    </div>
+  </div>
+</section>
+
   <script>
     ///////////////////////////////////////////////////////////////////////////////
     //-----------------------WILLEKEURIGE AFBEELDINGEN--------------------------//
@@ -427,12 +450,19 @@
   keyboard: false
 });
 
-const caughtModalCloseBtn = document.getElementById('caughtModalCloseBtn');
+const nicknameModal = new bootstrap.Modal(document.getElementById('nicknameModal'), {
+  keyboard: false
+});
 
+const caughtModalCloseBtn = document.getElementById('caughtModalCloseBtn');
+const nicknameSubmitBtn = document.getElementById('nicknameSubmitBtn');
+const pokemonNicknameInput = document.getElementById('pokemonNickname');
+
+// Show caughtModal and then nicknameModal
 btnSendToDB.addEventListener('click', async function(event) {
   event.preventDefault();
 
-  // Logica van pokemon te vangen en te sturen naar database
+  // Logic to catch the Pokémon and send to the database
   const response = await fetch('/pokemons-vangen/vangen', {
     method: 'POST',
     headers: {
@@ -444,7 +474,7 @@ btnSendToDB.addEventListener('click', async function(event) {
   });
 
   if (response.ok) {
-    // popup voor als pokemon gevangen is
+    // Show the modal if the Pokémon is caught successfully
     caughtModal.show();
   } else {
     console.error('Failed to catch the Pokémon');
@@ -452,8 +482,32 @@ btnSendToDB.addEventListener('click', async function(event) {
 });
 
 caughtModalCloseBtn.addEventListener('click', function() {
-  // ga naar huidige pokemon als die gevangen is
-  window.location.href = '/huidige-pokemon';
+  // Hide the caughtModal and show the nicknameModal
+  caughtModal.hide();
+  nicknameModal.show();
+});
+
+nicknameSubmitBtn.addEventListener('click', async function() {
+  const nickname = pokemonNicknameInput.value.trim() || pokeNameModal.innerText;
+
+  // Logic to save the nickname to the database
+  const response = await fetch('/pokemons-vangen/nickname', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      pokemonName: pokeNameModal.innerText,
+      nickname: nickname
+    })
+  });
+
+  if (response.ok) {
+    // Redirect to huidige-pokemon.ejs after naming the Pokémon
+    window.location.href = '/huidige-pokemon';
+  } else {
+    console.error('Failed to save the nickname');
+  }
 });
 
   </script>
