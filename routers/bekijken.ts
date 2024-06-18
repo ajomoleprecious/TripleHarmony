@@ -155,6 +155,29 @@ router.post("/change-avatar/:avatar", async (req, res) => {
     }
 });
 
+router.get("/getCaughtDate/:pokemonId", async (req: Request, res: Response) => {
+    try {
+        const pokemonId = parseInt(req.params.pokemonId);
+        const usersPokemons = await client.db("users").collection("usersPokemons").findOne({ _id: res.locals.user._id });
+        if (usersPokemons && usersPokemons.pokemons.length > 0) {
+            const pokemon = usersPokemons.pokemons.find((poke: any) => poke.pokemonId === pokemonId);
+            if (pokemon) {
+                res.status(200).json({ caughtAt: pokemon.caughtAt });
+            }
+            else {
+                res.status(404).json({ message: "Pokémon not found." });
+            }
+        }
+        else {
+            res.status(404).json({ message: "Pokémon not found." });
+        }
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error fetching Pokémon caught date." });
+    }
+});
+
 // Helper functions for fetching Pokémon evolution chains and Pokémons by evolution chains
 async function fetchEvolutionChains(page: number, amount: number) {
     const response = await axios.get(`https://pokeapi.co/api/v2/evolution-chain/?limit=${amount}&offset=${page * amount}`);

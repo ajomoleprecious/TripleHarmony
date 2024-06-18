@@ -39,20 +39,36 @@ let detailImg = document.getElementById("detailImg"),
     detailLength = document.getElementById("detailLength"),
     detailType = document.getElementById("detailType"),
     detailName = document.getElementById("detailName"),
+    detailHP = document.getElementById("detailHP"),
+    detailAttack = document.getElementById("detailAttack"),
+    detailDefense = document.getElementById("detailDefense"),
+    detailCaughtAt = document.getElementById("detailCaughtAt"),
     detailbox = document.getElementById("detailbox");
 const moreDetails = document.getElementById("moreDetails");
 async function DetailOfPokemon(e) {
     await fetch(`https://pokeapi.co/api/v2/pokemon/${e}`).then(e => e.json()).then(e => {
-        detailWeight.innerHTML = `${e.weight / 10}<sub> kg</sub>`, detailLength.innerHTML = `${e.height / 10}<sub> m</sub>`;
+        detailWeight.innerHTML = `${e.weight / 10}<sub> kg</sub>`;
+        detailLength.innerHTML = `${e.height / 10}<sub> m</sub>`;
         let t = e.types.map(e => `<span style="background-color: ${typeColors[e.type.name]}">${e.type.name.charAt(0).toUpperCase() + e.type.name.slice(1)}</span>`);
-        detailType.innerHTML = t.join(" "), detailName.innerText = `${e.name.charAt(0).toUpperCase() + e.name.slice(1)}`, moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${e.name}`, detailImg.src = e.sprites.other["official-artwork"].front_default
+        detailType.innerHTML = t.join(" "), 
+        detailName.innerText = `${e.name.charAt(0).toUpperCase() + e.name.slice(1)}`, 
+        moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${e.name}`, 
+        detailImg.src = e.sprites.other["official-artwork"].front_default,
+        detailHP.innerText = e.stats[0].base_stat,
+        detailAttack.innerHTML = e.stats[1].base_stat, 
+        detailDefense.innerHTML = e.stats[2].base_stat
     })
 }
 async function showDetails(e) {
     detailWeight.innerHTML = "", detailLength.innerHTML = "", detailType.innerHTML = "", detailName.innerText = "", detailImg.src = "", await fetch(`https://pokeapi.co/api/v2/pokemon/${e}`).then(e => e.json()).then(e => {
         detailWeight.innerHTML = `${e.weight / 10}<sub> kg</sub>`, detailLength.innerHTML = `${e.height / 10}<sub> m</sub>`;
         let t = e.types.map(e => `<span style="background-color: ${typeColors[e.type.name]}">${e.type.name.charAt(0).toUpperCase() + e.type.name.slice(1)}</span>`);
-        detailType.innerHTML = t.join(" "), detailName.innerText = `${e.name.charAt(0).toUpperCase() + e.name.slice(1)}`, moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${e.name}`, detailImg.src = e.sprites.other["official-artwork"].front_default
+        detailType.innerHTML = t.join(" "), detailName.innerText = `${e.name.charAt(0).toUpperCase() + e.name.slice(1)}`, moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${e.name}`, detailImg.src = e.sprites.other["official-artwork"].front_default,
+        detailHP.innerText = e.stats[0].base_stat, detailAttack.innerHTML = e.stats[1].base_stat, detailDefense.innerHTML = e.stats[2].base_stat;
+
+        fetch(`/getCaughtDate/${e.id}`).then(e => e.json()).then(e => {
+            console.log('e', e)
+        })
     });
     let t;
     await fetch(`https://pokeapi.co/api/v2/pokemon-species/${e}`).then(e => e.json()).then(e => {
