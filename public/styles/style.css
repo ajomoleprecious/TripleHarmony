@@ -803,8 +803,14 @@ body.pokemon-bekijken h1 {
 
 #hint,
 #pvpfriend img,
-#pvpstranger img {
+#pvpstranger img,
+#waitforfriend img {
     width: 3rem
+}
+
+#won img,
+#lost img {
+    width: 6rem
 }
 
 .keer-terug {
@@ -1148,7 +1154,10 @@ body.pokemon-bekijken h1 {
 
 #battleChoice .modal-footer,
 #pvpfriend .modal-footer,
-#pvpstranger .modal-footer {
+#pvpstranger .modal-footer,
+#waitforfriend .modal-footer,
+#won .modal-footer,
+#lost .modal-footer {
     width: 100%;
     display: flex;
     flex-direction: column;

@@ -11,6 +11,9 @@ const attacks = document.querySelectorAll('ul.aanvallen li');
 const choiceModal = new bootstrap.Modal(document.getElementById("battleChoice"), { keyboard: false, backdrop: "static" });
 const pvpFriendModal = new bootstrap.Modal(document.getElementById("pvpfriend"), { keyboard: false, backdrop: "static" });
 const pvpStrangerModal = new bootstrap.Modal(document.getElementById("pvpstranger"), { keyboard: false, backdrop: "static" });
+const waitforfriend = new bootstrap.Modal(document.getElementById("waitforfriend"), { keyboard: false, backdrop: "static" });
+const won = new bootstrap.Modal(document.getElementById("won"), { keyboard: false, backdrop: "static" });
+const lost = new bootstrap.Modal(document.getElementById("lost"), { keyboard: false, backdrop: "static" });
 
 const linkInputGroup = document.getElementById("linkInputgroup"),
     linkInput = document.getElementById("linkInput"),
@@ -51,6 +54,11 @@ socket.on('roomFull', () => {
     window.location.href = "/pokemon-battler/";
 });
 
+// Handle waiting for player
+socket.on('waitingForPlayer', () => {
+    waitforfriend.show();
+});
+
 // Handle start game event and set players
 socket.on('startGame', (socket1, socket2) => {
     players[0] = socket1; // Assuming player1
@@ -60,10 +68,13 @@ socket.on('startGame', (socket1, socket2) => {
     choiceModal.hide();
     pvpFriendModal.hide();
     pvpStrangerModal.hide();
+    waitforfriend.hide();
 });
 
+let player1HP;
 // Handle setting Player 1's Pokémon
 socket.on('setPlayer1', (pokemon) => {
+    player1HP = pokemon.pokemonHP;
     player1.src = pokemon.pokemonBackGif || pokemon.pokemonBackImg;
     attacks.forEach((attack, index) => {
         attack.textContent = pokemon.pokemonMoves[index];
@@ -71,8 +82,10 @@ socket.on('setPlayer1', (pokemon) => {
     document.querySelector("#player1Progress p").textContent += pokemon.pokemonHP;
 });
 
+let player2HP;
 // Handle setting Player 2's Pokémon
 socket.on('setPlayer2', (pokemon) => {
+    player2HP = pokemon.pokemonHP;
     player2.src = pokemon.pokemonGif || pokemon.pokemonImg;
     document.querySelector("#player2Progress p").textContent += pokemon.pokemonHP;
 });
@@ -102,7 +115,7 @@ socket.on('currentPlayer', (player) => {
 });
 
 // Handle attacks from Player 1 to Player 2
-socket.on('attackFromPlayer1', () => {
+socket.on('attackFromPlayer1', (damage) => {
     // Make the punch animation visible
     punchAnim.style.display = "block";
 
@@ -119,10 +132,31 @@ socket.on('attackFromPlayer1', () => {
     setTimeout(() => {
         player1.style.animation = "none";
     }, 500);
+    let currentHP = parseInt(player1HP - damage);
+    if (currentHP <= 0) {
+        currentHP = 0;
+    }
+    player1HP = currentHP;
+    // Update player 1 health
+    const player1Health = document.querySelector("#player1Progress p");
+    player1Health.innerHTML = `&hearts;&nbsp;HP&nbsp;${currentHP}`;
+    if (currentHP <= 0) {
+        if (socket.id === players[0]) {
+            won.show();
+            setTimeout(() => {
+                window.location.href = "/pokemon-battler/";
+            }, 6000);
+        }else {
+            lost.show();
+            setTimeout(() => {
+                window.location.href = "/pokemon-battler/";
+            }, 6000);
+        }
+    }
 });
 
 // Handle attacks from Player 2 to Player 1
-socket.on('attackFromPlayer2', () => {
+socket.on('attackFromPlayer2', (damage) => {
     // Make the punch animation visible
     punchAnim.style.display = "block";
 
@@ -139,10 +173,31 @@ socket.on('attackFromPlayer2', () => {
     setTimeout(() => {
         player1.style.animation = "none";
     }, 500);
+    let currentHP = parseInt(player1HP - damage);
+    if (currentHP <= 0) {
+        currentHP = 0;
+    }
+    player1HP = currentHP;
+    // Update player 1 health
+    const player1Health = document.querySelector("#player1Progress p");
+    player1Health.innerHTML = `&hearts;&nbsp;HP&nbsp;${currentHP}`;
+    if (currentHP <= 0) {
+        if (socket.id === players[1]) {
+            won.show();
+            setTimeout(() => {
+                window.location.href = "/pokemon-battler/";
+            }, 6000);
+        }else {
+            lost.show();
+            setTimeout(() => {
+                window.location.href = "/pokemon-battler/";
+            }, 6000);
+        }
+    }
 });
 
 // Handle receiving damage from Player 1
-socket.on('receiveAttackFromPlayer1', () => {
+socket.on('receiveAttackFromPlayer1', (damage) => {
     // Display the punch animation
     punchAnim.style.display = "block";
 
@@ -159,10 +214,31 @@ socket.on('receiveAttackFromPlayer1', () => {
     setTimeout(() => {
         player2.style.animation = "none";
     }, 500);
+    let currentHP = parseInt(player2HP - damage);
+    if (currentHP <= 0) {
+        currentHP = 0;
+    }
+    player2HP = currentHP;
+    // Update Player 2 health
+    const player2Health = document.querySelector("#player2Progress p");
+    player2Health.innerHTML = `&hearts;&nbsp;HP&nbsp;${currentHP}`;
+    if (currentHP <= 0) {
+        if (socket.id === players[1]) {
+            won.show();
+            setTimeout(() => {
+                window.location.href = "/pokemon-battler/";
+            }, 6000);
+        }else {
+            lost.show();
+            setTimeout(() => {
+                window.location.href = "/pokemon-battler/";
+            }, 6000);
+        }
+    }
 });
 
 // Handle receiving damage from Player 2
-socket.on('receiveAttackFromPlayer2', () => {
+socket.on('receiveAttackFromPlayer2', (damage) => {
     // Display the punch animation
     punchAnim.style.display = "block";
 
@@ -179,6 +255,27 @@ socket.on('receiveAttackFromPlayer2', () => {
     setTimeout(() => {
         player2.style.animation = "none";
     }, 500);
+    let currentHP = parseInt(player2HP - damage);
+    if (currentHP <= 0) {
+        currentHP = 0;
+    }
+    player2HP = currentHP;
+    // Update Player 1 health
+    const player2Health = document.querySelector("#player2Progress p");
+    player2Health.innerHTML = `&hearts;&nbsp;HP&nbsp;${currentHP}`;
+    if (currentHP <= 0) {
+        if (socket.id === players[0]) {
+            won.show();
+            setTimeout(() => {
+                window.location.href = "/pokemon-battler/";
+            }, 6000);
+        }else {
+            lost.show();
+            setTimeout(() => {
+                window.location.href = "/pokemon-battler/";
+            }, 6000);
+        }
+    }
 });
 
 

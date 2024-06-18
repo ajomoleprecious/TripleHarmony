@@ -141,6 +141,11 @@ io.on('connection', (socket: any) => {
     //console.log(`Total players in room ${roomId}: ${roomPlayers[roomId].size}`);
     //console.log(`Player IDs in room ${roomId}: ${Array.from(roomPlayers[roomId]).join(', ')}`);
 
+    if (roomPlayers[roomID].size === 1) {
+      io.to(Array.from(roomPlayers[roomID])[0]).emit('waitingForPlayer');
+    }
+    
+
     if (roomPlayers[roomID].size === 2) {
       const [player1, player2] = Array.from(roomPlayers[roomID]);
       io.sockets.sockets.get(player1)?.join(roomID);
@@ -226,11 +231,14 @@ io.on('connection', (socket: any) => {
     io.to(players[attackerIndex]).emit('currentPlayer', currentPlayer);
     io.to(players[defenderIndex]).emit('currentPlayer', currentPlayer);
 
+    // Random hp damage
+    const damage = Math.floor(Math.random() * 8) + 1;
+
     // Notify the defender of the attack
-    io.to(players[defenderIndex]).emit(`attackFromPlayer${attackerIndex + 1}`);
+    io.to(players[defenderIndex]).emit(`attackFromPlayer${attackerIndex + 1}`, damage);
 
     // Notify the attacker of the attack being sent
-    io.to(players[attackerIndex]).emit(`receiveAttackFromPlayer${defenderIndex + 1}`);
+    io.to(players[attackerIndex]).emit(`receiveAttackFromPlayer${defenderIndex + 1}`, damage);
   }
 
   // Handle attack from Player 1 to Player 2
