@@ -44,6 +44,8 @@ let detailImg = document.getElementById("detailImg"),
     detailDefense = document.getElementById("detailDefense"),
     detailCaughtAt = document.getElementById("detailCaughtAt"),
     detailbox = document.getElementById("detailbox");
+    detailWins = document.getElementById("detailWins");
+    detailLosses = document.getElementById("detailLosses");
 const moreDetails = document.getElementById("moreDetails");
 async function DetailOfPokemon(e) {
     await fetch(`https://pokeapi.co/api/v2/pokemon/${e}`).then(e => e.json()).then(e => {
@@ -56,7 +58,31 @@ async function DetailOfPokemon(e) {
         detailImg.src = e.sprites.other["official-artwork"].front_default,
         detailHP.innerText = e.stats[0].base_stat,
         detailAttack.innerHTML = e.stats[1].base_stat, 
-        detailDefense.innerHTML = e.stats[2].base_stat
+        detailDefense.innerHTML = e.stats[2].base_stat;
+
+        fetch(`/pokemons-bekijken/getPokemonDetails/${e.id}`).then(e => e.json()).then(e => {
+            if (e.caughtAt) {
+                detailCaughtAt.innerText = `${e.caughtAt.toString().split("T")[0]}`
+            }
+            else {
+                detailCaughtAt.innerText = `Niet gevangen`
+            }
+            if (e.wins) {
+                detailWins.innerText = `${e.wins}`
+            }
+            else {
+                detailWins.innerText = `0`
+            }
+            if (e.losses) {
+                detailLosses.innerText = `${e.losses}`
+            }
+            else {
+                detailLosses.innerText = `0`
+            }
+
+        }).catch(e => {
+            // do nothing with the error
+        })
     })
 }
 async function showDetails(e) {
@@ -66,8 +92,26 @@ async function showDetails(e) {
         detailType.innerHTML = t.join(" "), detailName.innerText = `${e.name.charAt(0).toUpperCase() + e.name.slice(1)}`, moreDetails.href = `https://bulbapedia.bulbagarden.net/wiki/${e.name}`, detailImg.src = e.sprites.other["official-artwork"].front_default,
         detailHP.innerText = e.stats[0].base_stat, detailAttack.innerHTML = e.stats[1].base_stat, detailDefense.innerHTML = e.stats[2].base_stat;
 
-        fetch(`/getCaughtDate/${e.id}`).then(e => e.json()).then(e => {
-            console.log('e', e)
+        fetch(`/pokemons-bekijken/getPokemonDetails/${e.id}`).then(e => e.json()).then(e => {
+            if (e.caughtAt) {
+                detailCaughtAt.innerText = `${e.caughtAt.toString().split("T")[0]}`
+            }
+            else {
+                detailCaughtAt.innerText = `Niet gevangen`
+            }
+            if (e.wins) {
+                detailWins.innerText = `${e.wins}`
+            }
+            else {
+                detailWins.innerText = `0`
+            }
+            if (e.losses) {
+                detailLosses.innerText = `${e.losses}`
+            }
+            else {
+                detailLosses.innerText = `0`
+            }
+
         })
     });
     let t;

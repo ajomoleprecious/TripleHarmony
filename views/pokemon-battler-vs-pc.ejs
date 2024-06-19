@@ -13,7 +13,6 @@
   <script src="https://kit.fontawesome.com/cd8c9527e1.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script defer src="/scripts/general.js"></script>
-  <script defer src="/scripts/battler-pc.js"></script>
 </head>
 
 <body class="ingelogd battler">
@@ -58,7 +57,7 @@
       <article>
       </article>
       <article>
-        <section class="progress" role="progressbar" aria-label="Animated striped example" aria-valuemin="0" aria-valuemax="100">
+        <section id='player2Progress' class="progress" role="progressbar" aria-label="Animated striped example" aria-valuemin="0" aria-valuemax="100">
           <section class="progress-bar progress-bar-striped progress-bar-animated bg-danger overflow-visible text-dark" style="width: 100%"></section>
           <p>&hearts;&nbsp;HP&nbsp;<%= pokemonToBattleData.stats[0].base_stat %></p>
         </section>
@@ -68,15 +67,16 @@
         </section>
       </article>
       <article>
-        <section>
+        <section class="pokemon-damage">
           <img src="<%= currentPokemon.pokemonBackGif %>" alt="">
+          <img src="/assets/damage.gif" alt="">
         </section>
-        <section class="progress" role="progressbar" aria-label="Animated striped example" aria-valuemin="0" aria-valuemax="100">
+        <section id='player1Progress' class="progress" role="progressbar" aria-label="Animated striped example" aria-valuemin="0" aria-valuemax="100">
           <section class="progress-bar progress-bar-striped progress-bar-animated bg-primary overflow-visible text-dark" style="width: 100%;">
           </section>
           <p>&hearts;&nbsp;HP&nbsp;<%= currentPokemon.pokemonHP %></p>
         </section>
-        
+
       </article>
       <article>
         <ul class="aanvallen">
@@ -126,8 +126,178 @@
         </section>
       </section>
     </section>
+    <!-- Modal voor gewonnen -->
+    <section class="modal fade" id="won" tabindex="-1">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header">
+            <h5 class="modal-title">Gewonnen</h5>
+          </section>
+          <section class="modal-footer">
+            Proficiat! U heeft gewonnen.
+            <section>
+              <img src="/assets/pikachu_bye.gif" alt="">
+            </section>
+            Je wordt zodadelijk teruggebracht naar de uw pokemons.
+          </section>
+        </section>
+      </section>
+    </section>
+    <!-- Modal voor verloren -->
+    <section class="modal fade" id="lost" tabindex="-1">
+      <section class="modal-dialog modal-dialog-centered">
+        <section class="modal-content">
+          <section class="modal-header">
+            <h5 class="modal-title">Verloren</h5>
+          </section>
+          <section class="modal-footer">
+            Jammer! U heeft verloren.
+            <section>
+              <img src="/assets/pikachu_bye.gif" alt="">
+            </section>
+            Je wordt zodadelijk teruggebracht naar de uw pokemons.
+          </section>
+        </section>
+      </section>
+    </section>
     <section data-bs-toggle="modal" data-bs-target="#hulp" class="help"><button><i class="fa-solid fa-question"></i></button></section>
   </main>
 </body>
+
+<script>
+  let pokemonTofight = document.querySelector(".battlefield article:nth-child(2) img"),
+    myPokemon = document.querySelector(".battlefield article:nth-child(3) img"),
+    fightButtons = document.querySelectorAll(".aanvallen li"),
+    punchAnim = document.querySelector(".pokemon-damage img:nth-child(2)");
+  const pokemonToBattleData = <%- JSON.stringify(pokemonToBattleData) %>;
+  const currentPokemon = <%- JSON.stringify(currentPokemon) %>;
+
+  const won = new bootstrap.Modal(document.getElementById("won"), {
+    keyboard: false,
+    backdrop: "static"
+  });
+  const lost = new bootstrap.Modal(document.getElementById("lost"), {
+    keyboard: false,
+    backdrop: "static"
+  });
+
+  let pokemonToBattleHP = pokemonToBattleData.stats[0].base_stat;
+  let currentPokemonHP = currentPokemon.pokemonHP;
+
+  fightButtons.forEach((e) => {
+    e.addEventListener("click", () => {
+      (punchAnim.style.display = "block"),
+      (pokemonTofight.style.animation = "damage .5s"),
+      (pokemonTofight.style.animationdelay = "1s"),
+      setTimeout(() => {
+          punchAnim.style.display = "none";
+        }, 1e3),
+        setTimeout(() => {
+          pokemonTofight.style.animation = "none";
+        }, 1500);
+
+      // random damage
+      let damage = Math.floor(Math.random() * 8) + 1;
+
+      // damage to player 2
+      pokemonToBattleHP -= damage;
+      if (pokemonToBattleHP < 0) {
+        pokemonToBattleHP = 0;
+      }
+      document.querySelector("#player2Progress p").innerHTML = `&hearts;&nbsp;HP&nbsp;${pokemonToBattleHP}`;
+
+      // disable buttons
+      fightButtons.forEach((e) => {
+        e.style.pointerEvents = "none";
+        e.style.backgroundColor = "grey";
+        e.disabled = true;
+      });
+
+      // check if someone has won
+      if (pokemonToBattleHP <= 0) {
+        won.show();
+        // post a without body to update the wins
+        fetch("/pokemon-battler-vs-pc/updateWins", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        setTimeout(() => {
+          window.location.href = "/huidige-pokemon";
+        }, 5000);
+      } else if (currentPokemonHP <= 0) {
+        lost.show();
+        console.log("lost");
+        // post a without body to update the losses
+        fetch("/pokemon-battler-vs-pc/updateLosses", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        setTimeout(() => {
+          window.location.href = "/huidige-pokemon";
+        }, 5000);
+      }
+
+      // pause for 1.5s
+      setTimeout(() => {
+        // damage to player 1
+        (punchAnim.style.display = "block"),
+        (myPokemon.style.animation = "damage .5s"),
+        (myPokemon.style.animationdelay = "1s"),
+        setTimeout(() => {
+            punchAnim.style.display = "none";
+          }, 1e3),
+          setTimeout(() => {
+            myPokemon.style.animation = "none";
+          }, 1500);
+
+
+        let damage = Math.floor(Math.random() * 8) + 1;
+        currentPokemonHP -= damage;
+        if (currentPokemonHP < 0) {
+          currentPokemonHP = 0;
+        }
+        document.querySelector("#player1Progress p").innerHTML = `&hearts;&nbsp;HP&nbsp;${currentPokemonHP}`;
+
+        // enable buttons
+        fightButtons.forEach((e) => {
+          e.style.pointerEvents = "auto";
+          e.style.backgroundColor = "var(--orange)";
+          e.disabled = false;
+        });
+
+        // check if someone has won
+        if (pokemonToBattleHP <= 0) {
+          won.show();
+          // post a without body to update the wins
+          fetch("/pokemon-battler-vs-pc/updateWins", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          });
+          setTimeout(() => {
+            window.location.href = "/huidige-pokemon";
+          }, 5000);
+        } else if (currentPokemonHP <= 0) {
+          lost.show();
+          // post a without body to update the losses
+          fetch("/pokemon-battler-vs-pc/updateLosses", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          });
+          setTimeout(() => {
+            window.location.href = "/huidige-pokemon";
+          }, 5000);
+        }
+      }, 1500);
+    });
+  });
+</script>
 
 </html>

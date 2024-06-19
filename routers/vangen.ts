@@ -35,6 +35,11 @@ router.post("/loslaten", async (req: Request, res: Response) => {
             return res.status(404).send("Geen Pokémon gevonden om te verwijderen.");
         }
         
+        // check if user wants to delete current pokemon
+        if (sendPokeName.toString().toLowerCase() === res.locals.currentPokemon.pokemonName.toString().toLowerCase()) {
+            return res.status(400).render("error", { errorMessage: "Je kunt de huidige Pokémon niet verwijderen." });
+        }
+
         if(userPokeArray.length !== 1) {
             for (let pokemon of userPokeArray) {
                 if (pokemon.pokemonName.toString().toLowerCase() === sendPokeName.toString().toLowerCase()) {
@@ -73,8 +78,18 @@ router.post("/vangen", async (req: Request, res: Response) => {
             pokemonGif: coughtPoke.sprites.other["showdown"].front_default,
             pokemonBackImg: coughtPoke.sprites.back_default,
             pokemonBackGif: coughtPoke.sprites.other["showdown"].back_default,
-            caughtAt: new Date()
+            nickname: "",
+            caughtAt: new Date(),
+            wins: 0,
+            losses: 0
         };
+
+        const pokemons = await client.db("users").collection("usersPokemons").findOne({ _id: res.locals.user._id }, { projection: { pokemons: 1 } });
+
+        // check if user already has this pokemon
+        if (pokemons && pokemons.pokemons.find((poke: any) => poke.pokemonName === addPoke.pokemonName)) {
+            return res.status(400).render("error", { errorMessage: "Je hebt deze Pokémon al gevangen." });
+        }
         
         await client.db("users").collection("usersPokemons").updateOne(
             { _id: res.locals.user._id },

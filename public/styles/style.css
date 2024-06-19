@@ -675,7 +675,7 @@ body.pokemon-bekijken h1 {
     border-radius: 10px 0 0
 }
 
-#detail table tbody tr:nth-child(7) th {
+#detail table tbody tr:nth-child(9) th {
     border-radius: 0 0 0 10px
 }
 
@@ -683,7 +683,7 @@ body.pokemon-bekijken h1 {
     border-radius: 0 10px 0 0
 }
 
-#detail table tbody tr:nth-child(7) td {
+#detail table tbody tr:nth-child(9) td {
     border-radius: 0 0 10px
 }
 

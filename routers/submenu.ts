@@ -46,7 +46,9 @@ router.post("/", async (req: Request, res: Response) => {
     pokemonBackImg: pikachuData.sprites.back_default,
     pokemonBackGif: pikachuData.sprites.other["showdown"].back_default,
     nickname: "",
-    caughtAt: new Date()
+    caughtAt: new Date(),
+    wins: 0,
+    losses: 0
   }];
 
   try {

@@ -252,7 +252,7 @@
           document.getElementById('pokemondetailImg').src = data.pokemonImg;
           document.getElementById('pokemonName').innerText = data.pokemonName;
           pokemonNicknameInput.value = data.nickname || ''; 
-          document.getElementById('pokemonSetLink').href = `/huidige-pokemon/set-current/${pokemonId}`;
+          document.getElementById('pokemonSetLink').href = `/huidige-pokemon/changeCurrentPokemon/${pokemonId}`;
           saveNicknameBtn.setAttribute('data-pokemon-id', pokemonId); 
         })
         .catch(error => console.error('Error fetching Pokémon details:', error));

@@ -143,11 +143,25 @@ socket.on('attackFromPlayer1', (damage) => {
     if (currentHP <= 0) {
         if (socket.id === players[0]) {
             won.show();
+            // post a without body to update the wins
+            fetch("/pokemon-battler/updateWins", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
             setTimeout(() => {
                 window.location.href = "/pokemon-battler/";
             }, 6000);
-        }else {
+        } else {
             lost.show();
+            // post a without body to update the losses
+            fetch("/pokemon-battler/updateLosses", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
             setTimeout(() => {
                 window.location.href = "/pokemon-battler/";
             }, 6000);
@@ -184,11 +198,25 @@ socket.on('attackFromPlayer2', (damage) => {
     if (currentHP <= 0) {
         if (socket.id === players[1]) {
             won.show();
+            // post a without body to update the wins
+            fetch("/pokemon-battler/updateWins", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
             setTimeout(() => {
                 window.location.href = "/pokemon-battler/";
             }, 6000);
-        }else {
+        } else {
             lost.show();
+            // post a without body to update the losses
+            fetch("/pokemon-battler/updateLosses", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
             setTimeout(() => {
                 window.location.href = "/pokemon-battler/";
             }, 6000);
@@ -225,11 +253,25 @@ socket.on('receiveAttackFromPlayer1', (damage) => {
     if (currentHP <= 0) {
         if (socket.id === players[1]) {
             won.show();
+            // post a without body to update the wins
+            fetch("/pokemon-battler/updateWins", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
             setTimeout(() => {
                 window.location.href = "/pokemon-battler/";
             }, 6000);
-        }else {
+        } else {
             lost.show();
+            // post a without body to update the losses
+            fetch("/pokemon-battler/updateLosses", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
             setTimeout(() => {
                 window.location.href = "/pokemon-battler/";
             }, 6000);
@@ -266,11 +308,25 @@ socket.on('receiveAttackFromPlayer2', (damage) => {
     if (currentHP <= 0) {
         if (socket.id === players[0]) {
             won.show();
+            // post a without body to update the wins
+            fetch("/pokemon-battler/updateWins", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
             setTimeout(() => {
                 window.location.href = "/pokemon-battler/";
             }, 6000);
-        }else {
+        } else {
             lost.show();
+            // post a without body to update the losses
+            fetch("/pokemon-battler/updateLosses", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
             setTimeout(() => {
                 window.location.href = "/pokemon-battler/";
             }, 6000);

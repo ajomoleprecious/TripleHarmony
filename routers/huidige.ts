@@ -39,7 +39,7 @@ router.get("/filter", async (req: Request, res: Response) => {
     const pokemonName = req.query.pokemon_name ? req.query.pokemon_name as string : "";
 
     if (pokemonName !== "") {
-        const filteredPokemons = pokemonsList.filter((pokemon: any) => pokemon.pokemonName.toString().toLowerCase() === pokemonName.toString().toLowerCase());
+        const filteredPokemons = pokemonsList.filter((pokemon: any) => pokemon.pokemonName.toString().toLowerCase() === pokemonName.toString().toLowerCase() || pokemon.nickname?.toString().toLowerCase() === pokemonName.toString().toLowerCase());
         res.render('huidige-pokemon', { currentPokemon, avatar, pokemonsList: filteredPokemons, hasPreviousPage, hasNextPage, pageNumber });
         return;
     }
@@ -126,11 +126,11 @@ router.post("/change-avatar/:avatar", async (req, res) => {
     }
 });
 
-router.post("/changeCurrentPokemon/:id", async (req, res) => {
+router.get("/changeCurrentPokemon/:id", async (req, res) => {
     const pokemonId = parseInt(req.params.id);
     try {
         await client.db("users").collection("usersPokemons").updateOne({ _id: res.locals.user._id }, { $set: { currentPokemon: pokemonId } }, { upsert: true });
-        res.status(200).json({ message: "Pokemon is succesvol gewijzigd." });
+        res.status(200).redirect("/huidige-pokemon");
     }
     catch (err) {
         console.error(err);

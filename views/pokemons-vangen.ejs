@@ -477,7 +477,8 @@ btnSendToDB.addEventListener('click', async function(event) {
     // Show the modal if the Pokémon is caught successfully
     caughtModal.show();
   } else {
-    console.error('Failed to catch the Pokémon');
+    alert('Er liep iets mis bij het vangen van de Pokémon of de Pokémon is al gevangen.');
+    window.location.href = '/huidige-pokemon';
   }
 });
 
