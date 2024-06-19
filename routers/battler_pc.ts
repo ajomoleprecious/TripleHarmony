@@ -28,18 +28,18 @@ router.get("/:pokemonToBattle", async (req: Request, res: Response) => {
     const pokemonData = await pokemonResponse.json();
     const pokemonToBattleData = pokemonData;
     let pokemonImg;
-    if(pokemonToBattleData.sprites.other["showdown"].front_default){
+    if (pokemonToBattleData.sprites.other["showdown"].front_default) {
       pokemonImg = pokemonToBattleData.sprites.other["showdown"].front_default;
     }
-    else{
+    else {
       pokemonImg = pokemonToBattleData.sprites.other["official-artwork"].front_default;
     }
     res.status(200).render("pokemon-battler-vs-pc", { pokemonToBattleData, pokemonImg, currentPokemon, avatar });
   }
-  catch{
-    res.status(404).render("error", {errorMessage : "Er was een error opgetreden bij het ophalen van een pokemon gegevens."});
+  catch {
+    res.status(404).render("error", { errorMessage: "Er was een error opgetreden bij het ophalen van een pokemon gegevens." });
   }
-  
+
 });
 
 router.post("/change-avatar/:avatar", async (req, res) => {
@@ -119,6 +119,57 @@ router.post("/updateLosses", async (req: Request, res: Response) => {
   } catch (err) {
     console.error("Error updating losses:", err);
     res.status(500).json({ message: "Error updating losses" });
+  }
+});
+
+async function fetchPokemonByName(name: string) {
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+  const data = await response.json();
+  return data;
+}
+
+router.post("/vangen", async (req: Request, res: Response) => {
+  try {
+    const pokemonName = req.body.pokemonName;
+    const coughtPoke: any = await fetchPokemonByName(pokemonName);
+    const addPoke = {
+      pokemonId: coughtPoke.id,
+      pokemonName: coughtPoke.name,
+      pokemonLevel: 1,
+      pokemonHP: coughtPoke.stats[0].base_stat,
+      pokemonAttack: coughtPoke.stats[1].base_stat,
+      pokemonDefense: coughtPoke.stats[2].base_stat,
+      pokemonSpeed: coughtPoke.stats[5].base_stat,
+      pokemonType: coughtPoke.types,
+      pokemonMoves: coughtPoke.moves.splice(0, 4).map((move: any) => move.move.name),
+      pokemonImg: coughtPoke.sprites.other["official-artwork"].front_default,
+      pokemonGif: coughtPoke.sprites.other["showdown"].front_default,
+      pokemonBackImg: coughtPoke.sprites.back_default,
+      pokemonBackGif: coughtPoke.sprites.other["showdown"].back_default,
+      nickname: "",
+      caughtAt: new Date(),
+      wins: 0,
+      losses: 0
+    };
+
+    const pokemons = await client.db("users").collection("usersPokemons").findOne({ _id: res.locals.user._id }, { projection: { pokemons: 1 } });
+
+    // check if user already has this pokemon
+    if (pokemons && pokemons.pokemons.find((poke: any) => poke.pokemonName === addPoke.pokemonName)) {
+      return res.status(400).render("error", { errorMessage: "Je hebt deze Pokémon al gevangen." });
+    }
+
+    await client.db("users").collection("usersPokemons").updateOne(
+      { _id: res.locals.user._id },
+      { $addToSet: { pokemons: { ...addPoke } } },
+      { upsert: true }
+    );
+
+    res.redirect("/pokemons-vangen");
+  }
+  catch (error) {
+    console.error(error);
+    res.render("error", { errorMessage: "Fout bij het toevoegen van pokemon." });
   }
 });
 

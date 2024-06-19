@@ -223,6 +223,14 @@
             "Content-Type": "application/json"
           }
         });
+        fetch("/pokemon-battler-vs-pc/vangen", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          }, body: JSON.stringify({
+            pokemonName: pokemonToBattleData.name
+            })
+        });
         setTimeout(() => {
           window.location.href = "/huidige-pokemon";
         }, 5000);
