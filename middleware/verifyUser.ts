@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { User } from "../models/User";
+import { client } from "../index";
 const jwt = require('jsonwebtoken');
 
 const maxAge = 1 * 24 * 60 * 60; // 1 day in seconds
@@ -20,7 +21,17 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
                     // Create a new token
                     const newToken = jwt.sign({ id: decodedToken.id }, process.env.SECRET_KEY, { expiresIn: maxAge });
                     res.cookie('jwt', newToken, { httpOnly: true, maxAge: maxAge * 1000, secure: true, sameSite: 'strict'});
-
+                    
+                    // set last seen
+                    const userDocument = await client.db("users").collection("usersAccounts").findOne({ _id: user._id });
+                    if (userDocument) {
+                        userDocument.lastSeen = new Date();
+                        // Update the user's last seen date
+                        await client.db("users").collection("usersAccounts").updateOne(
+                            { _id: user._id },
+                            { $set: { lastSeen: userDocument.lastSeen } }
+                        );
+                    }
                     next();
                 } else {
                     res.locals.user = null;

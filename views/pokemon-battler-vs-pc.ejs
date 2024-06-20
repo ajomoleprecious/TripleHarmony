@@ -234,6 +234,7 @@
         setTimeout(() => {
           window.location.href = "/huidige-pokemon";
         }, 5000);
+        return;
       } else if (currentPokemonHP <= 0) {
         lost.show();
         console.log("lost");
@@ -247,6 +248,7 @@
         setTimeout(() => {
           window.location.href = "/huidige-pokemon";
         }, 5000);
+        return;
       }
 
       // pause for 1.5s
@@ -290,6 +292,7 @@
           setTimeout(() => {
             window.location.href = "/huidige-pokemon";
           }, 5000);
+          return;
         } else if (currentPokemonHP <= 0) {
           lost.show();
           // post a without body to update the losses
@@ -302,6 +305,7 @@
           setTimeout(() => {
             window.location.href = "/huidige-pokemon";
           }, 5000);
+          return;
         }
       }, 1500);
     });
