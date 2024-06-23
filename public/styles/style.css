@@ -1195,8 +1195,8 @@ body.pokemon-bekijken h1 {
 
 body#finder section>button .fa-solid.fa-question,
 body.battler section>button .fa-solid.fa-question {
-    background-color: brown;
-    color: var(--white)
+    background-color: var(--orange);
+    color: var(--black);
 }
 
 #startMessage {
@@ -1207,7 +1207,8 @@ body.battler section>button .fa-solid.fa-question {
     z-index: 100;
     top: 0;
     left: 0;
-    width: 100%
+    width: 100%;
+    height: 100%
 }
 
 .pokemonToGuess {

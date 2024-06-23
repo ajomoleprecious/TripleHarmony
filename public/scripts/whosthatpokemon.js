@@ -55,6 +55,8 @@ async function fetchAllPokemons() {
 
         if (inputWho.value.toLowerCase() === localStorage.getItem("pokemonName").toLowerCase()) {
                 result.innerText = "Correct!";
+                result.style.pointerEvents = "none";
+                skip.style.pointerEvents = "none";
                 let e = Math.floor(3 * Math.random() + 1);
                 if (hintCount === 1) {
                     if (e === 1) await fetch("/who's-that-pokemon/award/attack/2");
@@ -91,6 +93,8 @@ async function fetchAllPokemons() {
         mask.style.clip = "rect(0px, 0px, 15rem, 0px)";
         inputWho.value = "";
         hintCount = 1;
+        result.style.pointerEvents = "auto";
+        skip.style.pointerEvents = "auto";
         let e = await fetch("/who's-that-pokemon/new-pokemon");
         let t = await e.json();
         setTimeout(() => {
@@ -150,6 +154,8 @@ async function fetchAllPokemons() {
     inputWho.addEventListener("input", async () => {
         if (inputWho.value.toLowerCase() === localStorage.getItem("pokemonName").toLowerCase()) {
             result.innerText = "Correct!";
+            result.style.pointerEvents = "none";
+            skip.style.pointerEvents = "none";
             let e = Math.floor(3 * Math.random() + 1);
             if (hintCount === 1) {
                 if (e === 1) await fetch("/who's-that-pokemon/award/attack/2");
@@ -166,8 +172,6 @@ async function fetchAllPokemons() {
             }, 2500);
         }
     });
-
-    
 
     inputWho.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
