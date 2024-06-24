@@ -2,7 +2,7 @@ import { Request, Response, Router } from "express";
 import { verifyUser } from "../middleware/verifyUser";
 import { currentPokemon } from "../middleware/currentPokemon";
 import { currentAvatar } from "../middleware/userAvatar";
-import {Pokemon} from "../interfaces";
+import { Pokemon } from "../interfaces";
 import express from "express";
 import { client } from "../index";
 
@@ -19,69 +19,88 @@ router.get('/', async (req: Request, res: Response) => {
     const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
     const pokemonsList = user?.pokemons;
     const avatar = res.locals.currentAvatar;
-    const hasPreviousPage = false;
-    const hasNextPage = false;
-    const pageNumber = 1;
-    res.render('huidige-pokemon', { currentPokemon, avatar, pokemonsList, hasPreviousPage, hasNextPage, pageNumber });
+    let isFilter = false;
+    const page = req.query.page ? parseInt(req.query.page as string) : 0;
+    const amount = req.query.amount ? parseInt(req.query.amount as string) : 30;
+
+    const start = page * amount;
+    const end = start + amount;
+    const paginatedPokemons = pokemonsList?.slice(start, end);
+    const hasPreviousPage = start > 0;
+    const hasNextPage = end < pokemonsList.length;
+    const pageNumber = page + 1;
+
+    res.render('huidige-pokemon', { currentPokemon, avatar, pokemonsList: paginatedPokemons, hasPreviousPage, hasNextPage, pageNumber, isFilter });
 });
 
 router.get("/filter", async (req: Request, res: Response) => {
     const currentPokemon = res.locals.currentPokemon;
     const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
-    const pokemonsList = user?.pokemons;
+    const pokemonsList = user?.pokemons || [];
     const avatar = res.locals.currentAvatar;
     const hasPreviousPage = false;
     const hasNextPage = false;
     const pageNumber = 1;
+    let isFilter = true;
 
+    // Retrieve query parameters
     const pokemonType = req.query.pokemon_type ? req.query.pokemon_type as string : "";
     const sortBy = req.query.sort_by ? req.query.sort_by as string : "";
     const pokemonName = req.query.pokemon_name ? req.query.pokemon_name as string : "";
 
+    // Start with the full list of pokemons
+    let filteredPokemons = pokemonsList;
+
+    // Filter by name if provided
     if (pokemonName !== "") {
-        const filteredPokemons = pokemonsList.filter((pokemon: any) => pokemon.pokemonName.toString().toLowerCase() === pokemonName.toString().toLowerCase() || pokemon.nickname?.toString().toLowerCase() === pokemonName.toString().toLowerCase());
-        res.render('huidige-pokemon', { currentPokemon, avatar, pokemonsList: filteredPokemons, hasPreviousPage, hasNextPage, pageNumber });
-        return;
-    }
-
-    if (pokemonType !== "none") {
-        const filteredPokemons = pokemonsList.filter((pokemon: any) => pokemon.pokemonType.some((type: any) => type.type.name.toString().toLowerCase() === pokemonType.toString().toLowerCase()));
-
-        res.render('huidige-pokemon', { currentPokemon, avatar, pokemonsList: filteredPokemons, hasPreviousPage, hasNextPage, pageNumber });
-        return;
-    }
-
-    if (sortBy === "name") {
-        const sortedPokemons = pokemonsList.sort((a: any, b: any) => {
-            if (a.pokemonName < b.pokemonName) return -1;
-            if (a.pokemonName > b.pokemonName) return 1;
-            return 0;
+        filteredPokemons = filteredPokemons.filter((pokemon: any) => {
+            const name = pokemon.pokemonName?.toString().toLowerCase() || "";
+            const nickname = pokemon.nickname?.toString().toLowerCase() || "";
+            const searchTerm = pokemonName.toLowerCase();
+            return name.includes(searchTerm) || nickname.includes(searchTerm);
         });
-        res.render('huidige-pokemon', { currentPokemon, avatar, pokemonsList: sortedPokemons, hasPreviousPage, hasNextPage, pageNumber });
-        return;
-    }
-    else if (sortBy === "height") {
-        const sortedPokemons = pokemonsList.sort((a: any, b: any) => {
-            if (a.height < b.height) return -1;
-            if (a.height > b.height) return 1;
-            return 0;
-        });
-        res.render('huidige-pokemon', { currentPokemon, avatar, pokemonsList: sortedPokemons, hasPreviousPage, hasNextPage, pageNumber });
-        return;
-    }
-    else if (sortBy === "weight") {
-        const sortedPokemons = pokemonsList.sort((a: any, b: any) => {
-            if (a.weight < b.weight) return -1;
-            if (a.weight > b.weight) return 1;
-            return 0;
-        });
-        res.render('huidige-pokemon', { currentPokemon, avatar, pokemonsList: sortedPokemons, hasPreviousPage, hasNextPage, pageNumber });
-        return;
     }
 
-    res.render('huidige-pokemon', { currentPokemon, avatar, pokemonsList, hasPreviousPage, hasNextPage, pageNumber });
 
+    // Filter by type if provided and not "none"
+    if (pokemonType !== "none" && pokemonType !== "") {
+        filteredPokemons = filteredPokemons.filter((pokemon: any) =>
+            pokemon.pokemonType.some((type: any) => type.type.name.toString().toLowerCase() === pokemonType.toString().toLowerCase())
+        );
+    }
+
+    // Sort by the specified criteria
+    if (sortBy) {
+        filteredPokemons.sort((a: any, b: any) => {
+            switch (sortBy) {
+                case "name":
+                    return a.pokemonName.localeCompare(b.pokemonName);
+                case "hp":
+                    return a.pokemonHP - b.pokemonHP;
+                case "attack":
+                    return a.pokemonAttack - b.pokemonAttack;
+                case "defense":
+                    return a.pokemonDefense - b.pokemonDefense;
+                case "speed":
+                    return a.pokemonSpeed - b.pokemonSpeed;
+                default:
+                    return 0;
+            }
+        });
+    }
+
+    // Render the result
+    res.render('huidige-pokemon', {
+        currentPokemon,
+        avatar,
+        pokemonsList: filteredPokemons,
+        hasPreviousPage,
+        hasNextPage,
+        pageNumber,
+        isFilter
+    });
 });
+
 
 router.get("/get-pokemon/:id", async (req, res) => {
     const pokemonId = parseInt(req.params.id);
@@ -93,27 +112,27 @@ router.get("/get-pokemon/:id", async (req, res) => {
 router.post("/save-nickname/:id", async (req: Request, res: Response) => {
     const pokemonId = parseInt(req.params.id);
     const { nickname } = req.body;
-    
+
     try {
-      const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
-      if (!user) return res.status(404).send({ success: false, message: "User not found" });
-  
-      const pokemon = user.pokemons.find((poke: Pokemon) => poke.pokemonId === pokemonId);
-      if (pokemon) {
-        pokemon.nickname = nickname;
-        await client.db('users').collection('usersPokemons').updateOne(
-          { _id: res.locals.user._id },
-          { $set: { pokemons: user.pokemons } }
-        );
-        res.status(200).send({ success: true, message: "Nickname saved successfully" });
-      } else {
-        res.status(404).send({ success: false, message: "Pokémon not found" });
-      }
+        const user = await client.db('users').collection('usersPokemons').findOne({ _id: res.locals.user._id });
+        if (!user) return res.status(404).send({ success: false, message: "User not found" });
+
+        const pokemon = user.pokemons.find((poke: Pokemon) => poke.pokemonId === pokemonId);
+        if (pokemon) {
+            pokemon.nickname = nickname;
+            await client.db('users').collection('usersPokemons').updateOne(
+                { _id: res.locals.user._id },
+                { $set: { pokemons: user.pokemons } }
+            );
+            res.status(200).send({ success: true, message: "Nickname saved successfully" });
+        } else {
+            res.status(404).send({ success: false, message: "Pokémon not found" });
+        }
     } catch (err) {
-      console.error(err);
-      res.status(500).send({ success: false, message: "Error saving nickname" });
+        console.error(err);
+        res.status(500).send({ success: false, message: "Error saving nickname" });
     }
-  });
+});
 
 router.post("/change-avatar/:avatar", async (req, res) => {
     res.locals.avatar = req.params.avatar;

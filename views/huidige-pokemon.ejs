@@ -91,8 +91,10 @@
       <section class="form-floating mb-3">
         <select class="form-select form-select-sm" name="sort_by" id="floatingSelect" aria-label="Floating label select example">
           <option value="name" selected>Naam (alfabetisch)</option>
-          <option value="weight">Gewicht</option>
-          <option value="height">Lengte</option>
+          <option value="hp">Leven</option>
+          <option value="attack">Aanval</option>
+          <option value="defense">Verdediging</option>
+          <option value="speed">Snelheid</option>
         </select>
         <label for="floatingSelect">Sorteer op:</label>
       </section>
@@ -105,6 +107,20 @@
     <section><i class="fa-solid fa-filter"></i></section>
     <section class="title">
       <h1>Jouw Pokémons</h1>
+      <% if (isFilter) { %>
+      <% } else {%>
+      <section>
+        <form method="get" id="getAmountOfPokemons">
+          Toon:
+          <select class="form-select" id="amountOfPokemons" name="amount" aria-label="Amount of pokemons">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+          </select>
+          <input type="hidden" name="page" value="0">
+        </form>
+      </section>
+      <% } %>
     </section>
     <section class="pokemon-list">
       <ul>

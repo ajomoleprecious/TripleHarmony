@@ -80,7 +80,7 @@ pokemonSearch.addEventListener("keyup", event => {
             listItem.style.cursor = "pointer";
 
             // Add a click event listener to display the selected name
-            listItem.addEventListener("click", function() {
+            listItem.addEventListener("click", function () {
                 displayNames(pokemonSearch, name, leftList);
             });
 
@@ -109,3 +109,26 @@ function displayNames(searchInput, name, parentElement) {
     searchInput.value = name;  // Set the input value to the selected name
     removeElements(parentElement);  // Remove all list items
 }
+
+let listForm = document.getElementById("getAmountOfPokemons"),
+    amountOfpokemons = document.getElementById("amountOfPokemons");
+
+let previousButton = document.getElementById("previous"),
+    nextButton = document.getElementById("next");
+previousButton.addEventListener("click", function () {
+    let e = parseInt(localStorage.getItem("page"));
+    e > 0 && (listForm.querySelector('input[name="page"]').value = e - 1, localStorage.setItem("page", e - 1), listForm.submit())
+}), nextButton.addEventListener("click", function () {
+    let e = parseInt(localStorage.getItem("page"));
+    listForm.querySelector('input[name="page"]').value = e + 1, localStorage.setItem("page", e + 1), listForm.submit()
+});
+
+null === amountOfpokemons || (localStorage.getItem("amountOfPokemons") ? amountOfpokemons.value = localStorage.getItem("amountOfPokemons") : amountOfpokemons.value = 10, amountOfpokemons.addEventListener("change", function () {
+    localStorage.setItem("amountOfPokemons", amountOfpokemons.value), listForm.submit()
+}));
+
+window.onload = function () {
+    let e = new URLSearchParams(window.location.search),
+        t = parseInt(e.get("page")) || 0;
+    null !== amountOfpokemons && (listForm.querySelector('input[name="page"]').value = t), localStorage.setItem("page", t)
+};
