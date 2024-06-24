@@ -1,52 +1,52 @@
-// Function to adjust the layout based on the filter menu state and window width
+// Function to manage the layout based on the window width and the filter menu's state
 function openFilterMenu() {
-    // Check if the window width is less than or equal to 475 pixels
+    // Check if the window width is 475 pixels or less
     if (window.innerWidth <= 475) {
-        // For small screens, if the aside (filter menu) is active, change the grid layout to hide the aside
+        // If the aside element contains the 'active' class
         if (document.querySelector("aside").classList.contains("active")) {
+            // Set the grid template areas for the .pokemon-bekijken element for small screens
+            document.querySelector(".pokemon-bekijken").style.gridTemplateAreas = '"header header" "main main"';
+        } else {
+            // If not active, keep the layout unchanged for small screens
             document.querySelector(".pokemon-bekijken").style.gridTemplateAreas = '"header header" "main main"';
         }
     } else {
-        // For larger screens, adjust the grid layout based on the filter menu state
+        // For screens larger than 475 pixels
         if (document.querySelector("aside").classList.contains("active")) {
-            // If the filter menu is active, show the aside in the grid layout
+            // Set the grid template areas for the .pokemon-bekijken element with aside visible
             document.querySelector(".pokemon-bekijken").style.gridTemplateAreas = '"header header" "aside main"';
         } else {
-            // If the filter menu is not active, hide the aside in the grid layout
+            // Set the grid template areas for the .pokemon-bekijken element with aside hidden
             document.querySelector(".pokemon-bekijken").style.gridTemplateAreas = '"header header" "main main"';
         }
     }
 }
 
-// Select the filter menu button (usually a filter icon with the class 'fa-filter')
+// Select the filter menu icon element
 let filterMenu = document.querySelector(".fa-filter");
 
-// Add a click event listener to the filter menu button
+// Add a click event listener to the filter menu icon
 filterMenu.addEventListener("click", () => {
-    // Hide the filter menu button
+    // Hide the filter menu icon
     filterMenu.style.display = "none";
-    
-    // Toggle the 'active' class on the aside (filter menu)
+    // Toggle the 'active' class on the aside element
     document.querySelector("aside").classList.toggle("active");
-    
-    // Adjust the layout based on the new filter menu state
+    // Call the openFilterMenu function to update the layout
     openFilterMenu();
 });
 
-// Select the close button inside the filter menu (with the class 'filter-close')
+// Select the close button for the filter menu
 let closeFilter = document.querySelector(".filter-close");
 
 // Add a click event listener to the close button
 closeFilter.addEventListener("click", () => {
-    // Show the filter menu button
+    // Show the filter menu icon
     filterMenu.style.display = "block";
-    
-    // Toggle the 'active' class on the aside (filter menu)
+    // Toggle the 'active' class on the aside element
     document.querySelector("aside").classList.toggle("active");
-    
-    // Adjust the layout based on the new filter menu state
+    // Call the openFilterMenu function to update the layout
     openFilterMenu();
 });
 
-// Initial call to set up the correct layout based on the current window size and filter menu state
+// Initial call to set up the layout based on the current state and window size
 openFilterMenu();
