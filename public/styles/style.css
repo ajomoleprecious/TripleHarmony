@@ -55,7 +55,7 @@ aside {
     border-radius: 30px 30px;
     padding: .8rem;
     margin: 1rem 0;
-    min-height: 90%;
+    height: 90%;
     display: none;
     z-index: 5;
 }
