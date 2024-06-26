@@ -359,7 +359,7 @@ const roomID = urlParams.get("roomID");
 if (roomID) {
     socket.emit('joinRoom', roomID);
 } else {
-    //choiceModal.show();
+    choiceModal.show();
     socket.on("connect", () => {
         const roomID = generateRoomID();
         linkInput.value = `${window.location.origin}/pokemon-battler/?roomID=${roomID}`;
