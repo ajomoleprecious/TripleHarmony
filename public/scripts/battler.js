@@ -359,7 +359,7 @@ const roomID = urlParams.get("roomID");
 if (roomID) {
     socket.emit('joinRoom', roomID);
 } else {
-    choiceModal.show();
+    //choiceModal.show();
     socket.on("connect", () => {
         const roomID = generateRoomID();
         linkInput.value = `${window.location.origin}/pokemon-battler/?roomID=${roomID}`;
@@ -381,3 +381,48 @@ function generateRoomID() {
     }
     return result;
 }
+
+function scrollToBottom() {
+    var chatContainer = document.querySelector('.chat-container');
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+scrollToBottom();
+
+document.querySelector('.btn-close').addEventListener('click', () => {
+    document.querySelector('aside').classList.remove('active');
+});
+
+function openFilterMenu() {
+    if (window.innerWidth <= 475) {
+        if (document.querySelector("aside").classList.contains("active")) {
+            document.querySelector(".battler").style.gridTemplateAreas = '"header header" "main main"';
+        } else {
+            document.querySelector(".battler").style.gridTemplateAreas = '"header header" "main main"';
+        }
+    } else {
+        if (document.querySelector("aside").classList.contains("active")) {
+            document.querySelector(".battler").style.gridTemplateAreas = '"header header" "aside main"';
+        } else {
+            document.querySelector(".battler").style.gridTemplateAreas = '"header header" "main main"';
+        }
+    }
+}
+
+let chatMenu = document.querySelector(".fa-comments");
+
+chatMenu.addEventListener("click", () => {
+    chatMenu.style.display = "none";
+    document.querySelector("aside").classList.toggle("active");
+    openFilterMenu();
+});
+
+let closeChat = document.querySelector(".chat-close");
+
+closeChat.addEventListener("click", () => {
+    chatMenu.style.display = "block";
+    document.querySelector("aside").classList.remove("active");
+    openFilterMenu();
+});
+
+openFilterMenu();

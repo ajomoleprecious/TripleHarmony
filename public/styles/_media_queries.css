@@ -1,1 +1,346 @@
-@media (max-width:1100px){.ingelogd .pokemon-bekijken-main{grid-template-rows:10dvh 72dvh auto}.ingelogd.pokemon-bekijken{grid-template-columns:1.7fr 4fr}#poke-bg main.pokesubmenu{padding:1rem}#poke-bg button.submenu-button section,#poke-bg section.submenu{width:100%}#poke-bg button.submenu-button:hover{transform:scale(1.02)}}@media (max-width:950px){.boxing-gloves{width:15%;right:1rem}.denied button{display:block}.denied button>img:nth-child(2){display:none;visibility:hidden}.denied:hover{animation:2s infinite denied}}@media (max-width:800px){.poke-catch{flex-direction:column-reverse;justify-content:space-around}}@media (max-width:768px){.ingelogd .poke-catch article:first-child p{font-size:2rem}.ingelogd .poke-catch-img{width:10rem}.ingelogd .boxing-gloves{width:15%;right:1rem;top:15rem}.roulette-box{width:7.8125rem;height:7.8125rem;border-width:.25rem}.roulette-box li{width:3.125rem;left:2.109375rem}}@media (max-width:710px){.nav-container ul,.nav-container ul.active{position:fixed;top:0;bottom:0;display:flex}.projects ul li{width:350px;height:150px}.ingelogd{background-position:right}.ingelogd .hamMenu{display:block}.ingelogd header nav{border-radius:40px 0 0 40px}.nav-container ul.active{visibility:visible;padding:4rem .45rem 5rem;right:0;cursor:pointer;transition:0.2s ease-in-out;flex-direction:column;align-items:center;justify-content:space-evenly;background-color:#fcba03;gap:2rem;z-index:1}.nav-container ul{transition:3s ease-in-out;right:-140%;flex-direction:column}.current-pokemon{right:10px}.current-pokemon .pokemon-pic{width:80px;height:70px}.current-pokemon img:nth-child(2){width:80px}.pokemon-hp img,.pokemon-shield img{width:10px;height:10px}.pokemon-hp p,.pokemon-shield p{font-size:.8rem}.battler{background-image:url(../assets/mobiel_battler.png)}.battlefield article:nth-child(2) img{margin-top:0}.battlefield article:nth-child(2),.battlefield article:nth-child(3){justify-content:start}.aanvallen{justify-content:end;margin-right:1rem}}@media (max-width:475px){aside.active{position:fixed;top:180px}.aanvallen li{font-size:.7rem}.aanvallen{justify-content:center;align-self:center;margin-top:0}}@media (max-width:400px){.projects ul li{width:300px;height:150px}aside.active{position:fixed;top:100px}.fa-filter{top:100px}.poke-catch article:first-child p{font-size:2rem}.poke-catch article:first-child{margin-top:0}}@media (min-width:300px) and (max-width:710px){.ingelogd{background-position:right;height:80vh;width:90vw;margin-top:1rem}.ingelogd .battlefield .progress,.ingelogd .progress-bar{height:20px;width:75%;font-size:1rem}.ingelogd .pv_project{display:flex;justify-content:space-evenly}.ingelogd .pv_project input{width:fit-content}.ingelogd .left_pokemon,.ingelogd .right_pokemon{font-weight:700;justify-content:start}.ingelogd .left_pokemon img,.ingelogd .right_pokemon img{margin:2rem 0 0;width:110px;height:100px}.ingelogd .left_pokemon input,.ingelogd .right_pokemon input{width:2rem;padding:0;border:1px solid #000;border-left:1px solid #000;border-radius:.7rem;text-align:center;font-family:Anta,sans-serif;font-size:.7rem}.ingelogd .left_pokemon span,.ingelogd .right_pokemon span{padding:.2rem}.ingelogd .pv_stats{display:flex;font-size:.8rem}.ingelogd .pv_stats li{padding:.4rem;width:8rem;margin-top:.5rem}.ingelogd .pv_stats li:nth-child(2){width:5rem}.ingelogd .middle_stats{display:flex;margin-top:16.5rem}.pv_project article:nth-child(2){margin-top:10rem}.ingelogd .comparison,.right-container ul{padding:0}.ingelogd .comparison li{margin-top:2.9rem;margin-bottom:1rem;color:#22ee0b;text-shadow:#000 2px 2px 2px;font-size:1.1rem}.ingelogd .progress{width:7rem}.ingelogd .battlefield article:nth-child(3){justify-content:start}.ingelogd #vergelijken-HP-icon,.ingelogd #vergelijken-defence-icon{width:20px;height:auto;margin:auto}.ingelogd #vergelijken-aanval-icon{width:25px;height:auto;margin:auto}.pokemon-levels ul{width:300px}.landing-main .projects{width:90vw}.landing-main .projects .denied,.landing-main .projects ul li{width:300px;height:150px}.landing-main .denied button>img:first-child{width:100%;height:118px}.ingelogd .avatars li img{width:100px;height:100px}.ingelogd .pokemon-bekijken-main{grid-template-rows:13dvh 70dvh auto}#detailLabel{font-size:1rem}.pokemon-bekijken .modal-body>img:first-child{width:fit-content;height:100%}#poke-bg button.submenu-button span,.ingelogd .pokemon-bekijken-main .title h1{font-size:1.5rem}.ingelogd .pokemon-bekijken-main .title section,.ingelogd .pokemon-bekijken-main .title section select{font-size:.7rem}.ingelogd #nav-menus ul li.active{border:none;border-left:7px solid var(--nav-link-border)}section.pokemon-list ul{gap:1rem}main.pokemon-bekijken-main section.pokemon-list ul li{width:100px}#poke-bg main.pokesubmenu{padding:1rem}#poke-bg button.submenu-button section img{width:30px}body.ingelogd abbr::after{display:none}.ingelogd .pokemonToGuess{top:57%}.ingelogd .help{bottom:2.3rem}}@media (max-height:900px){.ingelogd .poke-catch-buttons,.poke-catch-buttons{flex-direction:row}.ingelogd .poke-catch article:nth-child(2),.ingelogd .poke-catch-buttons a{margin:0}.ingelogd .pokemon-bekijken-main .pokemon-list ul li:hover{transform:scale(1.05);transition:0.3s}}
+@media (max-width: 1100px) {
+    .ingelogd .pokemon-bekijken-main {
+        grid-template-rows: 10dvh 72dvh auto;
+    }
+    .ingelogd.pokemon-bekijken {
+        grid-template-columns: 1.7fr 4fr;
+    }
+    #poke-bg main.pokesubmenu {
+        padding: 1rem;
+    }
+    #poke-bg button.submenu-button section,
+    #poke-bg section.submenu {
+        width: 100%;
+    }
+    #poke-bg button.submenu-button:hover {
+        transform: scale(1.02);
+    }
+}
+@media (max-width: 950px) {
+    .boxing-gloves {
+        width: 15%;
+        right: 1rem;
+    }
+    .denied button {
+        display: block;
+    }
+    .denied button > img:nth-child(2) {
+        display: none;
+        visibility: hidden;
+    }
+    .denied:hover {
+        animation: 2s infinite denied;
+    }
+}
+@media (max-width: 800px) {
+    .poke-catch {
+        flex-direction: column-reverse;
+        justify-content: space-around;
+    }
+}
+@media (max-width: 768px) {
+    .ingelogd .poke-catch article:first-child p {
+        font-size: 2rem;
+    }
+    .ingelogd .poke-catch-img {
+        width: 10rem;
+    }
+    .ingelogd .boxing-gloves {
+        width: 15%;
+        right: 1rem;
+        top: 15rem;
+    }
+    .roulette-box {
+        width: 7.8125rem;
+        height: 7.8125rem;
+        border-width: 0.25rem;
+    }
+    .roulette-box li {
+        width: 3.125rem;
+        left: 2.109375rem;
+    }
+}
+@media (max-width: 710px) {
+    .nav-container ul,
+    .nav-container ul.active {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        display: flex;
+    }
+    .projects ul li {
+        width: 350px;
+        height: 150px;
+    }
+    .ingelogd {
+        background-position: right;
+    }
+    .ingelogd .hamMenu {
+        display: block;
+    }
+    .ingelogd header nav {
+        border-radius: 40px 0 0 40px;
+    }
+    .nav-container ul.active {
+        visibility: visible;
+        padding: 4rem 0.45rem 5rem;
+        right: 0;
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        background-color: #fcba03;
+        gap: 2rem;
+        z-index: 1;
+    }
+    .nav-container ul {
+        transition: 3s ease-in-out;
+        right: -140%;
+        flex-direction: column;
+    }
+    .current-pokemon {
+        right: 10px;
+    }
+    .current-pokemon .pokemon-pic {
+        width: 80px;
+        height: 70px;
+    }
+    .current-pokemon img:nth-child(2) {
+        width: 80px;
+    }
+    .pokemon-hp img,
+    .pokemon-shield img {
+        width: 10px;
+        height: 10px;
+    }
+    .pokemon-hp p,
+    .pokemon-shield p {
+        font-size: 0.8rem;
+    }
+    .battler {
+        background-image: url(../assets/mobiel_battler.png);
+    }
+    .battlefield article:nth-child(2) img {
+        margin-top: 0;
+    }
+    .battlefield article:nth-child(2),
+    .battlefield article:nth-child(3) {
+        justify-content: start;
+    }
+    .aanvallen {
+        justify-content: end;
+        margin-right: 1rem;
+    }
+}
+@media (max-width: 475px) {
+    aside.active{
+        position: fixed;
+        top: 180px;
+    }
+    .battler aside.active{
+        top: 50px;
+        position: fixed;
+    }
+    .battler aside .chat-container {
+        height: 70vh;
+    }
+    
+    .aanvallen li {
+        font-size: 0.7rem;
+    }
+    .aanvallen {
+        justify-content: center;
+        align-self: center;
+        margin-top: 0;
+    }
+}
+@media (max-width: 400px) {
+    .projects ul li {
+        width: 300px;
+        height: 150px;
+    }
+    aside.active {
+        position: fixed;
+        top: 100px;
+    }
+    .fa-filter {
+        top: 100px;
+    }
+    .poke-catch article:first-child p {
+        font-size: 2rem;
+    }
+    .poke-catch article:first-child {
+        margin-top: 0;
+    }
+}
+@media (min-width: 300px) and (max-width: 710px) {
+    .ingelogd {
+        background-position: right;
+        height: 80vh;
+        width: 90vw;
+        margin-top: 1rem;
+    }
+    .ingelogd .battlefield .progress,
+    .ingelogd .progress-bar {
+        height: 20px;
+        width: 75%;
+        font-size: 1rem;
+    }
+    .ingelogd .pv_project {
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .ingelogd .pv_project input {
+        width: fit-content;
+    }
+    .ingelogd .left_pokemon,
+    .ingelogd .right_pokemon {
+        font-weight: 700;
+        justify-content: start;
+    }
+    .ingelogd .left_pokemon img,
+    .ingelogd .right_pokemon img {
+        margin: 2rem 0 0;
+        width: 110px;
+        height: 100px;
+    }
+    .ingelogd .left_pokemon input,
+    .ingelogd .right_pokemon input {
+        width: 2rem;
+        padding: 0;
+        border: 1px solid #000;
+        border-left: 1px solid #000;
+        border-radius: 0.7rem;
+        text-align: center;
+        font-family: Anta, sans-serif;
+        font-size: 0.7rem;
+    }
+    .ingelogd .left_pokemon span,
+    .ingelogd .right_pokemon span {
+        padding: 0.2rem;
+    }
+    .ingelogd .pv_stats {
+        display: flex;
+        font-size: 0.8rem;
+    }
+    .ingelogd .pv_stats li {
+        padding: 0.4rem;
+        width: 8rem;
+        margin-top: 0.5rem;
+    }
+    .ingelogd .pv_stats li:nth-child(2) {
+        width: 5rem;
+    }
+    .ingelogd .middle_stats {
+        display: flex;
+        margin-top: 16.5rem;
+    }
+    .pv_project article:nth-child(2) {
+        margin-top: 10rem;
+    }
+    .ingelogd .comparison,
+    .right-container ul {
+        padding: 0;
+    }
+    .ingelogd .comparison li {
+        margin-top: 2.9rem;
+        margin-bottom: 1rem;
+        color: #22ee0b;
+        text-shadow: #000 2px 2px 2px;
+        font-size: 1.1rem;
+    }
+    .ingelogd .progress {
+        width: 7rem;
+    }
+    .ingelogd .battlefield article:nth-child(3) {
+        justify-content: start;
+    }
+    .ingelogd #vergelijken-HP-icon,
+    .ingelogd #vergelijken-defence-icon {
+        width: 20px;
+        height: auto;
+        margin: auto;
+    }
+    .ingelogd #vergelijken-aanval-icon {
+        width: 25px;
+        height: auto;
+        margin: auto;
+    }
+    .pokemon-levels ul {
+        width: 300px;
+    }
+    .landing-main .projects {
+        width: 90vw;
+    }
+    .landing-main .projects .denied,
+    .landing-main .projects ul li {
+        width: 300px;
+        height: 150px;
+    }
+    .landing-main .denied button > img:first-child {
+        width: 100%;
+        height: 118px;
+    }
+    .ingelogd .avatars li img {
+        width: 100px;
+        height: 100px;
+    }
+    .ingelogd .pokemon-bekijken-main {
+        grid-template-rows: 13dvh 70dvh auto;
+    }
+    #detailLabel {
+        font-size: 1rem;
+    }
+    .pokemon-bekijken .modal-body > img:first-child {
+        width: fit-content;
+        height: 100%;
+    }
+    #poke-bg button.submenu-button span,
+    .ingelogd .pokemon-bekijken-main .title h1 {
+        font-size: 1.5rem;
+    }
+    .ingelogd .pokemon-bekijken-main .title section,
+    .ingelogd .pokemon-bekijken-main .title section select {
+        font-size: 0.7rem;
+    }
+    .ingelogd #nav-menus ul li.active {
+        border: none;
+        border-left: 7px solid var(--nav-link-border);
+    }
+    section.pokemon-list ul {
+        gap: 1rem;
+    }
+    main.pokemon-bekijken-main section.pokemon-list ul li {
+        width: 100px;
+    }
+    #poke-bg main.pokesubmenu {
+        padding: 1rem;
+    }
+    #poke-bg button.submenu-button section img {
+        width: 30px;
+    }
+    body.ingelogd abbr::after {
+        display: none;
+    }
+    .ingelogd .pokemonToGuess {
+        top: 57%;
+    }
+    .ingelogd .help {
+        bottom: 2.3rem;
+    }
+}
+@media (max-height: 900px) {
+    .ingelogd .poke-catch-buttons,
+    .poke-catch-buttons {
+        flex-direction: row;
+    }
+    .ingelogd .poke-catch article:nth-child(2),
+    .ingelogd .poke-catch-buttons a {
+        margin: 0;
+    }
+    .ingelogd .pokemon-bekijken-main .pokemon-list ul li:hover {
+        transform: scale(1.05);
+        transition: 0.3s;
+    }
+}
