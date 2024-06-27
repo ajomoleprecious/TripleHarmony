@@ -8,4 +8,4 @@ Azure:
 https://tripleharmony.azurewebsites.net/ (might be slow on startup)
 
 Render:
-https://tripleharmony.onrender.com/ (takes 1-2 min to boot up then its up to speed)
+https://tripleharmony.onrender.com/ (takes 1-2 min to boot up then it is up to speed)
