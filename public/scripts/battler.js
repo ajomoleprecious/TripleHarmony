@@ -393,19 +393,22 @@ document.querySelector('.btn-close').addEventListener('click', () => {
 });
 
 function openChatMenu() {
-    scrollToBottom();
     if (window.innerWidth <= 475) {
         if (document.querySelector("aside").classList.contains("active")) {
             document.querySelector(".battler").style.gridTemplateAreas = '"header header" "main main"';
+            document.getElementById('chatInput').focus();
         } else {
             document.querySelector(".battler").style.gridTemplateAreas = '"header header" "main main"';
         }
+        scrollToBottom();
     } else {
         if (document.querySelector("aside").classList.contains("active")) {
             document.querySelector(".battler").style.gridTemplateAreas = '"header header" "aside main"';
+            document.getElementById('chatInput').focus();
         } else {
             document.querySelector(".battler").style.gridTemplateAreas = '"header header" "main main"';
         }
+        scrollToBottom();
     }
 }
 
@@ -422,6 +425,7 @@ let closeChat = document.querySelector(".chat-close");
 closeChat.addEventListener("click", () => {
     chatMenu.style.display = "block";
     document.querySelector("aside").classList.remove("active");
+    document.getElementById('chatSection').classList.remove("shake");
     openChatMenu();
 });
 
@@ -460,6 +464,13 @@ document.getElementById("chatInput").addEventListener("keypress", (e) => {
 // Handle receiving chat messages
 socket.on('receiveChatMessage', (message, time) => {
     const chatContainer = document.querySelector('.chat-container');
+
+    if (!chatContainer) {
+        console.error('Chat container not found!');
+        return; // Stop execution if chat container is missing
+    }
+
+    // Append the new message to the chat container
     chatContainer.innerHTML += `
     <div class="d-flex mb-3">
         <div class="chat-box bg-primary text-white p-2 rounded me-auto">
@@ -468,11 +479,33 @@ socket.on('receiveChatMessage', (message, time) => {
         </div>
     </div>
     `;
+
+    const chatMenu = document.querySelector(".fa-comments");
+    const chatSection = document.getElementById("chatSection");
+
+    if (chatMenu) {
+        // Get the computed style to check if it's displayed as 'block'
+        const displayStyle = window.getComputedStyle(chatMenu).display;
+
+        if (displayStyle === "block") {
+            // animate the chat icon with a shake effect
+            chatSection.classList.add("shake");
+        }
+    } else {
+        console.error('Chat menu not found!');
+    }
+
+    // Scroll to the bottom to show the latest message
     scrollToBottom();
 });
+
+
+
 document.querySelector('emoji-picker')
     .addEventListener('emoji-click', event => {
         document.getElementById('chatInput').value += event.detail.unicode;
+        // focus on the input field
+        document.getElementById('chatInput').focus();
     });
 
 document.getElementById('emojiBtn').addEventListener('click', () => {
