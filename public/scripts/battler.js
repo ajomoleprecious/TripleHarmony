@@ -359,6 +359,7 @@ const roomID = urlParams.get("roomID");
 if (roomID) {
     socket.emit('joinRoom', roomID);
 } else {
+    document.querySelector(".fa-comments").style.display = "none"; // Hide chat icon for PvP with stranger
     choiceModal.show();
     socket.on("connect", () => {
         const roomID = generateRoomID();
@@ -387,13 +388,12 @@ function scrollToBottom() {
     chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
-scrollToBottom();
-
 document.querySelector('.btn-close').addEventListener('click', () => {
     document.querySelector('aside').classList.remove('active');
 });
 
-function openFilterMenu() {
+function openChatMenu() {
+    scrollToBottom();
     if (window.innerWidth <= 475) {
         if (document.querySelector("aside").classList.contains("active")) {
             document.querySelector(".battler").style.gridTemplateAreas = '"header header" "main main"';
@@ -414,7 +414,7 @@ let chatMenu = document.querySelector(".fa-comments");
 chatMenu.addEventListener("click", () => {
     chatMenu.style.display = "none";
     document.querySelector("aside").classList.toggle("active");
-    openFilterMenu();
+    openChatMenu();
 });
 
 let closeChat = document.querySelector(".chat-close");
@@ -422,7 +422,60 @@ let closeChat = document.querySelector(".chat-close");
 closeChat.addEventListener("click", () => {
     chatMenu.style.display = "block";
     document.querySelector("aside").classList.remove("active");
-    openFilterMenu();
+    openChatMenu();
 });
 
-openFilterMenu();
+openChatMenu();
+
+// Handle chat submission
+document.getElementById("sendChat").addEventListener("click", () => {
+    const chatInput = document.getElementById("chatInput");
+    const time = new Date().toLocaleTimeString();
+
+    if (chatInput.value) {
+        // Emit the message to the server with the roomID
+        socket.emit('sendChatMessage', chatInput.value, time);
+
+        // Display the sent message in the chat container
+        const chatContainer = document.querySelector('.chat-container');
+        chatContainer.innerHTML += `
+        <div class="d-flex mb-3">
+            <div class="chat-box bg-secondary text-white p-2 rounded ms-auto">
+                <p class="mb-0">${chatInput.value}</p>
+                <small class="d-block text-end">${time}</small>
+            </div>
+        </div>
+        `;
+        chatInput.value = "";
+    }
+    scrollToBottom();
+});
+
+document.getElementById("chatInput").addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        document.getElementById("sendChat").click();
+    }
+});
+
+// Handle receiving chat messages
+socket.on('receiveChatMessage', (message, time) => {
+    const chatContainer = document.querySelector('.chat-container');
+    chatContainer.innerHTML += `
+    <div class="d-flex mb-3">
+        <div class="chat-box bg-primary text-white p-2 rounded me-auto">
+            <p class="mb-0">${message}</p>
+            <small class="d-block text-end">${time}</small>
+        </div>
+    </div>
+    `;
+    scrollToBottom();
+});
+document.querySelector('emoji-picker')
+    .addEventListener('emoji-click', event => {
+        document.getElementById('chatInput').value += event.detail.unicode;
+    });
+
+document.getElementById('emojiBtn').addEventListener('click', () => {
+    // toggle class active on emoji picker
+    document.querySelector('emoji-picker').classList.toggle('active');
+});

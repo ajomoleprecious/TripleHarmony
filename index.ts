@@ -123,6 +123,20 @@ io.on('connection', (socket: any) => {
   // Store the player's Pokémon
   playersPokemon[socket.id] = userPokemon;
 
+  // Function to handle chat messages
+  const handleChatMessages = (socket: any, roomID: string) => {
+    socket.on('sendChatMessage', (message: any, time: any) => {
+      // Find the other player in the room
+      const playersInRoom = Array.from(roomPlayers[roomID]);
+
+      const receiverID = playersInRoom.find(playerID => playerID !== socket.id);
+      if (receiverID) {
+        // Send the message to the other player only
+        io.to(receiverID).emit('receiveChatMessage', message, time);
+      }
+    });
+  };
+
   // Handle join room
   socket.on('joinRoom', (roomID: any) => {
     if (roomPlayers[roomID] && roomPlayers[roomID].size === 2) {
@@ -144,7 +158,7 @@ io.on('connection', (socket: any) => {
     if (roomPlayers[roomID].size === 1) {
       io.to(Array.from(roomPlayers[roomID])[0]).emit('waitingForPlayer');
     }
-    
+
 
     if (roomPlayers[roomID].size === 2) {
       const [player1, player2] = Array.from(roomPlayers[roomID]);
@@ -171,6 +185,9 @@ io.on('connection', (socket: any) => {
 
       console.log(`Game started in room: ${roomID}`);
     }
+
+    // Handle chat messages for this room
+    handleChatMessages(socket, roomID);
   });
 
   // Handle join random PvP
@@ -221,7 +238,6 @@ io.on('connection', (socket: any) => {
         io.to(player2).emit('setPlayer2', playersPokemon[player1]);
 
         console.log(`Game started in room: ${roomId}`);
-
       }
     }
   });
@@ -265,8 +281,8 @@ io.on('connection', (socket: any) => {
         }
         else if (roomPlayers[roomId].size === 1) {
           // Only one player left, delete the room
-          delete roomPlayers[roomId];
           io.to(roomId).emit('playerDisconnected');
+          delete roomPlayers[roomId];
         }
         else {
           io.to(roomId).emit('updateRoomPlayerCount', roomPlayers[roomId].size);

@@ -15,6 +15,7 @@
   <script defer src="/scripts/general.js"></script>
   <script defer src="/scripts/battler.js"></script>
   <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
 </head>
 
 <body class="ingelogd battler">
@@ -60,95 +61,15 @@
       <button type="button" class="btn-close chat-close" aria-label="Close"></button>
     </section>
     <section class="chat-container">
-      <!-- Message from User 1 -->
-      <div class="d-flex mb-3">
-        <div class="chat-box bg-primary text-white p-2 rounded me-auto">
-          <p class="mb-0">Hallo! Hoe gaat het?</p>
-          <small class="d-block text-end">10:45 AM</small>
-        </div>
-      </div>
-      <!-- Message from User 2 -->
-      <div class="d-flex mb-3">
-        <div class="chat-box bg-secondary text-white p-2 rounded ms-auto">
-          <p class="mb-0">Hallo! Het gaat goed, en met jou?</p>
-          <small class="d-block text-end">10:46 AM</small>
-        </div>
-      </div>
-      <!-- Message from User 2 -->
-      <div class="d-flex mb-3">
-        <div class="chat-box bg-secondary text-white p-2 rounded ms-auto">
-          <p class="mb-0">Hallo! Het gaat goed, en met jou?</p>
-          <small class="d-block text-end">10:46 AM</small>
-        </div>
-      </div>
-      <!-- Message from User 1 -->
-      <div class="d-flex mb-3">
-        <div class="chat-box bg-primary text-white p-2 rounded me-auto">
-          <p class="mb-0">Hallo! Hoe gaat het?</p>
-          <small class="d-block text-end">10:45 AM</small>
-        </div>
-      </div>
-      <!-- Message from User 2 -->
-      <div class="d-flex mb-3">
-        <div class="chat-box bg-secondary text-white p-2 rounded ms-auto">
-          <p class="mb-0">Hallo! Het gaat goed, en met jou?</p>
-          <small class="d-block text-end">10:46 AM</small>
-        </div>
-      </div>
-      <!-- Message from User 1 -->
-      <div class="d-flex mb-3">
-        <div class="chat-box bg-primary text-white p-2 rounded me-auto">
-          <p class="mb-0">Hallo! Hoe gaat het?</p>
-          <small class="d-block text-end">10:45 AM</small>
-        </div>
-      </div>
-      <!-- Message from User 2 -->
-      <div class="d-flex mb-3">
-        <div class="chat-box bg-secondary text-white p-2 rounded ms-auto">
-          <p class="mb-0">Hallo! Het gaat goed, en met jou?</p>
-          <small class="d-block text-end">10:46 AM</small>
-        </div>
-      </div>
-      <!-- Message from User 1 -->
-      <div class="d-flex mb-3">
-        <div class="chat-box bg-primary text-white p-2 rounded me-auto">
-          <p class="mb-0">Hallo! Hoe gaat het?</p>
-          <small class="d-block text-end">10:45 AM</small>
-        </div>
-      </div>
-      <!-- Message from User 2 -->
-      <div class="d-flex mb-3">
-        <div class="chat-box bg-secondary text-white p-2 rounded ms-auto">
-          <p class="mb-0">Hallo! Het gaat goed, en met jou?</p>
-          <small class="d-block text-end">10:46 AM</small>
-        </div>
-      </div>
-      <!-- Message from User 1 -->
-      <div class="d-flex mb-3">
-        <div class="chat-box bg-primary text-white p-2 rounded me-auto">
-          <p class="mb-0">Hallo! Hoe gaat het?</p>
-          <small class="d-block text-end">10:45 AM</small>
-        </div>
-      </div>
-      <!-- Message from User 1 -->
-      <div class="d-flex mb-3">
-        <div class="chat-box bg-primary text-white p-2 rounded me-auto">
-          <p class="mb-0">Hallo! Hoe gaat het?</p>
-          <small class="d-block text-end">10:45 AM</small>
-        </div>
-      </div>
-      <!-- Message from User 1 -->
-      <div class="d-flex mb-3">
-        <div class="chat-box bg-primary text-white p-2 rounded me-auto">
-          <p class="mb-0">Hallo! Hoe gaat het?</p>
-          <small class="d-block text-end">10:45 AM</small>
-        </div>
-      </div>
     </section>
-    <section class="emoji-picker-container d-flex justify-content-between align-items-center mt-2 gap-2">
-      <input type="text" class="form-control" id="chatInput" placeholder="Typ een bericht...">
-      <button class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
+    <section class="emoji-picker-container d-flex justify-content-between align-items-center mt-2 mb-1 gap-2">
+      <div class="input-group">
+        <input type="text" class="form-control" id="chatInput" placeholder="Typ een bericht...">
+        <span class="input-group-text text-primary" style="cursor: pointer;" id="emojiBtn"><i class="fa-solid fa-face-smile"></i></span>
+      </div>
+      <button id="sendChat" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
     </section>
+    <emoji-picker></emoji-picker>
   </aside>
   <main>
     <section><i class="fa-solid fa-comments"></i></section>
