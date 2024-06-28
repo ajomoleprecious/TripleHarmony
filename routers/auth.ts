@@ -109,7 +109,7 @@ router.post('/register', async (req: Request, res: Response) => {
             <br>
             <p>Voordat u zich kunt onderdompelen in de wereld van Pokémon op onze website, moeten we uw account verifiëren. Klik op de onderstaande link om uw e-mailadres te verifiëren:</p>
             <br>
-            <a href="https://tripleharmony.azurewebsites.net/pokemon-auth/verify/${user._id}">Verificatielink</a>
+            <a href="https://tripleharmony.onrender.com/pokemon-auth/verify/${user._id}">Verificatielink</a>
             <br>
             <p>Zodra uw account is geverifieerd, heeft u volledige toegang tot alle functies en inhoud op onze website. We hopen dat u een plezierige ervaring heeft met het verkennen en interactie met ons platform.</p>
             <br>
@@ -179,7 +179,7 @@ router.post('/reset', async (req: Request, res: Response) => {
                 <br>
                 <p> Uw tijdelijke wachtwoord is: <b style="color: red;">${password}</b></p>
                 <br>
-                <p>Wij raden u aan om uw wachtwoord zo snel mogelijk te wijzigen met deze <a href="https://tripleharmony.azurewebsites.net/pokemon-auth/change-password/${user._id}">link</a>.</p>
+                <p>Wij raden u aan om uw wachtwoord zo snel mogelijk te wijzigen met deze <a href="https://tripleharmony.onrender.com/pokemon-auth/change-password/${user._id}">link</a>.</p>
                 <br>
                 <p>Als u geen verzoek heeft ingediend om uw wachtwoord te resetten, kunt u deze e-mail veilig negeren.</p>
                 <br>
