@@ -4,6 +4,8 @@ import nodemailer from "nodemailer";
 import { client } from "../index";
 import express from "express";
 import { User } from "../models/User";
+import dotenv from "dotenv";
+dotenv.config();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
@@ -19,7 +21,7 @@ const transporter = nodemailer.createTransport({
     secure: false,
     auth: {
         user: "tripleharmony.ap@gmail.com",
-        pass: "daph rlhq lzix gnxp"
+        pass: process.env.GMAIL_PASS as string
     }
 });
 
