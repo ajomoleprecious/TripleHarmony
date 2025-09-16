@@ -29,7 +29,7 @@
     "dependencies": {
         "axios": "^1.7.4",
         "bcrypt": "^5.1.1",
-        "cookie-parser": "^1.4.6",
+        "cookie-parser": "^1.4.7",
         "dotenv": "^16.4.5",
         "ejs": "^3.1.10",
         "express": "^4.21.2",
@@ -39,7 +39,7 @@
         "mongodb": "^6.5.0",
         "mongoose": "^8.9.5",
         "nodemailer": "^6.9.13",
-        "socket.io": "^4.7.5",
+        "socket.io": "^4.8.1",
         "socket.io-client": "^4.7.5",
         "validator": "^13.11.0"
     }
