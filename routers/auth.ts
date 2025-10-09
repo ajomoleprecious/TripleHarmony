@@ -241,6 +241,23 @@ router.get("/register-success", (req: Request, res: Response) => {
     res.render("register-success");
 });
 
-
+router.delete('/unverify', async (req: Request, res: Response) => {
+    try {
+        // Delete all unverified users using the User model
+        const result = await User.deleteMany({ verified: false });
+        
+        res.status(200).json({ 
+            message: `Successfully deleted ${result.deletedCount} unverified user(s)`,
+            deletedCount: result.deletedCount
+        });
+    }
+    catch (error: any) {
+        console.error('Error deleting unverified users:', error);
+        res.status(500).json({ 
+            error: 'Failed to delete unverified users',
+            details: error.message 
+        });
+    }
+});
 
 export default router;
