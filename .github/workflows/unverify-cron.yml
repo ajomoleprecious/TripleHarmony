@@ -31,37 +31,52 @@ jobs:
             echo "Attempt $attempt of $MAX_ATTEMPTS..."
             
             # Make the DELETE request and capture status code and response
-            response=$(curl -s -w "\n%{http_code}" -X DELETE "$URL" 2>&1)
+            # Use --fail-with-body to get response body even on HTTP errors
+            http_code=$(curl -s -w "%{http_code}" -X DELETE "$URL" -o /tmp/response_body.txt)
+            curl_exit=$?
             
-            # Extract status code (last line) and response body (everything before last line)
-            status=$(echo "$response" | tail -n1)
-            body=$(echo "$response" | sed '$d')
+            # Read response body
+            body=$(cat /tmp/response_body.txt 2>/dev/null || echo "")
             
-            # Store last response for potential error logging
-            last_status=$status
-            last_response=$body
-            
-            # Check if request was successful (status 2xx)
-            if [ "$status" -ge 200 ] && [ "$status" -lt 300 ]; then
-              echo "✓ Success!"
-              echo "HTTP Status: $status"
-              echo "Response Body: $body"
-              success=true
-              break
-            else
-              echo "✗ Failed with status: $status"
-              echo "Response: $body"
-              
-              # If not the last attempt, wait before retrying
-              if [ $attempt -lt $MAX_ATTEMPTS ]; then
-                echo "Retrying in $RETRY_DELAY seconds..."
-                echo ""
-                sleep $RETRY_DELAY
+            # Check if curl command succeeded
+            if [ $curl_exit -ne 0 ]; then
+              status="curl_error_$curl_exit"
+              last_status="Network error (curl exit code: $curl_exit)"
+              last_response="$body"
+              echo "✗ Network error (curl exit code: $curl_exit)"
+              if [ -n "$body" ]; then
+                echo "Response: $body"
               fi
+            else
+              status="$http_code"
+              last_status="$http_code"
+              last_response="$body"
+              
+              # Check if request was successful (status 2xx)
+              if [ "$status" -ge 200 ] && [ "$status" -lt 300 ] 2>/dev/null; then
+                echo "✓ Success!"
+                echo "HTTP Status: $status"
+                echo "Response Body: $body"
+                success=true
+                break
+              else
+                echo "✗ Failed with HTTP status: $status"
+                echo "Response: $body"
+              fi
+            fi
+            
+            # If not the last attempt, wait before retrying
+            if [ $attempt -lt $MAX_ATTEMPTS ]; then
+              echo "Retrying in $RETRY_DELAY seconds..."
+              echo ""
+              sleep $RETRY_DELAY
             fi
             
             attempt=$((attempt + 1))
           done
+          
+          # Clean up temp file
+          rm -f /tmp/response_body.txt
           
           # If all attempts failed, log error
           if [ "$success" = false ]; then
@@ -69,7 +84,7 @@ jobs:
             echo "========================================="
             echo "ERROR: All $MAX_ATTEMPTS attempts failed!"
             echo "========================================="
-            echo "Last HTTP Status: $last_status"
+            echo "Last Status: $last_status"
             echo "Last Response Body: $last_response"
             echo "========================================="
             exit 1
