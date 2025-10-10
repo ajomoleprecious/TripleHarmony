@@ -1,0 +1,76 @@
+name: Daily Unverify Users
+
+on:
+  schedule:
+    # Run once daily at midnight UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  delete-unverified-users:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Send DELETE request with retry logic
+        run: |
+          # Configuration
+          URL="https://pokemongame.koyeb.app/pokemon-auth/unverify"
+          MAX_ATTEMPTS=12  # 12 attempts * 5 seconds = 60 seconds
+          RETRY_DELAY=5    # 5 seconds between retries
+          
+          attempt=1
+          success=false
+          last_status=""
+          last_response=""
+          
+          echo "Starting DELETE request to remove unverified users..."
+          echo "Will retry for up to 1 minute (every 5 seconds if server is down)"
+          echo ""
+          
+          while [ $attempt -le $MAX_ATTEMPTS ]; do
+            echo "Attempt $attempt of $MAX_ATTEMPTS..."
+            
+            # Make the DELETE request and capture status code and response
+            response=$(curl -s -w "\n%{http_code}" -X DELETE "$URL" 2>&1)
+            
+            # Extract status code (last line) and response body (everything before last line)
+            status=$(echo "$response" | tail -n1)
+            body=$(echo "$response" | sed '$d')
+            
+            # Store last response for potential error logging
+            last_status=$status
+            last_response=$body
+            
+            # Check if request was successful (status 2xx)
+            if [ "$status" -ge 200 ] && [ "$status" -lt 300 ]; then
+              echo "✓ Success!"
+              echo "HTTP Status: $status"
+              echo "Response Body: $body"
+              success=true
+              break
+            else
+              echo "✗ Failed with status: $status"
+              echo "Response: $body"
+              
+              # If not the last attempt, wait before retrying
+              if [ $attempt -lt $MAX_ATTEMPTS ]; then
+                echo "Retrying in $RETRY_DELAY seconds..."
+                echo ""
+                sleep $RETRY_DELAY
+              fi
+            fi
+            
+            attempt=$((attempt + 1))
+          done
+          
+          # If all attempts failed, log error
+          if [ "$success" = false ]; then
+            echo ""
+            echo "========================================="
+            echo "ERROR: All $MAX_ATTEMPTS attempts failed!"
+            echo "========================================="
+            echo "Last HTTP Status: $last_status"
+            echo "Last Response Body: $last_response"
+            echo "========================================="
+            exit 1
+          fi
