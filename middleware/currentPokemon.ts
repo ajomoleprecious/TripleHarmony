@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import { client } from "../index";
-import axios from "axios";
 
 export let userPokemon :any;
 export const currentPokemon = async (req: Request, res: Response, next: NextFunction) => {

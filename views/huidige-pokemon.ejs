@@ -125,20 +125,20 @@
     <section class="pokemon-list">
       <ul>
         <% for (let i = 0; i < pokemonsList.length; i++) {%>
-        <li data-bs-toggle="modal" data-bs-target="#pokemons" onclick="getPokemon(<%= pokemonsList[i].pokemonId %>)">
+        <li <% if (currentPokemon && currentPokemon.pokemonName && pokemonsList[i].pokemonName && currentPokemon.pokemonName.toLowerCase() === pokemonsList[i].pokemonName.toLowerCase()) { %> class="current-border" <% } %> data-bs-toggle="modal" data-bs-target="#pokemons" onclick="getPokemon(<%= pokemonsList[i].pokemonId %>)">
           <a data-bs-toggle="modal" data-bs-target="#pokemons" href="#">
-            <% if (pokemonsList[i].pokemonGif) { %>
-            <img src="<%= pokemonsList[i].pokemonGif %>" alt="<%= pokemonsList[i].pokemonName %>">
-            <% } else { %>
-            <img src="<%= pokemonsList[i].pokemonImg %>" alt="<%= pokemonsList[i].pokemonName %>">
-            <% } %>
+        <% if (pokemonsList[i].pokemonGif) { %>
+        <img src="<%= pokemonsList[i].pokemonGif %>" alt="<%= pokemonsList[i].pokemonName %>">
+        <% } else { %>
+        <img src="<%= pokemonsList[i].pokemonImg %>" alt="<%= pokemonsList[i].pokemonName %>">
+        <% } %>
           </a>
           <p>
-            <% if (pokemonsList[i].nickname) { %>
-              <%= pokemonsList[i].nickname.charAt(0).toUpperCase() + pokemonsList[i].nickname.slice(1) %>
-            <% } else { %>
-              <%= pokemonsList[i].pokemonName.charAt(0).toUpperCase() + pokemonsList[i].pokemonName.slice(1) %>
-            <% } %>
+        <% if (pokemonsList[i].nickname) { %>
+          <%= pokemonsList[i].nickname.charAt(0).toUpperCase() + pokemonsList[i].nickname.slice(1) %>
+        <% } else { %>
+          <%= pokemonsList[i].pokemonName.charAt(0).toUpperCase() + pokemonsList[i].pokemonName.slice(1) %>
+        <% } %>
           </p>
         </li>
         <% } %>
